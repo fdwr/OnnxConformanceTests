@@ -1,0 +1,515 @@
+{
+  "tests": [
+    {
+      "graph_name": "Split equal size split",
+      "op_type": "Split",
+      "input": [1, 2, 3, 4, 5, 6],
+      "output_0": [1, 2, 3],
+      "output_1": [4, 5, 6],
+      "T": "float32"
+    },
+    {
+      "graph_name": "Split unequal split",
+      "op_type": "Split",
+      "axis": 0,
+      "split": [2, 4],
+      "input": [1, 2, 3, 4, 5, 6],
+      "output_0": [1, 2],
+      "output_1": [3, 4, 5, 6],
+      "T": "float32"
+    },
+    {
+      "graph_name": "Split float16",
+      "op_type": "Split",
+      "input": [1, 2, 3, 4, 5, 6],
+      "output_0": [1, 2, 3],
+      "output_1": [4, 5, 6],
+      "T": "float16"
+    },
+    {
+      "graph_name": "Split float64",
+      "op_type": "Split",
+      "input": [1, 2, 3, 4, 5, 6],
+      "output_0": [1, 2, 3],
+      "output_1": [4, 5, 6],
+      "T": "float64",
+      "verification": { "executor_filter": ".*" } // ORT CPU EP does not support float64 type.
+    },
+    {
+      "graph_name": "Split int64",
+      "op_type": "Split",
+      "input": [1, 2, 3, 4, -5, -6],
+      "output_0": [1, 2, 3],
+      "output_1": [4, -5, -6],
+      "T": "int64"
+    },
+    {
+      "graph_name": "Split uint64",
+      "op_type": "Split",
+      "input": [1, 2, 3, 4, 5, 6],
+      "output_0": [1, 2, 3],
+      "output_1": [4, 5, 6],
+      "T": "uint64",
+      "verification": {"executor_filter": ".*Cpu"}
+    },
+    // Unequal split.
+    {
+      "op_type": "Split",
+      "axis": 0,
+      "split": [2, 4],
+      "input": [1, 2, 3, 4, 5, 6],
+      "output_0": [1, 2],
+      "output_1": [3, 4, 5, 6],
+      "T": "float16"
+    },
+    // Equal size split.
+    {
+      "op_type": "Split",
+      "input": [1, 2, 3, 4, 5, 6],
+      "output_0": [1, 2, 3],
+      "output_1": [4, 5, 6],
+      "T": "uint32",
+      "verification": {"executor_filter": ".*Cpu"}
+    },
+    // Equal size split.
+    {
+      "op_type": "Split",
+      "input": [1, 2, 3, 4, 5, 6],
+      "output_0": [1, 2, 3],
+      "output_1": [4, 5, 6],
+      "T": "uint16",
+      "verification": {"executor_filter": ".*Cpu"}
+    },
+    // Equal size split.
+    {
+      "op_type": "Split",
+      "input": [1, 2, 3, 4, 5, 6],
+      "output_0": [1, 2, 3],
+      "output_1": [4, 5, 6],
+      "T": "uint8",
+      "verification": {"executor_filter": ".*Cpu"}
+    },
+    // Equal size split.
+    {
+      "op_type": "Split",
+      "input": [1, 2, 3, 4, 5, 6],
+      "output_0": [1, 2, 3],
+      "output_1": [4, 5, 6],
+      "T": "int32",
+      "verification": {"executor_filter": ".*Cpu"}
+    },
+    // Equal size split.
+    {
+      "op_type": "Split",
+      "input": [1, 2, 3, 4, 5, 6],
+      "output_0": [1, 2, 3],
+      "output_1": [4, 5, 6],
+      "T": "int16",
+      "verification": {"executor_filter": ".*Cpu"}
+    },
+    // Equal size split.
+    {
+      "op_type": "Split",
+      "input": [1, 2, 3, 4, 5, 6],
+      "output_0": [1, 2, 3],
+      "output_1": [4, 5, 6],
+      "T": "int8",
+      "verification": {"executor_filter": ".*Cpu"}
+    },
+    {
+      "op_type": "Split",
+      "axis": 6,
+      "input": [[[[[[[1, 2, 3, 4, 5, 6]]]]]]],
+      "output_0": [[[[[[[1, 2, 3]]]]]]],
+      "output_1": [[[[[[[4, 5, 6]]]]]]],
+      "T": "float32"
+    },
+    {
+      "op_type": "Split",
+      "axis": 6,
+      "split": [2, 4],
+      "input": [[[[[[[1, 2, 3, 4, 5, 6]]]]]]],
+      "output_0": [[[[[[[1, 2]]]]]]],
+      "output_1": [[[[[[[3, 4, 5, 6]]]]]]],
+      "T": "float32"
+    },
+    // 2D, split along X axis.
+    {
+      "op_type": "Split",
+      "axis": 2,
+      "split": [2, 1],
+      "input":    [[[ 1,  2,  3],
+                    [ 3,  4,  5],
+                    [ 6,  7,  9],
+                    [10, 11, 12]]],
+      "output_0": [[[ 1,  2],
+                    [ 3,  4],
+                    [ 6,  7],
+                    [10, 11]]],
+      "output_1": [[[ 3],
+                    [ 5],
+                    [ 9],
+                    [12]]],
+      "T": "float32"
+    },
+    // 2D, split along Y axis.
+    {
+      "op_type": "Split",
+      "axis": 1,
+      "split": [3, 1],
+      "input":    [[[ 1,  2,  3],
+                    [ 3,  4,  5],
+                    [ 6,  7,  9],
+                    [10, 11, 12]]],
+      "output_0": [[[ 1,  2,  3],
+                    [ 3,  4,  5],
+                    [ 6,  7,  9]]],
+      "output_1": [[[10, 11, 12]]],
+      "T": "float32"
+    },
+    // 2D, split along Y axis via negative axis.
+    {
+      "op_type": "Split",
+      "axis": -2,
+      "split": [3, 1],
+      "input":    [[[ 1,  2,  3],
+                    [ 3,  4,  5],
+                    [ 6,  7,  9],
+                    [10, 11, 12]]],
+      "output_0": [[[ 1,  2,  3],
+                    [ 3,  4,  5],
+                    [ 6,  7,  9]]],
+      "output_1": [[[10, 11, 12]]],
+      "T": "float32"
+    },
+    // float16. Equal size split.
+    {
+      "op_type": "Split",
+      "input": [1, 2, 3, 4, 5, 6],
+      "output_0": [1, 2, 3],
+      "output_1": [4, 5, 6],
+      "T": "float16"
+    },
+    // Non-constant outputs, unaligned concatenated dim size, written to graph intermediates,
+    // with two nodes consuming same split output
+    {
+        "nodes": [
+        {
+            "op_type": "Split",
+            "axis": 2,
+            "split": [2, 1],
+            "inputs": ["input"],
+            "outputs": ["split_result_0", "split_result_1"]
+        },
+        {
+          "op_type": "Relu",
+          "inputs": ["split_result_0"],
+          "outputs": ["output_0"]
+        },
+        {
+          "op_type": "Relu",
+          "inputs": ["split_result_1"],
+          "outputs": ["output_1"]
+        },
+        {
+          "op_type": "Relu",
+          "inputs": ["split_result_1"],
+          "outputs": ["output_2"]
+        }],
+        
+     "inputs": {
+        "input": {
+          "type": "float32",
+          "value": [[[ 1,  2,  3],
+                    [ 3,  4,  5],
+                    [ 6,  7,  9],
+                    [10, 11, 12]]]
+        }
+     },
+      
+     "outputs": {
+          "output_0" : {
+          "type": "float32",
+          "value": [[[ 1,  2],
+                    [  3,  4],
+                    [  6,  7],
+                    [ 10, 11]]]
+        },
+         "output_1" : {
+          "type": "float32",
+          "value": [[[ 3],
+                    [  5],
+                    [  9],
+                    [ 12]]]
+        },
+         "output_2" : {
+          "type": "float32",
+          "value": [[[ 3],
+                    [  5],
+                    [  9],
+                    [ 12]]]
+        }
+      }
+     },
+    // Non-constant outputs, aligned concatenated dim size, written to graph intermediates, written to graph intermediates,
+    // with two nodes consuming same split output
+    {
+        "nodes": [
+        {
+          "op_type": "Split",
+          "axis": 2,
+          "split": [4,4],
+          "inputs": ["input"],
+          "outputs": ["split_result_0", "split_result_1"]
+        },
+        {
+          "op_type": "Relu",
+          "inputs": ["split_result_0"],
+          "outputs": ["output_0"]
+        },
+        {
+          "op_type": "Relu",
+          "inputs": ["split_result_1"],
+          "outputs": ["output_1"]
+        },
+        {
+          "op_type": "Relu",
+          "inputs": ["split_result_1"],
+          "outputs": ["output_2"]
+        }],
+        
+      "inputs": {
+        "input": {
+          "type": "float32",
+          "value": [[[ 1,  2,  3,  4,  5,  6,  7,  8],
+                     [ 9, 10, 11, 12, 13, 14, 15, 16]]]
+        }
+      },
+      
+      "outputs": {
+        "output_0" : {
+          "type": "float32",
+          "value": [[[ 1,  2,  3,  4],
+                     [ 9, 10, 11, 12]]]
+        },
+        "output_1" : {
+          "type": "float32",
+          "value": [[[ 5,  6,  7,  8],
+                     [13, 14, 15, 16]]]
+        },
+        "output_2" : {
+          "type": "float32",
+          "value": [[[ 5,  6,  7,  8],
+                     [13, 14, 15, 16]]]
+        }
+      }
+    },
+    // Non-constant outputs, aligned concatenated dim size, written to graph intermediates, written to graph intermediates,
+    // with one output unused
+    {
+        "nodes": [
+        {
+          "op_type": "Split",
+          "axis": 2,
+          "split": [4,4],
+          "inputs": ["input"],
+          "outputs": ["split_result_0", "split_result_1"]
+        },
+        {
+          "op_type": "Relu",
+          "inputs": ["split_result_0"],
+          "outputs": ["output_0"]
+        }],
+        
+      "inputs": {
+        "input": {
+          "type": "float32",
+          "value": [[[ 1,  2,  3,  4,  5,  6,  7,  8],
+                     [ 9, 10, 11, 12, 13, 14, 15, 16]]]
+        }
+      },
+      
+      "outputs": {
+        "output_0" : {
+          "type": "float32",
+          "value": [[[ 1,  2,  3,  4],
+                     [ 9, 10, 11, 12]]]
+        }
+      }
+    },
+    // Non-constant outputs, aligned concatenated dim size, written to graph outputs
+    {
+      "nodes": [
+        {
+            "op_type": "Split",
+            "axis": 2,
+            "split": [4,4],
+            "inputs": ["input"],
+            "outputs": ["output_0", "output_1"]
+        }],
+        
+      "inputs": {
+        "input": {
+          "type": "float32",
+          "value": [[[ 1,  2,  3,  4,  5,  6,  7,  8],
+                     [ 9, 10, 11, 12, 13, 14, 15, 16]]]
+        }
+      },
+      
+      "outputs": {
+        "output_0" : {
+          "type": "float32",
+          "value": [[[ 1,  2,  3,  4],
+                     [ 9, 10, 11, 12]]]
+         },
+        "output_1" : {
+          "type": "float32",
+          "value": [[[ 5,  6,  7,  8],
+                     [13, 14, 15, 16]]]
+        }
+     }
+    },
+    // Non-constant outputs, aligned concatenated dim size, written to Concat input
+    {
+      "nodes": [
+        {
+            "op_type": "Split",
+            "axis": 2,
+            "split": [4,4],
+            "inputs": ["input"],
+            "outputs": ["split_result_1", "split_result_2"]
+        },
+        {
+            "op_type": "Concat",
+            "axis": 2,
+            "inputs": ["split_result_1", "split_result_2"],
+            "outputs": ["output_0"]
+        }
+      ],
+        
+      "inputs": {
+        "input": {
+          "type": "float32",
+          "value": [[[ 1,  2,  3,  4,  5,  6,  7,  8],
+                     [ 9, 10, 11, 12, 13, 14, 15, 16]]]
+        }
+      },
+      
+      "outputs": {
+          "output_0" : {
+          "type": "float32",
+          "value": [[[ 1,  2,  3,  4,  5,  6,  7,  8],
+                     [ 9, 10, 11, 12, 13, 14, 15, 16]]]
+        }
+      }
+    },
+    {
+      "graph_name": "Split version 13 unequal split",
+      "op_type": "Split",
+      "version": 13,
+      "input": [1, 2, 3, 4, 5, 6],
+      "split": [2, 4],
+      "output_0": [1, 2],
+      "output_1": [3, 4, 5, 6],
+      "T": "float32"
+    },
+    {
+      "graph_name": "Split version 18 num_splits",
+      "op_type": "Split",
+      "version": 13,
+      "input": [1, 2, 3, 4, 5, 6],
+      "num_outputs": 3,
+      "output_0": [1, 2],
+      "output_1": [3, 4],
+      "output_2": [5, 6],
+      "T": "float32"
+    },
+    {
+      "graph_name": "Split version 18 unequal split",
+      "op_type": "Split",
+      "version": 18,
+      "input": [1, 2, 3, 4, 5, 6],
+      "split": [2, 4],
+      "output_0": [1, 2],
+      "output_1": [3, 4, 5, 6],
+      "T": "float32"
+    }
+  ],
+
+  "schema": [
+    {
+      "op_type": "Split",
+      "version": 2,
+      "attributes": {
+        "axis": {"type": "int64"}, // default = 0
+        "split": {"type": "int64"} // list of ints
+      },
+      "inputs": {"input": {"type": "T"}},
+      "outputs": { // variadic
+        "output_0": {"type": "T"},
+        "output_1": {"type": "T"},
+        "output_2": {"type": "T"},
+        "output_3": {"type": "T"}
+      },
+      "types": {"T": ["float32", "float16", "float64", "uint8", "uint16", "uint32", "int8", "int16", "int32" ]}
+    },
+    {
+      "op_type": "Concat",
+      "version": 4,
+      "attributes": {
+        "axis": {"type": "int64"}
+      },
+      "inputs": { // Variadic
+        "input_0": {"type": "T"},
+        "input_1": {"type": "T"}
+      }, 
+      "outputs": {"concat_result": {"type": "T"}},
+      "types": {"T": ["float32", "float16", "float64", "uint8", "uint16", "uint32", "uint64", "int8", "int16", "int32", "int64", "bool8"]}
+    },
+    {
+      "op_type": "Split",
+      "version": 13,
+      "attributes": {
+        "axis": {"type": "int64"} // default = 0
+      },
+      "inputs": {
+        "input": {"type": "T"},
+        "split": {"type": "int64"} // list of ints
+      },
+      "outputs": { // variadic
+        "output_0": {"type": "T"},
+        "output_1": {"type": "T"},
+        "output_2": {"type": "T"},
+        "output_3": {"type": "T"}
+      },
+      "types": {"T": ["float32", "float16", "float64", "uint8", "uint16", "uint32", "int8", "int16", "int32", "string8", "bfloat16"]}
+    },
+    {
+      "op_type": "Relu",
+      "version": 1,
+      "attributes": {},
+      "inputs": {"input": {"type": "T"}},
+      "outputs": {"output": {"type": "T"}},
+      "types": {"T": ["float32", "float16", "float64", "uint8", "uint16", "uint32", "uint64", "int8", "int16", "int32", "int64", "bool8", "string8"]}
+    },
+    {
+      "op_type": "Split",
+      "version": 18,
+      "attributes": {
+        "axis": {"type": "int64"}, // default = 0
+        "num_outputs": {"type": "int64"}
+      },
+      "inputs": {
+        "input": {"type": "T"},
+        "split": {"type": "int64"} // list of ints
+      },
+      "outputs": { // variadic
+        "output_0": {"type": "T"},
+        "output_1": {"type": "T"},
+        "output_2": {"type": "T"},
+        "output_3": {"type": "T"}
+      },
+      "types": {"T": ["float32", "float16", "float64", "uint8", "uint16", "uint32", "int8", "int16", "int32", "string8", "bfloat16"]}
+    }
+  ]
+}

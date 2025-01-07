@@ -1,0 +1,180 @@
+{
+  "tests": [
+    {
+      "graph_name": "Mean float32",
+      "op_type": "Mean",
+      "version": 6,
+      "data_0": [2, -4, 0,    1, Inf, -Inf, Inf],
+      "data_1": [4,  2, 1,   -1,   0,    0, Inf],
+      "mean":   [3, -1, 0.5,  0, Inf, -Inf, Inf],
+      "T": "float32"
+    },
+    {
+      "graph_name": "Mean float16",
+      "op_type": "Mean",
+      "version": 6,
+      "data_0": [2, -4, 0,    1, Inf, -Inf, Inf],
+      "data_1": [4,  2, 1,   -1,   0,    0, Inf],
+      "mean":   [3, -1, 0.5,  0, Inf, -Inf, Inf],
+      "T": "float16"
+    },
+    {
+      "graph_name": "Mean 3 inputs",
+      "op_type": "Mean",
+      "version": 6,
+      "data_0": [0,  6, 2.5, Inf],
+      "data_1": [1,  0, 3,     0],
+      "data_2": [2,  0, 2,     0],
+      "mean":   [1,  2, 2.5, Inf],
+      "T": "float32"
+    },
+    {
+      "graph_name": "Mean float32 single input",
+      "op_type": "Mean",
+      "version": 6,
+      "data_0": [2, -4, 0.5,  1, Inf],
+      "mean":   [2, -4, 0.5,  1, Inf],
+      "T": "float32"
+    },
+    {
+      "graph_name": "Mean broadcast",
+      "op_type": "Mean",
+      "version": 8,
+      "data_0": [[0, 3, 6]], // equivalent to [[0, 3, 6], [0, 3, 6]]
+      "data_1": [[2]], // equivalent to [[2, 2, 2], [2, 2, 2]]
+      "data_2": [[4],[7]], // equivalent to [[4, 4, 4], [7, 7, 7]]
+      "mean":   [[2, 3, 4],[3, 4, 5]],
+      "T": "float32"
+    },
+    {
+      "op_type": "Mean",
+      "data_0": [[[[[[[[1]]]]]]]],
+      "data_1": [[[[[[[[1]]]]]]]],
+      "data_2": [[[[[[[[1]]]]]]]],
+      "mean":   [[[[[[[[1]]]]]]]],
+      "T": "float32"
+    },
+    {
+      "op_type": "Mean",
+      "data_0": [[[[[[[[1],[2]]]]]]]],
+      "data_1": [[[[[[[[1],[2]]]]]]]],
+      "data_2": [[[[[[[[1],[2]]]]]]]],
+      "mean":   [[[[[[[[1],[2]]]]]]]],
+      "T": "float32"
+    },
+    {
+      "op_type": "Mean",
+      "data_0": [[[[[[  [[1],[2]],
+                        [[3],[4]] ]]]]]],
+      "data_1": [[[[[[  [[1],[2]],
+                        [[3],[4]] ]]]]]],
+      "data_2": [[[[[[  [[1],[2]],
+                        [[3],[4]] ]]]]]],
+      "mean":   [[[[[[  [[1],[2]],
+                        [[3],[4]] ]]]]]],
+      "T": "float32"
+    },
+    {
+      "op_type": "Mean",
+      "data_0": [[[[  [[1],[2]],
+                      [[3],[4]] ]]]],
+      "data_1": [[[[  [[1],[2]],
+                      [[3],[4]] ]]]],
+      "data_2": [[[[  [[1],[2]],
+                      [[3],[4]] ]]]],
+      "mean":   [[[[  [[1],[2]],
+                      [[3],[4]] ]]]],
+      "T": "float32"
+    },
+    {
+      "op_type": "Mean",
+      "data_0": [[[ [[1],[2]],
+                    [[3],[4]] ]]],
+      "data_1": [[[ [[1],[2]],
+                    [[3],[4]] ]]],
+      "data_2": [[[ [[1],[2]],
+                    [[3],[4]] ]]],
+      "mean":   [[[ [[1],[2]],
+                    [[3],[4]] ]]],
+      "T": "float32"
+    },
+    {
+      "op_type": "Mean",
+      "data_0": [[[  [[[1],[2]],
+                      [[3],[4]]],
+                     [[[1],[2]],
+                      [[3],[4]]] ]]],
+      "data_1": [[[  [[[1],[2]],
+                      [[3],[4]]],
+                     [[[1],[2]],
+                      [[3],[4]]] ]]],
+      "data_2": [[[  [[[1],[2]],
+                      [[3],[4]]],
+                     [[[1],[2]],
+                      [[3],[4]]] ]]],
+      "mean": [[[    [[[1],[2]],
+                      [[3],[4]]],
+                     [[[1],[2]],
+                      [[3],[4]]] ]]],
+      "T": "float32"
+    },
+    {
+      "graph_name": "Mean version 13",
+      "op_type": "Mean",
+      "version": 13,
+      "data_0": [2, -4, 0,    1, Inf, -Inf, Inf],
+      "data_1": [4,  2, 1,   -1,   0,    0, Inf],
+      "mean":   [3, -1, 0.5,  0, Inf, -Inf, Inf],
+      "T": "float32"
+    }
+  ],
+
+  "schema": [
+    {
+      "op_type": "Mean",
+      "version": 6,
+      "attributes": {},
+      "inputs": { // Variadic
+        "data_0": {"type": "T"},
+        "data_1": {"type": "T"},
+        "data_2": {"type": "T"},
+        "data_3": {"type": "T"}
+      },
+      "outputs": {
+        "mean": {"type": "T"}
+      },
+      "types": {"T": ["float32", "float16", "float64"]}
+    },
+    // Supports broadcasting.
+    {
+      "op_type": "Mean",
+      "version": 8,
+      "attributes": {},
+      "inputs": { // Variadic
+        "data_0": {"type": "T"},
+        "data_1": {"type": "T"},
+        "data_2": {"type": "T"},
+        "data_3": {"type": "T"}
+      },
+      "outputs": {
+        "mean": {"type": "T"}
+      },
+      "types": {"T": ["float32", "float16", "float64"]}
+    },
+    {
+      "op_type": "Mean",
+      "version": 13,
+      "attributes": {},
+      "inputs": { // Variadic
+        "data_0": {"type": "T"},
+        "data_1": {"type": "T"},
+        "data_2": {"type": "T"},
+        "data_3": {"type": "T"}
+      },
+      "outputs": {
+        "mean": {"type": "T"}
+      },
+      "types": {"T": ["float32", "float16", "float64", "bfloat16"]}
+    }
+  ]
+}

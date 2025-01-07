@@ -1,0 +1,23 @@
+{
+  "tests": [
+    {
+      "graph_name": "Special strings",
+      "op_type": "Identity",
+      "input": ["Inf", "NaN", "0x42280000"],
+      "output": ["Inf", "NaN", "0x42280000"],
+      "T": "float32",
+      "verification": {"ulp": 0}
+    }
+  ],
+
+  "schema": [
+    {
+      "op_type": "Identity",
+      "version": 1,
+      "attributes": {},
+      "inputs": {"input": {"type": "T"}},
+      "outputs": {"output": {"type": "T"}},
+      "types": {"T": ["float32", "float16", "float64", "uint8", "uint16", "uint32", "uint64", "int8", "int16", "int32", "int64", "bool8", "string8"]}
+    }
+  ]
+}

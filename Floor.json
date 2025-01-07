@@ -1,0 +1,43 @@
+{
+  "tests": [
+    {
+      "op_type": "Floor",
+      "X": [0.5, 2, 2.5, 3, -3, -2.5, -2, -0.5],
+      "Y": [0, 2, 2, 3, -3, -3, -2, -1],
+      "T": "float32"
+    },
+    {
+      "op_type": "Floor",
+      "X": [0.5, 2, 2.5, 3, -3, -2.5, -2, -0.5],
+      "Y": [0, 2, 2, 3, -3, -3, -2, -1],
+      "T": "float16"
+    },
+    {
+      "graph_name": "Floor version 13",
+      "op_type": "Floor",
+      "version": 13,
+      "X": [0.5, 2, 2.5, 3, -3, -2.5, -2, -0.5],
+      "Y": [0, 2, 2, 3, -3, -3, -2, -1],
+      "T": "float32"
+    }
+  ],
+
+  "schema": [
+    {
+      "op_type": "Floor",
+      "version": 6,
+      "attributes": {},
+      "inputs": {"X": {"type": "T"}},
+      "outputs": {"Y": {"type": "T"}},
+      "types": {"T": ["float32", "float16", "float64"]}
+    },
+    {
+      "op_type": "Floor",
+      "version": 13,
+      "attributes": {},
+      "inputs": {"X": {"type": "T"}},
+      "outputs": {"Y": {"type": "T"}},
+      "types": {"T": ["float32", "float16", "float64", "bfloat16"]}
+    }
+  ]
+}

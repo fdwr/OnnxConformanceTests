@@ -1,0 +1,316 @@
+{
+  "tests": [
+    // 2D. 2x2 kernel with stride 2x2
+    {
+      "op_type": "AveragePool",
+      "version": 7,
+      "auto_pad": "VALID",
+      "count_include_pad": 0,
+      "kernel_shape": [2, 2],
+      "pads": [/*begins*/ 0, 0, /*ends*/ 0, 0],
+      "strides": [2, 2],
+      "X": [[[[ 1, 2, 3, 4],
+              [ 5, 6, 7, 8],
+              [ 9,10,11,12],
+              [13,14,15,16]]]],
+      "Y": [[[[ 3.5, 5.5],
+              [11.5,13.5]]]],
+      "T": "float32"
+    },
+    // 2D. 3x2 kernel with stride 1.
+    {
+      "op_type": "AveragePool",
+      "version": 7,
+      "auto_pad": "VALID",
+      "count_include_pad": 0,
+      "kernel_shape": [3, 2],
+      "pads": [0, 0, 0, 0],
+      "strides": [1, 1],
+      "X": [[[[ 1, 2, 3],
+              [ 4, 5, 6],
+              [ 7, 8, 9],
+              [10,11,12]]]],
+      "Y": [[[[ 4.5, 5.5],
+              [ 7.5, 8.5]]]],
+      "T": "float32",
+      "verification": {"ulp": 1}
+    },
+    // 2D. Treat as global pool with large kernel size.
+    {
+      "op_type": "AveragePool",
+      "version": 7,
+      "auto_pad": "VALID",
+      "count_include_pad": 0,
+      "kernel_shape": [4, 4],
+      "pads": [0, 0, 0, 0],
+      "strides": [4, 4],
+      "X": [[[[ 1, 2, 3, 4],
+              [ 5, 6, 7, 8],
+              [ 9,10,11,12],
+              [13,14,15,16]]]],
+      "Y": [[[[ 8.5]]]],
+      "T": "float32"
+    },
+    // 5D tensor with 1x3x2 kernel.
+    {
+      "op_type": "AveragePool",
+      "version": 7,
+      "auto_pad": "VALID",
+      "count_include_pad": 0,
+      "kernel_shape": [1, 3, 2],
+      "pads": [0, 0, 0, 0, 0, 0],
+      "strides": [1, 1, 1],
+      "X": [[[[[ 1, 2, 3],
+               [ 4, 5, 6],
+               [ 7, 8, 9],
+               [10,11,12]],
+              [[13,14,15],
+               [16,17,18],
+               [19,20,21],
+               [22,23,24]]]]],
+      "Y": [[[[[ 4.5, 5.5],
+               [ 7.5, 8.5]],
+              [[16.5,17.5],
+               [19.5,20.5]]]]],
+      "T": "float32",
+      "verification": {"ulp": 1}
+    },
+    // 5D tensor with 2x3x2 kernel.
+    {
+      "op_type": "AveragePool",
+      "version": 7,
+      "auto_pad": "VALID",
+      "count_include_pad": 0,
+      "kernel_shape": [2, 3, 2],
+      "pads": [0, 0, 0, 0, 0, 0],
+      "strides": [1, 1, 1],
+      "X": [[[[[ 1, 2, 3],
+               [ 4, 5, 6],
+               [ 7, 8, 9],
+               [10,11,12]],
+              [[13,14,15],
+               [16,17,18],
+               [19,20,21],
+               [22,23,24]]]]],
+      "Y": [[[[[10.5,11.5],
+               [13.5,14.5]]]]],
+      "T": "float32",
+      "verification": {"ulp": 1}
+    },
+    // 4D tensor with count_include_pad SAME_UPPER.
+    {
+      "op_type": "AveragePool",
+      "version": 7,
+      "auto_pad": "SAME_UPPER",
+      "count_include_pad": 1,
+      "kernel_shape": [2, 2],
+      "pads": [0, 0, 0, 0],
+      "strides": [1, 1],
+      "X": [[[[ 1, 2, 3],
+              [ 4, 5, 6],
+              [ 7, 8, 9],
+              [10,11,12]]]],
+      "Y": [[[[3.00,4.00,2.25],
+              [6.00,7.00,3.75],
+              [9.00,10.0,5.25],
+              [5.25,5.75,3.00]]]],
+      "T": "float32",
+      "verification": {"ulp": 1}
+    },
+    // 4D tensor with count_include_pad SAME_LOWER.
+    {
+      "op_type": "AveragePool",
+      "version": 7,
+      "auto_pad": "SAME_LOWER",
+      "count_include_pad": 1,
+      "kernel_shape": [2, 2],
+      "pads": [0, 0, 0, 0],
+      "strides": [1, 1],
+      "X": [[[[ 1, 2, 3],
+              [ 4, 5, 6],
+              [ 7, 8, 9],
+              [10,11,12]]]],
+      "Y": [[[[0.25,0.75,1.25],
+              [1.25,3.00,4.00],
+              [2.75,6.00,7.00],
+              [4.25,9.00,10.0]]]],
+      "T": "float32",
+      "verification": {"ulp": 1}
+    },
+    // 5D tensor with count_include_pad SAME_UPPER.
+    {
+      "op_type": "AveragePool",
+      "version": 7,
+      "auto_pad": "SAME_UPPER",
+      "count_include_pad": 1,
+      "kernel_shape": [2, 2, 2],
+      "pads": [0, 0, 0, 0, 0, 0],
+      "strides": [1, 1, 1],
+      "X": [[[[[ 1, 2, 3],
+               [ 4, 5, 6],
+               [ 7, 8, 9],
+               [10,11,12]],
+              [[13,14,15],
+               [16,17,18],
+               [19,20,21],
+               [22,23,24]]]]],
+      "Y": [[[[[9.000,10.00,5.250],
+               [12.00,13.00,6.750],
+               [15.00,16.00,8.250],
+               [8.250,8.750,4.500]],
+              [[7.500,8.000,4.125],
+               [9.000,9.500,4.875],
+               [10.50,11.00,5.625],
+               [5.625,5.875,3.000]]]]],
+      "T": "float32",
+      "verification": {"ulp": 1}
+    },
+    // 5D tensor with count_include_pad SAME_LOWER.
+    {
+      "op_type": "AveragePool",
+      "version": 7,
+      "auto_pad": "SAME_LOWER",
+      "count_include_pad": 1,
+      "kernel_shape": [2, 2, 2],
+      "pads": [0, 0, 0, 0, 0, 0],
+      "strides": [1, 1, 1],
+      "X": [[[[[ 1, 2, 3],
+               [ 4, 5, 6],
+               [ 7, 8, 9],
+               [10,11,12]],
+              [[13,14,15],
+               [16,17,18],
+               [19,20,21],
+               [22,23,24]]]]],
+      "Y": [[[[[0.125,0.375,0.625],
+               [0.625,1.500,2.000],
+               [1.375,3.000,3.500],
+               [2.125,4.500,5.000]],
+              [[1.750,3.750,4.250],
+               [4.250,9.000,10.00],
+               [5.750,12.00,13.00],
+               [7.250,15.00,16.00]]]]],
+      "T": "float32",
+      "verification": {"ulp": 1}
+    },
+    // float16
+    {
+      "op_type": "AveragePool",
+      "version": 7,
+      "auto_pad": "VALID",
+      "count_include_pad": 0,
+      "kernel_shape": [2, 2],
+      "pads": [/*begins*/ 0, 0, /*ends*/ 0, 0],
+      "strides": [2, 2],
+      "X": [[[[ 1, 2, 3, 4],
+              [ 5, 6, 7, 8],
+              [ 9,10,11,12],
+              [13,14,15,16]]]],
+      "Y": [[[[ 3.5, 5.5],
+              [11.5,13.5]]]],
+      "T": "float16"
+    },
+    // float32 with ceil
+    {
+      "op_type": "AveragePool",
+      "version": 10,
+      // auto_pad omitted, treated as "NOT_SET"
+      "ceil_mode": 1, // ceil
+      "count_include_pad": 0,
+      "kernel_shape": [3, 3],
+      // pads ommitted - treated as 0's.
+      "strides": [2, 2],
+      "X": [[[[1, 2, 3, 4],
+              [5, 6, 7, 8],
+              [9, 10, 11, 12],
+              [13, 14, 15, 16]]]],
+      "Y": [[[[6, 7.5],
+              [12, 13.5]]]],
+      "T": "float32",
+      "verification": {"ulp": 2}
+    },
+    {
+      "graph_name": "AveragePool v10 2D. 2x2 kernel with stride 2x2",
+      "op_type": "AveragePool",
+      "version": 10,
+      "auto_pad": "VALID",
+      "count_include_pad": 0,
+      "kernel_shape": [2, 2],
+      "pads": [/*begins*/ 0, 0, /*ends*/ 0, 0],
+      "strides": [2, 2],
+      "X": [[[[ 1, 2, 3, 4],
+              [ 5, 6, 7, 8],
+              [ 9,10,11,12],
+              [13,14,15,16]]]],
+      "Y": [[[[ 3.5, 5.5],
+              [11.5,13.5]]]],
+      "T": "float32"
+    },
+    {
+      "graph_name": "AveragePool v11 2D. 2x2 kernel with stride 2x2",
+      "op_type": "AveragePool",
+      "version": 11,
+      "auto_pad": "VALID",
+      "count_include_pad": 0,
+      "kernel_shape": [2, 2],
+      "pads": [/*begins*/ 0, 0, /*ends*/ 0, 0],
+      "strides": [2, 2],
+      "X": [[[[ 1, 2, 3, 4],
+              [ 5, 6, 7, 8],
+              [ 9,10,11,12],
+              [13,14,15,16]]]],
+      "Y": [[[[ 3.5, 5.5],
+              [11.5,13.5]]]],
+      "T": "float32"
+    },
+  ],
+
+  "schema": [
+    {
+      "op_type": "AveragePool",
+      "version": 7,
+      "attributes": {
+        "auto_pad": {"type": "string8"}, // "SAME_UPPER", "SAME_LOWER", "VALID"
+        "count_include_pad": {"type": "int64"}, // 1 if counting pad pixels for divisor.
+        "kernel_shape": {"type": "int64"}, // list
+        "pads": {"type": "int64"}, // list 2x (input dimension count - 2), or all 0's if absent.
+        "strides": {"type": "int64"} // list
+      },
+      "inputs": {"X": {"type": "T"}}, // N C D...
+      "outputs": {"Y": {"type": "T"}},
+      "types": {"T": ["float32", "float16", "float64"]}
+    },
+    // v10 adds ceil_mode to ceil instead of floor the output shape.
+    {
+      "op_type": "AveragePool",
+      "version": 10, // https://github.com/onnx/onnx/blob/master/docs/Changelog.md#averagepool-10
+      "attributes": {
+        "auto_pad": {"type": "string8"}, // "SAME_UPPER", "SAME_LOWER", "VALID"
+        "ceil_mode": {"type": "int64"}, // round up (ceil) output shape if 1, else floor if 0. https://github.com/onnx/onnx/pull/1860
+        "count_include_pad": {"type": "int64"}, // 1 if counting pad pixels for divisor.
+        "kernel_shape": {"type": "int64"}, // list
+        "pads": {"type": "int64"}, // list 2x (input dimension count - 2), or all 0's if absent.
+        "strides": {"type": "int64"} // list
+      },
+      "inputs": {"X": {"type": "T"}}, // N C D...
+      "outputs": {"Y": {"type": "T"}},
+      "types": {"T": ["float32", "float16", "float64"]}
+    },
+    // v11 is identical to v10. The version was incremented because of documentation clarification on optional default values.
+    {
+      "op_type": "AveragePool",
+      "version": 11, // https://github.com/onnx/onnx/blob/master/docs/Changelog.md#averagepool-10
+      "attributes": {
+        "auto_pad": {"type": "string8"}, // "SAME_UPPER", "SAME_LOWER", "VALID"
+        "ceil_mode": {"type": "int64"}, // round up (ceil) output shape if 1, else floor if 0. https://github.com/onnx/onnx/pull/1860
+        "count_include_pad": {"type": "int64"}, // 1 if counting pad pixels for divisor.
+        "kernel_shape": {"type": "int64"}, // list
+        "pads": {"type": "int64"}, // list 2x (input dimension count - 2), or all 0's if absent.
+        "strides": {"type": "int64"} // list
+      },
+      "inputs": {"X": {"type": "T"}}, // N C D...
+      "outputs": {"Y": {"type": "T"}},
+      "types": {"T": ["float32", "float16", "float64"]}
+    }
+  ]
+}

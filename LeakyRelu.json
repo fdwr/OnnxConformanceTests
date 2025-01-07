@@ -1,0 +1,33 @@
+{
+  "tests": [
+    // float32.
+    {
+      "op_type": "LeakyRelu",
+      "X": [0, 1, 2, -1],
+      "alpha": 2,
+      "Y": [0, 1, 2, -2],
+      "T": "float32"
+    },
+    // float16.
+    {
+      "op_type": "LeakyRelu",
+      "X": [0, 1, 2, -1],
+      "alpha": 2,
+      "Y": [0, 1, 2, -2],
+      "T": "float16"
+    }
+  ],
+
+  "schema": [
+    {
+      "op_type": "LeakyRelu", // y = alpha * x for x < 0, else y = x for x >= 0
+      "version": 6,
+      "attributes": {
+        "alpha":  {"type": "float32"} // Default = 0.01.
+      },
+      "inputs": {"X": {"type": "T"}},
+      "outputs": {"Y": {"type": "T"}},
+      "types": {"T": ["float32", "float16", "float64"]}
+    }
+  ]
+}

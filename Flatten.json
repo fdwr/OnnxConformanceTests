@@ -1,0 +1,121 @@
+{
+  "tests": [
+    {
+      "graph_name": "Flatten float32",
+      "op_type": "Flatten",
+      "version": 1,
+      "axis": 2,
+      "input": {"dims": [2,3,4,5], "function": "iota"},
+      "output": {"dims": [6,20], "function": "iota"},
+      "T": "float32"
+    },
+    {
+      "graph_name": "Flatten via negative axis float32",
+      "op_type": "Flatten",
+      "version": 1,
+      "axis": -2,
+      "input": {"dims": [2,3,4,5], "function": "iota"},
+      "output": {"dims": [6,20], "function": "iota"},
+      "T": "float32",
+      "verification": {
+          "executor_filters": [".*"] // ONNX shape inference fails: https://github.com/onnx/onnx/blob/414285bbab4e1a260ee09d6c9cb7fd90eae97049/onnx/defs/nn/old.cc#L577
+      }
+    },
+    {
+      "graph_name": "Flatten first axis float32",
+      "op_type": "Flatten",
+      "version": 1,
+      "axis": 0,
+      "input": {"dims": [2,3,4,5], "function": "iota"},
+      "output": {"dims": [1,120], "function": "iota"},
+      "T": "float32"
+    },
+    {
+      "graph_name": "Flatten last axis float32",
+      "op_type": "Flatten",
+      "version": 1,
+      "axis": 4,
+      "input": {"dims": [2,3,4,5], "function": "iota"},
+      "output": {"dims": [120,1], "function": "iota"},
+      "T": "float32"
+    },
+    {
+      "graph_name": "Flatten float16",
+      "op_type": "Flatten",
+      "version": 1,
+      "axis": 2,
+      "input": {"dims": [2,3,4,5], "function": "iota"},
+      "output": {"dims": [6,20], "function": "iota"},
+      "T": "float16"
+    },
+    {
+      "graph_name": "Flatten int32",
+      "op_type": "Flatten",
+      "version": 9,
+      "axis": 2,
+      "input": {"dims": [2,3,4,5], "function": "iota"},
+      "output": {"dims": [6,20], "function": "iota"},
+      "T": "int32"
+    },
+    {
+      "graph_name": "Flatten uint64",
+      "op_type": "Flatten",
+      "version": 9,
+      "axis": 2,
+      "input": {"dims": [2,3,4,5], "function": "iota"},
+      "output": {"dims": [6,20], "function": "iota"},
+      "T": "uint64"
+    },
+    {
+      "graph_name": "Flatten bool8",
+      "op_type": "Flatten",
+      "version": 9,
+      "axis": 2,
+      "input": {"dims": [2,3,4,5], "function": "iota"},
+      "output": {"dims": [6,20], "function": "iota"},
+      "T": "bool8"
+    },
+    {
+      "graph_name": "Flatten version 13",
+      "op_type": "Flatten",
+      "version": 13,
+      "axis": 2,
+      "input": {"dims": [2,3,4,5], "function": "iota"},
+      "output": {"dims": [6,20], "function": "iota"},
+      "T": "float32"
+    }
+  ],
+
+  "schema": [
+    {
+      "op_type": "Flatten",
+      "version": 1,
+      "attributes": {
+        "axis": {"type": "int64"} // Default = 1
+      },
+      "inputs": {"input": {"type": "T"}},
+      "outputs": {"output": {"type": "T"}},
+      "types": {"T": ["float32", "float16", "float64"]}
+    },
+    {
+      "op_type": "Flatten",
+      "version": 9,
+      "attributes": {
+        "axis": {"type": "int64"} // Default = 1
+      },
+      "inputs": {"input": {"type": "T"}},
+      "outputs": {"output": {"type": "T"}},
+      "types": {"T": ["float32", "float16", "float64", "uint8", "uint16", "uint32", "uint64", "int8", "int16", "int32", "int64", "bool8"]}
+    },
+    {
+      "op_type": "Flatten",
+      "version": 13,
+      "attributes": {
+        "axis": {"type": "int64"} // Default = 1
+      },
+      "inputs": {"input": {"type": "T"}},
+      "outputs": {"output": {"type": "T"}},
+      "types": {"T": ["float32", "float16", "float64", "uint8", "uint16", "uint32", "uint64", "int8", "int16", "int32", "int64", "bool8", "bfloat16"]}
+    }
+  ]
+}

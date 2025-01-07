@@ -1,0 +1,340 @@
+{
+  "tests": [
+    {
+      "graph_name": "OneHot axis 0",
+      "op_type": "OneHot",
+      "indices": [1, 0, 3],
+      "depth": [4],
+      "values": [1, 2],
+      "output": [[1, 2, 1],
+                 [2, 1, 1],
+                 [1, 1, 1],
+                 [1, 1, 2]],
+      "axis": 0,
+      "T1": "int64", // indices
+      "T2": "int64", // depth
+      "T3": "float32" // value
+    },
+    {
+      "graph_name": "OneHot axis 1",
+      "op_type": "OneHot",
+      "indices": [1, 0, 3],
+      "depth": [4],
+      "values": [1, 2],
+      "output": [[1, 2, 1, 1],
+                 [2, 1, 1, 1],
+                 [1, 1, 1, 2]],
+      "axis": 1,
+      "T1": "int64", // indices
+      "T2": "int64", // depth
+      "T3": "float32" // value
+    },
+    {
+      "graph_name": "OneHot negative axis",
+      "op_type": "OneHot",
+      "indices": [1, 0, 3],
+      "depth": [4],
+      "values": [1, 2],
+      "output": [[1, 2, 1, 1],
+                 [2, 1, 1, 1],
+                 [1, 1, 1, 2]],
+      "axis": -1, // Equivalent to 1.
+      "T1": "int64", // indices
+      "T2": "int64", // depth
+      "T3": "float32" // value
+    },
+    {
+      "graph_name": "OneHot invalid indices",
+      "op_type": "OneHot",
+      "indices": [-5, 4, 5],
+      "depth": [4],
+      "values": [1, 2],
+      "output": [[1, 1, 1],
+                 [1, 1, 1],
+                 [1, 1, 1],
+                 [1, 1, 1]],
+      "axis": 0,
+      "T1": "int64", // indices
+      "T2": "int64", // depth
+      "T3": "float32" // value
+    },
+    {
+      "graph_name": "OneHot 2D to 3D",
+      "op_type": "OneHot",
+      "indices": [[1, 0, 3],
+                  [0, 2, 0]],
+      "depth": [4],
+      "values": [1, 2],
+      "output": [[[1, 2, 1],[2, 1, 2]],
+                 [[2, 1, 1],[1, 1, 1]],
+                 [[1, 1, 1],[1, 2, 1]],
+                 [[1, 1, 2],[1, 1, 1]]],
+      "axis": 0,
+      "T1": "int64", // indices
+      "T2": "int64", // depth
+      "T3": "float32" // value
+    },
+    {
+      "graph_name": "OneHot 2D to 3D larger negative axis",
+      "op_type": "OneHot",
+      "indices": [[1, 0, 3],
+                  [0, 2, 0]],
+      "depth": [4],
+      "values": [1, 2],
+      "output": [[[1, 2, 1],[2, 1, 2]],
+                 [[2, 1, 1],[1, 1, 1]],
+                 [[1, 1, 1],[1, 2, 1]],
+                 [[1, 1, 2],[1, 1, 1]]],
+      "axis": -3, // Equivalent to 0.
+      "T1": "int64", // indices
+      "T2": "int64", // depth
+      "T3": "float32" // value
+    },
+    {
+      "graph_name": "OneHot axis 0 int64 indices and depth",
+      "op_type": "OneHot",
+      "indices": [1, 0, 3],
+      "depth": [4],
+      "values": [1, 2],
+      "output": [[1, 2, 1],
+                 [2, 1, 1],
+                 [1, 1, 1],
+                 [1, 1, 2]],
+      "axis": 0,
+      "T1": "int64", // indices
+      "T2": "int64", // depth
+      "T3": "int64" // value
+    },
+    {
+      "graph_name": "OneHot-11 axis 0 int64 negative indices and depth",
+      "op_type": "OneHot",
+      "version": 11,
+      "indices": [-3, -4, -1],
+      "depth": [4],
+      "values": [1, 2],
+      "output": [[1, 2, 1],
+                 [2, 1, 1],
+                 [1, 1, 1],
+                 [1, 1, 2]],
+      "axis": 0,
+      "T1": "int64", // indices
+      "T2": "int64", // depth
+      "T3": "int64" // value
+    },
+
+    // Data types.
+    {
+      "verification": {"executor_filter": ".*Cpu"},
+      "graph_name": "OneHot float16",
+      "op_type": "OneHot",
+      "version": 9,
+      "indices": [1, 0, 3],
+      "depth": [4],
+      "values": [1, 2],
+      "output": [[1, 2, 1],
+                 [2, 1, 1],
+                 [1, 1, 1],
+                 [1, 1, 2]],
+      "axis": 0,
+      "T1": "uint32", // indices
+      "T2": "int64", // depth
+      "T3": "float16" // value
+    },
+    {
+      "verification": {"executor_filter": ".*Cpu"},
+      "graph_name": "OneHot uint8",
+      "op_type": "OneHot",
+      "version": 9,
+      "indices": [1, 0, 3],
+      "depth": [4],
+      "values": [1, 2],
+      "output": [[1, 2, 1],
+                 [2, 1, 1],
+                 [1, 1, 1],
+                 [1, 1, 2]],
+      "axis": 0,
+      "T1": "uint32", // indices
+      "T2": "int64", // depth
+      "T3": "uint8" // value
+    },
+    {
+      "verification": {"executor_filter": ".*Cpu"},
+      "graph_name": "OneHot uint16",
+      "op_type": "OneHot",
+      "version": 9,
+      "indices": [1, 0, 3],
+      "depth": [4],
+      "values": [1, 2],
+      "output": [[1, 2, 1],
+                 [2, 1, 1],
+                 [1, 1, 1],
+                 [1, 1, 2]],
+      "axis": 0,
+      "T1": "uint32", // indices
+      "T2": "int64", // depth
+      "T3": "uint16" // value
+    },
+    {
+      "verification": {"executor_filter": ".*Cpu"},
+      "graph_name": "OneHot uint32",
+      "op_type": "OneHot",
+      "version": 9,
+      "indices": [1, 0, 3],
+      "depth": [4],
+      "values": [1, 2],
+      "output": [[1, 2, 1],
+                 [2, 1, 1],
+                 [1, 1, 1],
+                 [1, 1, 2]],
+      "axis": 0,
+      "T1": "uint32", // indices
+      "T2": "int64", // depth
+      "T3": "uint32" // value
+    },
+    {
+      "verification": {"executor_filter": ".*Cpu"},
+      "graph_name": "OneHot int8",
+      "op_type": "OneHot",
+      "version": 9,
+      "indices": [1, 0, 3],
+      "depth": [4],
+      "values": [1, 2],
+      "output": [[1, 2, 1],
+                 [2, 1, 1],
+                 [1, 1, 1],
+                 [1, 1, 2]],
+      "axis": 0,
+      "T1": "uint32", // indices
+      "T2": "int64", // depth
+      "T3": "int8" // value
+    },
+    {
+      "verification": {"executor_filter": ".*Cpu"},
+      "graph_name": "OneHot int16",
+      "op_type": "OneHot",
+      "version": 9,
+      "indices": [1, 0, 3],
+      "depth": [4],
+      "values": [1, 2],
+      "output": [[1, 2, 1],
+                 [2, 1, 1],
+                 [1, 1, 1],
+                 [1, 1, 2]],
+      "axis": 0,
+      "T1": "uint32", // indices
+      "T2": "int64", // depth
+      "T3": "int16" // value
+    },
+    {
+      "verification": {"executor_filter": ".*Cpu"},
+      "graph_name": "OneHot int32",
+      "op_type": "OneHot",
+      "version": 9,
+      "indices": [1, 0, 3],
+      "depth": [4],
+      "values": [1, 2],
+      "output": [[1, 2, 1],
+                 [2, 1, 1],
+                 [1, 1, 1],
+                 [1, 1, 2]],
+      "axis": 0,
+      "T1": "uint32", // indices
+      "T2": "int64", // depth
+      "T3": "int32" // value
+    },
+    {
+      "verification": {"executor_filter": ".*Cpu"},
+      "graph_name": "OneHot bool8",
+      "op_type": "OneHot",
+      "version": 9,
+      "indices": [1, 0, 3],
+      "depth": [4],
+      "values": [1, 0],
+      "output": [[1, 0, 1],
+                 [0, 1, 1],
+                 [1, 1, 1],
+                 [1, 1, 0]],
+      "axis": 0,
+      "T1": "uint32", // indices
+      "T2": "int64", // depth
+      "T3": "bool8" // value
+    },
+    {
+      "graph_name": "OneHot 7D axis 5",
+      "op_type": "OneHot",
+      "indices": [[[[[[1, 0, 3]]]]]],
+      "depth": [4],
+      "values": [1, 2],
+      "output": [[[[[
+                [[1, 2, 1],
+                 [2, 1, 1],
+                 [1, 1, 1],
+                 [1, 1, 2]]
+                ]]]]],
+      "axis": 5,
+      "T1": "int64", // indices
+      "T2": "int64", // depth
+      "T3": "float32" // value
+    },
+    {
+      "graph_name": "OneHot 8D axis 6",
+      "op_type": "OneHot",
+      "indices": [[[[[[[1, 0, 3]]]]]]],
+      "depth": [4],
+      "values": [1, 2],
+      "output": [[[[[[
+                [[1, 2, 1],
+                 [2, 1, 1],
+                 [1, 1, 1],
+                 [1, 1, 2]]
+                ]]]]]],
+      "axis": 6,
+      "T1": "int64", // indices
+      "T2": "int64", // depth
+      "T3": "float32" // value
+    }
+  ],
+
+  "schema": [
+    {
+      "op_type": "OneHot",
+      "version": 9,
+      "attributes": {
+        "axis": {"type": "int64"}
+      },
+      "inputs": {
+        "indices": {"type": "T1"}, // Indices must be positive, ranging [0, depth).
+        "depth": {"type": "T2"},
+        "values": {"type": "T3"}
+      },
+      "outputs": {
+        "output": {"type": "T3"}
+      },
+      "types": {
+        "T1": ["float32", "float16", "float64", "int32", "uint32", "int64", "uint64", "int16", "uint16", "int8", "uint8"],
+        "T2": ["float32", "float16", "float64", "int32", "uint32", "int64", "uint64", "int16", "uint16", "int8", "uint8"],
+        "T3": ["float32", "float16", "float64", "int32", "uint32", "int64", "uint64", "int16", "uint16", "int8", "uint8", "bool8", "string8"]
+      }
+    },
+    {
+      "op_type": "OneHot",
+      "version": 11,
+      "attributes": {
+        "axis": {"type": "int64"}
+      },
+      "inputs": {
+        "indices": {"type": "T1"}, // Indices may be negative, including [-depth, depth -1].
+        "depth": {"type": "T2"},
+        "values": {"type": "T3"}
+      },
+      "outputs": {
+        "output": {"type": "T3"}
+      },
+      "types": {
+        "T1": ["float32", "float16", "float64", "int32", "uint32", "int64", "uint64", "int16", "uint16", "int8", "uint8"],
+        "T2": ["float32", "float16", "float64", "int32", "uint32", "int64", "uint64", "int16", "uint16", "int8", "uint8"],
+        "T3": ["float32", "float16", "float64", "int32", "uint32", "int64", "uint64", "int16", "uint16", "int8", "uint8", "bool8", "string8"]
+      }
+    }
+  ]
+}

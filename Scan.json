@@ -1,0 +1,52 @@
+{
+  "tests": [
+    {
+      // Scan two parallel arrays, each starting with the value 1.
+      // Then multiply the initial value times each value (the Mul
+      // operator is inside the model file).
+      //
+      // So:
+      //    1 * 1 * 3 * 5 = 15
+      //    1 * 2 * 4 * 6 = 48
+      "model_file": "Scan.onnx",
+      "num_scan_inputs": 1,
+      "inputs": {
+        "initial": {"type": "float32", "dims": [1,2], "value": [1,1]}, // initial_states
+        "x": {"type": "float32", "dims": [1,3,2], "value": [1,2,3,4,5,6]} // scan_values
+      },
+      "outputs": {
+        "y": {"type": "float32", "dims": [1,2], "value": [15,48]}, // final_states
+        "z": {"type": "float32", "dims": [1,3,2], "value": [1,2,3,8,15,48]} // scan_outputs
+      }
+    }
+  ],
+
+  "schema": [
+    {
+      "op_type": "Scan",
+      "version": 8,
+      "attributes": {
+        "body": {"type": "graph"},
+        "directions": {"type": "int64"}, // Optional, size M. The i-th element specifies the scan direction for the i-th scan_input tensor: 0 = forward direction, 1 = reverse direction. Default = forward.
+        "num_scan_inputs": {"type": "int64"} // Number of scan_inputs M (latter part of initial_state_and_scan_inputs).
+      },
+      "inputs": { // variadic 2 to inifinity.
+        "sequence_lens": {"type": "I"}, // Optional. Specifies lengths of the sequences in a batch. If omitted, all sequences are assumed the maximum sequence length (dimension of the sequence axis of the scan_input tensors).
+        "initial_state_and_scan_inputs_0": {"type": "V"}, // Initial values of the loop's N state variables followed by M scan_inputs.
+        "initial_state_and_scan_inputs_1": {"type": "V"},
+        "initial_state_and_scan_inputs_2": {"type": "V"},
+        "initial_state_and_scan_inputs_3": {"type": "V"}
+      },
+      "outputs": { // variadic 1 to infinity. Final values of the loop's N state variables followed by K scan_outputs.
+        "final_state_and_scan_outputs_0": {"type": "V"},
+        "final_state_and_scan_outputs_1": {"type": "V"},
+        "final_state_and_scan_outputs_2": {"type": "V"},
+        "final_state_and_scan_outputs_3": {"type": "V"}
+      },
+      "types": {
+        "V": ["float32", "float16", "float64", "uint8", "uint16", "uint32", "uint64", "int8", "int16", "int32", "int64", "bool8"],
+        "I": ["int64"]
+      }
+    }
+  ]
+}

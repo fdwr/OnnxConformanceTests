@@ -1,0 +1,199 @@
+{
+  "tests": [
+    {
+      "graph_name": "Max float32",
+      "op_type": "Max",
+      "version": 6,
+      "data_0": [0, 1,  0, -Inf,   0],
+      "data_1": [1, 0, -1,    0, Inf],
+      "max":    [1, 1,  0,    0, Inf],
+      "T": "float32"
+    },
+    {
+      "graph_name": "Max float16",
+      "op_type": "Max",
+      "version": 6,
+      "data_0": [0, 1,  0, -Inf,   0],
+      "data_1": [1, 0, -1,    0, Inf],
+      "max":    [1, 1,  0,    0, Inf],
+      "T": "float16"
+    },
+    {
+      "graph_name": "Max 3 inputs",
+      "op_type": "Max",
+      "version": 6,
+      "data_0": [0, 1,  0, -Inf,   0],
+      "data_1": [1, 0, -1,    0, Inf],
+      "data_2": [2, 0, -2,    0,   0],
+      "max":    [2, 1,  0,    0, Inf],
+      "T": "float32"
+    },
+    {
+      "graph_name": "Max float32 single input",
+      "op_type": "Max",
+      "version": 6,
+      "data_0": [2, -4, 0.5,  1, Inf],
+      "max":    [2, -4, 0.5,  1, Inf],
+      "T": "float32"
+    },
+    {
+      "graph_name": "Max broadcast v8",
+      "op_type": "Max",
+      "version": 8,
+      "data_0": [[3, 1, 7]], // equivalent to [[3, 1, 7], [3, 1, 7]]
+      "data_1": [[2]], // equivalent to [[2, 2, 2], [2, 2, 2]]
+      "data_2": [[4],[6]], // equivalent to [[4, 4, 4], [6, 6, 6]]
+      "max":    [[4,4,7],[6,6,7]],
+      "T": "float32"
+    },
+    {
+      "graph_name": "Max uint8",
+      "op_type": "Max",
+      "version": 12,
+      "data_0": [0, 1, 0],
+      "data_1": [1, 0, 0],
+      "max":    [1, 1, 0],
+      "T": "uint8",
+      "verification": { "executor_filter": ".*Cpu" }
+    },
+    {
+      "graph_name": "Max int8",
+      "op_type": "Max",
+      "version": 12,
+      "data_0": [  -1,    1, 0],
+      "data_1": [ 127, -128, 0],
+      "max":    [ 127,    1, 0],
+      "T": "int8",
+      "verification": { "executor_filter": ".*Cpu" }
+    },
+    {
+      "graph_name": "Max uint16",
+      "op_type": "Max",
+      "version": 12,
+      "data_0": [0, 1, 60000, 0],
+      "data_1": [1, 0,   100, 0],
+      "max":    [1, 1, 60000, 0],
+      "T": "uint16",
+      "verification": { "executor_filter": ".*Cpu" }
+    },
+    {
+      "graph_name": "Max int16",
+      "op_type": "Max",
+      "version": 12,
+      "data_0": [-30000, 30000, 0],
+      "data_1": [     1,    -1, 0],
+      "max":    [     1, 30000, 0],
+      "T": "int16",
+      "verification": { "executor_filter": ".*Cpu" }
+    },
+    {
+      "graph_name": "Max uint32",
+      "op_type": "Max",
+      "version": 12,
+      "data_0": [4294967295,   1, 0],
+      "data_1": [         1,   0, 0],
+      "max":    [4294967295,   1, 0],
+      "T": "uint32"
+    },
+    {
+      "graph_name": "Max int32",
+      "op_type": "Max",
+      "version": 12,
+      "data_0": [ 2147483647, -2147483648, 0],
+      "data_1": [         -1,          -1, 0],
+      "max":    [ 2147483647,          -1, 0],
+      "T": "int32"
+    },
+    {
+      "graph_name": "Max uint64",
+      "op_type": "Max",
+      "version": 12,
+      "data_0": [20015998341138,   1, 0],
+      "data_1": [             1,   0, 0],
+      "max":    [20015998341138,   1, 0],
+      "T": "uint64"
+    },
+    {
+      "graph_name": "Max int64",
+      "op_type": "Max",
+      "version": 12,
+      "data_0": [ 2147483647, -2147483648, 0],
+      "data_1": [         -1,          -1, 0],
+      "max":    [ 2147483647,          -1, 0],
+      "T": "int64"
+    },
+    {
+      "graph_name": "Max version 13",
+      "op_type": "Max",
+      "version": 13,
+      "data_0": [0, 1,  0, -Inf,   0],
+      "data_1": [1, 0, -1,    0, Inf],
+      "max":    [1, 1,  0,    0, Inf],
+      "T": "float32"
+    }
+  ],
+
+  "schema": [
+    {
+      "op_type": "Max",
+      "version": 6,
+      "attributes": {},
+      "inputs": { // Variadic
+        "data_0": {"type": "T"},
+        "data_1": {"type": "T"},
+        "data_2": {"type": "T"},
+        "data_3": {"type": "T"}
+      },
+      "outputs": {
+        "max": {"type": "T"}
+      },
+      "types": {"T": ["float32", "float16", "float64"]}
+    },
+    // Supports broadcasting.
+    {
+      "op_type": "Max",
+      "version": 8,
+      "attributes": {},
+      "inputs": { // Variadic
+        "data_0": {"type": "T"},
+        "data_1": {"type": "T"},
+        "data_2": {"type": "T"},
+        "data_3": {"type": "T"}
+      },
+      "outputs": {
+        "max": {"type": "T"}
+      },
+      "types": {"T": ["float32", "float16", "float64"]}
+    },
+    {
+      "op_type": "Max",
+      "version": 12,
+      "attributes": {},
+      "inputs": { // Variadic
+        "data_0": {"type": "T"},
+        "data_1": {"type": "T"},
+        "data_2": {"type": "T"},
+        "data_3": {"type": "T"}
+      },
+      "outputs": {
+        "max": {"type": "T"}
+      },
+      "types": {"T": ["float32", "float16", "float64", "int8", "uint8", "int16", "uint16", "int32", "uint32", "int64", "uint64"]}
+    },
+    {
+      "op_type": "Max",
+      "version": 13,
+      "attributes": {},
+      "inputs": { // Variadic
+        "data_0": {"type": "T"},
+        "data_1": {"type": "T"},
+        "data_2": {"type": "T"},
+        "data_3": {"type": "T"}
+      },
+      "outputs": {
+        "max": {"type": "T"}
+      },
+      "types": {"T": ["float32", "float16", "float64", "int8", "uint8", "int16", "uint16", "int32", "uint32", "int64", "uint64", "bfloat16"]}
+    }
+  ]
+}

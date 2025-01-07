@@ -1,0 +1,48 @@
+{
+  "tests": [
+    // float32.
+    {
+      "op_type": "Log",
+      "input": [1, 2.718281828459],
+      "output": [0, 1],
+      "verification": {"ulp": 2},
+      "T": "float32"
+    },
+    // float16.
+    {
+      "op_type": "Log",
+      "input": [1, 2.718281828459],
+      "output": [0, 1],
+      "verification": {"ulp": 2},
+      "T": "float16"
+    },
+    {
+      "graph_name": "Log version 13",
+      "op_type": "Log",
+      "version": 13,
+      "input": [1, 2.718281828459],
+      "output": [0, 1],
+      "verification": {"ulp": 2},
+      "T": "float32"
+    }
+  ],
+
+  "schema": [
+    {
+      "op_type": "Log",
+      "version": 6,
+      "attributes": {},
+      "inputs": {"input": {"type": "T"}},
+      "outputs": {"output": {"type": "T"}},
+      "types": {"T": ["float32", "float16", "float64"]}
+    },
+    {
+      "op_type": "Log",
+      "version": 13,
+      "attributes": {},
+      "inputs": {"input": {"type": "T"}},
+      "outputs": {"output": {"type": "T"}},
+      "types": {"T": ["float32", "float16", "float64", "bfloat16"]}
+    }
+  ]
+}

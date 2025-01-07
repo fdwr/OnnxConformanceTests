@@ -1,0 +1,168 @@
+{
+  // https://github.com/onnx/onnx/blob/master/docs/Operators.md#ScatterND
+  // https://github.com/onnx/onnx/pull/2220
+  "tests": [
+    {
+      "graph_name": "ScatterND float32",
+      "op_type": "ScatterND",
+      "data": [1, 2, 3, 4, 5, 6, 7, 8],
+      "indices": [[4], [3], [1], [7]],
+      "updates": [9, 10, 11, 12],
+      "output": [1, 11, 3, 10, 9, 6, 7, 12],
+      "verification": {"ulp": 0},
+      "T": "float32"
+    },
+    {
+      "graph_name": "ScatterND float16",
+      "op_type": "ScatterND",
+      "data": [1, 2, 3, 4, 5, 6, 7, 8],
+      "indices": [[4], [3], [1], [7]],
+      "updates": [9, 10, 11, 12],
+      "output": [1, 11, 3, 10, 9, 6, 7, 12],
+      "verification": {"ulp": 0},
+      "T": "float16"
+    },
+    {
+      "graph_name": "ScatterND float64",
+      "op_type": "ScatterND",
+      "data": [1, 2, 3, 4, 5, 6, 7, 8],
+      "indices": [[4], [3], [1], [7]],
+      "updates": [9, 10, 11, 12],
+      "output": [1, 11, 3, 10, 9, 6, 7, 12],
+      "verification": {"ulp": 0},
+      "T": "float64"
+    },
+    {
+      "graph_name": "ScatterND int64",
+      "op_type": "ScatterND",
+      "data": [1, 2, -3, 4, 5, 6, 7, 8],
+      "indices": [[4], [3], [1], [7]],
+      "updates": [9, 10, 11, -12],
+      "output": [1, 11, -3, 10, 9, 6, 7, -12],
+      "verification": {"ulp": 0},
+      "T": "int64"
+    },
+    {
+      "graph_name": "ScatterND uint64",
+      "op_type": "ScatterND",
+      "data": [1, 2, 3, 4, 5, 6, 7, 8],
+      "indices": [[4], [3], [1], [7]],
+      "updates": [9, 10, 11, 12],
+      "output": [1, 11, 3, 10, 9, 6, 7, 12],
+      "verification": {"ulp": 0},
+      "T": "uint64"
+    },
+    {
+      "graph_name": "ScatterND uint32",
+      "op_type": "ScatterND",
+      "data": [1, 2, 3, 4, 5, 6, 7, 8],
+      "indices": [[4], [3], [1], [7]],
+      "updates": [9, 10, 11, 12],
+      "output": [1, 11, 3, 10, 9, 6, 7, 12],
+      "verification": {"ulp": 0},
+      "T": "uint32"
+    },
+    {
+      "graph_name": "ScatterND int32",
+      "op_type": "ScatterND",
+      "data": [1, 2, -3, 4, 5, 6, 7, 8],
+      "indices": [[4], [3], [1], [7]],
+      "updates": [9, 10, 11, -12],
+      "output": [1, 11, -3, 10, 9, 6, 7, -12],
+      "verification": {"ulp": 0},
+      "T": "int32"
+    },
+    {
+      "graph_name": "ScatterND uint16",
+      "op_type": "ScatterND",
+      "data": [1, 2, 3, 4, 5, 6, 7, 8],
+      "indices": [[4], [3], [1], [7]],
+      "updates": [9, 10, 11, 12],
+      "output": [1, 11, 3, 10, 9, 6, 7, 12],
+      "verification": {"ulp": 0},
+      "T": "uint16"
+    },
+    {
+      "graph_name": "ScatterND int16",
+      "op_type": "ScatterND",
+      "data": [1, 2, -3, 4, 5, 6, 7, 8],
+      "indices": [[4], [3], [1], [7]],
+      "updates": [9, 10, 11, -12],
+      "output": [1, 11, -3, 10, 9, 6, 7, -12],
+      "verification": {"ulp": 0},
+      "T": "int16"
+    },
+    {
+      "graph_name": "ScatterND uint8",
+      "op_type": "ScatterND",
+      "data": [1, 2, 3, 4, 5, 6, 7, 8],
+      "indices": [[4], [3], [1], [7]],
+      "updates": [9, 10, 11, 12],
+      "output": [1, 11, 3, 10, 9, 6, 7, 12],
+      "verification": {"ulp": 0},
+      "T": "uint8"
+    },
+    {
+      "graph_name": "ScatterND int8",
+      "op_type": "ScatterND",
+      "data": [1, 2, -3, 4, 5, 6, 7, 8],
+      "indices": [[4], [3], [1], [7]],
+      "updates": [9, 10, 11, -12],
+      "output": [1, 11, -3, 10, 9, 6, 7, -12],
+      "verification": {"ulp": 0},
+      "T": "int8"
+    },
+    {
+      "graph_name": "ScatterND float32 negative indices",
+      "op_type": "ScatterND",
+      "data": [1, 2, 3, 4, 5, 6, 7, 8],
+      "indices": [[-4], [-5], [-7], [-1]],
+      "updates": [9, 10, 11, 12],
+      "output": [1, 11, 3, 10, 9, 6, 7, 12],
+      "verification": {"ulp": 0, "executor_filter": ".*Cpu"},
+      "T":  "float32"
+    },
+    {
+      "graph_name": "ScatterND version 13",
+      "op_type": "ScatterND",
+      "version": 13,
+      "data": [1, 2, 3, 4, 5, 6, 7, 8],
+      "indices": [[4], [3], [1], [7]],
+      "updates": [9, 10, 11, 12],
+      "output": [1, 11, 3, 10, 9, 6, 7, 12],
+      "verification": {"ulp": 0},
+      "T": "float32"
+    }
+  ],
+
+  "schema": [
+    {
+      "op_type": "ScatterND",
+      "version": 11,
+      "attributes": {},
+      "inputs": {
+          "data": {"type": "T"},
+          "indices": {"type": "int64"}, // Negative indices mean relative to the back of the data tensor.
+          "updates": {"type": "T"}
+      },
+      "outputs": {
+          "output": {"type": "T"}
+      },
+      "types": {"T": ["float32", "float16", "float64", "uint8", "uint16", "uint32", "uint64", "int8", "int16", "int32", "int64", "bool8"]}
+    },
+    {
+      "op_type": "ScatterND",
+      "version": 13,
+      "attributes": {},
+      "inputs": {
+          "data": {"type": "T"},
+          "indices": {"type": "int64"}, // Negative indices mean relative to the back of the data tensor.
+          "updates": {"type": "T"}
+      },
+      "outputs": {
+          "output": {"type": "T"}
+      },
+      "types": {"T": ["float32", "float16", "float64", "uint8", "uint16", "uint32", "uint64", "int8", "int16", "int32", "int64", "bool8", "bfloat16"]}
+    }
+  ]
+}

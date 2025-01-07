@@ -1,0 +1,91 @@
+{
+  "tests": [
+    // Dropout is treated as identity - just returns the input as-is.
+    {
+      "graph_name": "Dropout identity float32",
+      "op_type": "Dropout",
+      "version": 7,
+      "ratio": 0,
+      "data": [2, 3, 4, 5, 6],
+      "output": [2, 3, 4, 5, 6],
+      "T": "float32"
+    },
+    {
+      "graph_name": "Dropout identity float16",
+      "op_type": "Dropout",
+      "version": 7,
+      "ratio": 0,
+      "data": [2, 3, 4, 5, 6],
+      "output": [2, 3, 4, 5, 6],
+      "T": "float16"
+    },
+    // Full drop-out is not supported for inferencing. Implementations just treat it as identity.
+    // {
+    //   "graph_name": "Dropout all zeroes float16",
+    //   "op_type": "Dropout",
+    //   "ratio": 1,
+    //   "data": [2, 3, 4, 5, 6],
+    //   "output": [0, 0, 0, 0, 0],
+    //   "mask": [1, 1, 1, 1, 1], // All values were dropped.
+    //   "T": "float16"
+    // },
+    {
+      "graph_name": "Dropout v7 identity with mask float32",
+      "op_type": "Dropout",
+      "version": 7,
+      "ratio": 0,
+      "data": [2, 3, 4, 5, 6],
+      "output": [2, 3, 4, 5, 6],
+      "mask": [0, 0, 0, 0, 0], // No values were dropped.
+      "T": "float32"
+    },
+    {
+      "graph_name": "Dropout v10 identity with mask float32",
+      "op_type": "Dropout",
+      "version": 10,
+      "ratio": 0,
+      "data": [2, 3, 4, 5, 6],
+      "output": [2, 3, 4, 5, 6],
+      "mask": [0, 0, 0, 0, 0], // No values were dropped.
+      "T": "float32"
+    }
+  ],
+
+  "schema": [
+    {
+      "op_type": "Dropout",
+      "version": 7,
+      "attributes": {
+        "ratio": {"type": "float32"} // default = 0.5, where 0 means identity, and 1 means all zeroes.
+      },
+      "inputs": {
+        "data": {"type": "T"}
+      },
+      "outputs": {
+        "output": {"type": "T"},
+        "mask": {"type": "T"} // optional
+      },
+      "types": {
+        "T": ["float32", "float16", "float64"]
+      }
+    },
+    {
+      "op_type": "Dropout",
+      "version": 10,
+      "attributes": {
+        "ratio": {"type": "float32"} // default = 0.5, where 0 means identity, and 1 means all zeroes.
+      },
+      "inputs": {
+        "data": {"type": "T"}
+      },
+      "outputs": {
+        "output": {"type": "T"},
+        "mask": {"type": "T1"} // optional boolean output
+      },
+      "types": {
+        "T": ["float32", "float16", "float64"],
+        "T1": ["bool8"]
+      }
+    }
+  ]
+}

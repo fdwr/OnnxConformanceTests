@@ -1,0 +1,94 @@
+{
+  // https://github.com/onnx/onnx/blob/master/docs/Operators.md#BitShift
+  // https://github.com/onnx/onnx/pull/1931
+  "tests": [
+    {
+      "graph_name": "BitShift left uint8",
+      "op_type": "BitShift",
+      "direction": "LEFT",
+      "X": [1, 1, 15],
+      "Y": [3, 0, 4],
+      "Z": [8, 1, 240],
+      "T": "uint8",
+      "verification": {"ulp": 0}
+    },
+    {
+      "graph_name": "BitShift left uint16",
+      "op_type": "BitShift",
+      "direction": "LEFT",
+      "X": [1, 1, 255],
+      "Y": [3, 0, 8],
+      "Z": [8, 1, 65280],
+      "T": "uint16",
+      "verification": {"ulp": 0, "executor_filter": ".*Cpu"} // uint16 not implemented by ORT.
+    },
+    {
+      "graph_name": "BitShift left uint32",
+      "op_type": "BitShift",
+      "direction": "LEFT",
+      "X": [1, 1, 65535],
+      "Y": [3, 0, 16],
+      "Z": [8, 1, 4294901760],
+      "T": "uint32",
+      "verification": {"ulp": 0}
+    },
+    {
+      "graph_name": "BitShift right uint8",
+      "op_type": "BitShift",
+      "direction": "RIGHT",
+      "X": [8, 1, 255],
+      "Y": [3, 0, 4],
+      "Z": [1, 1, 15],
+      "T": "uint8",
+      "verification": {"ulp": 0}
+    },
+    {
+      "graph_name": "BitShift right uint16",
+      "op_type": "BitShift",
+      "direction": "RIGHT",
+      "X": [8, 1, 65535],
+      "Y": [3, 0, 8],
+      "Z": [1, 1, 255],
+      "T": "uint16",
+      "verification": {"ulp": 0, "executor_filter": ".*Cpu"} // uint16 not implemented by ORT.
+    },
+    {
+      "graph_name": "BitShift right uint32",
+      "op_type": "BitShift",
+      "direction": "RIGHT",
+      "X": [8, 1, 4294967295],
+      "Y": [3, 0, 16],
+      "Z": [1, 1, 65535],
+      "T": "uint32",
+      "verification": {"ulp": 0}
+    },
+    {
+      "graph_name": "BitShift right uint64",
+      "op_type": "BitShift",
+      "direction": "RIGHT",
+      "X": [8, 1, 20015998341138],
+      "Y": [3, 0, 16],
+      "Z": [1, 1, 305419896],
+      "T": "uint64",
+      "verification": {"ulp": 0}
+    }
+  ],
+
+  "schema": [
+    {
+      "op_type": "BitShift",
+      "version": 11,
+      "attributes": {
+        "direction": {"type": "string8"} // "LEFT" or "RIGHT"
+      },
+      "inputs": {
+        "X": {"type": "T"},
+        "Y": {"type": "T"}
+      },
+      "outputs": {
+        "Z": {"type": "T"}
+      },
+      "types": {"T": ["uint8", "uint16", "uint32", "uint64"]}
+    }
+  ]
+}

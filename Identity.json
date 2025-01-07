@@ -1,0 +1,303 @@
+{
+  "tests": [
+    // Test every supported data type, via static initializers.
+
+    {
+      "graph_name": "Identity constant float32",
+      "op_type": "Identity",
+      "input": {"value": [2, 3, 4, 5, 6], "should_embed_constant": true},
+      "output": [2, 3, 4, 5, 6],
+      "T": "float32"
+    },
+    {
+      "graph_name": "Identity constant float64",
+      "op_type": "Identity",
+      "input": {"value": [2, 3, 4, 5, 6], "should_embed_constant": true},
+      "output": [2, 3, 4, 5, 6],
+      "T": "float64"
+    },
+    {
+      "graph_name": "Identity constant float16",
+      "op_type": "Identity",
+      "input": {"value": [2, 3, 4, 5, 6], "should_embed_constant": true},
+      "output": [2, 3, 4, 5, 6],
+      "T": "float16"
+    },
+    {
+      "graph_name": "Identity constant bfloat16",
+      "op_type": "Identity",
+      "input": {"value": [2, 3, 4, 5, 6], "should_embed_constant": true},
+      "output": [2, 3, 4, 5, 6],
+      "T": "bfloat16",
+      "verification": {"executor_filters": [".*"]} // bfloat16 is not supported by ONNX Runtime.
+    },
+    {
+      "graph_name": "Identity constant uint8",
+      "op_type": "Identity",
+      "input": {"value": [2, 3, 4, 5, 6], "should_embed_constant": true},
+      "output": [2, 3, 4, 5, 6],
+      "T": "uint8"
+    },
+    {
+      "graph_name": "Identity constant int8",
+      "op_type": "Identity",
+      "input": {"value": [2, 3, 4, 5, 6], "should_embed_constant": true},
+      "output": [2, 3, 4, 5, 6],
+      "T": "int8"
+    },
+    {
+      "graph_name": "Identity constant uint16",
+      "op_type": "Identity",
+      "input": {"value": [2, 3, 4, 5, 6], "should_embed_constant": true},
+      "output": [2, 3, 4, 5, 6],
+      "T": "uint16"
+    },
+    {
+      "graph_name": "Identity constant int16",
+      "op_type": "Identity",
+      "input": {"value": [2, 3, 4, 5, 6], "should_embed_constant": true},
+      "output": [2, 3, 4, 5, 6],
+      "T": "int16"
+    },
+    {
+      "graph_name": "Identity constant uint32",
+      "op_type": "Identity",
+      "input": {"value": [2, 3, 4, 5, 6], "should_embed_constant": true},
+      "output": [2, 3, 4, 5, 6],
+      "T": "uint32"
+    },
+    {
+      "graph_name": "Identity constant int32",
+      "op_type": "Identity",
+      "input": {"value": [2, 3, 4, 5, 6], "should_embed_constant": true},
+      "output": [2, 3, 4, 5, 6],
+      "T": "int32"
+    },
+    {
+      "graph_name": "Identity constant uint64",
+      "op_type": "Identity",
+      "input": {"value": [2, 3, 4, 5, 6], "should_embed_constant": true},
+      "output": [2, 3, 4, 5, 6],
+      "T": "uint64"
+    },
+    {
+      "graph_name": "Identity constant int64",
+      "op_type": "Identity",
+      "input": {"value": [2, 3, 4, 5, 6], "should_embed_constant": true},
+      "output": [2, 3, 4, 5, 6],
+      "T": "int64"
+    },
+    {
+      "graph_name": "Identity constant bool8",
+      "op_type": "Identity",
+      "input": {"value": [2, 3, 4, 5, 6], "should_embed_constant": true},
+      "output": [2, 3, 4, 5, 6],
+      "T": "bool8"
+    },
+
+    // Test tensors bound at runtime rather than as constant initializers in the graph.
+    {
+      "graph_name": "Identity dynamic float32",
+      "op_type": "Identity",
+      "input": {"value": [2, 3, 4, 5, 6], "should_embed_constant": false},
+      "output": [2, 3, 4, 5, 6],
+      "T": "float32"
+    },
+    {
+      "graph_name": "Identity dynamic float64",
+      "op_type": "Identity",
+      "input": {"value": [2, 3, 4, 5, 6], "should_embed_constant": false},
+      "output": [2, 3, 4, 5, 6],
+      "T": "float64"
+    },
+    {
+      "graph_name": "Identity dynamic float16",
+      "op_type": "Identity",
+      "input": {"value": [2, 3, 4, 5, 6], "should_embed_constant": false},
+      "output": [2, 3, 4, 5, 6],
+      "T": "float16"
+    },
+    {
+      "graph_name": "Identity dynamic bfloat16",
+      "op_type": "Identity",
+      "input": {"value": [2, 3, 4, 5, 6], "should_embed_constant": false},
+      "output": [2, 3, 4, 5, 6],
+      "T": "bfloat16",
+      "verification": {"executor_filters": [".*"]} // bfloat16 is not supported by ONNX Runtime.
+    },
+    {
+      "graph_name": "Identity dynamic uint8",
+      "op_type": "Identity",
+      "input": {"value": [2, 3, 4, 5, 6], "should_embed_constant": false},
+      "output": [2, 3, 4, 5, 6],
+      "T": "uint8"
+    },
+    {
+      "graph_name": "Identity dynamic int8",
+      "op_type": "Identity",
+      "input": {"value": [2, 3, 4, 5, 6], "should_embed_constant": false},
+      "output": [2, 3, 4, 5, 6],
+      "T": "int8"
+    },
+    {
+      "graph_name": "Identity dynamic uint16",
+      "op_type": "Identity",
+      "input": {"value": [2, 3, 4, 5, 6], "should_embed_constant": false},
+      "output": [2, 3, 4, 5, 6],
+      "T": "uint16"
+    },
+    {
+      "graph_name": "Identity dynamic int16",
+      "op_type": "Identity",
+      "input": {"value": [2, 3, 4, 5, 6], "should_embed_constant": false},
+      "output": [2, 3, 4, 5, 6],
+      "T": "int16"
+    },
+    {
+      "graph_name": "Identity dynamic uint32",
+      "op_type": "Identity",
+      "input": {"value": [2, 3, 4, 5, 6], "should_embed_constant": false},
+      "output": [2, 3, 4, 5, 6],
+      "T": "uint32"
+    },
+    {
+      "graph_name": "Identity dynamic int32",
+      "op_type": "Identity",
+      "input": {"value": [2, 3, 4, 5, 6], "should_embed_constant": false},
+      "output": [2, 3, 4, 5, 6],
+      "T": "int32"
+    },
+    {
+      "graph_name": "Identity dynamic uint64",
+      "op_type": "Identity",
+      "input": {"value": [2, 3, 4, 5, 6], "should_embed_constant": false},
+      "output": [2, 3, 4, 5, 6],
+      "T": "uint64"
+    },
+    {
+      "graph_name": "Identity dynamic int64",
+      "op_type": "Identity",
+      "input": {"value": [2, 3, 4, 5, 6], "should_embed_constant": false},
+      "output": [2, 3, 4, 5, 6],
+      "T": "int64"
+    },
+    {
+      "graph_name": "Identity dynamic bool8",
+      "op_type": "Identity",
+      "input": {"value": [2, 3, 4, 5, 6], "should_embed_constant": false},
+      "output": [2, 3, 4, 5, 6],
+      "T": "bool8"
+    },
+    {
+      "op_type": "Identity",
+      "input": [[[[[[[[1]]]]]]]],
+      "output": [[[[[[[[1]]]]]]]],
+      "T": "float32"
+    },
+    {
+      "op_type": "Identity",
+      "input": [[[[[[[[1],[-2]]]]]]]],
+      "output": [[[[[[[[1],[-2]]]]]]]],
+      "T": "float32"
+    },
+    {
+      "op_type": "Identity",
+      "input": [[[[[[  [[1],[-2]],
+                       [[3],[4]] ]]]]]],
+      "output": [[[[[[ [[1],[-2]],
+                       [[3],[4]] ]]]]]],
+      "T": "float32"
+    },
+    {
+      "op_type": "Identity",
+      "input": [[[[ [[-1],[2]],
+                [[3],[-4]] ]]]],
+      "output": [[[[ [[-1],[2]],
+                [[3],[-4]] ]]]],
+      "T": "float32"
+    },
+    {
+      "op_type": "Identity",
+      "input": [[[  [[1],[-2]],
+                    [[-3],[4]] ]]],
+      "output": [[[ [[1],[-2]],
+                    [[-3],[4]] ]]],
+      "T": "float32"
+    },
+    {
+      "op_type": "Identity",
+      "input": [[[ [[[-1],[2]],
+                    [[3],[-4]]],
+                   [[[-1],[2]],
+                    [[3],[-4]]] ]]],
+      "output": [[[ [[[-1],[2]],
+                    [[3],[-4]]],
+                   [[[-1],[2]],
+                    [[3],[-4]]] ]]],
+      "T": "float32"
+    },
+    {
+      "graph_name": "Identity through consecutive nodes",
+      "version": 1,
+      "nodes": [
+        {
+          "op_type": "Identity",
+          "inputs": ["input"],
+          "outputs": ["intermediate1"],
+          "T": "float32"
+        },
+        {
+          "op_type": "Identity",
+          "inputs": ["intermediate1"],
+          "outputs": ["intermediate2"],
+          "T": "float32"
+        },
+        {
+          "op_type": "Identity",
+          "inputs": ["intermediate2"],
+          "outputs": ["output"],
+          "T": "float32"
+        }
+      ],
+      "inputs": {
+        "input": {
+          "type": "float32",
+          "value": [2, 3, 4, 5, 6]
+        }
+      },
+      "outputs": {
+        "output": {
+          "type": "float32",
+          "value": [2, 3, 4, 5, 6]
+        }
+      }
+    },
+    {
+      "graph_name": "Identity version 13",
+      "op_type": "Identity",
+      "version": 13,
+      "input": {"value": [2, 3, 4, 5, 6], "should_embed_constant": true},
+      "output": [2, 3, 4, 5, 6],
+      "T": "float32"
+    }
+  ],
+
+  "schema": [
+    {
+      "op_type": "Identity",
+      "version": 1,
+      "attributes": {},
+      "inputs": {"input": {"type": "T"}},
+      "outputs": {"output": {"type": "T"}},
+      "types": {"T": ["float32", "float16", "float64", "uint8", "uint16", "uint32", "uint64", "int8", "int16", "int32", "int64", "bool8", "string8"]}
+    },
+    {
+      "op_type": "Identity",
+      "version": 13,
+      "attributes": {},
+      "inputs": {"input": {"type": "T"}},
+      "outputs": {"output": {"type": "T"}},
+      "types": {"T": ["float32", "float16", "float64", "uint8", "uint16", "uint32", "uint64", "int8", "int16", "int32", "int64", "bool8", "string8", "bfloat16"]}
+    }
+  ]
+}

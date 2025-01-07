@@ -1,0 +1,244 @@
+{
+  "tests": [
+    {
+      // Additional support beyond standard JSON:
+      // - Single line comments are permitted. Though not part of the JSON standard, but it's a parser option.
+      // - Inf and Nan are supported in numbers.
+      // These are useful during development, but any comments should be removed if/when the data
+      // files are shared externally so that any other JSON parser can directly consume them.
+      "op_type": "Add",
+      "A": [2, 3, 4, 5, 6],
+      "B": [2, 3, 4, 5, 6],
+      "C": [4, 6, 8, 10, 12],
+      "T": "float32"
+    },
+    {
+      "op_type": "Add",
+      "A": [[1, 2],[3, 4],[5, 6]],
+      "B": [[1, 2],[3, 4],[5, 6]],
+      "C": [[2, 4],[6, 8],[10, 12]],
+      "T": "uint8"
+    },
+    {
+      "op_type": "Add",
+      "A": [[[[1],[2]]]],
+      "B": [[[[3],[4]]]],
+      "C": [[[[4],[6]]]],
+      "T": "float16"
+    },
+    {
+      "op_type": "ParametricSoftplus",
+      "alpha": 1.0,
+      "beta": 1.0,
+      "X": [2, 1, 0, 3, 4],
+      "Y": [2.126928, 1.313262, 0.693147, 3.048587, 4.018150],
+      "T": "float32",
+      "verification": {"absolute_tolerance": 0.0001, "ulp": 10}
+    },
+    {
+      "op_type": "RandomUniform",
+      "dtype": 1,
+      "shape": [4, 5, 6],
+      "low": 1.0,
+      "high": 42.0,
+      "Y": {"dims": [4, 5, 6]},
+      "verification": {
+        "should_compare_expected": false
+      }
+    },
+    {
+      "nodes": [
+        {
+          "op_type": "Add",
+          "attributes": {},
+          "inputs": ["A", "B"],
+          "outputs": {"C": {"type": "float32", "dims": [5]}}
+        },
+        {
+          "op_type": "Relu",
+          "attributes": {},
+          "inputs": ["C"],
+          "outputs": ["Y"]
+        }
+      ],
+      "inputs": {
+        "A": {
+            "type": "float16",
+            "value": [2, 3, 4, 5, 6]
+        },
+        "B": {
+            "type": "float16",
+            "dims": [5],
+            "value": [2, 3, 4, 5, 6]
+        }
+      },
+      "outputs": {
+        "Y": {
+            "type": "float16",
+            "value": [4, 6, 8, 10, 12]
+        }
+      }
+    },
+    {
+      "op_type": "ValidateTypeParsing",
+      "attribute_float32"      : 13,
+      "attribute_uint8"        : 13,
+      "attribute_int8"         : 13,
+      "attribute_uint16"       : 13,
+      "attribute_int16"        : 13,
+      "attribute_int32"        : 13,
+      "attribute_int64"        : 13,
+      "attribute_string8"      : "13",
+      "attribute_bool8"        : 13,
+      "attribute_float16"      : 13,
+      "attribute_float64"      : 13,
+      "attribute_uint32"       : 13,
+      "attribute_uint64"       : 13,
+      "attribute_list_float32" : [11,12,13],
+      "attribute_list_uint8"   : [11,12,13],
+      "attribute_list_int8"    : [11,12,13],
+      "attribute_list_uint16"  : [11,12,13],
+      "attribute_list_int16"   : [11,12,13],
+      "attribute_list_int32"   : [11,12,13],
+      "attribute_list_int64"   : [11,12,13],
+      "attribute_list_string8" : ["11","12","13"],
+      "attribute_list_bool8"   : [11,12,13],
+      "attribute_list_float16" : [11,12,13],
+      "attribute_list_float64" : [11,12,13],
+      "attribute_list_uint32"  : [11,12,13],
+      "attribute_list_uint64"  : [11,12,13],
+      "tensor_float32"         : [[11,12,13],[14,15,16]],
+      "tensor_uint8"           : [[11,12,13],[14,15,16]],
+      "tensor_int8"            : [[11,12,13],[14,15,16]],
+      "tensor_uint16"          : [[11,12,13],[14,15,16]],
+      "tensor_int16"           : [[11,12,13],[14,15,16]],
+      "tensor_int32"           : [[11,12,13],[14,15,16]],
+      "tensor_int64"           : [[11,12,13],[14,15,16]],
+      "tensor_string8"         : [["11","12","13"],["14","15","16"]],
+      "tensor_bool8"           : [[11,12,13],[14,15,16]],
+      "tensor_float16"         : [[11,12,13],[14,15,16]],
+      "tensor_float64"         : [[11,12,13],[14,15,16]],
+      "tensor_uint32"          : [[11,12,13],[14,15,16]],
+      "tensor_uint64"          : [[11,12,13],[14,15,16]]
+    }
+  ],
+
+  "schema": [
+    {
+      "op_type": "Add",
+      "attributes": {
+        "axis": {"type": "int32"},
+        "broadcast": {"type": "int"}
+      },
+      "inputs": {"A": {"type": "T"}, "B": {"type": "T"}},
+      "outputs": {"C": {"type": "T"}},
+      "types": {"T": ["float32", "float64", "int32", "uint32", "int64", "uint64"]}
+    },
+    {
+      "op_type": "ParametricSoftplus",
+      "attributes": {
+        "alpha": {"type": "float32"},
+        "beta": {"type": "float32"}
+      },
+      "inputs": {"X": {"type": "T"}},
+      "outputs": {"Y": {"type": "T"}},
+      "types": {"T": ["float32", "float16", "float64"]}
+    },
+    {
+      "op_type": "RandomUniform",
+      "attributes": {
+        "dtype": {"type": "int64"},
+        "shape": {"type": "int64"},
+        "low": {"type": "float32"},
+        "high": {"type": "float32"}
+      },
+      "outputs": {"Y": {"type": "T"}},
+      "types": {"T": ["float32", "float16", "float64"]}
+    },
+    {
+      "op_type": "ConstantFill",
+      "attributes": {
+        "dtype": {"type": "int64"},
+        "extra_shape": {"type": "int64"},
+        "input_as_shape": {"type": "int64"},
+        "shape": {"type": "int64"},
+        "value": {"type": "float32"}
+      },
+      "inputs": {"input": {"type": "T1"}},
+      "outputs": {"output": {"type": "T2"}},
+      "types": {
+        "T1": ["float32", "float64", "int32", "uint32", "int64", "uint64"],
+        "T2": ["float32", "float64", "int32", "uint32", "int64", "uint64"]
+      }
+    },
+    {
+      "op_type": "ArgMax",
+      "attributes": {
+        "axis": {"type": "int64"},
+        "keepdims": {"type": "int64"},
+        "input_as_shape": {"type": "int64"},
+        "shape": {"type": "int64"},
+        "value": {"type": "float32"}
+      },
+      "inputs": {"data": {"type": "T"}},
+      "outputs": {"reduced": {"type": "int64"}},
+      "types": {
+        "T": ["float32", "float16", "float64", "int8", "uint8", "int16", "uint16", "int32", "uint32", "int64", "uint64"]
+      }
+    },
+    {
+      "op_type": "Relu", // y = max(0, x)
+      "version": 6,
+      "attributes": {},
+      "inputs": {"X": {"type": "T"}},
+      "outputs": {"Y": {"type": "T"}},
+      "types": {"T": ["float32", "float16", "float64"]}
+    },
+    {
+      "op_type": "ValidateTypeParsing",
+      "attributes": {
+        "attribute_float32"       : {"type": "float32"},
+        "attribute_uint8"         : {"type": "uint8"},
+        "attribute_int8"          : {"type": "int8"},
+        "attribute_uint16"        : {"type": "uint16"},
+        "attribute_int16"         : {"type": "int16"},
+        "attribute_int32"         : {"type": "int32"},
+        "attribute_int64"         : {"type": "int64"},
+        "attribute_string8"       : {"type": "string8"},
+        "attribute_bool8"         : {"type": "bool8"},
+        "attribute_float16"       : {"type": "float16"},
+        "attribute_float64"       : {"type": "float64"},
+        "attribute_uint32"        : {"type": "uint32"},
+        "attribute_uint64"        : {"type": "uint64"},
+        "attribute_list_float32"  : {"type": "float32"},
+        "attribute_list_uint8"    : {"type": "uint8"},
+        "attribute_list_int8"     : {"type": "int8"},
+        "attribute_list_uint16"   : {"type": "uint16"},
+        "attribute_list_int16"    : {"type": "int16"},
+        "attribute_list_int32"    : {"type": "int32"},
+        "attribute_list_int64"    : {"type": "int64"},
+        "attribute_list_string8"  : {"type": "string8"},
+        "attribute_list_bool8"    : {"type": "bool8"},
+        "attribute_list_float16"  : {"type": "float16"},
+        "attribute_list_float64"  : {"type": "float64"},
+        "attribute_list_uint32"   : {"type": "uint32"},
+        "attribute_list_uint64"   : {"type": "uint64"}
+      },
+      "inputs": {
+        "tensor_float32"     : {"type": "float32"},
+        "tensor_uint8"       : {"type": "uint8"},
+        "tensor_int8"        : {"type": "int8"},
+        "tensor_uint16"      : {"type": "uint16"},
+        "tensor_int16"       : {"type": "int16"},
+        "tensor_int32"       : {"type": "int32"},
+        "tensor_int64"       : {"type": "int64"},
+        "tensor_string8"     : {"type": "string8"},
+        "tensor_bool8"       : {"type": "bool8"},
+        "tensor_float16"     : {"type": "float16"},
+        "tensor_float64"     : {"type": "float64"},
+        "tensor_uint32"      : {"type": "uint32"},
+        "tensor_uint64"      : {"type": "uint64"}
+      }
+    }
+  ]
+}

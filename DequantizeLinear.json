@@ -1,0 +1,206 @@
+{
+  "tests": [
+    {
+      "graph_name": "DequantizeLinear entire tensor uint8 to float32",
+      "op_type": "DequantizeLinear",
+      "version": 10,
+      "X": [0, 3, 128, 255],
+      "x_scale": 2,
+      "x_zero_point": 128,
+      "Y": [-256, -250, 0, 254],
+      "T2": "float32",
+      "T1": "uint8"
+    },
+    {
+      "graph_name": "DequantizeLinear entire tensor int8 to float32",
+      "op_type": "DequantizeLinear",
+      "version": 10,
+      "X": [0, 3, 127, -127],
+      "x_scale": 2,
+      "x_zero_point": 127,
+      "Y": [-254, -248, 0, -508],
+      "T2": "float32",
+      "T1": "int8"
+    },
+    {
+      "graph_name": "DequantizeLinear entire tensor int32 to float32",
+      "op_type": "DequantizeLinear",
+      "version": 10,
+      "X": [0, 3, 127, -127],
+      "x_scale": 2,
+      "x_zero_point": 127,
+      "Y": [-254, -248, 0, -508],
+      "T2": "float32",
+      "T1": "int32",
+      "verification": {"executor_filter": ".*Cpu"}
+    },
+    {
+      "graph_name": "DequantizeLinear com.microsoft uint8 to float16",
+      "op_type": "DequantizeLinear",
+      "domain": "com.microsoft",
+      "version": 1,
+      "X": [0, 3, 128, 255],
+      "x_scale": [2, 2, 2, 2],
+      "x_zero_point": [128, 128, 128, 128],
+      "axis": 0,
+      "Y": [-256, -250, 0, 254],
+      "T2": "float16",
+      "T1": "uint8"
+    },
+    {
+      "graph_name": "DequantizeLinear com.microsoft int8 to float16",
+      "op_type": "DequantizeLinear",
+      "domain": "com.microsoft",
+      "version": 1,
+      "X": [0, 3, -128, -100],
+      "x_scale": [2, 2, 2, 2],
+      "x_zero_point": [1, 2, 3, 4],
+      "axis": 0,
+      "Y": [-2, 2, -262, -208],
+      "T2": "float16",
+      "T1": "int8"
+    },
+    {
+      "graph_name": "DequantizeLinear com.microsoft along broadcasted axis", // Should be identical to full tensor case
+      "op_type": "DequantizeLinear",
+      "domain": "com.microsoft",
+      "version": 1,
+      "X": [0, 3, 128, 255],
+      "x_scale": [2, 2, 2, 2],
+      "x_zero_point": [128, 128, 128, 128],
+      "axis": 0,
+      "Y": [-256, -250, 0, 254]
+    },
+    {
+      "graph_name": "DequantizeLinear com.microsoft 2D along first axis",
+      "op_type": "DequantizeLinear",
+      "domain": "com.microsoft",
+      "version": 1,
+      "X": [[0, 1, 2, 3],
+            [0, 1, 2, 3],
+            [0,10,20,30]],
+      "x_scale": [1, 2, 4], // Broadcast as if [[1], [2], [4]],
+      "x_zero_point": [0, 0, 0], // Broadcast as if [[0]],
+      "axis" : 0,
+      "Y": [[0, 1, 2, 3],
+            [0, 2, 4, 6],
+            [0, 40, 80, 120]]
+    },
+    {
+      "graph_name": "DequantizeLinear com.microsoft 2D along second axis",
+      "op_type": "DequantizeLinear",
+      "domain": "com.microsoft",
+      "version": 1,
+      "X": [[0, 1, 2, 3],
+            [0, 1, 2, 3],
+            [0,10,20,30]],
+      "x_scale": [1, 2, 4, 8], // Broadcast as if [[1, 2, 4, 8]],
+      "x_zero_point": [0, 0, 0, 0], // Broadcast as if [[0]],
+      "axis" : 1,
+      "Y": [[0, 2, 8, 24],
+            [0, 2, 8, 24],
+            [0,20,80,240]]
+    },
+    {
+      "graph_name": "DequantizeLinear com.microsoft 2D along second axis using negative axis value",
+      "op_type": "DequantizeLinear",
+      "domain": "com.microsoft",
+      "version": 1,
+      "X": [[0, 1, 2, 3],
+            [0, 1, 2, 3],
+            [0,10,20,30]],
+      "x_scale": [1, 2, 4, 8], // Broadcast as if [[1, 2, 4, 8]],
+      "x_zero_point": [0, 0, 0, 0], // Broadcast as if [[0]],
+      "axis" : -1,
+      "Y": [[0, 2, 8, 24],
+            [0, 2, 8, 24],
+            [0,20,80,240]]
+     },
+     {
+      "graph_name": "DequantizeLinear version 13 second axis",
+      "op_type": "DequantizeLinear",
+      "version": 13,
+      "X": [[0, 1, 2, 3],
+            [0, 1, 2, 3],
+            [0,10,20,30]],
+      "x_scale": [1, 2, 4, 8], // Broadcast as if [[1, 2, 4, 8]],
+      "x_zero_point": [0, 0, 0, 0], // Broadcast as if [[0]],
+      "axis": 1,
+      "Y": [[0, 2, 8, 24],
+            [0, 2, 8, 24],
+            [0,20,80,240]]
+    },
+    {
+      "graph_name": "DequantizeLinear-13 2D along first axis",
+      "op_type": "DequantizeLinear",
+      "version": 13,
+      "X": [[0, 1, 2, 3],
+            [0, 1, 2, 3],
+            [0,10,20,30]],
+      "x_scale": [1, 2, 4], // Broadcast as if [[1], [2], [4]],
+      "x_zero_point": [0, 0, 0], // Broadcast as if [[0]],
+      "axis": 0,
+      "Y": [[0, 1, 2, 3],
+            [0, 2, 4, 6],
+            [0, 40, 80, 120]]
+    }
+  ],
+
+  "schema": [
+    {
+      "op_type": "DequantizeLinear",
+      "version": 10,
+      "inputs": {
+        "X": {"type": "T1"},
+        "x_scale": {"type": "T2"},
+        "x_zero_point": {"type": "T1"}
+      },
+      "outputs": {
+        "Y": {"type": "T2"}
+      },
+      "types": {
+        "T2": ["float32"],
+        "T1": ["uint8", "int8", "int32"]
+      }
+    },
+    {
+      "op_type": "DequantizeLinear",
+      "domain": "com.microsoft",
+      "version": 1,
+      "attributes": {
+        "axis" : {"type" : "int64"}
+      },
+      "inputs": {
+        "X": {"type": "T1"},
+        "x_scale": {"type": "T2"},
+        "x_zero_point": {"type": "T1"}
+      },
+      "outputs": {
+        "Y": {"type": "T2"}
+      },
+      "types": {
+        "T2": ["float32", "float16"],
+        "T1": ["uint8", "int8"]
+      }
+    },
+    {
+      "op_type": "DequantizeLinear",
+      "version": 13, // Adds dequantization along vector via given axis.
+      "attributes": {
+        "axis" : {"type" : "int64"}
+      },
+      "inputs": {
+        "X": {"type": "T1"},
+        "x_scale": {"type": "T2"},
+        "x_zero_point": {"type": "T1"}
+      },
+      "outputs": {
+        "Y": {"type": "T2"}
+      },
+      "types": {
+        "T2": ["float32"],
+        "T1": ["uint8", "int8", "int32"]
+      }
+    }
+  ]
+}

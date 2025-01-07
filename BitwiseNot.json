@@ -1,0 +1,47 @@
+{
+    "tests": [
+      {
+        "op_type": "BitwiseNot",
+        "graph_name": "BitwiseNot",
+        "X": {"value": [-1, -2, 3]},
+        "Y": {"value": [0, 1, -4]},
+        "T": "int32"
+      },
+      {
+        "op_type": "BitwiseNot",
+        "graph_name": "BitwiseNot int64",
+        "X": {"value": [-1, -2, 3]},
+        "Y": {"value": [0, 1, -4]},
+        "T": "int64"
+      },
+      {
+        "op_type": "BitwiseNot",
+        "graph_name": "BitwiseNot int8",
+        "X": {"value": [-1, -2, 3]},
+        "Y": {"value": [0, 1, -4]},
+        "T": "int8"
+      },
+      {
+        "op_type": "BitwiseNot",
+        "graph_name": "BitwiseNot uint8",
+        "X": {"value": [1, 4, 5, 3]},
+        "Y": {"value": [254, 251, 250, 252]},
+        "T": "uint8"
+      }
+    ],
+  
+    "schema": [
+      {
+        "op_type": "BitwiseNot",
+        "version": 18,
+        "inputs": {
+          "X": {"type": "T"},
+        },
+        "outputs": {
+          "Y": {"type": "T"}
+        },
+        "types": {"T": ["uint8", "uint16", "uint32", "uint64", "int8", "int16", "int32", "int64"]}
+      }
+    ]
+  }
+  

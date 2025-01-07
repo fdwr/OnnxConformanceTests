@@ -1,0 +1,145 @@
+{
+  "tests": [
+    // 1D nop. Omit permutation axes.
+    {
+      "op_type": "Transpose",
+      "data":       [1, 2, 3, 4, 5, 6],
+      "transposed": [1, 2, 3, 4, 5, 6],
+      "T": "float32"
+    },
+    // 1D nop. Explicit permutation axes.
+    {
+      "op_type": "Transpose",
+      "perm": [0],
+      "data":       [1, 2, 3, 4, 5, 6],
+      "transposed": [1, 2, 3, 4, 5, 6],
+      "T": "float32"
+    },
+    // 2D. Omit permutation axes.
+    {
+      "op_type": "Transpose",
+      "data":       [[1, 2, 3],
+                     [4, 5, 6]],
+      "transposed": [[1, 4],
+                     [2, 5],
+                     [3, 6]],
+      "T": "float32"
+    },
+    // 2D. Explicit permutation axes.
+    {
+      "op_type": "Transpose",
+      "perm": [1, 0],
+      "data":       [[1, 2, 3],
+                     [4, 5, 6]],
+      "transposed": [[1, 4],
+                     [2, 5],
+                     [3, 6]],
+      "T": "float32"
+    },
+    // 2D nop.
+    {
+      "op_type": "Transpose",
+      "perm": [0, 1],
+      "data":       [[1, 2, 3],
+                     [4, 5, 6]],
+      "transposed": [[1, 2, 3],
+                     [4, 5, 6]],
+      "T": "float32"
+    },
+    // 3D.
+    {
+      "op_type": "Transpose",
+      "perm": [1, 0, 2],
+      "data":       [[[1, 2, 3],
+                      [4, 5, 6]]],
+      "transposed": [[[1, 2, 3]],
+                     [[4, 5, 6]]],
+      "T": "float32"
+    },
+    // 4D.
+    {
+      "perm": [2, 1, 0, 3],
+      "op_type": "Transpose",
+      "data":       [[[[1, 2, 3],
+                       [4, 5, 6]]]],
+      "transposed": [[[[1, 2, 3]]],
+                     [[[4, 5, 6]]]],
+      "T": "float32"
+    },
+    // 5D. Explicit permutation axes.
+    {
+      "perm": [3, 1, 2, 0, 4],
+      "op_type": "Transpose",
+      "data":       [[[[[1, 2, 3],
+                        [4, 5, 6]]]]],
+      "transposed": [[[[[1, 2, 3]]]],
+                     [[[[4, 5, 6]]]]],
+      "T": "float32"
+    },
+    // 5D. Reverse permutation axes.
+    {
+      "perm": [4, 3, 2, 1, 0],
+      "op_type": "Transpose",
+      "data":       [[[[[1, 2, 3],
+                        [4, 5, 6]]]]],
+      "transposed": [[[[[1]]],
+                      [[[4]]]],
+                     [[[[2]]],
+                      [[[5]]]],
+                     [[[[3]]],
+                      [[[6]]]]],
+      "T": "float32"
+    },
+    // float16
+    {
+      "op_type": "Transpose",
+      "data":       [[1, 2, 3],
+                     [4, 5, 6]],
+      "transposed": [[1, 4],
+                     [2, 5],
+                     [3, 6]],
+      "T": "float16"
+    },
+    // int64
+    {
+      "op_type": "Transpose",
+      "data":       [[1, 2, 3],
+                     [-3, -2, -1]],
+      "transposed": [[1, -3],
+                     [2, -2],
+                     [3, -1]],
+      "T": "int64"
+    },
+    {
+      "graph_name": "Transpose version 13",
+      "op_type": "Transpose",
+      "version": 13,
+      "data":       [1, 2, 3, 4, 5, 6],
+      "transposed": [1, 2, 3, 4, 5, 6],
+      "T": "float32"
+    }
+  ],
+
+  "schema": [
+    {
+      "op_type": "Transpose",
+      "version": 1,
+      "attributes": {
+        "perm": {"type": "int64"}
+      },
+      "inputs": {"data": {"type": "T"}},
+      "outputs": {"transposed": {"type": "T"}},
+      "types": {"T": ["float32", "float16", "float64", "uint8", "uint16", "uint32", "uint64", "int8", "int16", "int32", "int64", "bool8", "string8"]}
+    },
+    {
+      "op_type": "Transpose",
+      "version": 13,
+      "attributes": {
+        "perm": {"type": "int64"}
+      },
+      "inputs": {"data": {"type": "T"}},
+      "outputs": {"transposed": {"type": "T"}},
+      "types": {"T": ["float32", "float16", "float64", "uint8", "uint16", "uint32", "uint64", "int8", "int16", "int32", "int64", "bool8", "string8", "bfloat16"]}
+    }
+  ]
+}

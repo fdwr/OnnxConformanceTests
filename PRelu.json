@@ -1,0 +1,101 @@
+{
+  "tests": [
+    {
+      "graph_name": "PRelu float32",
+      "op_type": "PRelu",
+      "version": 7,
+      "X":     [0, 1, 1, -1, -1],
+      "Slope": [2, 2, 0,  2,  0],
+      "Y":     [0, 1, 1, -2,  0],
+      "T": "float32"
+    },
+    {
+      "graph_name": "PRelu float16",
+      "op_type": "PRelu",
+      "version": 7,
+      "X":     [0, 1, 1, -1, -1],
+      "Slope": [2, 2, 0,  2,  0],
+      "Y":     [0, 1, 1, -2,  0],
+      "T": "float16"
+    },
+    {
+      "graph_name": "PRelu 3D tensor",
+      "op_type": "PRelu",
+      "version": 7,
+      "X":     {"dims": [1, 5, 1], "value": [[[0], [1], [1], [-1], [-1]]]},
+      "Slope": {"dims": [1, 5, 1], "value": [[[2], [2], [0],  [2],  [0]]]},
+      "Y":     {"dims": [1, 5, 1], "value": [[[0], [1], [1], [-2],  [0]]]},
+      "T": "float32"
+    },
+    {
+      "graph_name": "PRelu broadcasting",
+      "op_type": "PRelu",
+      "version": 7,
+      "X":     [0, 1, -1],
+      "Slope": [2],
+      "Y":     [0, 1, -2],
+      "T": "float16"
+    },
+    {
+      "graph_name": "PRelu-9 float32",
+      "op_type": "PRelu",
+      "version": 9,
+      "X":     [0, 1, 1, -1, -1],
+      "Slope": [2, 2, 0,  2,  0],
+      "Y":     [0, 1, 1, -2,  0],
+      "T": "float32"
+    },
+    {
+      "graph_name": "PRelu-9 int32",
+      "op_type": "PRelu",
+      "version": 9,
+      "X":     [0, 1, 1, -1, -1],
+      "Slope": [2, 2, 0,  2,  0],
+      "Y":     [0, 1, 1, -2,  0],
+      "T": "int32",
+      "verification": {"executor_filters": [".*Cpu"]}
+    }
+  ],
+
+  "schema": [
+    {
+      "op_type": "PRelu", // y = slope * x for x < 0; y = x for x >= 0
+      "version": 7,
+      "attributes": {},
+      "inputs": {
+        "X": {"type": "T"},
+        "Slope": {"type": "T"}
+      },
+      "outputs": {
+        "Y": {"type": "T"}
+      },
+      "types": {"T": ["float32", "float16", "float64"]}
+    },
+    {
+      "op_type": "PRelu", // y = slope * x for x < 0; y = x for x >= 0
+      "version": 9,
+      "attributes": {},
+      "inputs": {
+        "X": {"type": "T"},
+        "Slope": {"type": "T"}
+      },
+      "outputs": {
+        "Y": {"type": "T"}
+      },
+      "types": {"T": ["float32", "float16", "float64", "uint32", "int32", "uint64", "int64"]}
+    },
+    {
+      "op_type": "PRelu", // y = slope * x for x < 0; y = x for x >= 0
+      "version": 16,
+      "attributes": {},
+      "inputs": {
+        "X": {"type": "T"},
+        "Slope": {"type": "T"}
+      },
+      "outputs": {
+        "Y": {"type": "T"}
+      },
+      "types": {"T": ["float32", "float16", "bfloat16", "float64", "uint32", "int32", "uint64", "int64"]}
+    }
+  ]
+}

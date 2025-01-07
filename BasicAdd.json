@@ -1,0 +1,77 @@
+{
+  "tests": [
+    // Add 1D arrays.
+    {
+      "op_type": "Add",
+      "A": [2, 3, 4, 5, 6],
+      "B": [2, 3, 4, 5, 6],
+      "C": [4, 6, 8, 10, 12],
+      "T": "float32"
+    },
+    // Add 3D arrays.
+    {
+      "op_type": "Add",
+      "A": [[[1, 2],[3, 4],[5, 6]],
+            [[7, 8],[9,10],[11, 12]]],
+      "B": [[[1, 2],[3, 4],[5, 6]],
+            [[7, 8],[9,10],[11, 12]]],
+      "C": [[[2, 4],[6, 8],[10, 12]],
+            [[14, 16],[18, 20],[22, 24]]],
+      "T": "float32"
+    },
+    // Add multiple consecutive nodes.
+    {
+      "nodes": [
+        {
+          "op_type": "Add",
+          "inputs": ["A", "B"],
+          "outputs": ["C"],
+          "T": "float32"
+        },
+        {
+          "op_type": "Add",
+          "inputs": {
+            "C": {},
+            "D": [1, 1, 1, 1, 1]
+          },
+          "outputs": ["E"],
+          "T": "float32"
+        }
+      ],
+      "inputs": {
+        "A": {
+          "type": "float32",
+          "value": [2, 3, 4, 5, 6]
+        },
+        "B": {
+          "type": "float32",
+          "value": [2, 3, 4, 5, 6]
+        }
+      },
+      "outputs": {
+        "E": {
+          "type": "float32",
+          "value": [5, 7, 9, 11, 13]
+        }
+      }
+    }
+  ],
+
+  "schema": [
+    {
+      "op_type": "Add",
+      "attributes": {
+        "axis": {"type": "int64"},
+        "broadcast": {"type": "int64"}
+      },
+      "inputs": {
+        "A": {"type": "T"},
+        "B": {"type": "T"}
+      },
+      "outputs": {
+        "C": {"type": "T"}
+      },
+      "types": {"T": ["float32", "float64", "int32", "uint32", "int64", "uint64"]}
+    }
+  ]
+}

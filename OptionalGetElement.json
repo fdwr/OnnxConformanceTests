@@ -1,0 +1,46 @@
+{
+  "tests": [
+    {
+      "graph_name": "OptionalGetElement",
+      "model_file": "OptionalGetElement.onnx",
+      "inputs": {
+        "optional_input": {"type": "float32", "value": [1, 2, 3, 4]},
+        "nonoptional_input": {"type": "float32", "value": [1, 1, 1, 1]}
+      },
+      "outputs": {
+        "output": {"type": "float32", "value": [2, 3, 4, 5]}
+      },
+      "verification": {"executor_filters": [".*"]} // WinML does not support binding optional tensors. So disabled for CPU and DX.
+    },
+    {
+      "graph_name": "OptionalAndOptionalGetElement",
+      "model_file": "OptionalAndOptionalGetElement.onnx",
+      "inputs": {
+        "optional_input": {"type": "float32", "value": [1, 2, 3, 4]},
+        "nonoptional_input": {"type": "float32", "value": [1, 1, 1, 1]}
+      },
+      "outputs": {
+        "output": {"type": "float32", "value": [2, 3, 4, 5]}
+      }
+    }
+  ],
+
+  "schema": [
+    {
+      "op_type": "OptionalGetElement",
+      "version": 15,
+      "attributes": {
+      },
+      "inputs": {
+        "input": {"type": "V"} // The actual type is O(V) (an optional wrapping a real type)
+      },
+      "outputs":{
+        "output": {"type": "V"}
+      },
+      "types": {
+        // The "O" type can't actually be represented in WinML or this JSON schema. So just pass the same type for input and output.
+        "V": ["float32", "float16", "bfloat16", "float64", "uint8", "uint16", "uint32", "uint64", "int8", "int16", "int32", "int64", "bool8", "string8"]
+      }
+    }
+  ]
+}

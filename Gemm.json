@@ -1,0 +1,198 @@
+{
+  "tests": [
+    {
+      "graph_name": "Gemm-7 float32",
+      "op_type": "Gemm",
+      "version": 7,
+      "A": [[1, 2, 3], [4, 5, 6]],
+      "B": [[1, 2], [3, 4], [5, 6]],
+      "C": [[1, 1], [1, 1]],
+      "Y": [[23, 29], [50, 65]],
+      "T": "float32"
+    },
+    {
+      "graph_name": "Gemm-7 float32 alpha and beta",
+      "op_type": "Gemm",
+      "version": 7,
+      "alpha": 3,
+      "beta": 2,
+      "A": [[1, 2, 3], [4, 5, 6]],
+      "B": [[1, 2], [3, 4], [5, 6]],
+      "C": [[1, 1], [1, 1]],
+      "Y": [[68, 86], [149, 194]],
+      "T": "float32"
+    },
+    {
+      "graph_name": "Gemm-7 float32 transpose A",
+      "op_type": "Gemm",
+      "version": 7,
+      "beta": 2,
+      "transA": 1,
+      "transB": 0,
+      "A": [[1, 4],
+            [2, 5],
+            [3, 6]],
+      "B": [[1, 2], [3, 4], [5, 6]],
+      "C": [[1, 1], [1, 1]],
+      "Y": [[24, 30], [51, 66]],
+      "T": "float32"
+    },
+    {
+      "graph_name": "Gemm-7 float16",
+      "op_type": "Gemm",
+      "version": 7,
+      "A": [[1, 2, 3], [4, 5, 6]],
+      "B": [[1, 2], [3, 4], [5, 6]],
+      "C": [[1, 1], [1, 1]],
+      "Y": [[23, 29], [50, 65]],
+      "T": "float16"
+    },
+    {
+      "graph_name": "Gemm-7 via MatMul Add fusion", // It's possible to reach GEMM via graph transformation, fusing MatMul + Add.
+      "nodes": [
+        {
+          "op_type": "MatMul",
+          "inputs": [
+            "Input0", // [[1, 2, 3], [4, 5, 6]]
+            "Input1"  // [[1, 2], [3, 4], [5, 6]]
+          ],
+          "outputs": ["MatMulOutput"], // [[22, 28], [49, 64]]
+        },
+        {
+          "op_type": "Add",
+          "inputs": [
+            "MatMulOutput", // [[22, 28], [49, 64]]
+            "Input2"        // [[1, 1], [1, 1]]
+          ],
+          "outputs": ["AddOutput"], // [[23, 29], [50, 65]]
+        }
+      ],
+      "inputs": {
+        "Input0": {
+          "type": "float16",
+          "value": [[1, 2, 3], [4, 5, 6]]
+        },
+        "Input1": {
+          "type": "float16",
+          "value": [[1, 2], [3, 4], [5, 6]]
+        },
+        "Input2": {
+          "type": "float16",
+          "value": [[1, 1], [1, 1]]
+        }
+      },
+      "outputs": {
+        "AddOutput": {
+          "type": "float16",
+          "value": [[23, 29], [50, 65]]
+        }
+      }
+    },
+    {
+      "graph_name": "Gemm-9 float32",
+      "op_type": "Gemm",
+      "version": 9,
+      "A": [[1, 2, 3], [4, 5, 6]],
+      "B": [[1, 2], [3, 4], [5, 6]],
+      "C": [[1, 1], [1, 1]],
+      "Y": [[23, 29], [50, 65]],
+      "T": "float32"
+    },
+    {
+      "graph_name": "Gemm-13 float32",
+      "op_type": "Gemm",
+      "version": 13,
+      "A": [[1, 2, 3], [4, 5, 6]],
+      "B": [[1, 2], [3, 4], [5, 6]],
+      "C": [[1, 1], [1, 1]],
+      "Y": [[23, 29], [50, 65]],
+      "T": "float32"
+    }
+  ],
+
+  "schema": [
+    {
+      "op_type": "Gemm",
+      "version": 7,
+      "attributes": {
+        "alpha": {"type": "float32"},
+        "beta": {"type": "float32"},
+        "transA": {"type": "int64"},
+        "transB": {"type": "int64"}
+      },
+      "inputs": {
+        "A": {"type": "T"},
+        "B": {"type": "T"},
+        "C": {"type": "T"}
+      },
+      "outputs": {
+        "Y": {"type": "T"}
+      },
+      "types": {"T": ["float32", "float16", "float64"]}
+    },
+    {
+      "op_type": "Gemm",
+      "version": 9, // Just supports more data types.
+      "attributes": {
+        "alpha": {"type": "float32"},
+        "beta": {"type": "float32"},
+        "transA": {"type": "int64"},
+        "transB": {"type": "int64"}
+      },
+      "inputs": {
+        "A": {"type": "T"},
+        "B": {"type": "T"},
+        "C": {"type": "T"}
+      },
+      "outputs": {
+        "Y": {"type": "T"}
+      },
+      "types": {"T": ["float32", "float16", "float64", "int32", "uint32", "int64", "uint64"]}
+    },
+    {
+      "op_type": "MatMul",
+      "version": 1,
+      "attributes": {},
+      "inputs": {
+        "A": {"type": "T"},
+        "B": {"type": "T"}
+      },
+      "outputs": {
+        "Y": {"type": "T"}
+      },
+      "types": {"T": ["float32", "float16", "float64"]}
+    },
+    {
+      "op_type": "Add",
+      "version": 7,
+      "attributes": {},
+      "inputs": {
+        "A": {"type": "T"},
+        "B": {"type": "T"}
+      },
+      "outputs": {
+        "C": {"type": "T"}
+      },
+      "types": {"T": ["float32", "float16", "float64", "int32", "uint32", "int64", "uint64"]}
+    },
+    {
+      "op_type": "Gemm",
+      "version": 13, // Just supports more data types.
+      "attributes": {
+        "alpha": {"type": "float32"},
+        "beta": {"type": "float32"},
+        "transA": {"type": "int64"},
+        "transB": {"type": "int64"}
+      },
+      "inputs": {
+        "A": {"type": "T"},
+        "B": {"type": "T"},
+        "C": {"type": "T"}
+      },
+      "outputs": {
+        "Y": {"type": "T"}
+      },
+      "types": {"T": ["float32", "float16", "float64", "int32", "uint32", "int64", "uint64", "bfloat16"]}
+    }
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "tests": [
+    {
+      "op_type": "Celu",
+      "alpha": 2,
+      "X": [0, 1, -1,          -5],
+      "Y": [0, 1, -0.78693868, -1.83583000],
+      "T": "float32",
+      "verification": {"ulp": 1}
+    }
+  ],
+
+  "schema": [
+    {
+      "op_type": "Celu", // y = max(0,x) + min(0,alpha*(exp(x/alpha)-1))
+      "version": 12,
+      "attributes": {
+        "alpha": {"type": "float32"} // default = 1.0
+      },
+      "inputs": {"X": {"type": "T"}},
+      "outputs": {"Y": {"type": "T"}},
+      "types": {"T": ["float32"]}
+    }
+  ]
+}

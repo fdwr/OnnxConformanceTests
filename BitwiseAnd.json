@@ -1,0 +1,116 @@
+{
+    "tests": [
+      {
+        "op_type": "BitwiseAnd",
+        "graph_name": "BitwiseAnd",
+        "A": {"value": [-1, -2, 3]},
+        "B": {"value": [1, 0, 3]},
+        "C": {"value": [1, 0, 3]},
+        "T": "int32"
+      },
+      {
+        "op_type": "BitwiseAnd",
+        "graph_name": "BitwiseAnd int64",
+        "A": {"value": [-1, -2, 3]},
+        "B": {"value": [1, 0, 3]},
+        "C": {"value": [1, 0, 3]},
+        "T": "int64"
+      },
+      {
+        "op_type": "BitwiseAnd",
+        "graph_name": "BitwiseAnd int8",
+        "A": {"value": [-1, -2, 3]},
+        "B": {"value": [1, 0, 3]},
+        "C": {"value": [1, 0, 3]},
+        "T": "int8"
+      },
+      {
+        "op_type": "BitwiseAnd",
+        "graph_name": "BitwiseAnd uint8",
+        "A": {"value": [1, 4, 5, 3]},
+        "B": {"value": [1, 2, 2, 1]},
+        "C": {"value": [1, 0, 0, 1]},
+        "T": "uint8"
+      },
+      {
+        "op_type": "BitwiseAnd",
+        "graph_name": "BitwiseAnd uint64",
+        "A": {"value": [10, 11, 12, 13]},
+        "B": {"value": [15, 7, 12, 9]},
+        "C": {"value": [10, 3, 12, 9]},
+        "T": "uint64"
+      },
+      {
+        "op_type": "BitwiseAnd",
+        "graph_name": "BitwiseAnd broadcastAB",
+        "A": {"value": [[10, 11],
+                        [12, 13],
+                        [14, 15],
+                        [16, 17]]},
+        "B": {"value": [15, 7]},
+        "C": {"value": [[10,  3],
+                        [12,  5],
+                        [14,  7],
+                        [ 0,  1]]},
+        "T": "int32"
+      },
+      {
+        "op_type": "BitwiseAnd",
+        "graph_name": "BitwiseAnd broadcastBA",
+        "A": {"value": [15, 7]},
+        "B": {"value": [[10, 11],
+                        [12, 13],
+                        [14, 15],
+                        [16, 17]]},
+        "C": {"value": [[10,  3],
+                        [12,  5],
+                        [14,  7],
+                        [ 0,  1]]},
+        "T": "int32"
+      },
+      {
+        "op_type": "BitwiseAnd",
+        "graph_name": "BitwiseAnd multidirectional_broadcastAB",
+        "A": {"value": [[10],
+                        [11],
+                        [12],
+                        [13]]},
+        "B": {"value": [15, 7]},
+        "C": {"value": [[10,  2],
+                        [11,  3],
+                        [12,  4],
+                        [13,  5]]},
+        "T": "int32"
+      },
+      {
+        "op_type": "BitwiseAnd",
+        "graph_name": "BitwiseAnd multidirectional_broadcastBA",
+        "A": {"value": [15, 7]},
+        "B": {"value": [[10],
+                        [11],
+                        [12],
+                        [13]]},
+        "C": {"value": [[10,  2],
+                        [11,  3],
+                        [12,  4],
+                        [13,  5]]},
+        "T": "int32"
+      }
+    ],
+  
+    "schema": [
+      {
+        "op_type": "BitwiseAnd",
+        "version": 18,
+        "inputs": {
+          "A": {"type": "T"},
+          "B": {"type": "T"}
+        },
+        "outputs": {
+          "C": {"type": "T"}
+        },
+        "types": {"T": ["uint8", "uint16", "uint32", "uint64", "int8", "int16", "int32", "int64"]}
+      }
+    ]
+  }
+  

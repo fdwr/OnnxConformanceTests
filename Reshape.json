@@ -1,0 +1,188 @@
+{
+  "tests": [
+    // float32.
+    {
+      "op_type": "Reshape",
+      "data": {"dims": [1,2,4,5], "function": "iota"},
+      "shape": [2,1,5,4],
+      "reshaped": {"dims": [2,1,5,4], "function": "iota"},
+      "T": "float32"
+    },
+    // float16.
+    {
+      "op_type": "Reshape",
+      "data": {"dims": [1,2,4,5], "function": "iota"},
+      "shape": [2,1,5,4],
+      "reshaped": {"dims": [2,1,5,4], "function": "iota"},
+      "T": "float16"
+    },
+    // One dimension deduced, via -1.
+    {
+      "op_type": "Reshape",
+      "data": {"dims": [1,2,4,5], "function": "iota"},
+      "shape": [2,1,-1,4], // -1 -> 5.
+      "reshaped": {"dims": [2,1,5,4], "function": "iota"},
+      "T": "float32"
+    },
+    // One dimension deduced, via -1, and one dimension copied from input via 0.
+    {
+      "op_type": "Reshape",
+      "data": {"dims": [1,2,4,5], "function": "iota"},
+      "shape": [1,0,5,4], // 0 -> 2 from input.
+      "reshaped": {"dims": [1,2,5,4], "function": "iota"},
+      "T": "float32"
+    },
+
+    // Verify data types...
+    {
+      "op_type": "Reshape",
+      "data": {"dims": [1,2,4,5], "function": "iota"},
+      "shape": [2,1,5,4],
+      "reshaped": {"dims": [2,1,5,4], "function": "iota"},
+      "T": "bool8"
+    },
+    {
+      "op_type": "Reshape",
+      "data": {"dims": [1,2,4,5], "function": "iota"},
+      "shape": [2,1,5,4],
+      "reshaped": {"dims": [2,1,5,4], "function": "iota"},
+      "T": "uint8"
+    },
+    {
+      "op_type": "Reshape",
+      "data": {"dims": [1,2,4,5], "function": "iota"},
+      "shape": [2,1,5,4],
+      "reshaped": {"dims": [2,1,5,4], "function": "iota"},
+      "T": "int8"
+    },
+    {
+      "op_type": "Reshape",
+      "data": {"dims": [1,2,4,5], "function": "iota"},
+      "shape": [2,1,5,4],
+      "reshaped": {"dims": [2,1,5,4], "function": "iota"},
+      "T": "uint16"
+    },
+    {
+      "op_type": "Reshape",
+      "data": {"dims": [1,2,4,5], "function": "iota"},
+      "shape": [2,1,5,4],
+      "reshaped": {"dims": [2,1,5,4], "function": "iota"},
+      "T": "int16"
+    },
+    {
+      "op_type": "Reshape",
+      "data": {"dims": [1,2,4,5], "function": "iota"},
+      "shape": [2,1,5,4],
+      "reshaped": {"dims": [2,1,5,4], "function": "iota"},
+      "T": "uint32"
+    },
+    {
+      "op_type": "Reshape",
+      "data": {"dims": [1,2,4,5], "function": "iota"},
+      "shape": [2,1,5,4],
+      "reshaped": {"dims": [2,1,5,4], "function": "iota"},
+      "T": "int32"
+    },
+    {
+      "op_type": "Reshape",
+      "data": {"dims": [1,2,4,5], "function": "iota"},
+      "shape": [2,1,5,4],
+      "reshaped": {"dims": [2,1,5,4], "function": "iota"},
+      "T": "uint64"
+    },
+    {
+      "op_type": "Reshape",
+      "data": {"dims": [1,2,4,5], "function": "iota"},
+      "shape": [2,1,5,4],
+      "reshaped": {"dims": [2,1,5,4], "function": "iota"},
+      "T": "int64"
+    },
+    {
+      "op_type": "Reshape",
+      "data": {"dims": [1,2,4,5], "function": "iota"},
+      "shape": [2,1,5,4],
+      "reshaped": {"dims": [2,1,5,4], "function": "iota"},
+      "T": "float16"
+    },
+    {
+      "op_type": "Reshape",
+      "data": {"dims": [1,2,4,5], "function": "iota"},
+      "shape": [2,1,5,4],
+      "reshaped": {"dims": [2,1,5,4], "function": "iota"},
+      "T": "float32"
+    },
+    {
+      "graph_name": "Reshape-13",
+      "op_type": "Reshape",
+      "version": 13,
+      "data": {"dims": [1,2,4,5], "function": "iota"},
+      "shape": [2,1,5,4],
+      "reshaped": {"dims": [2,1,5,4], "function": "iota"},
+      "T": "float32"
+    },
+    {
+      "graph_name": "Reshape-14 allowzero false",
+      "op_type": "Reshape",
+      "version": 14,
+      "allowzero": 0,
+      "data": {"dims": [1,2,4,5], "function": "iota"},
+      "shape": [2,1,0,5],
+      "reshaped": {"dims": [2,1,4,5], "function": "iota"},
+      "T": "float32"
+    },
+    {
+      "graph_name": "Reshape-14 allowzero true",
+      "op_type": "Reshape",
+      "version": 14,
+      "allowzero": 1,
+      "data": {"dims": [1,2,0,5], "function": "iota"},
+      "shape": [2,1,0,5],
+      "reshaped": {"dims": [2,1,0,5], "function": "iota"},
+      "T": "float32"
+    }
+  ],
+
+  "schema": [
+    {
+      "op_type": "Reshape",
+      "version": 5,
+      "attributes": {},
+      "inputs": {
+        "data": {"type": "T"},
+        "shape": {"type": "int64"}
+      },
+      "outputs": {
+        "reshaped": {"type": "T"}
+      },
+      "types": {"T": ["float32", "float16", "float64", "uint8", "uint16", "uint32", "uint64", "int8", "int16", "int32", "int64", "bool8"]}
+    },
+    {
+      "op_type": "Reshape",
+      "version": 13,
+      "attributes": {},
+      "inputs": {
+        "data": {"type": "T"},
+        "shape": {"type": "int64"}
+      },
+      "outputs": {
+        "reshaped": {"type": "T"}
+      },
+      "types": {"T": ["float32", "float16", "float64", "uint8", "uint16", "uint32", "uint64", "int8", "int16", "int32", "int64", "bool8", "bfloat16"]}
+    },
+    {
+      "op_type": "Reshape",
+      "version": 14,
+      "attributes": {
+        "allowzero": {"type": "int64"} // Default = 0
+      },
+      "inputs": {
+        "data": {"type": "T"},
+        "shape": {"type": "int64"}
+      },
+      "outputs": {
+        "reshaped": {"type": "T"}
+      },
+      "types": {"T": ["float32", "float16", "float64", "uint8", "uint16", "uint32", "uint64", "int8", "int16", "int32", "int64", "bool8", "bfloat16"]}
+    }
+  ]
+}

@@ -1,0 +1,279 @@
+{
+  "tests": [
+    {
+      "graph_name": "Pow float32 integers",
+      "verification": { "ulp": 2 },
+      "op_type": "Pow",
+      "version": 7,
+      "X": {"value": [0,1,2,3]},
+      "Y": {"value": [2,3,4,5]},
+      "Z": {"value": [0,1,16,243]},
+      "T": "float32"
+    },
+    {
+      "graph_name": "Pow float32 fractions",
+      "verification": { "ulp": 3 },
+      "op_type": "Pow",
+      "version": 7,
+      "X": {"value": [0,1,2,3,Inf,  2,   2,  9, 0.5, 1.25]},
+      "Y": {"value": [1,1,3,2,  2,Inf,  -2,0.5,   2,  2.5]},
+      "Z": {"value": [0,1,8,9,Inf,Inf,0.25,  3,0.25, 1.746928]},
+      "T": "float32"
+    },
+    {
+      "graph_name": "Pow float16 fraction",
+      "verification": { "ulp": 3 },
+      "op_type": "Pow",
+      "version": 7,
+      "X": {"value": [0,1,2,3,Inf,  2,   2,  9, 0.5, 1.25]},
+      "Y": {"value": [1,1,3,2,  2,Inf,  -2,0.5,   2,  2.5]},
+      "Z": {"value": [0,1,8,9,Inf,Inf,0.25,  3,0.25, 1.746928]},
+      "T": "float16"
+    },
+    {
+      "graph_name": "Pow float32 negative bases",
+      "verification": { "ulp": 3 },
+      "op_type": "Pow",
+      "version": 7,
+      "X": {"value": [-2,-2,-2,-2  ,-2   ,-2]},
+      "Y": {"value": [ 1, 2, 3,-1  ,-2   ,-3]},
+      "Z": {"value": [-2, 4,-8,-0.5, 0.25,-0.125]},
+      "T": "float32"
+      // Note -x ^ 0 is ommitted because it appears inconsistently across std::pow, numpy, and GPU.
+    },
+    {
+      "graph_name": "Pow float32 base int8 exp negative bases",
+      "verification": { "executor_filter": ".*Cpu", "ulp": 3 },
+      "op_type": "Pow",
+      "version": 12,
+      "X": {"value": [-2,-2,-2,-2  ,-2   ,-2]},
+      "Y": {"value": [ 1, 2, 3,-1  ,-2   ,-3]},
+      "Z": {"value": [-2, 4,-8,-0.5, 0.25,-0.125]},
+      "T": "float32",
+      "T1": "int8",
+    },
+    {
+      "graph_name": "Pow float32 base int32 exp negative bases",
+      "verification": { "executor_filter": ".*Cpu", "ulp": 3 },
+      "op_type": "Pow",
+      "version": 12,
+      "X": {"value": [-2,-2,-2,-2  ,-2   ,-2]},
+      "Y": {"value": [ 1, 2, 3,-1  ,-2   ,-3]},
+      "Z": {"value": [-2, 4,-8,-0.5, 0.25,-0.125]},
+      "T": "float32",
+      "T1": "int32",
+    },
+    {
+      "graph_name": "Pow float16 base int16 exp negative bases",
+      "verification": { "executor_filter": ".*Cpu", "ulp": 3 },
+      "op_type": "Pow",
+      "version": 12,
+      "X": {"value": [-2,-2,-2,-2  ,-2   ,-2]},
+      "Y": {"value": [ 1, 2, 3,-1  ,-2   ,-3]},
+      "Z": {"value": [-2, 4,-8,-0.5, 0.25,-0.125]},
+      "T": "float16",
+      "T1": "int16",
+    },
+    {
+      "graph_name": "Pow float16 base int16 exp negative bases",
+      "verification": { "executor_filter": ".*Cpu", "ulp": 3 },
+      "op_type": "Pow",
+      "version": 12,
+      "X": {"value": [-2,-2,-2,-2  ,-2   ,-2]},
+      "Y": {"value": [ 1, 2, 3,-1  ,-2   ,-3]},
+      "Z": {"value": [-2, 4,-8,-0.5, 0.25,-0.125]},
+      "T": "float16",
+      "T1": "int16"
+    },
+    {
+      "graph_name": "Pow int32 base uint8 exp integers",
+      "verification": { "executor_filter": ".*Cpu", "ulp": 0 },
+      "op_type": "Pow",
+      "version": 12,
+      "X": {"value": [0,1,2,-3]},
+      "Y": {"value": [2,3,4,5]},
+      "Z": {"value": [0,1,16,-243]},
+      "T": "int32",
+      "T1": "uint8"
+    },
+    {
+      "graph_name": "Pow int32 base uint16 exp integers",
+      "verification": {"executor_filter": ".*Cpu", "ulp": 0 },
+      "op_type": "Pow",
+      "version": 12,
+      "X": {"value": [0,1,2,-3]},
+      "Y": {"value": [2,3,4,5]},
+      "Z": {"value": [0,1,16,-243]},
+      "T": "int32",
+      "T1": "uint16"
+    },
+    {
+      "graph_name": "Pow int32 base uint32 exp big numbers and overflow",
+      "verification": {"executor_filter": ".*Cpu", "ulp": 0 },
+      "op_type": "Pow",
+      "version": 12,
+      "X": {"value": [1000, 1000, 1000, 1000, 1000]},
+      "Y": {"value": [1, 2, 3, 4, 5]},
+      "Z": {"value": [1000, 1000000, 1000000000, -727379968, -1530494976]},
+      "T": "int32",
+      "T1": "uint32"
+    },
+    {
+      "graph_name": "Pow int32 base int32 exp negative exp",
+      "verification": {"executor_filter": ".*Cpu", "ulp": 0 },
+      "op_type": "Pow",
+      "version": 12,
+      "X": {"value": [0, 1,2 ,-3, -1, -1, -1]},
+      "Y": {"value": [2,-3,4 ,-5, -1, -3,  0]},
+      "Z": {"value": [0, 1,16, 0, -1, -1,  1]},
+      "T": "int32",
+      "T1": "int32"
+    },
+    {
+      "op_type": "Pow",
+      "X": [[[[[[[[1]]]]]]]],
+      "Y": [[[[[[[[1]]]]]]]],
+      "Z": [[[[[[[[1]]]]]]]],
+      "T": "float32",
+      "verification": {"ulp": 1}
+    },
+    {
+      "op_type": "Pow",
+      "X": [[[[[[[[1],[2]]]]]]]],
+      "Y": [[[[[[[[1],[2]]]]]]]],
+      "Z": [[[[[[[[1],[4]]]]]]]],
+      "T": "float32",
+      "verification": {"ulp": 1}
+    },
+    {
+      "op_type": "Pow",
+      "X": [[[[[[ [[1],[2]],
+                  [[3],[4]] ]]]]]],
+      "Y": [[[[[[ [[1],[2]],
+                  [[3],[4]] ]]]]]],
+      "Z": [[[[[[ [[1],[4]],
+                  [[27],[256]] ]]]]]],
+      "T": "float32",
+      "verification": {"ulp": 1}
+    },
+    {
+      "op_type": "Pow",
+      "X": [[[[ [[1],[2]],
+                [[3],[4]] ]]]],
+      "Y": [[[[ [[1],[2]],
+                [[3],[4]] ]]]],
+      "Z": [[[[ [[1],[4]],
+                [[27],[256]] ]]]],
+      "T": "float32",
+      "verification": {"ulp": 1}
+    },
+    {
+      "op_type": "Pow",
+      "X": [[[  [[1],[2]],
+                [[3],[4]] ]]],
+      "Y": [[[  [[1],[2]],
+                [[3],[4]] ]]],
+      "Z": [[[  [[1],[4]],
+                [[27],[256]] ]]],
+      "T": "float32",
+      "verification": {"ulp": 1}
+    },
+    {
+      "op_type": "Pow",
+      "X": [[[ [[[1],[2]],
+                [[3],[4]]],
+               [[[1],[2]],
+                [[3],[4]]] ]]],
+      "Y": [[[ [[[1],[2]],
+                [[3],[4]]],
+                [[[1],[2]],
+               [[3],[4]]] ]]],
+      "Z": [[[ [[[1],[4]],
+                [[27],[256]]],
+               [[[1],[4]],
+                [[27],[256]]] ]]],
+      "T": "float32",
+      "verification": {"ulp": 1}
+    },
+    {
+      "graph_name": "Pow-13",
+      "op_type": "Pow",
+      "version": 13,
+      "X": {"value": [0,1,2,3]},
+      "Y": {"value": [2,3,4,5]},
+      "Z": {"value": [0,1,16,243]},
+      "T": "float32",
+      "verification": { "ulp": 2 }
+    },
+    {
+      "graph_name": "Pow-15",
+      "op_type": "Pow",
+      "version": 15,
+      "X": {"value": [0,1,2,3]},
+      "Y": {"value": [2,3,4,5]},
+      "Z": {"value": [0,1,16,243]},
+      "T": "float32",
+      "verification": { "ulp": 2 }
+    }
+  ],
+
+  "schema": [
+    {
+      "op_type": "Pow",
+      "version": 7,
+      "inputs": {
+        "X": {"type": "T"},
+        "Y": {"type": "T"}
+      },
+      "outputs": {
+        "Z": {"type": "T"}
+      },
+      "types": {"T": ["float32", "float16", "float64"]}
+    },
+    {
+      "op_type": "Pow",
+      "version": 12,
+      "inputs": {
+        "X": {"type": "T"},
+        "Y": {"type": "T1"}
+      },
+      "outputs": {
+        "Z": {"type": "T"}
+      },
+      "types": {
+        "T" : ["int32", "int64", "float32", "float16", "float64"],
+        "T1": [ "float16", "float32", "float64", "uint8", "uint16", "uint32", "uint64", "int8", "int16", "int32", "int64"]
+      }
+    },
+    {
+      "op_type": "Pow",
+      "version": 13, // Added bfloat to T.
+      "inputs": {
+        "X": {"type": "T"},
+        "Y": {"type": "T1"}
+      },
+      "outputs": {
+        "Z": {"type": "T"}
+      },
+      "types": {
+        "T" : ["int32", "int64", "float32", "float16", "bfloat16", "float64"],
+        "T1": [ "float16", "float32", "float64", "uint8", "uint16", "uint32", "uint64", "int8", "int16", "int32", "int64"]
+      }
+    },
+    {
+      "op_type": "Pow",
+      "version": 15, // Added bfloat to T1.
+      "inputs": {
+        "X": {"type": "T"},
+        "Y": {"type": "T1"}
+      },
+      "outputs": {
+        "Z": {"type": "T"}
+      },
+      "types": {
+        "T" : ["int32", "int64", "float32", "float16", "bfloat16", "float64"],
+        "T1": [ "float16", "float32", "float64", "uint8", "uint16", "uint32", "uint64", "int8", "int16", "int32", "int64", "bfloat16"]
+      }
+    }
+  ]
+}

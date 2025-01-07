@@ -1,0 +1,112 @@
+{
+  "tests": [
+    {
+      "graph_name": "Sign float32",
+      "op_type": "Sign",
+      "input": ["-Inf", -1, -0.125, 0, 0.125, 1,"Inf" ],
+      "output": [ -1, -1, -1, 0, 1, 1, 1 ],
+      "T": "float32",
+      "verification": {
+        "ulp": 0
+      }
+    },
+    {
+      "graph_name": "Sign float16",
+      "op_type": "Sign",
+      "input": ["-Inf", -1, -0.125, 0, 0.125, 1,"Inf" ],
+      "output": [ -1, -1, -1, 0, 1, 1, 1 ],
+      "T": "float16",
+      "verification": {
+        "ulp": 0
+      }
+    },
+    {
+      "graph_name": "Sign uint32",
+      "op_type": "Sign",
+      "input": [ 0, 0, 1, 2, 3, 4, 5 ],
+      "output": [ 0, 0, 1, 1, 1, 1, 1 ],
+      "T": "uint32",
+      "verification": {
+        "ulp": 0
+      }
+    },
+    {
+      "graph_name": "Sign uint16",
+      "op_type": "Sign",
+      "input": [ 0, 0, 1, 2, 3, 4, 5 ],
+      "output": [ 0, 0, 1, 1, 1, 1, 1 ],
+      "T": "uint16",
+      "verification": {
+        "ulp": 0
+      }
+    },
+    {
+      "graph_name": "Sign uint8",
+      "op_type": "Sign",
+      "input": [ 0, 0, 1, 2, 3, 4, 5 ],
+      "output": [ 0, 0, 1, 1, 1, 1, 1 ],
+      "T": "uint8",
+      "verification": {
+        "ulp": 0
+      }
+    },
+    {
+      "graph_name": "Sign int32",
+      "op_type": "Sign",
+      "input": [ -2, -1, 0, 2, 3, 4, 5 ],
+      "output": [ -1, -1, 0, 1, 1, 1, 1 ],
+      "T": "int32",
+      "verification": {
+        "ulp": 0
+      }
+    },
+    {
+      "graph_name": "Sign int16",
+      "op_type": "Sign",
+      "input": [ -2, -1, 0, 2, 3, 4, 5 ],
+      "output": [ -1, -1, 0, 1, 1, 1, 1 ],
+      "T": "int16",
+      "verification": {
+        "ulp": 0
+      }
+    },
+    {
+      "graph_name": "Sign int8",
+      "op_type": "Sign",
+      "input": [ -2, -1, 0, 2, 3, 4, 5 ],
+      "output": [ -1, -1, 0, 1, 1, 1, 1 ],
+      "T": "int8",
+      "verification": {
+        "ulp": 0
+      }
+    },
+    {
+      "graph_name": "Sign version 13",
+      "op_type": "Sign",
+      "version": 13,
+      "input": ["-Inf", -1, -0.125, 0, 0.125, 1,"Inf" ],
+      "output": [ -1, -1, -1, 0, 1, 1, 1 ],
+      "T": "float32",
+      "verification": {
+        "ulp": 0
+      }
+    }
+  ],
+
+  "schema": [
+    {
+      "op_type": "Sign",
+      "version": 9,
+      "inputs": {"input": {"type": "T"}},
+      "outputs": {"output": {"type": "T"}},
+      "types": {"T": ["float16", "float32", "float64"]}
+    },
+    {
+      "op_type": "Sign",
+      "version": 13,
+      "inputs": {"input": {"type": "T"}},
+      "outputs": {"output": {"type": "T"}},
+      "types": {"T": ["float16", "float32", "float64", "bfloat16"]}
+    }
+  ]
+}

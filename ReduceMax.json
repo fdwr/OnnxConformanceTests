@@ -1,0 +1,220 @@
+{
+  "tests":[
+    {
+      "graph_name": "ReduceMax no axes defined - implicitly all axes",
+      "op_type": "ReduceMax",
+      "keepdims": 1,
+      "data": [[[1, 2], [3, 4]], [[5, 6], [7, 8]], [[12, 11], [10, 9]]],
+      "reduced": [[[12]]],
+      "T": "float32"
+    },
+    {
+      "graph_name": "ReduceMax all axes specified",
+      "op_type": "ReduceMax",
+      "axes": [0, 1, 2],
+      "keepdims": 1,
+      "data": [[[1, 2], [3, 4]], [[5, 6], [7, 8]], [[12, 11], [10, 9]]],
+      "reduced": [[[12]]],
+      "T": "float32"
+    },
+    {
+      "graph_name": "ReduceMax single axis reduced, removing reduced dimensions",
+      "op_type": "ReduceMax",
+      "axes": [1],
+      "keepdims": 0,
+      "data": [[[1, 2], [3, 4]], [[5, 6], [7, 8]], [[12, 11], [10, 9]]],
+      "reduced": [[3, 4], [7, 8], [12, 11]],
+      "T": "float32"
+    },
+    {
+      "graph_name": "ReduceMax single axis reduced, keeping reduced dimensions as 1's",
+      "op_type": "ReduceMax",
+      "axes": [1],
+      "keepdims": 1,
+      "data": [[[1, 2], [3, 4]], [[5, 6], [7, 8]], [[12, 11], [10, 9]]],
+      "reduced": [[[3, 4]], [[7, 8]], [[12, 11]]],
+      "T": "float32"
+    },
+    {
+      "graph_name": "ReduceMax single axis reduced via negative axis, keeping reduced dimensions as 1's",
+      "op_type": "ReduceMax",
+      "axes": [-2],
+      "keepdims": 1,
+      "data": [[[1, 2], [3, 4]], [[5, 6], [7, 8]], [[12, 11], [10, 9]]],
+      "reduced": [[[3, 4]], [[7, 8]], [[12, 11]]],
+      "T": "float32"
+    },
+    {
+      "graph_name": "ReduceMax float16",
+      "op_type": "ReduceMax",
+      "axes": [1],
+      "keepdims": 1,
+      "data": [[[1, 2], [3, 4]], [[5, 6], [7, 8]], [[12, 11], [10, 9]]],
+      "reduced": [[[3, 4]], [[7, 8]], [[12, 11]]],
+      "T": "float16"
+    },
+    {
+      "graph_name": "ReduceMax uint8",
+      "op_type": "ReduceMax",
+      "version": 12,
+      "axes": [1],
+      "keepdims": 1,
+      "data": [[[1, 2], [3, 4]], [[5, 6], [7, 8]], [[12, 11], [10, 9]]],
+      "reduced": [[[3, 4]], [[7, 8]], [[12, 11]]],
+      "T": "uint8"
+    },
+    {
+      "graph_name": "ReduceMax int8",
+      "op_type": "ReduceMax",
+      "version": 12,
+      "axes": [1],
+      "keepdims": 1,
+      "data": [[[-1, -2], [-3, -4]], [[5, 6], [7, 8]], [[12, 11], [10, 9]]],
+      "reduced": [[[-1, -2]], [[7, 8]], [[12, 11]]],
+      "T": "int8"
+    },
+    {
+      "graph_name": "ReduceMax uint32",
+      "op_type": "ReduceMax",
+      "version": 12,
+      "axes": [1],
+      "keepdims": 1,
+      "data": [[[1, 2], [3, 4]], [[5, 6], [7, 8]], [[12, 11], [10, 9]]],
+      "reduced": [[[3, 4]], [[7, 8]], [[12, 11]]],
+      "T": "uint32",
+      "verification": {"executor_filter": ".*Cpu"}
+    },
+    {
+      "graph_name": "ReduceMax int32",
+      "op_type": "ReduceMax",
+      "version": 12,
+      "axes": [1],
+      "keepdims": 1,
+      "data": [[[-1, -2], [-3, -4]], [[5, 6], [7, 8]], [[12, 11], [10, 9]]],
+      "reduced": [[[-1, -2]], [[7, 8]], [[12, 11]]],
+      "T": "int32"
+    },
+    {
+      "graph_name": "ReduceMax uint64",
+      "op_type": "ReduceMax",
+      "version": 12,
+      "axes": [1],
+      "keepdims": 1,
+      "data": [[[1, 2], [3, 4]], [[5, 6], [7, 8]], [[12, 11], [10, 9]]],
+      "reduced": [[[3, 4]], [[7, 8]], [[12, 11]]],
+      "T": "uint64",
+      "verification": {"executor_filter": ".*Cpu"}
+    },
+    {
+      "graph_name": "ReduceMax int64",
+      "op_type": "ReduceMax",
+      "version": 12,
+      "axes": [1],
+      "keepdims": 1,
+      "data": [[[-1, -2], [-3, -4]], [[5, 6], [7, 8]], [[12, 11], [10, 9]]],
+      "reduced": [[[-1, -2]], [[7, 8]], [[12, 11]]],
+      "T": "int64"
+    },
+    {
+      "op_type": "ReduceMax",
+      "version": 12,
+      "keepdims": 1,
+      "axes": [6],
+      "data": [[[[[[  [[1],[-2]],
+                     [[-3],[4]] ]]]]]],
+      "reduced": [[[[[[  [[1]],
+                         [[4]] ]]]]]],
+      "T": "float32"
+    },
+    {
+      "op_type": "ReduceMax",
+      "version": 12,
+      "keepdims": 1,
+      "axes": [5],
+      "data": [[[[[        [[[-1],[2]],
+                            [[3],[-4]]],
+                           [[[-1],[2]],
+                            [[3],[-4]]] ]]]]],
+      "reduced": [[[[[      [[[3],[2]]],
+                             [[[3],[2]]] ]]]]],
+      "T": "float32"
+    },
+    {
+      "graph_name": "ReduceMax empty dimensions",
+      "op_type": "ReduceMax",
+      "keepdims": 1,
+      "axes": [0],
+      "data": {"dims": [1,1,0], "value": []},
+      "reduced": {"dims": [1,1,0], "value": []},
+      "T": "float32"
+    },
+    {
+      "graph_name": "ReduceMax version 13",
+      "op_type": "ReduceMax",
+      "version": 13,
+      "keepdims": 1,
+      "data": [[[1, 2], [3, 4]], [[5, 6], [7, 8]], [[12, 11], [10, 9]]],
+      "reduced": [[[12]]],
+      "T": "float32"
+    },
+    {
+      "graph_name": "ReduceMax version 18 axes",
+      "op_type": "ReduceMax",
+      "version": 18,
+      "axes": [1],
+      "keepdims": 0,
+      "data": [[[1, 2], [3, 4]], [[5, 6], [7, 8]], [[12, 11], [10, 9]]],
+      "reduced": [[3, 4], [7, 8], [12, 11]],
+      "T": "float32"
+    }
+  ],
+
+  "schema": [
+    {
+      "op_type": "ReduceMax",
+      "version": 1,
+      "attributes": {
+        "axes": {"type": "int64"}, // Default = all axes
+        "keepdims": {"type": "int64"} // Default = 1
+      },
+      "inputs" : {"data": {"type": "T"}},
+      "outputs": {"reduced": {"type": "T"}},
+      "types": {"T": ["float32", "float16", "float64", "uint32", "uint64", "int32", "int64"]}
+    },
+    {
+      "op_type": "ReduceMax",
+      "version": 12,
+      "attributes": {
+        "axes": {"type": "int64"}, // Default = all axes
+        "keepdims": {"type": "int64"} // Default = 1
+      },
+      "inputs" : {"data": {"type": "T"}},
+      "outputs": {"reduced": {"type": "T"}},
+      "types": {"T": ["float32", "float16", "float64", "uint32", "uint64", "int32", "int64", "int8", "uint8"]}
+    },
+    {
+      "op_type": "ReduceMax",
+      "version": 13,
+      "attributes": {
+        "axes": {"type": "int64"}, // Default = all axes
+        "keepdims": {"type": "int64"} // Default = 1
+      },
+      "inputs" : {"data": {"type": "T"}},
+      "outputs": {"reduced": {"type": "T"}},
+      "types": {"T": ["float32", "float16", "float64", "uint32", "uint64", "int32", "int64", "int8", "uint8", "bfloat16"]}
+    },
+    {
+      "op_type": "ReduceMax",
+      "version": 18,
+      "attributes": {
+        "keepdims": {"type": "int64"} // Default = 1
+      },
+      "inputs" : {
+        "data": {"type": "T"},
+        "axes": {"type": "int64"}, // Default = all axes
+      },
+      "outputs": {"reduced": {"type": "T"}},
+      "types": {"T": ["float32", "float16", "float64", "uint32", "uint64", "int32", "int64", "bfloat16"]}
+    }
+  ]
+}

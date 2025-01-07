@@ -1,0 +1,418 @@
+{
+  "tests": [
+    {
+      "graph_name": "RoiAlign mode=max 1D identity output=1,1,1,8 roi=1,1",
+      "op_type": "RoiAlign",
+      "version": 10,
+      "output_height": 1,
+      "output_width": 8,
+      "sampling_ratio": 1,
+      "spatial_scale": 1,
+      "mode": "max",
+      "X": [[[[1,2,3,4,5,6,7,8]]]],
+      "rois": [[0,0, 8,1]],
+      "batch_indices": [0],
+      "Y": [[[[1,2,3,4,5,6,7,8]]]],
+      "T1": "float32",
+      "T2": "int64",
+      "verification": { "executor_filter": ".*Cpu" } // CPU issue - pixels are misaligned.
+    },
+    {
+      "graph_name": "RoiAlign mode=avg 1D identity output=1,1,1,1 roi=1,1 float32 sampling_ratio=0",
+      "op_type": "RoiAlign",
+      "version": 10,
+      "output_height": 1,
+      "output_width": 4,
+      "sampling_ratio": 0,
+      "spatial_scale": 1,
+      "mode": "avg",
+      "X": [[[[ 0, 1, 2, 3]]]],
+      "rois": [[0,0, 4,1]],
+      "batch_indices": [0],
+      "Y": [[[[ 0, 1, 2, 3]]]],
+      "T1": "float32",
+      "T2": "int64",
+      "verification": { "executor_filter": ".*Cpu" } // CPU issue - pixels are misaligned.
+    },
+    {
+      "graph_name": "RoiAlign mode=avg 1D output=1,1,1,1 roi=1,1 float32",
+      "op_type": "RoiAlign",
+      "version": 10,
+      "output_height": 1,
+      "output_width": 1,
+      "sampling_ratio": 0,
+      "spatial_scale": 1,
+      "mode": "avg",
+      "X": [[[[ 0, 1, 2, 3]]]],
+      "rois": [[0,0, 4,1]],
+      "batch_indices": [0],
+      "Y": [[[[1.5]]]],
+      "T1": "float32",
+      "T2": "int64",
+      "verification": { "executor_filter": ".*Cpu" } // CPU issue - pixels are misaligned.
+    },
+    {
+      "graph_name": "RoiAlign mode=avg 1D output=1,1,1,1 roi=1,1 float16",
+      "op_type": "RoiAlign",
+      "version": 10,
+      "output_height": 1,
+      "output_width": 1,
+      "sampling_ratio": 0,
+      "spatial_scale": 1,
+      "mode": "avg",
+      "X": [[[[ 0, 1, 2, 3]]]],
+      "rois": [[0,0, 4,1]],
+      "batch_indices": [0],
+      "Y": [[[[1.5]]]],
+      "T1": "float16",
+      "T2": "int64",
+      "verification": { "executor_filter": ".*Cpu" } // Unsupported data type.
+    },
+    {
+      "graph_name": "RoiAlign mode=max 1D multichannel output=1,2,1,1 roi=1,1",
+      "op_type": "RoiAlign",
+      "version": 10,
+      "output_height": 1,
+      "output_width": 2,
+      "sampling_ratio": 1,
+      "spatial_scale": 1,
+      "mode": "max",
+      "X": [[[[ 0, 1, 2, 3]],
+             [[ 8, 9,10,11]]]],
+      "rois": [[1,0, 3,1]],
+      "batch_indices": [0],
+      "Y": [[[[ 1, 2]],
+             [[ 9,10]]]],
+      "T1": "float32",
+      "T2": "int64",
+      "verification": { "executor_filter": ".*Cpu" } // CPU issue - pixels are misaligned.
+    },
+    {
+      "graph_name": "RoiAlign mode=max 1D multibatch output=2,1,1,2 roi=1,2",
+      "op_type": "RoiAlign",
+      "version": 10,
+      "output_height": 1,
+      "output_width": 2,
+      "sampling_ratio": 0,
+      "spatial_scale": 1,
+      "mode": "max",
+      "X": [[[[ 0, 1, 2, 3]]],
+            [[[ 8, 9,10,11]]]],
+      "rois": [[1,0, 3,1],[1,0, 3,1]],
+      "batch_indices": [1,0], // Reverse batch indices.
+      "Y": [[[[ 9,10]]],
+            [[[ 1, 2]]]],
+      "T1": "float32",
+      "T2": "int64",
+      "verification": { "executor_filter": ".*Cpu" } // CPU issue - pixels are misaligned.
+    },
+    {
+      "graph_name": "RoiAlign mode=max output=3,1,1,1 roi=1,1",
+      "op_type": "RoiAlign",
+      "version": 10,
+      "output_height": 1,
+      "output_width": 1,
+      "sampling_ratio": 0,
+      "spatial_scale": 1,
+      "mode": "max",
+      "X": [[[[ 0, 1, 2, 3],
+              [ 4, 5, 6, 7],
+              [ 8, 9,10,11],
+              [12,13,14,15]]]],
+      "rois": [[0,0, 1,1], [3,0, 4,1], [0,3, 1,4]],
+      "batch_indices": [0,0,0],
+      "Y": [[[[0]]], [[[3]]], [[[12]]]],
+      "T1": "float32",
+      "T2": "int64",
+      "verification": { "executor_filter": ".*Cpu" } // CPU issue - pixels are misaligned.
+    },
+    {
+      "graph_name": "RoiAlign mode=max output=1,1,1,1 roi=2,2 sampling_ratio=2",
+      "op_type": "RoiAlign",
+      "version": 10,
+      "output_height": 1,
+      "output_width": 1,
+      "sampling_ratio": 2,
+      "spatial_scale": 1,
+      "mode": "max",
+      "X": [[[[ 0, 1, 2, 3],
+              [ 4, 5, 6, 7],
+              [ 8, 9,10,11],
+              [12,13,14,15]]]],
+      "rois": [[0,0, 2,2], [2,0, 4,2], [0,2, 2,4]],
+      "batch_indices": [0,0,0],
+      "Y": [[[[5]]], [[[7]]], [[[13]]]],
+      "T1": "float32",
+      "T2": "int64",
+      "verification": { "executor_filter": ".*Cpu" } // CPU issue - pixels are misaligned.
+    },
+    {
+      "graph_name": "RoiAlign mode=max output=1,1,1,1 roi=2x2 sampling_ratio=1 spatial_scale=2",
+      "op_type": "RoiAlign",
+      "version": 10,
+      "output_height": 1,
+      "output_width": 1,
+      "sampling_ratio": 4,
+      "spatial_scale": 2, // the 2x2 ROI scales up to 4x4.
+      "mode": "max",
+      "X": [[[[ 0, 1, 2, 3],
+              [ 4, 5, 6, 7],
+              [ 8, 9,10,11],
+              [12,13,14,15]]]],
+      "rois": [[0,0, 2,2]], // 4x4 after spatial_scale
+      "batch_indices": [0],
+      "Y": [[[[15]]]],
+      "T1": "float32",
+      "T2": "int64"
+    },
+    {
+      "graph_name": "RoiAlign mode=max output=1,1,1,1 roi=2x2 sampling_ratio=1 spatial_scale=0.5",
+      "op_type": "RoiAlign",
+      "version": 10,
+      "output_height": 1,
+      "output_width": 1,
+      "sampling_ratio": 2,
+      "spatial_scale": 0.5, // the 4x4 ROI scales down to 2x2.
+      "mode": "max",
+      "X": [[[[ 0, 1, 2, 3],
+              [ 4, 5, 6, 7],
+              [ 8, 9,10,11],
+              [12,13,14,15]]]],
+      "rois": [[0,0, 4,4]], // 2x2 after spatial_scale
+      "batch_indices": [0],
+      "Y": [[[[5]]]],
+      "T1": "float32",
+      "T2": "int64",
+      "verification": { "executor_filter": ".*Cpu" } // CPU issue - pixels are misaligned.
+    },
+    {
+      "graph_name": "RoiAlign mode=avg input=1,1,1,4 output=1,1,1,1 roi=4,4 sampling_ratio=4",
+      "op_type": "RoiAlign",
+      "version": 10,
+      "output_height": 1,
+      "output_width": 1,
+      "sampling_ratio": 4,
+      "spatial_scale": 1,
+      "mode": "avg",
+      "X": [[[[ 0, 1, 2, 3],
+              [ 4, 5, 6, 7],
+              [ 8, 9,10,11],
+              [12,13,14,15]]]],
+      "rois": [[0,0, 4,4]],
+      "batch_indices": [0],
+      "Y": [[[[7.5]]]],
+      "T1": "float32",
+      "T2": "int64",
+      "verification": { "executor_filter": ".*" } // CPU issue - pixels are misaligned.
+    },
+    {
+      "graph_name": "RoiAlign empty dimensions",
+      "op_type": "RoiAlign",
+      "version": 10,
+      "output_height": 1,
+      "output_width": 4,
+      "sampling_ratio": 1,
+      "spatial_scale": 1,
+      "mode": "max",
+      "X": [[[[ 0, 1, 2, 3]]]],
+      "rois": {"dims": [0,4], "value": []},
+      "batch_indices": [],
+      "Y": {"dims": [0,1,1,4], "value": []},
+      "T1": "float32",
+      "T2": "int64"
+      //"verification": { "executor_filter": ".*Cpu" } // CPU issue - pixels are misaligned.
+    },
+    {
+      // See alignment notes in detectron, where it's stated that alignment should be to pixel centers:
+      // https://github.com/facebookresearch/detectron2/blob/master/tests/layers/test_roi_align.py
+      // https://arxiv.org/abs/1703.06870
+      "graph_name": "RoiAlign mode=avg 2D output=1,1,4,4 roi=2,2 float32 detectron alignment test case",
+      "op_type": "RoiAlign",
+      "version": 10,
+      "output_height": 4,
+      "output_width": 4,
+      "sampling_ratio": 1,
+      "spatial_scale": 1,
+      "mode": "max",
+      "X": [[[[ 0, 1, 2, 3, 4],
+              [10,11,12,13,14],
+              [20,21,22,23,24],
+              [30,31,32,33,34],
+            [40,41,42,43,44]]]],
+      "rois": [[1,1,3,3]],
+      "batch_indices": [0],
+      "Y": [[[[ 8.2500,  8.7500,  9.2500,  9.7500],
+              [13.2500, 13.7500, 14.2500, 14.7500],
+              [18.2500, 18.7500, 19.2500, 19.7500],
+              [23.2500, 23.7500, 24.2500, 24.7500]]]],
+      "T1": "float32",
+      "T2": "int64",
+      "verification": { "executor_filter": ".*Cpu" } // CPU issue - pixels are misaligned.
+    },
+    {
+      "graph_name": "RoiAlign mode=avg 2D output=1,1,4,4 single input midpoints",
+      "op_type": "RoiAlign",
+      "version": 10,
+      "output_height": 1,
+      "output_width": 1,
+      "sampling_ratio": 1,
+      "spatial_scale": 1,
+      "mode": "max",
+      "X": [[[[ 0, 1, 2, 3]]]],
+      "rois":[
+                [0,0.5, 4,0.5],
+                [0,0.5, 2,0.5],
+                [2,0.5, 4,0.5],
+                [0,0.5, 3,0.5],
+                [1,0.5, 4,0.5]
+             ],
+      "batch_indices": [0,0,0,0,0],
+      "Y": [
+               [[[1.5]]],
+               [[[0.5]]],
+               [[[2.5]]],
+               [[[1.0]]],
+               [[[2.0]]]
+           ],
+      "T1": "float32",
+      "T2": "int64",
+      "verification": { "executor_filter": ".*Cpu" } // CPU issue - pixels are misaligned.
+    },
+    {
+      //Equivalent to:
+      //
+      //  # pip install torch==1.7.1+cpu torchvision==0.8.2+cpu torchaudio===0.7.2 -f https://download.pytorch.org/whl/torch_stable.html
+      //  import torch
+      //  import torchvision
+      //  
+      //  input = torch.tensor([[[[0, 1000, 0, 2000]]]], dtype=torch.float)
+      //  boxes = torch.tensor([[0,0,0,4,1]], dtype=torch.float)
+      //  output_size = [1,2]
+      //  output = torchvision.ops.roi_align(
+      //      input,
+      //      boxes,
+      //      output_size,
+      //      spatial_scale=1,
+      //      sampling_ratio=1,
+      //      aligned=True
+      //  )
+      "graph_name": "RoiAlign mode=avg 2D output=1,1,1,2 pytorch case",
+      "op_type": "RoiAlign",
+      "version": 10,
+      "output_height": 1,
+      "output_width": 2,
+      "sampling_ratio": 1,
+      "spatial_scale": 1,
+      "mode": "avg",
+      "X": [[[[0, 1000, 0, 2000]]]],
+      "rois":[[0,0,4,1]],
+      "batch_indices": [0],
+      "Y": [[[[500,1000]]]],
+      "T1": "float32",
+      "T2": "int64",
+      "verification": { "executor_filter": ".*Cpu" } // CPU issue - pixels are misaligned.
+    },
+    {
+      "graph_name": "RoiAlign mode=max 1D identity outside input",
+      "op_type": "RoiAlign",
+      "version": 10,
+      "output_height": 1,
+      "output_width": 8,
+      "sampling_ratio": 1,
+      "spatial_scale": 1,
+      "mode": "max",
+      "X": [[[[1,2,3,4,5,6,7,8]]]],
+      "rois": [[-4,0, 4,1]],
+      "batch_indices": [0],
+      "Y": [[[[0,0,0,0,1,2,3,4]]]],
+      "T1": "float32",
+      "T2": "int64",
+      "verification": { "executor_filter": ".*Cpu" } // CPU issue - pixels are misaligned.
+    },
+    {
+      "graph_name": "RoiAlign mode=max 1D identity outside input",
+      "op_type": "RoiAlign",
+      "version": 10,
+      "output_height": 1,
+      "output_width": 8,
+      "sampling_ratio": 1,
+      "spatial_scale": 1,
+      "mode": "avg",
+      "X": [[[[1,2,3,4]]]],
+      "rois": [[0,0, 4,1]],
+      "batch_indices": [0],
+      "Y": [[[[1,1.25,1.75,2.25,2.75,3.25,3.75,4]]]],
+      "T1": "float32",
+      "T2": "int64",
+      "verification": { "executor_filter": ".*Cpu" } // CPU issue - pixels are misaligned.
+    },
+    {
+      "graph_name": "RoiAlign 16 mode=max 1D identity output=1,1,1,8 roi=1,1",
+      "op_type": "RoiAlign",
+      "version": 16,
+      "output_height": 1,
+      "output_width": 8,
+      "sampling_ratio": 1,
+      "spatial_scale": 1,
+      "mode": "max",
+      "coordinate_transformation_mode": "half_pixel",
+      "X": [[[[1,2,3,4,5,6,7,8]]]],
+      "rois": [[0,0, 8,1]],
+      "batch_indices": [0],
+      "Y": [[[[1,2,3,4,5,6,7,8]]]],
+      "T1": "float32",
+      "T2": "int64",
+      // "verification": { "executor_filter": ".*Cpu" } // CPU issue - pixels are misaligned.
+    }
+  ],
+
+  "schema": [
+    {
+      "op_type": "RoiAlign",
+      "version": 10,
+      "attributes": {
+        "mode": {"type": "string8"}, // "avg", "max"; default = "avg"
+        "output_height": {"type": "int64"}, // (default 1) Output Y's height (it must match).
+        "output_width": {"type": "int64"}, // (default 1) Output Y's width (it must match).
+        "sampling_ratio": {"type": "int64"}, // (default is 0) Number of sampling points in the interpolation grid used to compute the output value of each pooled output bin. If > 0, then exactly sampling_ratio x sampling_ratio grid points are used. If == 0, then an adaptive number of grid points are used (computed as ceil(roi_width / output_width), and likewise for height). Default is 0.
+        "spatial_scale": {"type": "float32"} // (default is 1) Multiplicative spatial scale factor to translate ROI coordinates from their input spatial scale to the scale used when pooling, i.e., spatial scale of the input feature map X relative to the input image. E.g.; default is 1.0f.
+      },
+      "inputs": {
+        "X": {"type": "T1"}, // Input data tensor from the previous operator; 4-D feature map of shape (N, C, H, W), where N is the batch size, C is the number of channels, and H and W are the height and the width of the data.
+        "rois": {"type": "T1"}, // RoIs (Regions of Interest) to pool over; rois is 2-D input of shape (num_rois, 4) given as [[x1, y1, x2, y2], ...]. The RoIs' coordinates are in the coordinate system of the input image. Each coordinate set has a 1:1 correspondence with the 'batch_indices' input.
+        "batch_indices": {"type": "T2"} // 1-D tensor of shape (num_rois,) with each element denoting the index of the corresponding image in the batch.
+      },
+      "outputs": {
+        "Y": {"type": "T1"}
+      },
+      "types": {
+          "T1": ["float32", "float16", "float64"],
+          "T2": ["int64"]
+      }
+    },
+    {
+      "op_type": "RoiAlign",
+      "version": 16,
+      "attributes": {
+        "coordinate_transformation_mode": {"type":"string8"}, //(default half_pixel) Whether to pixel shift the input coordiates by -0.5.
+        "mode": {"type": "string8"}, // "avg", "max"; default = "avg"
+        "output_height": {"type": "int64"}, // (default 1) Output Y's height (it must match).
+        "output_width": {"type": "int64"}, // (default 1) Output Y's width (it must match).
+        "sampling_ratio": {"type": "int64"}, // (default is 0) Number of sampling points in the interpolation grid used to compute the output value of each pooled output bin. If > 0, then exactly sampling_ratio x sampling_ratio grid points are used. If == 0, then an adaptive number of grid points are used (computed as ceil(roi_width / output_width), and likewise for height). Default is 0.
+        "spatial_scale": {"type": "float32"} // (default is 1) Multiplicative spatial scale factor to translate ROI coordinates from their input spatial scale to the scale used when pooling, i.e., spatial scale of the input feature map X relative to the input image. E.g.; default is 1.0f.
+      },
+      "inputs": {
+        "X": {"type": "T1"}, // Input data tensor from the previous operator; 4-D feature map of shape (N, C, H, W), where N is the batch size, C is the number of channels, and H and W are the height and the width of the data.
+        "rois": {"type": "T1"}, // RoIs (Regions of Interest) to pool over; rois is 2-D input of shape (num_rois, 4) given as [[x1, y1, x2, y2], ...]. The RoIs' coordinates are in the coordinate system of the input image. Each coordinate set has a 1:1 correspondence with the 'batch_indices' input.
+        "batch_indices": {"type": "T2"} // 1-D tensor of shape (num_rois,) with each element denoting the index of the corresponding image in the batch.
+      },
+      "outputs": {
+        "Y": {"type": "T1"}
+      },
+      "types": {
+          "T1": ["float32", "float16", "float64"],
+          "T2": ["int64"]
+      }
+    }
+  ]
+}

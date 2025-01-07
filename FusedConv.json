@@ -1,0 +1,731 @@
+{
+  "tests": [
+    // 5D convolution fused with Relu.
+    {
+      "nodes": [
+        {
+          "op_type": "Conv",
+          "kernel_shape": [2,2,2],
+          "inputs": ["Conv_Input", "Conv_Weight", "Conv_Bias"],
+          "outputs": ["Conv_Output_Relu_Input"]
+        },
+        {
+          "op_type": "Relu",
+          "inputs": {
+            "Conv_Output_Relu_Input": {}
+          },
+          "outputs": ["Relu_Output"]
+        }
+      ],
+      "inputs": {
+        "Conv_Input": {
+          "type": "float32",
+          "value": [[[[[-10, 9,-8, 7,-6],
+                        [  5,-4, 3,-2, 1]],
+                      [[  0,-1, 2,-3, 4],
+                        [ -5, 6,-7, 8,-9]]]]]
+        },
+        "Conv_Weight": {
+          "type": "float32",
+          "value": [[[[[1,2],
+                        [3,4]],
+                      [[5,6],
+                        [7,8]]]]]
+        },
+        "Conv_Bias": {
+          "type": "float32",
+          "value": [1]
+        }
+      },
+      "outputs": {
+        "Relu_Output": {
+          "type": "float32",
+          "value": [[[[[15,0,15,0]]]]]
+        }
+      }
+    },
+    // 5D convolution fused with Tanh.
+    {
+      "nodes": [
+        {
+          "op_type": "Conv",
+          "kernel_shape": [2,2,2],
+          "inputs": ["Conv_Input", "Conv_Weight", "Conv_Bias"],
+          "outputs": ["Conv_Output_Tanh_Input"]
+        },
+        {
+          "op_type": "Tanh",
+          "inputs": {
+            "Conv_Output_Tanh_Input": {}
+          },
+          "outputs": ["Tanh_Output"]
+        }
+      ],
+      "inputs": {
+        "Conv_Input": {
+          "type": "float32",
+          "value": [[[[[-10, 9,-8, 7,-6],
+                        [  5,-4, 3,-2, 1]],
+                      [[  0,-1, 2,-3, 4],
+                        [ -5, 6,-7, 8,-9]]]]]
+        },
+        "Conv_Weight": {
+          "type": "float32",
+          "value": [[[[[1,2],
+                        [3,4]],
+                      [[5,6],
+                        [7,8]]]]]
+        },
+        "Conv_Bias": {
+          "type": "float32",
+          "value": [1]
+        }
+      },
+      "outputs": {
+        "Tanh_Output": {
+          "type": "float32",
+          "value": [[[[[1,-1,1,-1]]]]]
+        }
+      }
+    },
+    // 5D convolution fused with Sigmoid.
+    {
+      "verification": {"ulp": 1},
+      "nodes": [
+        {
+          "op_type": "Conv",
+          "kernel_shape": [2,2,2],
+          "inputs": ["Conv_Input", "Conv_Weight", "Conv_Bias"],
+          "outputs": ["Conv_Output_Sigmoid_Input"]
+        },
+        {
+          "op_type": "Sigmoid",
+          "inputs": {
+            "Conv_Output_Sigmoid_Input": {}
+          },
+          "outputs": ["Sigmoid_Output"]
+        }
+      ],
+      "inputs": {
+        "Conv_Input": {
+          "type": "float32",
+          "value": [[[[[ 0, 1, 2, 3, 4],
+                        [ 5, 6, 7, 8, 9]],
+                      [[10,11,12,13,14],
+                        [15,16,17,18,19]]]]]
+        },
+        "Conv_Weight": {
+          "type": "float32",
+          "value": [[[[[1,2],
+                        [3,4]],
+                      [[5,6],
+                        [7,8]]]]]
+        },
+        "Conv_Bias": {
+          "type": "float32",
+          "value": [1]
+        }
+      },
+      "outputs": {
+        "Sigmoid_Output": {
+          "type": "float32",
+          "value": [[[[[1,1,1,1]]]]]
+        }
+      }
+    },
+    // 5D convolution fused with Affine.
+    {
+      "verification": {"ulp": 1},
+      "nodes": [
+        {
+          "op_type": "Conv",
+          "kernel_shape": [2,2,2],
+          "inputs": ["Conv_Input", "Conv_Weight", "Conv_Bias"],
+          "outputs": ["Conv_Output_Affine_Input"]
+        },
+        {
+          "op_type": "Affine",
+          "inputs": {
+            "Conv_Output_Affine_Input": {}
+          },
+          "outputs": ["Affine_Output"],
+          "alpha": 2,
+          "beta": 1
+        }
+      ],
+      "inputs": {
+        "Conv_Input": {
+          "type": "float32",
+          "value": [[[[[ 0, 1, 2, 3, 4],
+                        [ 5, 6, 7, 8, 9]],
+                      [[10,11,12,13,14],
+                        [15,16,17,18,19]]]]]
+        },
+        "Conv_Weight": {
+          "type": "float32",
+          "value": [[[[[1,2],
+                        [3,4]],
+                      [[5,6],
+                        [7,8]]]]]
+        },
+        "Conv_Bias": {
+          "type": "float32",
+          "value": [1]
+        }
+      },
+      "outputs": {
+        "Affine_Output": {
+          "type": "float32",
+          "value": [[[[[783,855,927,999]]]]]
+        }
+      }
+    },
+    // 5D convolution fused with LeakyRelu.
+    {
+      "verification": {"ulp": 1},
+      "nodes": [
+        {
+          "op_type": "Conv",
+          "kernel_shape": [2,2,2],
+          "inputs": ["Conv_Input", "Conv_Weight", "Conv_Bias"],
+          "outputs": ["Conv_Output_LeakyRelu_Input"]
+        },
+        {
+          "op_type": "LeakyRelu",
+          "inputs": {
+            "Conv_Output_LeakyRelu_Input": {}
+          },
+          "outputs": ["LeakyRelu_Output"],
+          "alpha": 2
+        }
+      ],
+      "inputs": {
+        "Conv_Input": {
+          "type": "float32",
+          "value": [[[[[-10, 9,-8, 7,-6],
+                        [  5,-4, 3,-2, 1]],
+                      [[  0,-1, 2,-3, 4],
+                        [ -5, 6,-7, 8,-9]]]]]
+        },
+        "Conv_Weight": {
+          "type": "float32",
+          "value": [[[[[1,2],
+                        [3,4]],
+                      [[5,6],
+                        [7,8]]]]]
+        },
+        "Conv_Bias": {
+          "type": "float32",
+          "value": [1]
+        }
+      },
+      "outputs": {
+        "LeakyRelu_Output": {
+          "type": "float32",
+          "value": [[[[[15,-26,15,-26]]]]]
+        }
+      }
+    },
+    // 5D convolution fused with ScaledTanh.
+    {
+      "verification": {"ulp": 4},
+      "nodes": [
+        {
+          "op_type": "Conv",
+          "kernel_shape": [2,2,2],
+          "inputs": ["Conv_Input", "Conv_Weight", "Conv_Bias"],
+          "outputs": ["Conv_Output_ScaledTanh_Input"]
+        },
+        {
+          "op_type": "ScaledTanh",
+          "inputs": {
+            "Conv_Output_ScaledTanh_Input": {}
+          },
+          "outputs": ["ScaledTanh_Output"],
+          "alpha": 2,
+          "beta": 3
+        }
+      ],
+      "inputs": {
+        "Conv_Input": {
+          "type": "float32",
+          "value": [[[[[-10, 9,-8, 7,-6],
+                        [  5,-4, 3,-2, 1]],
+                      [[  0,-1, 2,-3, 4],
+                        [ -5, 6,-7, 8,-9]]]]]
+        },
+        "Conv_Weight": {
+          "type": "float32",
+          "value": [[[[[1,2],
+                        [3,4]],
+                      [[5,6],
+                        [7,8]]]]]
+        },
+        "Conv_Bias": {
+          "type": "float32",
+          "value": [1]
+        }
+      },
+      "outputs": {
+        "ScaledTanh_Output": {
+          "type": "float32",
+          "value": [[[[[2,-2,2,-2]]]]]
+        }
+      }
+    },
+    // 5D convolution fused with HardSigmoid.
+    {
+      "verification": {"ulp": 1},
+      "nodes": [
+        {
+          "op_type": "Conv",
+          "kernel_shape": [2,2,2],
+          "inputs": ["Conv_Input", "Conv_Weight", "Conv_Bias"],
+          "outputs": ["Conv_Output_HardSigmoid_Input"]
+        },
+        {
+          "op_type": "HardSigmoid",
+          "inputs": {
+            "Conv_Output_HardSigmoid_Input": {}
+          },
+          "outputs": ["HardSigmoid_Output"],
+          "alpha": 2,
+          "beta": 3
+        }
+      ],
+      "inputs": {
+        "Conv_Input": {
+          "type": "float32",
+          "value": [[[[[-10, 9,-8, 7,-6],
+                        [  5,-4, 3,-2, 1]],
+                      [[  0,-1, 2,-3, 4],
+                        [ -5, 6,-7, 8,-9]]]]]
+        },
+        "Conv_Weight": {
+          "type": "float32",
+          "value": [[[[[1,2],
+                        [3,4]],
+                      [[5,6],
+                        [7,8]]]]]
+        },
+        "Conv_Bias": {
+          "type": "float32",
+          "value": [1]
+        }
+      },
+      "outputs": {
+        "HardSigmoid_Output": {
+          "type": "float32",
+          "value": [[[[[1,0,1,0]]]]]
+        }
+      }
+    },
+    // 5D convolution fused with Elu.
+    {
+      "verification": {"ulp": 5},
+      "nodes": [
+        {
+          "op_type": "Conv",
+          "kernel_shape": [2,2,2],
+          "inputs": ["Conv_Input", "Conv_Weight", "Conv_Bias"],
+          "outputs": ["Conv_Output_Elu_Input"]
+        },
+        {
+          "op_type": "Elu",
+          "inputs": {
+            "Conv_Output_Elu_Input": {}
+          },
+          "outputs": ["Elu_Output"],
+          "alpha": 2
+        }
+      ],
+      "inputs": {
+        "Conv_Input": {
+          "type": "float32",
+          "value": [[[[[-10, 9,-8, 7,-2],
+                        [  5,-4, 3,-2, 1]],
+                      [[  0,-9, 2,-5, 4],
+                        [ -5, 6,-7, 8,-9]]]]]
+        },
+        "Conv_Weight": {
+          "type": "float32",
+          "value": [[[[[1,2],
+                        [3,4]],
+                      [[5,6],
+                        [7,8]]]]]
+        },
+        "Conv_Bias": {
+          "type": "float32",
+          "value": [1]
+        }
+      },
+      "outputs": {
+        "Elu_Output": {
+          "type": "float32",
+          "value": [[[[[-2,-2,3,-2]]]]]
+        }
+      }
+    },
+    // 5D convolution fused with Softsign.
+    {
+      "verification": {"ulp": 8},
+      "nodes": [
+        {
+          "op_type": "Conv",
+          "kernel_shape": [2,2,2],
+          "inputs": ["Conv_Input", "Conv_Weight", "Conv_Bias"],
+          "outputs": ["Conv_Output_Softsign_Input"]
+        },
+        {
+          "op_type": "Softsign",
+          "inputs": {
+            "Conv_Output_Softsign_Input": {}
+          },
+          "outputs": ["Softsign_Output"]
+        }
+      ],
+      "inputs": {
+        "Conv_Input": {
+          "type": "float32",
+          "value": [[[[[-10, 9,-8, 7,-2],
+                        [  5,-4, 3,-2, 1]],
+                      [[  0,-9, 2,-5, 4],
+                        [ -5, 6,-7, 8,-9]]]]]
+        },
+        "Conv_Weight": {
+          "type": "float32",
+          "value": [[[[[1,2],
+                        [3,4]],
+                      [[5,6],
+                        [7,8]]]]]
+        },
+        "Conv_Bias": {
+          "type": "float32",
+          "value": [1]
+        }
+      },
+      "outputs": {
+        "Softsign_Output": {
+          "type": "float32",
+          "value": [[[[[-0.970588,-0.981481,0.75,-0.9375]]]]]
+        }
+      }
+    },
+    // 5D convolution fused with Softplus.
+    {
+      "verification": {"ulp": 6},
+      "nodes": [
+        {
+          "op_type": "Conv",
+          "kernel_shape": [2,2,2],
+          "inputs": ["Conv_Input", "Conv_Weight", "Conv_Bias"],
+          "outputs": ["Conv_Output_Softplus_Input"]
+        },
+        {
+          "op_type": "Softplus",
+          "inputs": {
+            "Conv_Output_Softplus_Input": {}
+          },
+          "outputs": ["Softplus_Output"]
+        }
+      ],
+      "inputs": {
+        "Conv_Input": {
+          "type": "float32",
+          "value": [[[[[-10, 9,-8, 7,-2],
+                        [ 20,-4, 3,32, 1]],
+                      [[  0,-9,-6,-5, 4],
+                        [ -5, 6,-7, 8,-9]]]]]
+        },
+        "Conv_Weight": {
+          "type": "float32",
+          "value": [[[[[1,2],
+                        [3,4]],
+                      [[5,6],
+                        [7,8]]]]]
+        },
+        "Conv_Bias": {
+          "type": "float32",
+          "value": [1]
+        }
+      },
+      "outputs": {
+        "Softplus_Output": {
+          "type": "float32",
+          "value": [[[[[12,0,99,87]]]]]
+        }
+      }
+    },
+    // 5D convolution fused with Identity.
+    {
+      "verification": {"ulp": 6},
+      "nodes": [
+        {
+          "op_type": "Conv",
+          "kernel_shape": [2,2,2],
+          "inputs": ["Conv_Input", "Conv_Weight", "Conv_Bias"],
+          "outputs": ["Conv_Output_Identity_Input"]
+        },
+        {
+          "op_type": "Identity",
+          "inputs": {
+            "Conv_Output_Identity_Input": {}
+          },
+          "outputs": ["Identity_Output"]
+        }
+      ],
+      "inputs": {
+        "Conv_Input": {
+          "type": "float32",
+          "value": [[[[[ 0, 1, 2, 3, 4],
+                        [ 5, 6, 7, 8, 9]],
+                      [[10,11,12,13,14],
+                        [15,16,17,18,19]]]]]
+        },
+        "Conv_Weight": {
+          "type": "float32",
+          "value": [[[[[1,2],
+                        [3,4]],
+                      [[5,6],
+                        [7,8]]]]]
+        },
+        "Conv_Bias": {
+          "type": "float32",
+          "value": [1]
+        }
+      },
+      "outputs": {
+        "Identity_Output": {
+          "type": "float32",
+          "value": [[[[[391,427,463,499]]]]]
+        }
+      }
+    },
+    // 5D convolution fused with LogSoftmax.
+    {
+      "nodes": [
+        {
+          "op_type": "Conv",
+          "kernel_shape": [2,2,2],
+          "inputs": ["Conv_Input", "Conv_Weight", "Conv_Bias"],
+          "outputs": ["Conv_Output_LogSoftmax_Input"]
+        },
+        {
+          "op_type": "LogSoftmax",
+          "inputs": {
+            "Conv_Output_LogSoftmax_Input": {}
+          },
+          "outputs": ["LogSoftmax_Output"]
+        }
+      ],
+      "inputs": {
+        "Conv_Input": {
+          "type": "float32",
+          "value": [[[[[-10, 9,-8, 7,-2],
+                        [ 20,-4, 3,32, 1]],
+                      [[  0,-9,-6,-5, 4],
+                        [ -5, 6,-7, 8,-9]]]]]
+        },
+        "Conv_Weight": {
+          "type": "float32",
+          "value": [[[[[1,2],
+                        [3,4]],
+                      [[5,6],
+                        [7,8]]]]]
+        },
+        "Conv_Bias": {
+          "type": "float32",
+          "value": [1]
+        }
+      },
+      "outputs": {
+        "LogSoftmax_Output": {
+          "type": "float32",
+          "value": [[[[[-87,-200,-6.19886e-06,-12]]]]]
+        }
+      },
+      "verification": {"ulp": 8 /* 0.000001 RTOL */}
+    }
+  ],
+  
+  "schema": [
+    {
+      "op_type": "Conv",
+      "version": 1,
+      "attributes": {
+        "auto_pad": {"type": "string8"}, // "SAME_UPPER", "SAME_LOWER", "VALID"
+        "dilations": {"type": "int64"}, // list, defaults = 1
+        "group": {"type": "int64"}, // default = 1
+        "kernel_shape": {"type": "int64"}, // list, default = input tensor W
+        "pads": {"type": "int64"}, // list [x1_begin, x2_begin...x1_end, x2_end,...], defaults = 0
+        "strides": {"type": "int64"} // list, defaults = 1
+      },
+      "inputs": {
+        "X": {"type": "T"},
+        "W": {"type": "T"},
+        "B": {"type": "T"} // optional, size M
+      },
+      "outputs": {
+        "Y": {"type": "T"}
+      },
+      "types": {"T": ["float32", "float16", "float64"]}
+    },
+    {
+      "op_type": "Affine",
+      "version": 1,
+      "attributes": {
+        "alpha": {"type": "float32"},
+        "beta": {"type": "float32"}
+      },
+      "inputs": {
+        "X": {"type": "T"}
+      },
+      "outputs": {
+        "Y": {"type": "T"}
+      },
+      "types": {"T": ["float32", "float16", "float64"]}
+    },
+    {
+      "op_type": "Relu", // y = max(0, x)
+      "version": 6,
+      "attributes": {},
+      "inputs": {
+        "X": {"type": "T"}
+      },
+      "outputs": {
+        "Y": {"type": "T"}
+      },
+      "types": {"T": ["float32", "float16", "float64"]}
+    },
+    {
+      "op_type": "LeakyRelu",
+      "version": 6,
+      "attributes": {
+        "alpha": {"type": "float32"}
+      },
+      "inputs": {
+        "X": {"type": "T"}
+      },
+      "outputs": {
+        "Y": {"type": "T"}
+      },
+      "types": {"T": ["float32", "float16", "float64"]}
+    },
+    {
+      "op_type": "ThresholdedRelu",
+      "version": 1,
+      "attributes": {
+        "alpha": {"type": "float32"}
+      },
+      "inputs": {
+        "X": {"type": "T"}
+      },
+      "outputs": {
+        "Y": {"type": "T"}
+      },
+      "types": {"T": ["float32", "float16", "float64"]}
+    },
+    {
+      "op_type": "ScaledTanh",
+      "version": 1,
+      "attributes": {
+        "alpha": {"type": "float32"},
+        "beta": {"type": "float32"}
+      },
+      "inputs": {
+        "X": {"type": "T"}
+      },
+      "outputs": {
+        "Y": {"type": "T"}
+      },
+      "types": {"T": ["float32", "float16", "float64"]}
+    },
+    {
+      "op_type": "HardSigmoid",
+      "version": 6,
+      "attributes": {
+        "alpha": {"type": "float32"},
+        "beta": {"type": "float32"}
+      },
+      "inputs": {
+        "X": {"type": "T"}
+      },
+      "outputs": {
+        "Y": {"type": "T"}
+      },
+      "types": {"T": ["float32", "float16", "float64"]}
+    },
+    {
+      "op_type": "Elu",
+      "version": 6,
+      "attributes": {
+        "alpha": {"type": "float32"}
+      },
+      "inputs": {
+        "X": {"type": "T"}
+      },
+      "outputs": {
+        "Y": {"type": "T"}
+      },
+      "types": {"T": ["float32", "float16", "float64"]}
+    },
+    {
+      "op_type": "Tanh",
+      "version": 7,
+      "attributes": {},
+      "inputs": {
+        "input": {"type": "T"}
+      },
+      "outputs": {
+        "output": {"type": "T"}
+      },
+      "types": {"T": ["float32", "float16", "float64"]}
+    },
+    {
+      "op_type": "Sigmoid", // y = 1 / (1 + exp(-x)),
+      "version": 6,
+      "attributes": {},
+      "inputs": {
+        "X": {"type": "T"}
+      },
+      "outputs": {
+        "Y": {"type": "T"}
+      },
+      "types": {"T": ["float32", "float16", "float64"]}
+    },
+    {
+      "op_type": "Identity",
+      "version": 1,
+      "attributes": {},
+      "inputs": {"input": {"type": "T"}},
+      "outputs": {"output": {"type": "T"}},
+      "types": {"T": ["float32", "float16", "float64", "uint8", "uint16", "uint32", "uint64", "int8", "int16", "int32", "int64", "bool8", "string8"]}
+    },
+    {
+      "op_type": "Softsign", // y = x / (1 + abs(x))
+      "version": 1,
+      "attributes": {},
+      "inputs": {"input": {"type": "T"}},
+      "outputs": {"output": {"type": "T"}},
+      "types": {"T": ["float32", "float16", "float64"]}
+    },
+    {
+      "op_type": "Softplus", // y = ln(exp(x) + 1)
+      "version": 1,
+      "attributes": {},
+      "inputs": {"X": {"type": "T"}},
+      "outputs": {"Y": {"type": "T"}},
+      "types": {"T": ["float32", "float16", "float64"]}
+    },
+    {
+      "op_type": "LogSoftmax", // y = log(exp(x - max(X)) / sum(exp(X - max(X))))
+      "version": 1,
+      "attributes": {
+        "axis": {"type": "int64"} // default = 1 (skip 0th axis)
+      },
+      "inputs": {"input": {"type": "T"}},
+      "outputs": {"output": {"type": "T"}},
+      "types": {"T": ["float32", "float16", "float64"]}
+    }
+  ]
+}

@@ -1,0 +1,108 @@
+{
+  "tests": [
+    {
+      "op_type": "Size",
+      "data": [[1, 2, 3], [4, 5, 6]],
+      "size": 6,
+      "T": "float32"
+    },
+    {
+      "op_type": "Size",
+      "data": [[1, 2, 3], [4, 5, 6]],
+      "size": 6,
+      "T": "float16"
+    },
+    {
+      "op_type": "Size",
+      "data": [[1, 2, 3], [4, 5, 6]],
+      "size": 6,
+      "T": "float64"
+    },
+    {
+      "op_type": "Size",
+      "data": [[1, 2, 3], [4, 5, 6]],
+      "size": 6,
+      "T": "int8"
+    },
+    {
+      "op_type": "Size",
+      "data": [[1, 2, 3], [4, 5, 6]],
+      "size": 6,
+      "T": "uint8"
+    },
+    {
+      "op_type": "Size",
+      "data": [[1, 2, 3], [4, 5, 6]],
+      "size": 6,
+      "T": "int16"
+    },
+    {
+      "op_type": "Size",
+      "data": [[1, 2, 3], [4, 5, 6]],
+      "size": 6,
+      "T": "uint16"
+    },
+    {
+      "op_type": "Size",
+      "data": [[1, 2, 3], [4, 5, 6]],
+      "size": 6,
+      "T": "int32"
+    },
+    {
+      "op_type": "Size",
+      "data": [[1, 2, 3], [4, 5, 6]],
+      "size": 6,
+      "T": "uint32"
+    },
+    {
+      "op_type": "Size",
+      "data": [[1, 2, 3], [4, 5, 6]],
+      "size": 6,
+      "T": "int64"
+    },
+    {
+      "op_type": "Size",
+      "data": [[1, 2, 3], [4, 5, 6]],
+      "size": 6,
+      "T": "uint64"
+    },
+    {
+      "op_type": "Size",
+      "data": [[1, 2, 3], [4, 5, 6]],
+      "size": 6,
+      "T": "bool8"
+    },
+    {
+      "graph_name": "Size version 13",
+      "op_type": "Size",
+      "data": [[1, 2, 3], [4, 5, 6]],
+      "size": 6,
+      "T": "float32"
+    }
+  ],
+
+  "schema": [
+    {
+      "op_type": "Size",
+      "version": 1,
+      "attributes": {},
+      "inputs": {"data": {"type": "T"}},
+      "outputs": {"size": {"type": "T1"}},
+      "types": {
+        "T": ["float32", "float16", "float64", "uint8", "uint16", "uint32", "uint64", "int8", "int16", "int32", "int64", "bool8"],
+        "T1": ["int64"]
+      }
+    },
+    {
+      "op_type": "Size",
+      "version": 1,
+      "attributes": {},
+      "inputs": {"data": {"type": "T"}},
+      "outputs": {"size": {"type": "T1"}},
+      "types": {
+        "T": ["float32", "float16", "float64", "uint8", "uint16", "uint32", "uint64", "int8", "int16", "int32", "int64", "bool8", "string8", "bfloat16"],
+        "T1": ["int64"]
+      }
+    }
+  ]
+}

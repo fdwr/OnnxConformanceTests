@@ -1,0 +1,116 @@
+{
+    "tests": [
+      {
+        "op_type": "BitwiseXor",
+        "graph_name": "BitwiseXor",
+        "A": {"value": [-1, -2, 3]},
+        "B": {"value": [1, 0, 4]},
+        "C": {"value": [-2, -2, 7]},
+        "T": "int32"
+      },
+      {
+        "op_type": "BitwiseXor",
+        "graph_name": "BitwiseXor int64",
+        "A": {"value": [-1, -2, 3]},
+        "B": {"value": [1, 0, 4]},
+        "C": {"value": [-2, -2, 7]},
+        "T": "int64"
+      },
+      {
+        "op_type": "BitwiseXor",
+        "graph_name": "BitwiseXor int8",
+        "A": {"value": [-1, -2, 3]},
+        "B": {"value": [1, 0, 4]},
+        "C": {"value": [-2, -2, 7]},
+        "T": "int8"
+      },
+      {
+        "op_type": "BitwiseXor",
+        "graph_name": "BitwiseXor uint8",
+        "A": {"value": [1, 4, 5, 3]},
+        "B": {"value": [1, 2, 2, 1]},
+        "C": {"value": [0, 6, 7, 2]},
+        "T": "uint8"
+      },
+      {
+        "op_type": "BitwiseXor",
+        "graph_name": "BitwiseXor uint64",
+        "A": {"value": [10, 11, 12, 13]},
+        "B": {"value": [15, 7, 12, 9]},
+        "C": {"value": [5, 12, 0, 4]},
+        "T": "uint64"
+      },
+      {
+        "op_type": "BitwiseXor",
+        "graph_name": "BitwiseXor broadcastAB",
+        "A": {"value": [[10, 11],
+                        [12, 13],
+                        [14, 15],
+                        [16, 17]]},
+        "B": {"value": [15, 7]},
+        "C": {"value": [[ 5, 12],
+                        [ 3, 10],
+                        [ 1,  8],
+                        [31, 22]]},
+        "T": "int32"
+      },
+      {
+        "op_type": "BitwiseXor",
+        "graph_name": "BitwiseXor broadcastBA",
+        "A": {"value": [15, 7]},
+        "B": {"value": [[10, 11],
+                        [12, 13],
+                        [14, 15],
+                        [16, 17]]},
+        "C": {"value": [[ 5, 12],
+                        [ 3, 10],
+                        [ 1,  8],
+                        [31, 22]]},
+        "T": "int32"
+      },
+      {
+        "op_type": "BitwiseXor",
+        "graph_name": "BitwiseXor multidirectional_broadcastAB",
+        "A": {"value": [[10],
+                        [11],
+                        [12],
+                        [13]]},
+        "B": {"value": [15, 7]},
+        "C": {"value": [[ 5, 13],
+                        [ 4, 12],
+                        [ 3, 11],
+                        [ 2, 10]]},
+        "T": "int32"
+      },
+      {
+        "op_type": "BitwiseXor",
+        "graph_name": "BitwiseXor multidirectional_broadcastBA",
+        "A": {"value": [15, 7]},
+        "B": {"value": [[10],
+                        [11],
+                        [12],
+                        [13]]},
+        "C": {"value": [[ 5, 13],
+                        [ 4, 12],
+                        [ 3, 11],
+                        [ 2, 10]]},
+        "T": "int32"
+      }
+    ],
+  
+    "schema": [
+      {
+        "op_type": "BitwiseXor",
+        "version": 18,
+        "inputs": {
+          "A": {"type": "T"},
+          "B": {"type": "T"}
+        },
+        "outputs": {
+          "C": {"type": "T"}
+        },
+        "types": {"T": ["uint8", "uint16", "uint32", "uint64", "int8", "int16", "int32", "int64"]}
+      }
+    ]
+  }
+  

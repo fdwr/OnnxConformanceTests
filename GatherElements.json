@@ -1,0 +1,242 @@
+{
+  // https://github.com/onnx/onnx/blob/master/docs/Operators.md#GatherElements
+  // https://github.com/onnx/onnx/pull/2143
+  "tests": [
+    {
+      "graph_name": "GatherElements 2D Axis 0 float32",
+      "op_type": "GatherElements",
+      "data": [[1, 2, 3],
+               [4, 5, 6],
+               [7, 8, 9]],
+      "indices": [[1, 2, 0],
+                  [2, 0, 0]],
+      "axis": 0,
+      "output": [[4, 8, 3],
+                 [7, 2, 3]],
+      "T": "float32"
+    },
+    {
+      "graph_name": "GatherElements 2D Axis 0 float16",
+      "op_type": "GatherElements",
+      "data": [[1, 2, 3],
+               [4, 5, 6],
+               [7, 8, 9]],
+      "indices": [[1, 2, 0],
+                  [2, 0, 0]],
+      "axis": 0,
+      "output": [[4, 8, 3],
+                 [7, 2, 3]],
+      "T": "float16"
+    },
+    {
+      "graph_name": "GatherElements 2D Axis 0 float64",
+      "op_type": "GatherElements",
+      "data": [[1, 2, 3],
+               [4, 5, 6],
+               [7, 8, 9]],
+      "indices": [[1, 2, 0],
+                  [2, 0, 0]],
+      "axis": 0,
+      "output": [[4, 8, 3],
+                 [7, 2, 3]],
+      "T": "float64"
+    },
+    {
+      "graph_name": "GatherElements 2D Axis 0 uint64",
+      "op_type": "GatherElements",
+      "data": [[1, 2, 3],
+               [4, 5, 6],
+               [7, 8, 9]],
+      "indices": [[1, 2, 0],
+                  [2, 0, 0]],
+      "axis": 0,
+      "output": [[4, 8, 3],
+                 [7, 2, 3]],
+      "T": "uint64"
+    },
+    {
+      "graph_name": "GatherElements 2D Axis 0 int64",
+      "op_type": "GatherElements",
+      "data": [[1, 2, 3],
+               [4, 5, 6],
+               [7, 8, 9]],
+      "indices": [[1, 2, 0],
+                  [2, 0, 0]],
+      "axis": 0,
+      "output": [[4, 8, 3],
+                 [7, 2, 3]],
+      "T": "int64"
+    },
+    {
+      "graph_name": "GatherElements 2D Axis 1 float32",
+      "op_type": "GatherElements",
+      "data": [[1, 2],
+              [3, 4]],
+      "indices": [[0, 0],
+                  [1, 0]],
+      "axis": 1,
+      "output": [[1, 1],
+                 [4, 3]],
+      "T": "float32"
+    },
+    {
+      "graph_name": "GatherElements 2D Axis 0 int8",
+      "op_type": "GatherElements",
+      "data": [[1, 2, 3],
+               [4, 5, 6],
+               [7, 8, 9]],
+      "indices": [[1, 2, 0],
+                  [2, 0, 0]],
+      "axis": 0,
+      "output": [[4, 8, 3],
+                 [7, 2, 3]],
+      "T": "int8"
+    },
+    {
+      "graph_name": "GatherElements 2D Axis 0 int16",
+      "op_type": "GatherElements",
+      "data": [[1, 2, 3],
+               [4, 5, 6],
+               [7, 8, 9]],
+      "indices": [[1, 2, 0],
+                  [2, 0, 0]],
+      "axis": 0,
+      "output": [[4, 8, 3],
+                 [7, 2, 3]],
+      "T": "int8"
+    },
+    {
+      "graph_name": "GatherElements 2D Axis 0 int32",
+      "op_type": "GatherElements",
+      "data": [[1, 2, 3],
+               [4, 5, 6],
+               [7, 8, 9]],
+      "indices": [[1, 2, 0],
+                  [2, 0, 0]],
+      "axis": 0,
+      "output": [[4, 8, 3],
+                 [7, 2, 3]],
+      "T": "int8"
+    },
+    {
+      "graph_name": "GatherElements 2D Axis 0 uint32",
+      "op_type": "GatherElements",
+      "data": [[1, 2, 3],
+               [4, 5, 6],
+               [7, 8, 9]],
+      "indices": [[1, 2, 0],
+                  [2, 0, 0]],
+      "axis": 0,
+      "output": [[4, 8, 3],
+                 [7, 2, 3]],
+      "T": "uint32"
+    },
+    {
+      "graph_name": "GatherElements 2D Axis 0 uint16",
+      "op_type": "GatherElements",
+      "data": [[1, 2, 3],
+               [4, 5, 6],
+               [7, 8, 9]],
+      "indices": [[1, 2, 0],
+                  [2, 0, 0]],
+      "axis": 0,
+      "output": [[4, 8, 3],
+                 [7, 2, 3]],
+      "T": "uint16"
+    },
+    {
+      "graph_name": "GatherElements 2D Axis 0 uint32",
+      "op_type": "GatherElements",
+      "data": [[1, 2, 3],
+               [4, 5, 6],
+               [7, 8, 9]],
+      "indices": [[1, 2, 0],
+                  [2, 0, 0]],
+      "axis": 0,
+      "output": [[4, 8, 3],
+                 [7, 2, 3]],
+      "T": "uint32"
+    },
+    {
+      "graph_name": "GatherElements 2D Axis 0 uint32 negative indices",
+      "op_type": "GatherElements",
+      "version": 11,
+      "data": [[1, 2, 3],
+               [4, 5, 6],
+               [7, 8, 9]],
+      "indices": [[-2, -1, -3],
+                  [-1, -3, -3]],
+      "axis": 0,
+      "output": [[4, 8, 3],
+                 [7, 2, 3]],
+      "T": "uint32"
+    },
+    {
+      "graph_name": "GatherElements 8D",
+      "op_type": "GatherElements",
+      "version": 11,
+      "data": [[[[[[[1, 2, 3],
+                    [4, 5, 6],
+                    [7, 8, 9]]]]]]],
+      "indices": [[[[[[[-2, -1, -3],
+                  [-1, -3, -3]]]]]]],
+      "axis": 5,
+      "output": [[[[[[[4, 8, 3],
+                      [7, 2, 3]]]]]]],
+      "T": "uint32"
+    },
+    {
+      "graph_name": "GatherElements version 13",
+      "op_type": "GatherElements",
+      "version": 13,
+      "data": [[1, 2, 3],
+               [4, 5, 6],
+               [7, 8, 9]],
+      "indices": [[1, 2, 0],
+                  [2, 0, 0]],
+      "axis": 0,
+      "output": [[4, 8, 3],
+                 [7, 2, 3]],
+      "T": "float32"
+    }
+  ],
+
+  "schema": [
+    {
+      "op_type": "GatherElements", // equivalent to torch gather
+      "version": 11,
+      "attributes": {
+        "axis": {"type": "int64"} // default = 0. Negative means from the back.
+      },
+      "inputs": {
+        "data": {"type": "T"},
+        "indices": {"type": "Tind"} // Negative indices mean from the back of the data tensor.
+      },
+      "outputs": {
+        "output": {"type": "T"}
+      },
+      "types": {
+        "T": ["float32", "float16", "float64", "uint8", "uint16", "uint32", "uint64", "int8", "int16", "int32", "int64", "bool8", "string8"],
+        "Tind": ["int32", "int64"]
+      }
+    },
+    {
+      "op_type": "GatherElements", // equivalent to torch gather
+      "version": 13,
+      "attributes": {
+        "axis": {"type": "int64"} // default = 0. Negative means from the back.
+      },
+      "inputs": {
+        "data": {"type": "T"},
+        "indices": {"type": "Tind"} // Negative indices mean from the back of the data tensor.
+      },
+      "outputs": {
+        "output": {"type": "T"}
+      },
+      "types": {
+        "T": ["float32", "float16", "float64", "uint8", "uint16", "uint32", "uint64", "int8", "int16", "int32", "int64", "bool8", "string8", "bfloat16"],
+        "Tind": ["int32", "int64"]
+      }
+    }
+  ]
+}

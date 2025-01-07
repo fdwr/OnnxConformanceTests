@@ -1,0 +1,239 @@
+{
+  "tests": [
+    {
+      "graph_name": "Trilu-14 k=0 upper=1",
+      "op_type": "Trilu",
+      "version": 14,
+      "upper": 1,
+      "input": [[0, 1, 2, 3],
+                [4, 5, 6, 7],
+                [8, 9,10,11]],
+      "k": 0,
+      "output": [[0, 1, 2, 3],
+                 [0, 5, 6, 7],
+                 [0, 0,10,11]],
+      "T": "float32"
+    },
+    {
+      "graph_name": "Trilu-14 k=0 upper=0",
+      "op_type": "Trilu",
+      "version": 14,
+      "upper": 0,
+      "input": [[0, 1, 2, 3],
+                [4, 5, 6, 7],
+                [8, 9,10,11]],
+      "k": 0,
+      "output": [[0, 0, 0, 0],
+                 [4, 5, 0, 0],
+                 [8, 9,10, 0]],
+      "T": "float32"
+    },
+    {
+      "graph_name": "Trilu-14 k=1 upper=1",
+      "op_type": "Trilu",
+      "version": 14,
+      "upper": 1,
+      "input": [[0, 1, 2, 3],
+                [4, 5, 6, 7],
+                [8, 9,10,11]],
+      "k": 1,
+      "output": [[0, 1, 2, 3],
+                 [0, 0, 6, 7],
+                 [0, 0, 0,11]],
+      "T": "float32"
+    },
+    {
+      "graph_name": "Trilu-14 k=-1 upper=0",
+      "op_type": "Trilu",
+      "version": 14,
+      "upper": 0,
+      "input": [[0, 1, 2, 3],
+                [4, 5, 6, 7],
+                [8, 9,10,11]],
+      "k": -1,
+      "output": [[0, 0, 0, 0],
+                 [4, 0, 0, 0],
+                 [8, 9, 0, 0]],
+      "T": "float32"
+    },
+    {
+      "graph_name": "Trilu-14 default k",
+      "op_type": "Trilu",
+      "version": 14,
+      "input": [[0, 1, 2, 3],
+                [4, 5, 6, 7],
+                [8, 9,10,11]],
+      "output": [[0, 1, 2, 3],
+                 [0, 5, 6, 7],
+                 [0, 0,10,11]],
+      "T": "float32"
+    },
+    {
+      "graph_name": "Trilu-14 float16",
+      "op_type": "Trilu",
+      "version": 14,
+      "upper": 1,
+      "input": [[0, 1, 2, 3],
+                [4, 5, 6, 7],
+                [8, 9,10,11]],
+      "k": 0,
+      "output": [[0, 1, 2, 3],
+                 [0, 5, 6, 7],
+                 [0, 0,10,11]]
+    },
+    {
+      "graph_name": "Trilu-14 uint8",
+      "op_type": "Trilu",
+      "version": 14,
+      "upper": 1,
+      "input": [[0, 1, 2, 3],
+                [4, 5, 6, 7],
+                [8, 9,10,11]],
+      "k": 0,
+      "output": [[0, 1, 2, 3],
+                 [0, 5, 6, 7],
+                 [0, 0,10,11]],
+      "T": "uint8",
+      "verification": {"executor_filter": ".*Cpu"}
+    },
+    {
+      "graph_name": "Trilu-14 uint16",
+      "op_type": "Trilu",
+      "version": 14,
+      "upper": 1,
+      "input": [[0, 1, 2, 3],
+                [4, 5, 6, 7],
+                [8, 9,10,11]],
+      "k": 0,
+      "output": [[0, 1, 2, 3],
+                 [0, 5, 6, 7],
+                 [0, 0,10,11]],
+      "T": "uint16",
+      "verification": {"executor_filter": ".*Cpu"}
+    },
+    {
+      "graph_name": "Trilu-14 uint32",
+      "op_type": "Trilu",
+      "version": 14,
+      "upper": 1,
+      "input": [[0, 1, 2, 3],
+                [4, 5, 6, 7],
+                [8, 9,10,11]],
+      "k": 0,
+      "output": [[0, 1, 2, 3],
+                 [0, 5, 6, 7],
+                 [0, 0,10,11]],
+      "T": "uint32",
+      "verification": {"executor_filter": ".*Cpu"}
+    },
+    {
+      "graph_name": "Trilu-14 uint64",
+      "op_type": "Trilu",
+      "version": 14,
+      "upper": 1,
+      "input": [[0, 1, 2, 3],
+                [4, 5, 6, 7],
+                [8, 9,10,11]],
+      "k": 0,
+      "output": [[0, 1, 2, 3],
+                 [0, 5, 6, 7],
+                 [0, 0,10,11]],
+      "T": "uint64",
+      "verification": {"executor_filter": ".*Cpu"}
+    },
+    {
+      "graph_name": "Trilu-14 int8",
+      "op_type": "Trilu",
+      "version": 14,
+      "upper": 1,
+      "input": [[0, 1, 2, 3],
+                [4, 5, 6, 7],
+                [8, 9,10,11]],
+      "k": 0,
+      "output": [[0, 1, 2, 3],
+                 [0, 5, 6, 7],
+                 [0, 0,10,11]],
+      "T": "int8",
+      "verification": {"executor_filter": ".*Cpu"}
+    },
+    {
+      "graph_name": "Trilu-14 int16",
+      "op_type": "Trilu",
+      "version": 14,
+      "upper": 1,
+      "input": [[0, 1, 2, 3],
+                [4, 5, 6, 7],
+                [8, 9,10,11]],
+      "k": 0,
+      "output": [[0, 1, 2, 3],
+                 [0, 5, 6, 7],
+                 [0, 0,10,11]],
+      "T": "int16",
+      "verification": {"executor_filter": ".*Cpu"}
+    },
+    {
+      "graph_name": "Trilu-14 int32",
+      "op_type": "Trilu",
+      "version": 14,
+      "upper": 1,
+      "input": [[0, 1, 2, 3],
+                [4, 5, 6, 7],
+                [8, 9,10,11]],
+      "k": 0,
+      "output": [[0, 1, 2, 3],
+                 [0, 5, 6, 7],
+                 [0, 0,10,11]],
+      "T": "int32",
+      "verification": {"executor_filter": ".*Cpu"}
+    },
+    {
+      "graph_name": "Trilu-14 int64",
+      "op_type": "Trilu",
+      "version": 14,
+      "upper": 1,
+      "input": [[0, 1, 2, 3],
+                [4, 5, 6, 7],
+                [8, 9,10,11]],
+      "k": 0,
+      "output": [[0, 1, 2, 3],
+                 [0, 5, 6, 7],
+                 [0, 0,10,11]],
+      "T": "int64"
+    },
+    {
+      "graph_name": "Trilu-14 bool8",
+      "op_type": "Trilu",
+      "version": 14,
+      "upper": 1,
+      "input": [[0, 1, 2, 3],
+                [4, 5, 6, 7],
+                [8, 9,10,11]],
+      "k": 0,
+      "output": [[0, 1, 2, 3],
+                 [0, 5, 6, 7],
+                 [0, 0,10,11]],
+      "T": "bool8",
+      "verification": {"executor_filter": ".*Cpu"}
+    }
+  ],
+
+  "schema": [
+    {
+      "op_type": "Trilu",
+      "version": 14,
+      "attributes": {
+        "upper": {"type": "int64"}, // optional, default = 1
+      },
+      "inputs": {
+        "input": {"type": "T"},
+        "k": {"type": "int64"} // optional, default = 0
+      },
+      "outputs": {
+        "output": {"type": "T"}
+      },
+      "types": {
+        "T": ["float32", "float16", "float64", "int32", "uint32", "int64", "uint64", "int16", "uint16", "int8", "uint8", "bool8"]
+      }
+    }
+  ]
+}

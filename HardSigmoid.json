@@ -1,0 +1,38 @@
+{
+  "tests": [
+    // float32.
+    {
+      "op_type": "HardSigmoid",
+      "alpha": 0.5,
+      "beta": 0.25,
+      "X": [0, 1, 2, -1],
+      "Y": [0.25, 0.75, 1, 0],
+      "T": "float32",
+      "verification": { "executor_filter": ".*Cpu" }
+    },
+    // float16.
+    {
+      "op_type": "HardSigmoid",
+      "alpha": 0.5,
+      "beta": 0.25,
+      "X": [0, 1, 2, -1],
+      "Y": [0.25, 0.75, 1, 0],
+      "T": "float16",
+      "verification": { "executor_filter": ".*Cpu" }
+    }
+  ],
+
+  "schema": [
+    {
+      "op_type": "HardSigmoid", // y = max(0, min(1, alpha * x + beta))
+      "version": 6,
+      "attributes": {
+        "alpha": {"type": "float32"}, // default = 0.2
+        "beta": {"type": "float32"} // default = 0.5
+      },
+      "inputs": {"X": {"type": "T"}},
+      "outputs": {"Y": {"type": "T"}},
+      "types": {"T": ["float32", "float16", "float64"]}
+    }
+  ]
+}

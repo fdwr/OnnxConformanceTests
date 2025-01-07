@@ -1,0 +1,60 @@
+{
+  "tests": [
+    // Test true condition case.
+    {
+      "graph_name": "If true case",
+      "model_file": "If.onnx",
+      "inputs": {
+        "split_input": {"type": "float32", "value": [1, 10]},
+        "if_cond": {"type": "bool8", "value": [true]},
+        "if_graph_input_0": {"type": "float32", "value": [1]}
+      },
+      "outputs": {
+        "split_out_0": {"type": "float32", "value": [1]},
+        "split_out_1": {"type": "float32", "value": [10]},
+        "if_out_0": {"type": "float32", "value": [2]},
+        "if_input_0": {"type": "float32", "value": [1]}
+      }
+    },
+    // Test false condition case.
+    {
+      "graph_name": "If false case",
+      "model_file": "If.onnx",
+      "inputs": {
+        "split_input": {"type": "float32", "value": [1, 10]},
+        "if_cond": {"type": "bool8", "value": [false]},
+        "if_graph_input_0": {"type": "float32", "value": [1]}
+      },
+      "outputs": {
+        "split_out_0": {"type": "float32", "value": [1]},
+        "split_out_1": {"type": "float32", "value": [10]},
+        "if_out_0": {"type": "float32", "value": [11]},
+        "if_input_0": {"type": "float32", "value": [1]}
+      }
+    }
+  ],
+
+  "schema": [
+    {
+      "op_type": "If",
+      "version": 1,
+      "attributes": {
+        "else_branch": {"type": "graph"},
+        "then_branch": {"type": "graph"}
+      },
+      "inputs": {
+        "cond": {"type": "B"}
+      },
+      "outputs":{ // Variadic, 1 to infinity. Values that outlive the enclosing scope. The return values in the `then_branch` and `else_branch` must be of the same shape and same data type.
+        "output_0": {"type": "V"},
+        "output_1": {"type": "V"},
+        "output_2": {"type": "V"},
+        "output_3": {"type": "V"}
+      },
+      "types": {
+        "V": ["float32", "float16", "float64", "uint8", "uint16", "uint32", "uint64", "int8", "int16", "int32", "int64", "bool8"],
+        "B": ["bool8"]
+      }
+    }
+  ]
+}

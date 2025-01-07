@@ -1,0 +1,124 @@
+{
+  "tests": [
+    {
+      "graph_name": "Subtract 1D arrays",
+      "op_type": "Sub",
+      "A": [0, 3, 2.5,"Inf","-Inf"],
+      "B": [0, 2, 1.5,   1,    1],
+      "C": [0, 1, 1.0,"Inf","-Inf"],
+      "T": "float32"
+    },
+    {
+      "graph_name": "Subtract float16",
+      "op_type": "Sub",
+      "A": [0, 3, 2.5,"Inf","-Inf"],
+      "B": [0, 2, 1.5,   1,    1],
+      "C": [0, 1, 1.0,"Inf","-Inf"],
+      "T": "float16"
+    },
+    // Check broadcast support, numpy-style broadcasting. https://github.com/onnx/onnx/blob/master/docs/Broadcasting.md
+    {
+      "graph_name": "Subtract broadcast scalar",
+      "op_type": "Sub",
+      "A": [2, 3, 4, 5, 6],
+      "B": 1,
+      "C": [1, 2, 3, 4, 5],
+      "T": "float32"
+    },
+    {
+      "graph_name": "Subtract int32",
+      "op_type": "Sub",
+      "A": [2, 3, 4, -5, -6],
+      "B": 1,
+      "C": [1, 2, 3, -6, -7],
+      "T": "int32"
+    },
+    {
+      "graph_name": "Subtract uint32",
+      "op_type": "Sub",
+      "A": [2, 3, 4, 5, 6],
+      "B": 1,
+      "C": [1, 2, 3, 4, 5],
+      "T": "uint32",
+      "verification": { "executor_filter": ".*Cpu" }
+    },
+    {
+      "graph_name": "Subtract int64",
+      "op_type": "Sub",
+      "A": [2, 3, 4, -5, -6],
+      "B": 1,
+      "C": [1, 2, 3, -6, -7],
+      "T": "int64"
+    },
+    {
+      "graph_name": "Subtract uint64",
+      "op_type": "Sub",
+      "A": [2, 3, 4, 5, 6],
+      "B": 1,
+      "C": [1, 2, 3, 4, 5],
+      "T": "uint64",
+      "verification": { "executor_filter": ".*Cpu" }
+    },
+    {
+      "graph_name": "Subtract-13 with infinity",
+      "op_type": "Sub",
+      "version": 13,
+      "A": [0, 3, 2.5,"Inf","-Inf"],
+      "B": [0, 2, 1.5,   1,    1],
+      "C": [0, 1, 1.0,"Inf","-Inf"],
+      "T": "float32"
+    },
+    {
+      "graph_name": "Subtract-14 uint8",
+      "op_type": "Sub",
+      "version": 14,
+      "A": [2, 3, 4, 5, 6],
+      "B": 250,
+      "C": [8, 9, 10, 11, 12],
+      "T": "uint8",
+      "verification": { "executor_filter": ".*Cpu" }
+    }
+  ],
+
+  "schema": [
+    {
+      "op_type": "Sub",
+      "version": 7,
+      "attributes": {},
+      "inputs": {
+        "A": {"type": "T"},
+        "B": {"type": "T"}
+      },
+      "outputs": {
+        "C": {"type": "T"}
+      },
+      "types": {"T": ["float32", "float16", "float64", "int32", "uint32", "int64", "uint64"]}
+    },
+    {
+      "op_type": "Sub",
+      "version": 13,
+      "attributes": {},
+      "inputs": {
+        "A": {"type": "T"},
+        "B": {"type": "T"}
+      },
+      "outputs": {
+        "C": {"type": "T"}
+      },
+      "types": {"T": ["float32", "float16", "float64", "int32", "uint32", "int64", "uint64", "bfloat16"]}
+    },
+    {
+      "op_type": "Sub",
+      "version": 14,
+      "attributes": {},
+      "inputs": {
+        "A": {"type": "T"},
+        "B": {"type": "T"}
+      },
+      "outputs": {
+        "C": {"type": "T"}
+      },
+      "types": {"T": ["float32", "float16", "float64", "int8", "uint8", "int16", "uint16", "int32", "uint32", "int64", "uint64", "bfloat16"]}
+    }
+  ]
+}

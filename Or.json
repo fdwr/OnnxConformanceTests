@@ -1,0 +1,26 @@
+{
+  "tests": [
+    {
+      "op_type": "Or",
+      "A": {"value": [0,1,0,1]},
+      "B": {"value": [0,0,1,1]},
+      "C": {"value": [0,1,1,1]},
+      "T": "bool8"
+    }
+  ],
+
+  "schema": [
+    {
+      "op_type": "Or",
+      "version": 7,
+      "inputs": {
+        "A": {"type": "T"},
+        "B": {"type": "T"}
+      },
+      "outputs": {
+        "C": {"type": "T"}
+      },
+      "types": {"T": ["bool8"]}
+    }
+  ]
+}

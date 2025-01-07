@@ -1,0 +1,48 @@
+{
+  "tests": [
+    // float32.
+    {
+      "op_type": "Sigmoid",
+      "X": [0, 1, 2, -1],
+      "Y": [0.5, 0.731058579, 0.880797078, 0.268941421],
+      "T": "float32",
+      "verification": {"ulp": 1}
+    },
+    // float16.
+    {
+      "op_type": "Sigmoid",
+      "X": [0, 1, 2, -1],
+      "Y": [0.5, 0.731058579, 0.880797078, 0.268941421],
+      "T": "float16",
+      "verification": {"ulp": 1}
+    },
+    {
+      "graph_name": "Sigmoid version 13",
+      "op_type": "Sigmoid",
+      "version": 13,
+      "X": [0, 1, 2, -1],
+      "Y": [0.5, 0.731058579, 0.880797078, 0.268941421],
+      "T": "float32",
+      "verification": {"ulp": 1}
+    }
+  ],
+
+  "schema": [
+    {
+      "op_type": "Sigmoid", // y = 1 / (1 + exp(-x)),
+      "version": 6,
+      "attributes": {},
+      "inputs": {"X": {"type": "T"}},
+      "outputs": {"Y": {"type": "T"}},
+      "types": {"T": ["float32", "float16", "float64"]}
+    },
+    {
+      "op_type": "Sigmoid", // y = 1 / (1 + exp(-x)),
+      "version": 13,
+      "attributes": {},
+      "inputs": {"X": {"type": "T"}},
+      "outputs": {"Y": {"type": "T"}},
+      "types": {"T": ["float32", "float16", "float64", "bfloat16"]}
+    }
+  ]
+}

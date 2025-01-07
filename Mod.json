@@ -1,0 +1,194 @@
+{
+  // https://github.com/onnx/onnx/blob/master/docs/Operators.md#Mod
+  // https://github.com/onnx/onnx/pull/1874
+  "tests": [
+    {
+      "graph_name": "Mod fmod 1 float32",
+      "op_type": "Mod",
+      "fmod": 1,
+      "A": [7.5, 7.5,-7.5,-7.5, 0.0, 3.0, -3.0],
+      "B": [3.0,-3.0, 3.0,-3.0, 3.0, 3.0, -3.0],
+      "C": [1.5, 1.5,-1.5,-1.5, 0.0, 0.0,  0.0],
+      "T": "float32",
+      "verification": {"ulp": 6}
+    },
+    {
+      "graph_name": "Mod fmod 1 float16",
+      "op_type": "Mod",
+      "fmod": 1,
+      "A": [7.5, 7.5,-7.5,-7.5, 0.0, 3.0, -3.0],
+      "B": [3.0,-3.0, 3.0,-3.0, 3.0, 3.0, -3.0],
+      "C": [1.5, 1.5,-1.5,-1.5, 0.0, 0.0,  0.0],
+      "T": "float16",
+      "verification": {"ulp": 6}
+    },
+    {
+      "graph_name": "Mod fmod 1 int8",
+      "op_type": "Mod",
+      "fmod": 1,
+      "A": [8,  8, -8, -8, 0, 3, -3],
+      "B": [3, -3,  3, -3, 3, 3, -3],
+      "C": [2,  2, -2, -2, 0, 0,  0],
+      "T": "int8",
+      "verification": {"ulp": 0}
+    },
+    {
+      "graph_name": "Mod fmod 1 int16",
+      "op_type": "Mod",
+      "fmod": 1,
+      "A": [8,  8, -8, -8, 0, 3, -3],
+      "B": [3, -3,  3, -3, 3, 3, -3],
+      "C": [2,  2, -2, -2, 0, 0,  0],
+      "T": "int16",
+      "verification": {"ulp": 0}
+    },
+    {
+      "graph_name": "Mod fmod 1 int32",
+      "op_type": "Mod",
+      "fmod": 1,
+      "A": [8,  8, -8, -8, 0, 3, -3],
+      "B": [3, -3,  3, -3, 3, 3, -3],
+      "C": [2,  2, -2, -2, 0, 0,  0],
+      "T": "int32",
+      "verification": {"ulp": 0}
+    },
+    {
+      "graph_name": "Mod fmod 1 uint8",
+      "op_type": "Mod",
+      "fmod": 1,
+      "A": [8, 0, 3],
+      "B": [3, 3, 3],
+      "C": [2, 0, 0],
+      "T": "int8",
+      "verification": {"ulp": 0}
+    },
+    {
+      "graph_name": "Mod fmod 1 uint16",
+      "op_type": "Mod",
+      "fmod": 1,
+      "A": [8, 0, 3],
+      "B": [3, 3, 3],
+      "C": [2, 0, 0],
+      "T": "int16",
+      "verification": {"ulp": 0}
+    },
+    {
+      "graph_name": "Mod fmod 1 uint32",
+      "op_type": "Mod",
+      "fmod": 1,
+      "A": [8, 0, 3],
+      "B": [3, 3, 3],
+      "C": [2, 0, 0],
+      "T": "int32",
+      "verification": {"ulp": 0}
+    },
+    {
+      "graph_name": "Mod fmod 0 int8",
+      "op_type": "Mod",
+      "fmod": 0,
+      "A": [8,  8, -8, -8, 0, 3, -3],
+      "B": [3, -3,  3, -3, 3, 3, -3],
+      "C": [2, -1,  1, -2, 0, 0,  0],
+      "T": "int8",
+      "verification": {"ulp": 0}
+    },
+    {
+      "graph_name": "Mod fmod 0 int16",
+      "op_type": "Mod",
+      "fmod": 0,
+      "A": [8,  8, -8, -8, 0, 3, -3],
+      "B": [3, -3,  3, -3, 3, 3, -3],
+      "C": [2, -1,  1, -2, 0, 0,  0],
+      "T": "int16",
+      "verification": {"ulp": 0}
+    },
+    {
+      "graph_name": "Mod fmod 0 int32",
+      "op_type": "Mod",
+      "fmod": 0,
+      "A": [8,  8, -8, -8, 0, 3, -3],
+      "B": [3, -3,  3, -3, 3, 3, -3],
+      "C": [2, -1,  1, -2, 0, 0,  0],
+      "T": "int32",
+      "verification": {"ulp": 0}
+    },
+    {
+      "graph_name": "Mod fmod 0 uint8",
+      "op_type": "Mod",
+      "fmod": 0,
+      "A": [8, 0, 3],
+      "B": [3, 3, 3],
+      "C": [2, 0, 0],
+      "T": "uint8",
+      "verification": {"ulp": 0}
+    },
+    {
+      "graph_name": "Mod fmod 0 uint16",
+      "op_type": "Mod",
+      "fmod": 0,
+      "A": [8, 0, 3],
+      "B": [3, 3, 3],
+      "C": [2, 0, 0],
+      "T": "uint16",
+      "verification": {"ulp": 0}
+    },
+    {
+      "graph_name": "Mod fmod 0 uint32",
+      "op_type": "Mod",
+      "fmod": 0,
+      "A": [8, 0, 3],
+      "B": [3, 3, 3],
+      "C": [2, 0, 0],
+      "T": "uint32",
+      "verification": {"ulp": 0}
+    },
+    {
+      "graph_name": "Mod version 13",
+      "op_type": "Mod",
+      "version": 13,
+      "fmod": 0,
+      "A": [8, 0, 3],
+      "B": [3, 3, 3],
+      "C": [2, 0, 0],
+      "T": "uint32",
+      "verification": {"ulp": 0}
+    }
+  ],
+
+  "schema": [
+    {
+      "op_type": "Mod",
+      "version": 10,
+      "attributes": {
+        // When fmod = 0: result = x - (y * floor(x / y)). Result sign follows the divisor.
+        // When fmod = 1: result = x - (y * trunc(x / y)). Result sign follows the dividend.
+        "fmod": {"type": "int64"} // Default = 0. Must be one with float* types.
+      },
+      "inputs": {
+        "A": {"type": "T"},
+        "B": {"type": "T"}
+      },
+      "outputs": {
+        "C": {"type": "T"}
+      },
+      "types": {"T": ["float32", "float16", "float64", "uint8", "uint16", "uint32", "uint64", "int8", "int16", "int32", "int64"]}
+    },
+    {
+      "op_type": "Mod",
+      "version": 13,
+      "attributes": {
+        // When fmod = 0: result = x - (y * floor(x / y)). Result sign follows the divisor.
+        // When fmod = 1: result = x - (y * trunc(x / y)). Result sign follows the dividend.
+        "fmod": {"type": "int64"} // Default = 0. Must be one with float* types.
+      },
+      "inputs": {
+        "A": {"type": "T"},
+        "B": {"type": "T"}
+      },
+      "outputs": {
+        "C": {"type": "T"}
+      },
+      "types": {"T": ["float32", "float16", "float64", "uint8", "uint16", "uint32", "uint64", "int8", "int16", "int32", "int64", "bfloat16"]}
+    }
+  ]
+}

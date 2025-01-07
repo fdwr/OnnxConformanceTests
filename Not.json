@@ -1,0 +1,20 @@
+{
+  "tests": [
+    {
+      "op_type": "Not",
+      "X": {"value": [0,1]},
+      "Y": {"value": [1,0]},
+      "T": "bool8"
+    }
+  ],
+
+  "schema": [
+    {
+      "op_type": "Not",
+      "version": 1,
+      "inputs": {"X": {"type": "T"}},
+      "outputs": {"Y": {"type": "T"}},
+      "types": {"T": ["bool8"]}
+    }
+  ]
+}

@@ -1,0 +1,54 @@
+{
+  "tests": [
+    {
+      "op_type": "ImageScaler",
+      "bias": [1,2,3],
+      "scale": 2,
+      "input":  [[[[1,2,3],
+                   [4,5,6]],
+                  [[2,3,4],
+                   [5,6,7]],
+                  [[3,4,5],
+                   [6,7,8]]]],
+      "output": [[[[3,5,7],
+                   [9,11,13]],
+                  [[6,8,10],
+                   [12,14,16]],
+                  [[9,11,13],
+                   [15,17,19]]]],
+      "T": "float32"
+    },
+    {
+      "op_type": "ImageScaler",
+      "bias": [1,2,3],
+      "scale": 2,
+      "input":  [[[[1,2,3],
+                   [4,5,6]],
+                  [[2,3,4],
+                   [5,6,7]],
+                  [[3,4,5],
+                   [6,7,8]]]],
+      "output": [[[[3,5,7],
+                   [9,11,13]],
+                  [[6,8,10],
+                   [12,14,16]],
+                  [[9,11,13],
+                   [15,17,19]]]],
+      "T": "float16"
+    }
+  ],
+
+  "schema": [
+    {
+      "op_type": "ImageScaler",
+      "version": 1,
+      "attributes": {
+        "bias": {"type": "float32"}, // list of floats, size [C]
+        "scale": {"type": "float32"} // default = 1
+      },
+      "inputs": {"input": {"type": "T"}}, // [N,C,H,W]
+      "outputs": {"output": {"type": "T"}},
+      "types": {"T": ["float32", "float16", "float64"]}
+    }
+  ]
+}

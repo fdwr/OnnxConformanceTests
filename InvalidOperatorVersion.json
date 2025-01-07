@@ -1,0 +1,43 @@
+{
+  "tests": [
+    // Pick an existing valid operator but with a ridiculous version number
+    // to ensure it fails.
+    {
+      "graph_name": "InvalidOperatorVersion",
+      "op_type": "Add",
+      "version": 314159,
+      "A": [2, 3, 4, 5, 6],
+      "B": [2, 3, 4, 5, 6],
+      "C": [4, 6, 8, 10, 12],
+      "T": "float32",
+      "verification": {"should_fail": true, "should_compare_expected": false}
+    },
+    {
+      "model_file": "InvalidIr.onnx",
+      "inputs": {
+        "A": {"type": "float32", "value": [2, 3, 4, 5, 6]},
+        "B": {"type": "float32", "value": [2, 3, 4, 5, 6]}
+      },
+      "outputs": {
+        "C": {"type": "float32", "value": [4, 6, 8, 10, 12]}
+      },
+      "verification": {"should_fail": true, "should_compare_expected": false}
+    }
+  ],
+
+  "schema": [
+    {
+      "op_type": "Add",
+      "version": 314159,
+      "attributes": {},
+      "inputs": {
+        "A": {"type": "T"},
+        "B": {"type": "T"}
+      },
+      "outputs": {
+        "C": {"type": "T"}
+      },
+      "types": {"T": ["float32", "float16", "float64", "int32", "uint32", "int64", "uint64"]}
+    }
+  ]
+}

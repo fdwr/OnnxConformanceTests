@@ -1,0 +1,56 @@
+{
+  "tests": [
+    {
+      "graph_name": "InstanceNormalization 4D float32",
+      "op_type": "InstanceNormalization",
+      "epsilon": 1.0,
+      "input": {"value": [[[[1, 2], [3, 4]]]]},
+      "scale": {"value": [0.5]},
+      "B": {"value": [2]},
+      "output": {"value": [[[[1.5, 1.83333], [2.16667, 2.5]]]]},
+      "T": "float32",
+      "verification": {"absolute_tolerance": 0.00001}
+    },
+    {
+      "graph_name": "InstanceNormalization 4D float16",
+      "op_type": "InstanceNormalization",
+      "epsilon": 1.0,
+      "input": {"value": [[[[1, 2], [3, 4]]]]},
+      "scale": {"value": [0.5]},
+      "B": {"value": [2]},
+      "output": {"value": [[[[1.5, 1.83333], [2.16667, 2.5]]]]},
+      "T": "float16",
+      "verification": {"ulp": 1}
+    },
+    {
+      "graph_name": "InstanceNormalization 3D float32",
+      "op_type": "InstanceNormalization",
+      "epsilon": 1.0,
+      "input": {"value": [[[1, 2, 3, 4]]]},
+      "scale": {"value": [0.5]},
+      "B": {"value": [2]},
+      "output": {"value": [[[1.5, 1.83333, 2.16667, 2.5]]]},
+      "T": "float32",
+      "verification": {"absolute_tolerance": 0.00001}
+    }
+  ],
+
+  "schema": [
+    {
+      "op_type": "InstanceNormalization",
+      "version": 6,
+      "attributes": {
+        "epsilon": {"type": "float32"}
+      },
+      "inputs": {
+        "input": {"type": "T"},
+        "scale": {"type": "T"},
+        "B": {"type": "T"}
+      },
+      "outputs": {
+        "output": {"type": "T"}
+      },
+      "types": {"T": ["float32", "float16", "float64"]}
+    }
+  ]
+}

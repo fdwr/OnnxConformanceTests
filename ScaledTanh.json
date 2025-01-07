@@ -1,0 +1,36 @@
+{
+  "tests": [
+    {
+      "op_type": "ScaledTanh",
+      "alpha": 2,
+      "beta": 3,
+      "input": [0, 1, 2, -1],
+      "output": [0, 1.990109507, 1.999975423, -1.990109507],
+      "T": "float32",
+      "verification": {"ulp": 2}
+    },
+    {
+      "op_type": "ScaledTanh",
+      "alpha": 2,
+      "beta": 3,
+      "input": [0, 1, 2, -1],
+      "output": [0, 1.990109507, 1.999975423, -1.990109507],
+      "T": "float16",
+      "verification": {"ulp": 2}
+    }
+  ],
+
+  "schema": [
+    {
+      "op_type": "ScaledTanh", // y = alpha * tanh(beta * x)
+      "version": 1,
+      "attributes": {
+        "alpha": {"type": "float32"},
+        "beta": {"type": "float32"}
+      },
+      "inputs": {"input": {"type": "T"}},
+      "outputs": {"output": {"type": "T"}},
+      "types": {"T": ["float32", "float16", "float64"]}
+    }
+  ]
+}

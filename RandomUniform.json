@@ -1,0 +1,47 @@
+{
+  "tests": [
+    {
+      "graph_name": "RandomUniform float32",
+      "op_type": "RandomUniform",
+      "dtype": 1,
+      "shape": [1, 1, 10, 20],
+      "low": 1.0,
+      "high": 42.0,
+      "Y": {"dims": [1, 1, 10, 20]},
+      "T": "float32",
+      "verification": {
+        "should_compare_expected": false 
+      }
+    },
+    {
+      "graph_name": "RandomUniform float16",
+      "verification": {"executor_filters": [".*"]},
+      "op_type": "RandomUniform",
+      "dtype": 10,
+      "shape": [1, 1, 10, 20],
+      "low": 1.0,
+      "high": 42.0,
+      "Y": {"dims": [1, 1, 10, 20]},
+      "T": "float16",
+      "verification": {
+        "should_compare_expected": false 
+      }
+    }
+  ],
+
+  "schema": [
+    {
+      "op_type": "RandomUniform",
+      "version": 1,
+      "attributes": {
+        "dtype": {"type": "int64"},
+        "shape": {"type": "int64"},
+        "low": {"type": "float32"},
+        "high": {"type": "float32"},
+        "seed": {"type": "float32"}
+      },
+      "outputs": {"Y": {"type": "T"}},
+      "types": {"T": ["float32", "float16", "float64"]}
+    }
+  ]
+}

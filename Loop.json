@@ -1,0 +1,44 @@
+{
+  "tests": [
+    {
+      "model_file": "Loop.onnx",
+      "inputs": {
+        "M": {"type": "int64", "value": [5]},
+        "cond": {"type": "bool8", "value": [true]},
+        "loop_var_0_orig": {"type": "float32", "value": [1]}
+      },
+      "outputs": {
+        "outer_scope_0": {"type": "float32", "value": [3]},
+        "loop_var_0_final": {"type": "float32", "value": [10]}, // 1 original value + 3 outer node value * 3 expected iteration count
+        "loop_var_1_final": {"type": "float32", "value": [1, 4, 7, 10]},
+        "loop_out_0_final": {"type": "float32", "value": [[0, 4], [1, 7], [2, 10]]}
+      }
+    }
+  ],
+
+  "schema": [
+    {
+      "op_type": "Loop",
+      "version": 8,
+      "attributes": {
+        "body": {"type": "graph"}
+      },
+      "inputs": {
+        "M": {"type": "I"}, // A maximum trip-count for the loop specified at runtime. Optional.
+        "cond": {"type": "B"}, // A boolean termination condition. Optional.
+        "v_initial": {"type": "V"} // The initial values of any loop-carried dependencies (values that change across loop iterations)
+      },
+      "outputs": { // variadic 1 to infinity. Final N loop carried dependency values then K scan_outputs.
+        "v_final_and_scan_outputs_0": {"type": "V"},
+        "v_final_and_scan_outputs_1": {"type": "V"},
+        "v_final_and_scan_outputs_2": {"type": "V"},
+        "v_final_and_scan_outputs_3": {"type": "V"}
+      },
+      "types": {
+        "V": ["float32", "float16", "float64", "uint8", "uint16", "uint32", "uint64", "int8", "int16", "int32", "int64", "bool8"],
+        "I": ["int64"],
+        "B": ["bool8"]
+      }
+    }
+  ]
+}

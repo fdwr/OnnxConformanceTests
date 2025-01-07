@@ -1,0 +1,387 @@
+{
+  "tests": [
+    {
+      "graph_name": "LSTM-7 direction=forward",
+      "op_type": "LSTM",
+      "version": 7,
+      "activations": ["Relu", "Relu", "Relu"],
+      "hidden_size": 2,
+      "T": "float32",
+      "X": [[
+            [1, 2],
+            [2, 1]
+      ]],
+      "W": [[
+            [1, -1],
+            [2, -2],
+            [1, -1],
+            [2, -2],
+            [1, -1],
+            [2, -2],
+            [1, -1],
+            [2, -2]
+      ]],
+      "R": [[
+            [0.1, 0.1],
+            [0.1, 0.1],
+            [0.1, 0.1],
+            [0.1, 0.1],
+
+            [0.1, 0.1],
+            [0.1, 0.1],
+            [0.1, 0.1],
+            [0.1, 0.1]
+      ]],
+      "B": [[ 
+            1, 2, 1, 2, 1, 2, 1, 2,
+            1, 2, 1, 2, 1, 2, 1, 2
+      ]],
+      "sequence_lens": [1, 1],
+      "initial_h": [[
+            [0, 0],
+            [0, 0]
+      ]],
+      "initial_c": [[
+            [0, 0],
+            [0, 0]
+      ]],
+      "P": [[ 0, 0, 0, 0, 0, 0 ]],
+      "Y": [[[
+            [1, 8],
+            [27, 216]
+      ]]],
+      "Y_h": [[
+            [1, 8],
+            [27, 216]
+      ]],
+      "Y_c": [[
+            [1, 4],
+            [9, 36]
+      ]],
+      "verification": { "ulp": 1 }
+    },
+    {
+      "graph_name": "LSTM-7 direction=reverse",
+      "op_type": "LSTM",
+      "version": 7,
+      "activations": ["Relu", "Relu", "Relu"],
+      "hidden_size": 2,
+      "direction": "reverse",
+      "T": "float32",
+      "X": [
+            [
+              [1, 2],
+              [2, 1]
+            ],
+            [
+              [3, 4],
+              [1, 2]
+            ]
+      ],
+      "W": [[
+            [1, -1],
+            [2, -2],
+            [1, -1],
+            [2, -2],
+            [1, -1],
+            [2, -2],
+            [1, -1],
+            [2, -2]
+      ]],
+      "R": [[
+            [0.1, 0.1],
+            [0.1, 0.1],
+            [0.1, 0.1],
+            [0.1, 0.1],
+
+            [0.1, 0.1],
+            [0.1, 0.1],
+            [0.1, 0.1],
+            [0.1, 0.1]
+      ]],
+      "B": [[ 
+            1, 2, 1, 2, 1, 2, 1, 2,
+            1, 2, 1, 2, 1, 2, 1, 2
+      ]],
+      "Y": {
+        "type": "float32",
+        "dims": [2, 1, 2, 2],
+        "value": [[[[10.469000816345215, 58.02900695800781], [74.52900695800781, 518.948974609375]]], [[[1, 8], [1, 8]]]]
+      },
+      "Y_h": {
+        "type": "float32",
+        "dims": [1, 2, 2],
+        "value": [[[10.469000816345215, 58.02900695800781], [74.52900695800781, 518.948974609375]]]
+      },
+      "Y_c": {
+        "type": "float32",
+        "dims": [1, 2, 2],
+        "value": [[[5.510000228881836, 20.01000213623047], [19.110000610351564, 75.20999908447266]]]
+      },
+      "verification": {
+        "ulp": 1
+      }
+    },
+    {
+      "graph_name": "LSTM-7 float16",
+      "op_type": "LSTM",
+      "version": 7,
+      "activations": ["Relu", "Relu", "Relu"],
+      "hidden_size": 2,
+      "T": "float16",
+      "X": {"value": [[
+                        [1, 2],
+                        [2, 1]
+                      ]]},
+      "W": {"value": [[
+                        [1, -1],
+                        [2, -2],
+                        [1, -1],
+                        [2, -2],
+                        [1, -1],
+                        [2, -2],
+                        [1, -1],
+                        [2, -2]
+                      ]]},
+      "R": {"value": [[
+                        
+                        [0.1, 0.1],
+                        [0.1, 0.1],
+                        [0.1, 0.1],
+                        [0.1, 0.1],
+                        
+                        [0.1, 0.1],
+                        [0.1, 0.1],
+                        [0.1, 0.1],
+                        [0.1, 0.1]
+                     ]]},
+      "B": {"value": [[ 
+                        1, 2, 1, 2, 1, 2, 1, 2,
+                        1, 2, 1, 2, 1, 2, 1, 2
+                      ]]},
+      "sequence_lens": {"value": [1, 1]},
+      "initial_h": {"value": [[
+                                [0, 0],
+                                [0, 0]
+                             ]]},
+      "initial_c": {"value": [[
+                                [0, 0],
+                                [0, 0]
+                             ]]},
+      "P": {"value": [[ 0, 0, 0, 0, 0, 0 ]]},
+      "Y": {"value": [[[
+                        [1, 8],
+                        [27, 216]
+                     ]]]},
+      "Y_h": {"value": [[
+                        [1, 8],
+                        [27, 216]
+                       ]]},
+      "Y_c": {"value": [[
+                        [1, 4],
+                        [9, 36]
+                       ]]},
+      "verification": { "ulp": 1 }
+    },
+    {
+      "graph_name": "LSTM-14 layout=1",
+      "op_type": "LSTM",
+      "version": 14,
+      "activations": ["Relu", "Relu", "Relu"],
+      "hidden_size": 2,
+      "layout": 1,
+      /*
+      - If layout=0:
+          X.shape = [seq_length, batch_size, input_size]
+          Y.shape = [seq_length, num_directions, batch_size, hidden_size]
+          initial_h.shape = Y_h.shape = [num_directions, batch_size, hidden_size]
+      - If layout=1:
+          X.shape = [batch_size, seq_length, input_size]
+          Y.shape = [batch_size, seq_length, num_directions, hidden_size]
+          initial_h.shape = Y_h.shape = [batch_size, num_directions, hidden_size]
+      */
+      "T": "float32",
+      "X": [
+            [[1, 2]],
+            [[2, 1]]
+      ],
+      "W": [[
+            [1, -1],
+            [2, -2],
+            [1, -1],
+            [2, -2],
+            [1, -1],
+            [2, -2],
+            [1, -1],
+            [2, -2]
+      ]],
+      "R": [[
+            [0.1, 0.1],
+            [0.1, 0.1],
+            [0.1, 0.1],
+            [0.1, 0.1],
+
+            [0.1, 0.1],
+            [0.1, 0.1],
+            [0.1, 0.1],
+            [0.1, 0.1]
+      ]],
+      "B": [[ 
+            1, 2, 1, 2, 1, 2, 1, 2,
+            1, 2, 1, 2, 1, 2, 1, 2
+      ]],
+      "sequence_lens": [1, 1],
+      "initial_h": [
+            [[0, 0]],
+            [[0, 0]]
+      ],
+      "initial_c": [
+            [[0, 0]],
+            [[0, 0]]
+      ],
+      "P": [[ 0, 0, 0, 0, 0, 0 ]],
+      "Y": [
+            [[[1, 8]]],
+            [[[27, 216]]]
+      ],
+      "Y_h": [
+            [[1, 8]],
+            [[27, 216]]
+      ],
+      "Y_c": [
+            [[1, 4]],
+            [[9, 36]]
+      ],
+      "verification": {"ulp": 1, "executor_filters": [".*"]} // Neither ORT CPU nor the DML EP support batchwise operators.
+    },
+    {
+      "graph_name": "LSTM-14 layout=0",
+      "op_type": "LSTM",
+      "version": 14,
+      "activations": ["Relu", "Relu", "Relu"],
+      "hidden_size": 2,
+      "layout": 0,
+      "T": "float32",
+      "X": [[
+            [1, 2],
+            [2, 1]
+      ]],
+      "W": [[
+            [1, -1],
+            [2, -2],
+            [1, -1],
+            [2, -2],
+            [1, -1],
+            [2, -2],
+            [1, -1],
+            [2, -2]
+      ]],
+      "R": [[
+            [0.1, 0.1],
+            [0.1, 0.1],
+            [0.1, 0.1],
+            [0.1, 0.1],
+
+            [0.1, 0.1],
+            [0.1, 0.1],
+            [0.1, 0.1],
+            [0.1, 0.1]
+      ]],
+      "B": [[ 
+            1, 2, 1, 2, 1, 2, 1, 2,
+            1, 2, 1, 2, 1, 2, 1, 2
+      ]],
+      "sequence_lens": [1, 1],
+      "initial_h": [[
+            [0, 0],
+            [0, 0]
+      ]],
+      "initial_c": [[
+            [0, 0],
+            [0, 0]
+      ]],
+      "P": [[ 0, 0, 0, 0, 0, 0 ]],
+      "Y": [[[
+            [1, 8],
+            [27, 216]
+      ]]],
+      "Y_h": [[
+            [1, 8],
+            [27, 216]
+      ]],
+      "Y_c": [[
+            [1, 4],
+            [9, 36]
+      ]],
+      "verification": {"ulp": 1}
+    }
+  ],
+
+  "schema": [
+    {
+      "op_type": "LSTM",
+      "version": 7, // First version supported.
+      "attributes": {
+        "activation_alpha": {"type": "float32"},
+        "activation_beta": {"type": "float32"},
+        "activations": {"type": "string8"},
+        "clip": {"type": "float32"},
+        "direction": {"type": "string8"},
+        "hidden_size": {"type": "int64"},
+        "input_forget ": {"type": "int64"}
+      },
+      "inputs": {
+        "X": {"type": "T"},
+        "W": {"type": "T"},
+        "R": {"type": "T"},
+        "B": {"type": "T"},
+        "sequence_lens": {"type": "T1"},
+        "initial_h": {"type": "T"},
+        "initial_c": {"type": "T"},
+        "P": {"type": "T"} 
+      },
+      "outputs": {
+        "Y": {"type": "T"},
+        "Y_h": {"type": "T"},
+        "Y_c": {"type": "T"}
+      },
+      "types": {
+        "T": ["float32", "float16", "float64"],
+        "T1": ["int32"]
+      }
+    },
+    {
+      "op_type": "LSTM",
+      "version": 14, // Adds layout attribute.
+      "attributes": {
+        "activation_alpha": {"type": "float32"},
+        "activation_beta": {"type": "float32"},
+        "activations": {"type": "string8"},
+        "clip": {"type": "float32"},
+        "direction": {"type": "string8"},
+        "hidden_size": {"type": "int64"},
+        "input_forget ": {"type": "int64"}, // Default = 0
+        "layout": {"type": "int64"} // Default = 0 where X.shape = [seq_length, batch_size, input_size]; if 1, then X.shape = [batch_size, seq_length, input_size].
+      },
+      "inputs": {
+        "X": {"type": "T"},
+        "W": {"type": "T"},
+        "R": {"type": "T"},
+        "B": {"type": "T"},
+        "sequence_lens": {"type": "T1"},
+        "initial_h": {"type": "T"},
+        "initial_c": {"type": "T"},
+        "P": {"type": "T"} 
+      },
+      "outputs": {
+        "Y": {"type": "T"},
+        "Y_h": {"type": "T"},
+        "Y_c": {"type": "T"}
+      },
+      "types": {
+        "T": ["float32", "float16", "float64"],
+        "T1": ["int32"]
+      }
+    }
+  ]
+}

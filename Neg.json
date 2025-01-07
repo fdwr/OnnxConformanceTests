@@ -1,0 +1,79 @@
+{
+  "tests": [
+    {
+      "graph_name": "Neg float32",
+      "op_type": "Neg",
+      "X": {"value": [0,13,-13,Inf,-Inf]},
+      "Y": {"value": [0,-13,13,-Inf,Inf]},
+      "T": "float32"
+    },
+    {
+      "graph_name": "Neg float16",
+      "op_type": "Neg",
+      "X": {"value": [0,13,-13,Inf,-Inf]},
+      "Y": {"value": [0,-13,13,-Inf,Inf]},
+      "T": "float16"
+    },
+    {
+      "graph_name": "Neg int64",
+      "op_type": "Neg",
+      "X": {"value": [0,13,-13]},
+      "Y": {"value": [0,-13,13]},
+      "T": "int64"
+    },
+    {
+      "graph_name": "Neg int32",
+      "op_type": "Neg",
+      "X": {"value": [0,13,-13]},
+      "Y": {"value": [0,-13,13]},
+      "T": "int32"
+    },
+    {
+      "graph_name": "Neg large int32",
+      "op_type": "Neg",
+      "X": {"value": [2147483647,-2147483647,-16777217]},
+      "Y": {"value": [-2147483647,2147483647,16777217]},
+      "T": "int32"
+    },
+    {
+      "graph_name": "Neg int8",
+      "op_type": "Neg",
+      "X": {"value": [0,13,-13,127,-127]},
+      "Y": {"value": [0,-13,13,-127,127]},
+      "T": "int8"
+    },
+    {
+      "graph_name": "Neg int16",
+      "verification": {"executor_filters": [".*"]},
+      "op_type": "Neg",
+      "X": {"value": [0,13,-13,32767,-32767]},
+      "Y": {"value": [0,-13,13,-32767,32767]},
+      "T": "int16"
+    },
+    {
+      "graph_name": "Neg version 13",
+      "op_type": "Neg",
+      "version": 13,
+      "X": {"value": [0,13,-13,Inf,-Inf]},
+      "Y": {"value": [0,-13,13,-Inf,Inf]},
+      "T": "float32"
+    }
+  ],
+
+  "schema": [
+    {
+      "op_type": "Neg",
+      "version": 6,
+      "inputs": {"X": {"type": "T"}},
+      "outputs": {"Y": {"type": "T"}},
+      "types": {"T": ["float32", "int32", "int8", "int16", "int64", "float16", "float64"]}
+    },
+    {
+      "op_type": "Neg",
+      "version": 13,
+      "inputs": {"X": {"type": "T"}},
+      "outputs": {"Y": {"type": "T"}},
+      "types": {"T": ["float32", "int32", "int8", "int16", "int64", "float16", "float64", "bfloat16"]}
+    }
+  ]
+}

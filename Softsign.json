@@ -1,0 +1,31 @@
+{
+  "tests": [
+    // float32.
+    {
+      "op_type": "Softsign",
+      "input": [0, 3, 7, -3],
+      "output": [0, 0.75, 0.875, -0.75],
+      "T": "float32",
+      "verification": { "executor_filter": ".*Cpu" }
+    },
+    // float16.
+    {
+      "op_type": "Softsign",
+      "input": [0, 3, 7, -3],
+      "output": [0, 0.75, 0.875, -0.75],
+      "T": "float16",
+      "verification": { "executor_filter": ".*Cpu" }
+    }
+  ],
+
+  "schema": [
+    {
+      "op_type": "Softsign", // y = x / (1 + abs(x))
+      "version": 1,
+      "attributes": {},
+      "inputs": {"input": {"type": "T"}},
+      "outputs": {"output": {"type": "T"}},
+      "types": {"T": ["float32", "float16", "float64"]}
+    }
+  ]
+}

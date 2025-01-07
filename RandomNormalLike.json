@@ -1,0 +1,48 @@
+{
+  "tests": [
+    {
+      "graph_name": "RandomNormalLike float32",
+      "op_type": "RandomNormalLike",
+      "mean": 0.5,
+      "scale": 1.0,
+      "seed": 17,
+      "X": {"dims": [1, 1, 1, 5]},
+      "Y": {"dims": [1, 1, 1, 5], "value": [[[[-0.0715491771697998, -0.385770320892334, 0.6075782179832459, 1.7107211351394654, 0.39378324151039126]]]]},
+      "T": "float32",
+      "verification": {
+        "should_compare_expected": false,
+        "ulp": 4
+      }
+    },
+    {
+      "graph_name": "RandomNormalLike float16",
+      "op_type": "RandomNormalLike",
+      "mean": 0.5,
+      "scale": 1.0,
+      "seed": 17,
+      "X": {"dims": [1, 1, 1, 5]},
+      "Y": {"dims": [1, 1, 1, 5], "value": [[[[-0.0715491771697998, -0.385770320892334, 0.6075782179832459, 1.7107211351394654, 0.39378324151039126]]]]},
+      "T": "float16",
+      "verification": {
+        "should_compare_expected": false,
+        "ulp": 4
+      }
+    }
+  ],
+
+  "schema": [
+    {
+      "op_type": "RandomNormalLike",
+      "version": 1,
+      "attributes": {
+        "dtype": {"type": "int64"},
+        "mean": {"type": "float32"},
+        "scale": {"type": "float32"},
+        "seed": {"type": "float32"}
+      },
+      "inputs": {"X": {"type": "T"}},
+      "outputs": {"Y": {"type": "T"}},
+      "types": {"T": ["float32", "float16", "float64"]}
+    }
+  ]
+}

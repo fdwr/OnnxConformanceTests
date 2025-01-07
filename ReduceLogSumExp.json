@@ -1,0 +1,122 @@
+{
+  "tests":[
+    // No axes defined - implicitly all axes.
+    {
+      "op_type": "ReduceLogSumExp",
+      "keepdims": 1,
+      "data": [[[1, 2], [3, 4]], [[5, 6], [7, 8]], [[9, 10], [11, 12]]],
+      "reduced": [[[12.4587]]],
+      "T": "float32",
+      "verification": {"ulp": 1024 /* ~0.0001 RTOL */}
+    },
+    // All axes specified.
+    {
+      "op_type": "ReduceLogSumExp",
+      "axes": [0, 1, 2],
+      "keepdims": 1,
+      "data": [[[1, 2], [3, 4]], [[5, 6], [7, 8]], [[9, 10], [11, 12]]],
+      "reduced": [[[12.4587]]],
+      "T": "float32",
+      "verification": {"ulp": 1024 /* ~0.0001 RTOL */}
+    },
+    // Single axis removed, removing reduced dimensions.
+    {
+      "op_type": "ReduceLogSumExp",
+      "axes": [1],
+      "keepdims": 0,
+      "data": [[[1, 2], [3, 4]], [[5, 6], [7, 8]], [[9, 10], [11, 12]]],
+      "reduced": [[3.12693, 4.12693], [7.12693, 8.12693], [11.1269, 12.1269]],
+      "T": "float32",
+      "verification": {"ulp": 1024 /* ~0.0001 RTOL */}
+    },
+    // Single axis removed, keeping reduced dimensions as 1's.
+    {
+      "op_type": "ReduceLogSumExp",
+      "axes": [1],
+      "keepdims": 1,
+      "data": [[[1, 2], [3, 4]], [[5, 6], [7, 8]], [[9, 10], [11, 12]]],
+      "reduced": [[[3.12693, 4.12693]], [[7.12693, 8.12693]], [[11.1269, 12.1269]]],
+      "T": "float32",
+      "verification": {"ulp": 1024 /* ~0.0001 RTOL */}
+    },
+    // Single axis removed via negative axis, keeping reduced dimensions as 1's.
+    {
+      "op_type": "ReduceLogSumExp",
+      "axes": [-2],
+      "keepdims": 1,
+      "data": [[[1, 2], [3, 4]], [[5, 6], [7, 8]], [[9, 10], [11, 12]]],
+      "reduced": [[[3.12693, 4.12693]], [[7.12693, 8.12693]], [[11.1269, 12.1269]]],
+      "T": "float32",
+      "verification": {"ulp": 1024 /* ~0.0001 RTOL */}
+    },
+    // float16. Reduce along 2nd axis. e.g. Log(Exp(1) + Exp(3)) = 3.126928011
+    {
+      "op_type": "ReduceLogSumExp",
+      "axes": [1],
+      "keepdims": 1,
+      "data": [[[1, 2], [3, 4]], [[5, 6], [7, 8]], [[9, 10], [11, 12]]],
+      "reduced": [[[3.12693, 4.12693]], [[7.12693, 8.12693]], [[11.1269, 12.1269]]],
+      "T": "float16",
+      "verification": {"ulp": 5 /* 0.005 RTOL */}
+    },
+    {
+      "graph_name": "ReduceLogSumExp version 13",
+      "op_type": "ReduceLogSumExp",
+      "version": 13,
+      "keepdims": 1,
+      "data": [[[1, 2], [3, 4]], [[5, 6], [7, 8]], [[9, 10], [11, 12]]],
+      "reduced": [[[12.4587]]],
+      "T": "float32",
+      "verification": {"ulp": 1024 /* ~0.0001 RTOL */}
+    },
+    {
+      "graph_name": "ReduceLogSumExp version 18 axes",
+      "op_type": "ReduceLogSumExp",
+      "version": 18,
+      "axes": [1],
+      "keepdims": 0,
+      "data": [[[1, 2], [3, 4]], [[5, 6], [7, 8]], [[9, 10], [11, 12]]],
+      "reduced": [[3.12693, 4.12693], [7.12693, 8.12693], [11.1269, 12.1269]],
+      "T": "float32",
+      "verification": {"ulp": 1024 /* ~0.0001 RTOL */}
+    }
+  ],
+
+  "schema": [
+    {
+      "op_type": "ReduceLogSumExp", // Log(ReduceSum(Exp(data), axis))
+      "version": 1,
+      "attributes": {
+        "axes": {"type": "int64"}, // Default = all axes
+        "keepdims": {"type": "int64"} // Default = 1
+      },
+      "inputs" : {"data": {"type": "T"}},
+      "outputs": {"reduced": {"type": "T"}},
+      "types": {"T": ["float32", "float16", "float64", "uint32", "uint64", "int32", "int64"]}
+    },
+    {
+      "op_type": "ReduceLogSumExp", // Log(ReduceSum(Exp(data), axis))
+      "version": 13,
+      "attributes": {
+        "axes": {"type": "int64"}, // Default = all axes
+        "keepdims": {"type": "int64"} // Default = 1
+      },
+      "inputs" : {"data": {"type": "T"}},
+      "outputs": {"reduced": {"type": "T"}},
+      "types": {"T": ["float32", "float16", "float64", "uint32", "uint64", "int32", "int64", "bfloat16"]}
+    },
+    {
+      "op_type": "ReduceLogSumExp",
+      "version": 18,
+      "attributes": {
+        "keepdims": {"type": "int64"} // Default = 1
+      },
+      "inputs" : {
+        "data": {"type": "T"},
+        "axes": {"type": "int64"}, // Default = all axes
+      },
+      "outputs": {"reduced": {"type": "T"}},
+      "types": {"T": ["float32", "float16", "float64", "uint32", "uint64", "int32", "int64", "bfloat16"]}
+    }
+  ]
+}

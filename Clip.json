@@ -1,0 +1,261 @@
+{
+  "tests": [
+    {
+      "graph_name": "Clip v6 float32",
+      "op_type": "Clip",
+      "version": 6,
+      "input": [0, 99.999, 100, 101, "Inf", -99.999, -100, "-Inf"],
+      "output": [0, 99.999, 100, 100, 100, -99.999, -100, -100],
+      "min": -100,
+      "max": 100,
+      "T": "float32"
+    },
+    {
+      "graph_name": "Clip v6 float16",
+      "op_type": "Clip",
+      "version": 6,
+      "input": [0, 99.999, 100, 101, "Inf", -99.999, -100, "-Inf"],
+      "output": [0, 99.999, 100, 100, 100, -99.999, -100, -100],
+      "min": -100,
+      "max": 100,
+      "T": "float16"
+    },
+    {
+      "graph_name": "Clip v11 float32",
+      "op_type": "Clip",
+      "version": 11,
+      "input": [0, 99.999, 100, 101, "Inf", -99.999, -100, "-Inf"],
+      "output": [0, 99.999, 100, 100, 100, -99.999, -100, -100],
+      "min": -100,
+      "max": 100,
+      "T": "float32"
+    },
+    {
+      "graph_name": "Clip v11 float32 missing max",
+      "op_type": "Clip",
+      "version": 11,
+      "input": [0, 99.999, 100, 101, 99999, -99.999, -100, "-Inf"],
+      "output": [0, 99.999, 100, 101, 99999, -99.999, -100, -100],
+      "min": -100,
+      "T": "float32"
+    },
+    {
+      "graph_name": "Clip v11 float32 missing min",
+      "op_type": "Clip",
+      "version": 11,
+      "input": [0, 99.999, 100, 101, "Inf", -99.999, -100, -99999],
+      "max": 100,
+      "output": [0, 99.999, 100, 100, 100, -99.999, -100, -99999],
+      "T": "float32"
+    },
+    {
+      "graph_name": "Clip v12 int8",
+      "op_type": "Clip",
+      "version": 12,
+      "input": [0, 99, 100, 101, 127, -99, -100, -128],
+      "output": [0, 99, 100, 100, 100, -99, -100, -100],
+      "min": -100,
+      "max": 100,
+      "T": "int8",
+      "verification": { "executor_filter": ".*Cpu" }
+    },
+    {
+      "graph_name": "Clip v12 uint8",
+      "op_type": "Clip",
+      "version": 12,
+      "input": [0, 99, 100, 101, 127, 240, 255, 200],
+      "output": [5, 99, 100, 101, 127, 200, 200, 200],
+      "min": 5,
+      "max": 200,
+      "T": "uint8"
+    },
+    {
+      "graph_name": "Clip v12 uint16",
+      "op_type": "Clip",
+      "version": 12,
+      "input": [9, 99, 100, 101, 127, 11, 0, 10, 1000],
+      "output": [10, 99, 100, 100, 100, 11, 10, 10, 100],
+      "min": 10,
+      "max": 100,
+      "T": "uint16",
+      "verification": { "executor_filter": ".*Cpu" }
+    },
+    {
+      "graph_name": "Clip v12 int16",
+      "op_type": "Clip",
+      "version": 12,
+      "input": [-1000, 99, 100, 101, 127, -99, -100, -128, 1000],
+      "output": [-100, 99, 100, 100, 100, -99, -100, -100, 100],
+      "min": -100,
+      "max": 100,
+      "T": "int16",
+      "verification": { "executor_filter": ".*Cpu" }
+    },
+    {
+      "graph_name": "Clip v12 int32",
+      "op_type": "Clip",
+      "version": 12,
+      "input": [-1000, 99, 100, 101, 127, -99, -100, -128, 1000],
+      "output": [-100, 99, 100, 100, 100, -99, -100, -100, 100],
+      "min": -100,
+      "max": 100,
+      "T": "int32",
+      "verification": { "executor_filter": ".*Cpu" }
+    },
+    {
+      "graph_name": "Clip v12 uint32",
+      "op_type": "Clip",
+      "version": 12,
+      "input": [9, 99, 100, 101, 127, 11, 0, 10, 1000],
+      "output": [10, 99, 100, 100, 100, 11, 10, 10, 100],
+      "min": 10,
+      "max": 100,
+      "T": "uint32",
+      "verification": { "executor_filter": ".*Cpu" }
+    },
+    {
+      "graph_name": "Clip v12 int64",
+      "op_type": "Clip",
+      "version": 12,
+      "input": [-1000, 99, 100, 101, 127, -99, -100, -128, 1000],
+      "output": [-100, 99, 100, 100, 100, -99, -100, -100, 100],
+      "min": -100,
+      "max": 100,
+      "T": "int64"
+    },
+    {
+      "graph_name": "Clip v12 uint64",
+      "op_type": "Clip",
+      "version": 12,
+      "input": [9, 99, 100, 101, 127, 11, 0, 10, 1000],
+      "output": [10, 99, 100, 100, 100, 11, 10, 10, 100],
+      "min": 10,
+      "max": 100,
+      "T": "uint64",
+      "verification": { "executor_filter": ".*Cpu" }
+    },
+    {
+      "op_type": "Clip",
+      "input": [[[[[[[[5]]]]]]]],
+      "output": [[[[[[[[5]]]]]]]],
+      "min": 1,
+      "max": 10,
+      "T": "float32"
+    },
+    {
+      "op_type": "Clip",
+      "input": [[[[[[[[1],[20]]]]]]]],
+      "output": [[[[[[[[1],[10]]]]]]]],
+      "min": 1,
+      "max": 10,
+      "T": "float32"
+    },
+    {
+      "op_type": "Clip",
+      "input": [[[[[[  [[1],[20]],
+                       [[30],[40]] ]]]]]],
+      "output": [[[[[[ [[1],[20]],
+                       [[30],[35]] ]]]]]],
+      "min": 1,
+      "max": 35,
+      "T": "float32"
+    },
+    {
+      "op_type": "Clip",
+      "input": [[[[  [[1],[20]],
+                     [[30],[40]] ]]]],
+      "output": [[[[ [[1],[20]],
+                     [[30],[35]] ]]]],
+      "min": 1,
+      "max": 35,
+      "T": "float32"
+    },
+    {
+      "op_type": "Clip",
+      "input": [[[  [[1],[20]],
+                    [[30],[40]] ]]],
+      "output": [[[ [[1],[20]],
+                    [[30],[35]] ]]],
+      "min": 1,
+      "max": 35,
+      "T": "float32"
+    },
+    {
+      "op_type": "Clip",
+      "input": [[[  [[[1],[20]],
+                     [[30],[40]]],
+                    [[[1],[20]],
+                     [[30],[40]]] ]]],
+      "output": [[[ [[[1],[20]],
+                     [[30],[35]]],
+                    [[[1],[20]],
+                     [[30],[35]]] ]]],
+      "min": 1,
+      "max": 35,
+      "T": "float32"
+    },
+    {
+      "graph_name": "Clip version 13",
+      "op_type": "Clip",
+      "version": 13,
+      "input": [0, 99.999, 100, 101, "Inf", -99.999, -100, "-Inf"],
+      "output": [0, 99.999, 100, 100, 100, -99.999, -100, -100],
+      "min": -100,
+      "max": 100,
+      "T": "float32"
+    }
+  ],
+
+  "schema": [
+    {
+      "op_type": "Clip",
+      "version": 6,
+      "attributes": {
+        "max": {"type": "float32"},
+        "min": {"type": "float32"}
+      },
+      "inputs": {"input": {"type": "T"}},
+      "outputs": {"output": {"type": "T"}},
+      "types": {"T": ["float32", "float16", "float64"]}
+    },
+    {
+      "op_type": "Clip",
+      "version": 11,
+      "attributes": {
+      },
+      "inputs": {
+        "input": {"type": "T"},
+        "min": {"type": "T"},
+        "max": {"type": "T"}
+      },
+      "outputs": {"output": {"type": "T"}},
+      "types": {"T": ["float32", "float16", "float64"]}
+    },
+    {
+      "op_type": "Clip",
+      "version": 12,
+      "attributes": {
+      },
+      "inputs": {
+        "input": {"type": "T"},
+        "min": {"type": "T"},
+        "max": {"type": "T"}
+      },
+      "outputs": {"output": {"type": "T"}},
+      "types": {"T": ["float32", "float16", "float64", "int8", "uint8", "int16", "uint16", "int32", "uint32", "int64", "uint64"]}
+    },
+    {
+      "op_type": "Clip",
+      "version": 13,
+      "attributes": {
+      },
+      "inputs": {
+        "input": {"type": "T"},
+        "min": {"type": "T"},
+        "max": {"type": "T"}
+      },
+      "outputs": {"output": {"type": "T"}},
+      "types": {"T": ["float32", "float16", "float64", "int8", "uint8", "int16", "uint16", "int32", "uint32", "int64", "uint64", "bfloat16"]}
+    }
+  ]
+}

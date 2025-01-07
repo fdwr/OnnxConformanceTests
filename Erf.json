@@ -1,0 +1,52 @@
+{
+  "tests": [
+    {
+      "graph_name": "Erf float32",
+      "op_type": "Erf",
+      "input": [ -1000, -1, 0, 1, 1000 ],
+      "output": [ -0.99999999999999999, -0.842700792949715, 0, 0.842700792949715, 0.99999999999999999 ],
+      "T": "float32",
+      "verification": {
+        "absolute_tolerance": 0.000001
+      }
+    },
+    {
+      "graph_name": "Erf float16",
+      "op_type": "Erf",
+      "input": [ -1000, -1, 0, 1, 1000 ],
+      "output": [ -0.99999999999999999, -0.842700792949715, 0, 0.842700792949715, 0.99999999999999999 ],
+      "T": "float16",
+      "verification": {
+        "absolute_tolerance": 0.001
+      }
+    },
+    {
+      "graph_name": "Erf version 13",
+      "op_type": "Erf",
+      "version": 13,
+      "input": [ -1000, -1, 0, 1, 1000 ],
+      "output": [ -0.99999999999999999, -0.842700792949715, 0, 0.842700792949715, 0.99999999999999999 ],
+      "T": "float32",
+      "verification": {
+        "absolute_tolerance": 0.000001
+      }
+    }
+  ],
+
+  "schema": [
+    {
+      "op_type": "Erf",
+      "version": 9,
+      "inputs": {"input": {"type": "T"}},
+      "outputs": {"output": {"type": "T"}},
+      "types": {"T": ["float16", "float32", "float64"]}
+    },
+    {
+      "op_type": "Erf",
+      "version": 13,
+      "inputs": {"input": {"type": "T"}},
+      "outputs": {"output": {"type": "T"}},
+      "types": {"T": ["float16", "float32", "float64", "bfloat16"]}
+    }
+  ]
+}

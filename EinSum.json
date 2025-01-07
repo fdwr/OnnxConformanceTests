@@ -1,0 +1,374 @@
+{
+  "tests":[
+    {
+      "op_type": "Einsum",
+      "graph_name": "Einsum ij,jk->ik matmul 2D float32",
+      "equation": "ij,jk->ik",
+      "data_0": [[0,1],[2,3]],
+      "data_1": [[1,2],[3,4]],
+      "output":  [[3,4],[11,16]],
+      "T": "float32"
+    },
+    {
+      "op_type": "Einsum",
+      "graph_name": "Einsum ij,jk->ik matmul 2D float16",
+      "equation": "ij,jk->ik",
+      "data_0": [[0,1],[2,3]],
+      "data_1": [[1,2],[3,4]],
+      "output":  [[3,4],[11,16]],
+      "T": "float16"
+    },
+    {
+      "op_type": "Einsum",
+      "graph_name": "Einsum ij,jk->ik matmul 1D float32",
+      "equation": "ij,jk->ik",
+      "data_0": [[0,1,2,3]],
+      "data_1": [[1],[2],[3],[4]],
+      "output":  [[20]],
+      "T": "float32"
+    },
+    {
+      "op_type": "Einsum",
+      "graph_name": "Einsum ij,jk matmul implicit output 2D float32",
+      "equation": "ij,jk",
+      "data_0": [[0,1],[2,3]],
+      "data_1": [[1,2],[3,4]],
+      "output":  [[3,4],[11,16]],
+      "T": "float32"
+    },
+    {
+      "op_type": "Einsum",
+      "graph_name": "Einsum bij,bjk->bik matmul with batch 3D float32",
+      "equation": "bij,bjk->bik",
+      "data_0": [[[0,1],[2,3]],[[4,5],[6,7]]],
+      "data_1": [[[1,2],[3,4]],[[5,6],[7,8]]],
+      "output": [[[3,4],[11,16]],[[55,64],[79,92]]],
+      "T": "float32"
+    },
+    {
+      "op_type": "Einsum",
+      "graph_name": "Einsum abij,abjk->abik matmul with batch 4D float32",
+      "equation": "abij,abjk->abik",
+      "data_0": [[[[0,1],[2,3]],[[4,5],[6,7]]]],
+      "data_1": [[[[1,2],[3,4]],[[5,6],[7,8]]]],
+      "output": [[[[3,4],[11,16]],[[55,64],[79,92]]]],
+      "T": "float32"
+    },
+    {
+      "op_type": "Einsum",
+      "graph_name": "Einsum i-> reduce sum 1D float32",
+      "equation": "i->",
+      "data_0": [0,1,2,3],
+      "output": 6,
+      "T": "float32"
+    },
+    {
+      "op_type": "Einsum",
+      "graph_name": "Einsum ijk-> reduce sum 3D float32",
+      "equation": "ijk->",
+      "data_0": [[[0,1],[2,3]],[[4,5],[6,7]]],
+      "output": 28,
+      "T": "float32"
+    },
+    {
+      "op_type": "Einsum",
+      "graph_name": "Einsum ij->i partial reduce sum 2D float32",
+      "equation": "ij->i",
+      "data_0": [[0,1],[2,3]],
+      "output": [1,5],
+      "T": "float32"
+    },
+    {
+      "op_type": "Einsum",
+      "graph_name": "Einsum ij->j partial reduce sum 2D float32",
+      "equation": "ij->j",
+      "data_0": [[0,1],[2,3]],
+      "output": [2,4],
+      "T": "float32"
+    },
+    {
+      "op_type": "Einsum",
+      "graph_name": "Einsum -> identity 0D float32",
+      "equation": "->",
+      "data_0": 42,
+      "output": 42,
+      "T": "float32"
+    },
+    {
+      "op_type": "Einsum",
+      "graph_name": "Einsum '' identity empty string 0D float32",
+      "equation": "",
+      "data_0": 42,
+      "output": 42,
+      "T": "float32"
+    },
+    {
+      "op_type": "Einsum",
+      "graph_name": "Einsum i->i identity 1D float32",
+      "equation": "i->i",
+      "data_0": [0,1,2,3],
+      "output": [0,1,2,3],
+      "T": "float32"
+    },
+    {
+      "op_type": "Einsum",
+      "graph_name": "Einsum i identity 1D float32",
+      "equation": "i",
+      "data_0": [0,1,2,3],
+      "output": [0,1,2,3],
+      "T": "float32"
+    },
+    {
+      "op_type": "Einsum",
+      "graph_name": "Einsum ijklm identity 5D float32",
+      "equation": "ijklm->ijklm",
+      "data_0": [[[[[0,1],[2,3]],[[4,5],[6,7]]]]],
+      "output": [[[[[0,1],[2,3]],[[4,5],[6,7]]]]],
+      "T": "float32"
+    },
+    {
+      "op_type": "Einsum",
+      "graph_name": "Einsum ji->ij transpose 2D float32",
+      "equation": "ji->ij",
+      "data_0": [[0,1],[2,3]],
+      "output": [[0,2],[1,3]],
+      "T": "float32"
+    },
+    {
+      "op_type": "Einsum",
+      "graph_name": "Einsum ji transpose 2D float32",
+      "equation": "ji",
+      "data_0": [[0,1],[2,3]],
+      "output": [[0,2],[1,3]],
+      "T": "float32"
+    },
+    {
+      "op_type": "Einsum",
+      "graph_name": "Einsum ijk->kji transpose 2D float32",
+      "equation": "ijk->kji",
+      "data_0": [[[0],[2],[3]],[[4],[5],[6]]],
+      "output": [[[0,4],[2,5],[3,6]]],
+      "T": "float32"
+    },
+    {
+      "op_type": "Einsum",
+      "graph_name": "Einsum ijkl->lkji transpose 4D float32",
+      "equation": "ijkl->lkji",
+      "data_0": [[[[0,1],[2,3]]]],
+      "output": [[[[0]],[[2]]],[[[1]],[[3]]]],
+      "T": "float32"
+    },
+    {
+      "op_type": "Einsum",
+      "graph_name": "Einsum ji,jk->ik matmul transpose A 2D float32",
+      "equation": "ji,jk->ik",
+      "data_0": [[0,1],[2,3]],
+      "data_1": [[1,2],[3,4]],
+      "output":  [[6,8],[10,14]],
+      "T": "float32"
+    },
+    {
+      "op_type": "Einsum",
+      "graph_name": "Einsum bji,bjk->bik matmul transpose A 3D float32",
+      "equation": "bji,bjk->bik",
+      "data_0": [[[0,1],[2,3]],[[4,5],[6,7]]],
+      "data_1": [[[1,2],[3,4]],[[5,6],[7,8]]],
+      "output": [[[6,8],[10,14]],[[62,72],[74,86]]],
+      "T": "float32"
+    },
+    {
+      "op_type": "Einsum",
+      "graph_name": "Einsum abji,abjk->abik matmul transpose A 4D float32",
+      "equation": "abji,abjk->abik",
+      "data_0": [[[[0,1],[2,3]],[[4,5],[6,7]]]],
+      "data_1": [[[[1,2],[3,4]],[[5,6],[7,8]]]],
+      "output": [[[[6,8],[10,14]],[[62,72],[74,86]]]],
+      "T": "float32"
+    },
+    {
+      "op_type": "Einsum",
+      "graph_name": "Einsum ij,kj->ik matmul transpose B 2D float32",
+      "equation": "ij,kj->ik",
+      "data_0": [[0,1],[2,3]],
+      "data_1": [[1,2],[3,4]],
+      "output":  [[2,4],[8,18]],
+      "T": "float32"
+    },
+    {
+      "op_type": "Einsum",
+      "graph_name": "Einsum bij,bkj->bik matmul transpose B 3D float32",
+      "equation": "bij,bkj->bik",
+      "data_0": [[[0,1],[2,3]],[[4,5],[6,7]]],
+      "data_1": [[[1,2],[3,4]],[[5,6],[7,8]]],
+      "output": [[[2,4],[8,18]],[[50,68],[72,98]]],
+      "T": "float32"
+    },
+    {
+      "op_type": "Einsum",
+      "graph_name": "Einsum abij,abkj->abik matmul transpose B 4D float32",
+      "equation": "abij,abkj->abik",
+      "data_0": [[[[0,1],[2,3]],[[4,5],[6,7]]]],
+      "data_1": [[[[1,2],[3,4]],[[5,6],[7,8]]]],
+      "output": [[[[2,4],[8,18]],[[50,68],[72,98]]]],
+      "T": "float32"
+    },
+    {
+      "op_type": "Einsum",
+      "graph_name": "Einsum bhid,bhjd->bhij matmul 4D float32 single cell",
+      "equation": "bhid,bhjd->bhij",
+      "data_0": [[[[1]]]],
+      "data_1": [[[[1]]]],
+      "output": [[[[1]]]],
+      "T": "float32"
+    },
+    {
+      "op_type": "Einsum",
+      "graph_name": "Einsum i,i-> dot product 1D float32",
+      "equation": "i,i->",
+      "data_0": [0,1,2,3],
+      "data_1": [1,2,3,4],
+      "output": 20,
+      "T": "float32"
+    },
+    {
+      "op_type": "Einsum",
+      "graph_name": "Einsum mul 1D float32",
+      "equation": "i,i->i",
+      "data_0": [0,1,2,3],
+      "data_1": [1,2,3,4],
+      "output": [0,2,6,12],
+      "T": "float32"
+    },
+    {
+      "op_type": "Einsum",
+      "graph_name": "Einsum mul 1D 3 inputs float32",
+      "equation": "i,i,i->i",
+      "data_0": [0,1,2,3],
+      "data_1": [1,2,3,4],
+      "data_2": [2,3,4,5],
+      "output": [0,6,24,60],
+      "T": "float32"
+    },
+    {
+      "op_type": "Einsum",
+      "graph_name": "Einsum ij,ij->ij mul 2D float32",
+      "equation": "ij,ij->ij",
+      "data_0": [[0,1],[2,3]],
+      "data_1": [[1,2],[3,4]],
+      "output": [[0,2],[6,12]],
+      "T": "float32"
+    },
+    {
+      "op_type": "Einsum",
+      "graph_name": "Einsum ijk,ijk->ijk mul 3D float32",
+      "equation": "ijk,ijk->ijk",
+      "data_0": [[[0,1],[2,3]],[[4,5],[6,7]]],
+      "data_1": [[[1,2],[3,4]],[[5,6],[7,8]]],
+      "output": [[[0,2],[6,12]],[[20,30],[42,56]]],
+      "T": "float32"
+    },
+    {
+      "op_type": "Einsum",
+      "graph_name": "Einsum ijkl,ijkl->ijkl mul 4D float32",
+      "equation": "ijkl,ijkl->ijkl",
+      "data_0": [[[[0,1],[2,3]],[[4,5],[6,7]]]],
+      "data_1": [[[[1,2],[3,4]],[[5,6],[7,8]]]],
+      "output": [[[[0,2],[6,12]],[[20,30],[42,56]]]],
+      "T": "float32"
+    },
+    {
+      "op_type": "Einsum",
+      "graph_name": "Einsum ij,jk->ik matmul 2D spaces float32",
+      "equation": " ij ,  jk ->  ik ",
+      "data_0": [[0,1],[2,3]],
+      "data_1": [[1,2],[3,4]],
+      "output":  [[3,4],[11,16]],
+      "T": "float32"
+    },
+    {
+      "op_type": "Einsum",
+      "graph_name": "Einsum ZY,YX->ZX matmul 2D uppercase float32",
+      "equation": "ZY,YX->ZX",
+      "data_0": [[0,1],[2,3]],
+      "data_1": [[1,2],[3,4]],
+      "output":  [[3,4],[11,16]],
+      "T": "float32",
+      // ORT rejects uppercase letters, even though the ONNX reference numpy does.
+      // https://github.com/microsoft/onnxruntime/issues/4944
+      "verification": { "executor_filter": ".*Cpu" }
+    },
+    {
+      "op_type": "Einsum",
+      "graph_name": "Einsum Zx,xX->ZX matmul 2D uppercase float32",
+      "equation": "Zx,xX->ZX",
+      "data_0": [[0,1],[2,3]],
+      "data_1": [[1,2],[3,4]],
+      "output":  [[3,4],[11,16]],
+      "T": "float32",
+      // ORT rejects uppercase letters, even though the ONNX reference numpy does.
+      // https://github.com/microsoft/onnxruntime/issues/4944
+      "verification": { "executor_filter": ".*Cpu" }
+    },
+    {
+      "op_type": "Einsum",
+      "graph_name": "Einsum ii->i diagonal float32",
+      "equation": "ii->i",
+      "data_0": [[0,1],[2,3]],
+      "output": [0,3],
+      "T": "float32"
+    },
+    {
+      "op_type": "Einsum",
+      "graph_name": "Einsum bii->bi diagonal batch float32",
+      "equation": "bii->bi",
+      "data_0": [[[0,1],[2,3]],[[4,5],[6,7]],[[8,9],[10,11]]],
+      "output": [[0,3],[4,7],[8,11]],
+      "T": "float32"
+    },
+    {
+      "op_type": "Einsum",
+      "graph_name": "Einsum ibi->bi diagonal batch float32",
+      "equation": "ibi->bi",
+      "data_0": [[[0,1],[4,5],[8,9]],[[2,3],[6,7],[10,11]]],
+      "output": [[0,3],[4,7],[8,11]],
+      "T": "float32"
+    },
+    {
+      "op_type": "Einsum",
+      "graph_name": "Einsum ...ii->...i diagonal batch ellipsis float32",
+      "equation": "...ii->...i",
+      "data_0": [[[0,1],[2,3]],[[4,5],[6,7]]],
+      "output": [[0,3],[4,7]],
+      "T": "float32"
+      // Skipped by DML EP.
+    },
+    {
+      "op_type": "Einsum",
+      "graph_name": "Einsum i,j->ij outer product float32",
+      "equation": "i,j->ij",
+      "data_0": [1,2,3],
+      "data_1": [4,5,6],
+      "output": [[4,5,6],[8,10,12],[12,15,18]],
+      "T": "float32"
+      // Skipped by DML EP.
+    }
+  ],
+
+  "schema": [
+    {
+      "op_type": "Einsum",
+      "version": 12,
+      "attributes": {
+        "equation": {"type": "string8"} // e.g. "ij,jk->ik"
+      },
+      "inputs": { // Variadic
+        "data_0": {"type": "T"},
+        "data_1": {"type": "T"},
+        "data_2": {"type": "T"},
+        "data_3": {"type": "T"}
+      },
+      "outputs": {"output": {"type": "T"}},
+      "types": {"T": ["uint8", "uint16", "uint32", "uint64", "int8", "int16", "int32", "int64", "float16", "float32", "float64"]}
+    }
+  ]
+}

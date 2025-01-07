@@ -1,0 +1,187 @@
+{
+  "tests": [
+    {
+      "graph_name": "Less float32",
+      "op_type": "Less",
+      "version": 7,
+      "A": [0, 1, 1,  0, -Inf,   0, Inf,    0],
+      "B": [1, 0, 1, -1,    0, Inf,   0, -Inf],
+      "C": [1, 0, 0,  0,    1,   1,   0,    0],
+      "T": "float32"
+    },
+    {
+      "graph_name": "Less float32 with broadcast scalar",
+      "op_type": "Less",
+      "version": 7,
+      "A": [0, 2, 3, -3],
+      "B":  2,
+      "C": [1, 0, 0, 1],
+      "T": "float32"
+    },
+    {
+      "graph_name": "Less float16",
+      "op_type": "Less",
+      "version": 7,
+      "A": [0, 1, 1,  0, -Inf,   0, Inf,    0],
+      "B": [1, 0, 1, -1,    0, Inf,   0, -Inf],
+      "C": [1, 0, 0,  0,    1,   1,   0,    0],
+      "T": "float16"
+    },
+    {
+      "graph_name": "Less float16 with broadcast scalar",
+      "op_type": "Less",
+      "version": 7,
+      "A": [0, 2, 3, -3],
+      "B":  2,
+      "C": [1, 0, 0, 1],
+      "T": "float16"
+    },
+    {
+      "graph_name": "Less v9 float32",
+      "op_type": "Less",
+      "version": 9,
+      "A": [0, 2, 3, -3],
+      "B":  2,
+      "C": [1, 0, 0, 1],
+      "T": "float32"
+    },
+    {
+      "graph_name": "Less v9 int64",
+      "op_type": "Less",
+      "version": 9,
+      "A": [0, 2, 3, -3],
+      "B":  2,
+      "C": [1, 0, 0, 1],
+      "T": "int64"
+    },
+    {
+      "graph_name": "Less v9 int32",
+      "op_type": "Less",
+      "version": 9,
+      "A": [0, 2, 3, -3],
+      "B":  2,
+      "C": [1, 0, 0, 1],
+      "T": "int32"
+    },
+    {
+      "graph_name": "Less v9 int16",
+      "op_type": "Less",
+      "version": 9,
+      "A": [0, 2, 3, -3],
+      "B":  2,
+      "C": [1, 0, 0, 1],
+      "T": "int16",
+      "verification": {"executor_filter": ".*Cpu"}
+    },
+    {
+      "graph_name": "Less v9 int8",
+      "op_type": "Less",
+      "version": 9,
+      "A": [0, 2, 3, -3],
+      "B":  2,
+      "C": [1, 0, 0, 1],
+      "T": "int8",
+      "verification": {"executor_filter": ".*Cpu"}
+    },
+    {
+      "graph_name": "Less v9 uint64",
+      "op_type": "Less",
+      "version": 9,
+      "A": [0, 2, 3, 3],
+      "B":  2,
+      "C": [1, 0, 0, 0],
+      "T": "uint64",
+      "verification": {"executor_filter": ".*Cpu"}
+    },
+    {
+      "graph_name": "Less v9 uint32",
+      "op_type": "Less",
+      "version": 9,
+      "A": [0, 2, 3, 3],
+      "B":  2,
+      "C": [1, 0, 0, 0],
+      "T": "uint32",
+      "verification": {"executor_filter": ".*Cpu"}
+    },
+    {
+      "graph_name": "Less v9 uint16",
+      "op_type": "Less",
+      "version": 9,
+      "A": [0, 2, 3, 3],
+      "B":  2,
+      "C": [1, 0, 0, 0],
+      "T": "uint16",
+      "verification": {"executor_filter": ".*Cpu"}
+    },
+    {
+      "graph_name": "Less v9 uint8",
+      "op_type": "Less",
+      "version": 9,
+      "A": [0, 2, 3, 3],
+      "B":  2,
+      "C": [1, 0, 0, 0],
+      "T": "uint8",
+      "verification": {"executor_filter": ".*Cpu"}
+    },
+    {
+      "graph_name": "Less version 13",
+      "op_type": "Less",
+      "version": 13,
+      "A": [0, 1, 1,  0, -Inf,   0, Inf,    0],
+      "B": [1, 0, 1, -1,    0, Inf,   0, -Inf],
+      "C": [1, 0, 0,  0,    1,   1,   0,    0],
+      "T": "float32"
+    }
+  ],
+
+  "schema": [
+    {
+      "op_type": "Less",
+      "version": 7,
+      "attributes": {},
+      "inputs": {
+        "A": {"type": "T"},
+        "B": {"type": "T"}
+      },
+      "outputs": {
+        "C": {"type": "T1"}
+      },
+      "types": {
+        "T": ["float32", "float16", "float64"],
+        "T1": ["bool8"]
+      }
+    },
+    {
+      "op_type": "Less",
+      "version": 9, // No significant differences, just more data types.
+      "attributes": {},
+      "inputs": {
+        "A": {"type": "T"},
+        "B": {"type": "T"}
+      },
+      "outputs": {
+        "C": {"type": "T1"}
+      },
+      "types": {
+        "T": ["float32", "float16", "float64", "uint8", "uint16", "uint32", "uint64", "int8", "int16", "int32", "int64"],
+        "T1": ["bool8"]
+      }
+    },
+    {
+      "op_type": "Less",
+      "version": 13, // No significant differences, just more data types.
+      "attributes": {},
+      "inputs": {
+        "A": {"type": "T"},
+        "B": {"type": "T"}
+      },
+      "outputs": {
+        "C": {"type": "T1"}
+      },
+      "types": {
+        "T": ["float32", "float16", "float64", "uint8", "uint16", "uint32", "uint64", "int8", "int16", "int32", "int64", "bfloat16"],
+        "T1": ["bool8"]
+      }
+    }
+  ]
+}

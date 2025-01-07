@@ -1,0 +1,34 @@
+{
+  "tests": [
+    {
+      "graph_name": "Sinh float32",
+      "op_type": "Sinh",
+      "input": [ -10, -1, 0, 1, 10 ],
+      "output": [ -11013.232874703, -1.175201194, 0, 1.175201194, 11013.232874703 ],
+      "T": "float32",
+      "verification": {
+        "ulp": 8 /* 0.000001 RTOL */
+      }
+    },
+    {
+      "graph_name": "Sinh float16",
+      "op_type": "Sinh",
+      "input": [ -10, -1, 0, 1, 10 ],
+      "output": [ -11013.232874703, -1.175201194, 0, 1.175201194, 11013.232874703 ],
+      "T": "float16",
+      "verification": {
+        "ulp": 4 // Multiple bits can be lost during decomposition: (e^x - x^(-x)) / 2
+      }
+    }
+  ],
+
+  "schema": [
+    {
+      "op_type": "Sinh",
+      "version": 9,
+      "inputs": {"input": {"type": "T"}},
+      "outputs": {"output": {"type": "T"}},
+      "types": {"T": ["float16", "float32", "float64"]}
+    }
+  ]
+}

@@ -1,0 +1,173 @@
+{
+  "tests": [
+    // Insert middle.
+    {
+      "op_type": "Unsqueeze",
+      "version": 1,
+      "axes": [1],
+      "data": {"dims": [2, 3, 4], "function": "iota"},
+      "expanded": {"dims": [2, 1, 3, 4], "function": "iota"},
+      "T": "float32"
+    },
+    // Insert ends.
+    {
+      "op_type": "Unsqueeze",
+      "version": 1,
+      "axes": [0, 3],
+      "data": {"dims": [2, 3], "function": "iota"},
+      "expanded": {"dims": [1, 2, 3, 1], "function": "iota"},
+      "T": "float32"
+    },
+    // Insert middle and ends.
+    {
+      "op_type": "Unsqueeze",
+      "version": 1,
+      "axes": [0, 2, 4],
+      "data": {"dims": [2, 3], "function": "iota"},
+      "expanded": {"dims": [1, 2, 1, 3, 1], "function": "iota"},
+      "T": "float32"
+    },
+  
+    // Verify data types...
+    {
+      "op_type": "Unsqueeze",
+      "version": 1,
+      "axes": [1],
+      "data": {"dims": [2, 3, 4], "function": "iota"},
+      "expanded": {"dims": [2, 1, 3, 4], "function": "iota"},
+      "T": "bool8"
+    },
+    {
+      "op_type": "Unsqueeze",
+      "version": 1,
+      "axes": [1],
+      "data": {"dims": [2, 3, 4], "function": "iota"},
+      "expanded": {"dims": [2, 1, 3, 4], "function": "iota"},
+      "T": "uint8"
+    },
+    {
+      "op_type": "Unsqueeze",
+      "version": 1,
+      "axes": [1],
+      "data": {"dims": [2, 3, 4], "function": "iota"},
+      "expanded": {"dims": [2, 1, 3, 4], "function": "iota"},
+      "T": "int8"
+    },
+    {
+      "op_type": "Unsqueeze",
+      "version": 1,
+      "axes": [1],
+      "data": {"dims": [2, 3, 4], "function": "iota"},
+      "expanded": {"dims": [2, 1, 3, 4], "function": "iota"},
+      "T": "uint16"
+    },
+    {
+      "op_type": "Unsqueeze",
+      "version": 1,
+      "axes": [1],
+      "data": {"dims": [2, 3, 4], "function": "iota"},
+      "expanded": {"dims": [2, 1, 3, 4], "function": "iota"},
+      "T": "int16"
+    },
+    {
+      "op_type": "Unsqueeze",
+      "version": 1,
+      "axes": [1],
+      "data": {"dims": [2, 3, 4], "function": "iota"},
+      "expanded": {"dims": [2, 1, 3, 4], "function": "iota"},
+      "T": "uint32"
+    },
+    {
+      "op_type": "Unsqueeze",
+      "version": 1,
+      "axes": [1],
+      "data": {"dims": [2, 3, 4], "function": "iota"},
+      "expanded": {"dims": [2, 1, 3, 4], "function": "iota"},
+      "T": "int32"
+    },
+    {
+      "op_type": "Unsqueeze",
+      "version": 1,
+      "axes": [1],
+      "data": {"dims": [2, 3, 4], "function": "iota"},
+      "expanded": {"dims": [2, 1, 3, 4], "function": "iota"},
+      "T": "uint64"
+    },
+    {
+      "op_type": "Unsqueeze",
+      "version": 1,
+      "axes": [1],
+      "data": {"dims": [2, 3, 4], "function": "iota"},
+      "expanded": {"dims": [2, 1, 3, 4], "function": "iota"},
+      "T": "int64"
+    },
+    {
+      "op_type": "Unsqueeze",
+      "version": 1,
+      "axes": [1],
+      "data": {"dims": [2, 3, 4], "function": "iota"},
+      "expanded": {"dims": [2, 1, 3, 4], "function": "iota"},
+      "T": "float32"
+    },
+    {
+      "op_type": "Unsqueeze",
+      "version": 1,
+      "axes": [1],
+      "data": {"dims": [2, 3, 4], "function": "iota"},
+      "expanded": {"dims": [2, 1, 3, 4], "function": "iota"},
+      "T": "float16"
+    },
+    {
+      "op_type": "Unsqueeze",
+      "version": 11,
+      "axes": [-3],
+      "data": {"dims": [2, 3, 4], "function": "iota"},
+      "expanded": {"dims": [2, 1, 3, 4], "function": "iota"},
+      "T": "float16"
+    },
+    {
+      "graph_name": "Unsqueeze version 13",
+      "op_type": "Unsqueeze",
+      "version": 13,
+      "axes": [1],
+      "data": {"dims": [2, 3, 4], "function": "iota"},
+      "expanded": {"dims": [2, 1, 3, 4], "function": "iota"},
+      "T": "float32"
+    }
+  ],
+
+  "schema": [
+    {
+      "op_type": "Unsqueeze",
+      "version": 1,
+      "attributes": {
+        "axes": {"type": "int64"} // Missing means all axes.
+      },
+      "inputs": {"data": {"type": "T"}},
+      "outputs": {"expanded": {"type": "T"}},
+      "types": {"T": ["float32", "float16", "float64", "int8", "uint8", "int16", "uint16", "int32", "uint32", "int64", "uint64", "bool8"]}
+    },
+    {
+      "op_type": "Unsqueeze",
+      "version": 11,
+      "attributes": {
+        "axes": {"type": "int64"} // Missing means all axes. Can be negative in v11.
+      },
+      "inputs": {"data": {"type": "T"}},
+      "outputs": {"expanded": {"type": "T"}},
+      "types": {"T": ["float32", "float16", "float64", "int8", "uint8", "int16", "uint16", "int32", "uint32", "int64", "uint64", "bool8"]}
+    },
+    {
+      "op_type": "Unsqueeze",
+      "version": 13,
+      "attributes": {
+      },
+      "inputs": {
+        "data": {"type": "T"},
+        "axes": {"type": "int64"} // Missing means all axes. Can be negative in v11.
+      },
+      "outputs": {"expanded": {"type": "T"}},
+      "types": {"T": ["float32", "float16", "float64", "int8", "uint8", "int16", "uint16", "int32", "uint32", "int64", "uint64", "bool8", "string8", "bfloat16"]}
+    }
+  ]
+}

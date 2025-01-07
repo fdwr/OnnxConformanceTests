@@ -1,0 +1,318 @@
+{
+  "tests": [
+    // 1D, keep dims (implicit)
+    {
+      "op_type": "ArgMin",
+      "data": [2, 3, -1, 3, 2],
+      "reduced": [2],
+      "T": "float32"
+    },
+    // 1D, prune dims (output is scalar)
+    {
+      "op_type": "ArgMin",
+      "data": [2, 3, -1, 3, 2],
+      "reduced": 2,
+      "keepdims": 0,
+      "T": "float32"
+    },
+    // 2D, vertical axis, keep dims
+    {
+      "op_type": "ArgMin",
+      "data": [[2, 3, 2], 
+               [4, 3, 1], 
+               [2, 1, 5], 
+               [3, 3, 3]],
+      "reduced": [[0, 2, 1]],
+      "axis": 0,
+      "keepdims": 1,
+      "T": "float32"
+    },
+    // 2D, vertical axis, prune dims
+    {
+      "op_type": "ArgMin",
+      "data": [[2, 3, 2], 
+               [4, 3, 1], 
+               [2, 1, 5], 
+               [3, 3, 3]],
+      "reduced": [0, 2, 1],
+      "axis": 0,
+      "keepdims": 0,
+      "T": "float32"
+    },
+    // 2D, vertical axis via negative axis, prune dims
+    {
+      "op_type": "ArgMin",
+      "data": [[2, 3, 2], 
+               [4, 3, 1], 
+               [2, 1, 5], 
+               [3, 3, 3]],
+      "reduced": [0, 2, 1],
+      "axis": -2,
+      "keepdims": 0,
+      "T": "float32"
+    },
+    // 2D, horizontal axis, keep dims
+    {
+      "op_type": "ArgMin",
+      "data": [[2, 3, 2],
+               [4, 3, 1], 
+               [2, 1, 5], 
+               [3, 3, 3]],
+      "reduced": [[0], 
+                  [2], 
+                  [1], 
+                  [0]],
+      "axis": 1,
+      "keepdims": 1,
+      "T": "float32"
+    },
+    // 2D, horizontal axis, prune dims
+    {
+      "op_type": "ArgMin",
+      "data": [[2, 3, 2],
+               [4, 3, 1], 
+               [2, 1, 5], 
+               [3, 3, 3]],
+      "reduced": [0, 2, 1, 0],
+      "axis": 1,
+      "keepdims": 0,
+      "T": "float32"
+    },
+    // 3D, depth axis, keep dims
+    {
+      "op_type": "ArgMin",
+      "data": [[[1,6],
+                [7,3]],
+               [[5,4],
+                [3,9]]], 
+      "reduced": [[[0,1],
+                   [1,0]]],
+      "axis": 0,
+      "keepdims": 1,
+      "T": "float32"
+    },
+    // 3D, depth axis, prune dims
+    {
+      "op_type": "ArgMin",
+      "data": [[[1,6],
+                [7,3]],
+               [[5,4],
+                [3,9]]], 
+      "reduced": [[0,1],[1,0]],
+      "axis": 0,
+      "keepdims": 0,
+      "T": "float32"
+    },
+    // 3D, vertical axis, keep dims
+    {
+      "op_type": "ArgMin",
+      "data": [[[1,6],
+                [7,3]],
+               [[5,4],
+                [3,9]]], 
+      "reduced": [[[0,1]],
+                  [[1,0]]],
+      "axis": 1,
+      "keepdims": 1,
+      "T": "float32"
+    },
+    // 3D, vertical axis, prune dims
+    {
+      "op_type": "ArgMin",
+      "data": [[[1,6],
+                [7,3]],
+               [[5,4],
+                [3,9]]], 
+      "reduced": [[0,1],[1,0]],
+      "axis": 1,
+      "keepdims": 0,
+      "T": "float32"
+    },
+    // 3D, horizontal axis, keep dims
+    {
+      "op_type": "ArgMin",
+      "data": [[[1,6],
+                [7,3]],
+               [[5,4],
+                [3,9]]], 
+      "reduced": [[[0],
+                   [1]],
+                  [[1],
+                   [0]]],
+      "axis": 2,
+      "keepdims": 1,
+      "T": "float32"
+    },
+    // 3D, horizontal axis, prune dims
+    {
+      "op_type": "ArgMin",
+      "data": [[[1,6],
+                [7,3]],
+               [[5,4],
+                [3,9]]], 
+      "reduced": [[0,1],[1,0]],
+      "axis": 2,
+      "keepdims": 0,
+      "T": "float32"
+    },
+    {
+      "graph_name": "ArgMin float16",
+      "op_type": "ArgMin",
+      "data": [2, 3, -1, 3, 2],
+      "reduced": [2],
+      "T": "float16"
+    },
+    {
+      "graph_name": "ArgMin uint64",
+      "op_type": "ArgMin",
+      "data": [2, 3, 0, 3, 2],
+      "reduced": [2],
+      "T": "uint64",
+      "verification": {"executor_filter": ".*Cpu"}
+    },
+    {
+      "graph_name": "ArgMin uint32",
+      "op_type": "ArgMin",
+      "data": [2, 3, 0, 3, 2],
+      "reduced": [2],
+      "T": "uint32",
+      "verification": {"executor_filter": ".*Cpu"}
+    },
+    {
+      "graph_name": "ArgMin uint16",
+      "op_type": "ArgMin",
+      "data": [2, 3, 0, 3, 2],
+      "reduced": [2],
+      "T": "uint16",
+      "verification": {"executor_filter": ".*Cpu"}
+    },
+    {
+      "graph_name": "ArgMin uint8",
+      "op_type": "ArgMin",
+      "data": [2, 3, 0, 3, 2],
+      "reduced": [2],
+      "T": "uint8",
+      "verification": {"executor_filter": ".*Cpu"}
+    },
+    {
+      "graph_name": "ArgMin int64",
+      "op_type": "ArgMin",
+      "data": [2, 3, -1, 3, 2],
+      "reduced": [2],
+      "T": "int64",
+      "verification": { "executor_filter": ".*Cpu" }
+    },
+    {
+      "graph_name": "ArgMin int32",
+      "op_type": "ArgMin",
+      "data": [2, 3, -1, 3, 2],
+      "reduced": [2],
+      "T": "int32"
+    },
+    {
+      "graph_name": "ArgMin int16",
+      "op_type": "ArgMin",
+      "data": [2, 3, -1, 3, 2],
+      "reduced": [2],
+      "T": "int16",
+      "verification": {"executor_filter": ".*Cpu"}
+    },
+    {
+      "graph_name": "ArgMin int8",
+      "op_type": "ArgMin",
+      "data": [2, 3, -1, 3, 2],
+      "reduced": [2],
+      "T": "int8",
+      "verification": {"executor_filter": ".*Cpu"}
+    },
+    {
+      "graph_name": "ArgMin int8 last index",
+      "op_type": "ArgMin",
+      "version": 12,
+      "data": [2, 3, -1, 3, 2, -1, 2],
+      "select_last_index": 1,
+      "reduced": [5],
+      "T": "int8",
+      "verification": {"executor_filter": ".*Cpu"}
+    },
+    {
+      "graph_name": "ArgMin float32 last index",
+      "op_type": "ArgMin",
+      "version": 12,
+      "data": [2, 3, -1, 3, 2, -1, 2],
+      "select_last_index": 1,
+      "reduced": [5],
+      "T": "float32"
+    },
+    {
+      "op_type": "ArgMin",
+      "version": 12,
+      "keepdims": 1,
+      "axis": 6,
+      "data": [[[[[[  [[1],[-2]],
+                      [[-3],[4]] ]]]]]],
+      "reduced": [[[[[[  [[1]],
+                         [[0]] ]]]]]],
+      "T": "float32"
+    },
+    {
+      "op_type": "ArgMin",
+      "version": 12,
+      "keepdims": 1,
+      "axis": 5,
+      "data": [[[[[        [[[-1],[2]],
+                            [[3],[-4]]],
+                           [[[-1],[2]],
+                            [[3],[-4]]] ]]]]],
+      "reduced": [[[[[      [[[0],[1]]],
+                            [[[0],[1]]] ]]]]],
+      "T": "float32"
+    },
+    {
+      "graph_name": "ArgMin version 13",
+      "op_type": "ArgMin",
+      "version": 13,
+      "data": [2, 3, -1, 3, 2],
+      "reduced": [2],
+      "T": "float32"
+    }
+  ],
+
+  "schema": [
+    {
+      "op_type": "ArgMin",
+      "version": 1,
+      "attributes": {
+        "axis": {"type": "int64"}, // Default = 0
+        "keepdims": {"type": "int64"} // Default = 1 to keep them
+      },
+      "inputs": {"data": {"type": "T"}},
+      "outputs": {"reduced": {"type": "int64"}},
+      "types": {"T": ["float32", "float16", "float64", "uint8", "uint16", "uint32", "uint64", "int8", "int16", "int32", "int64"]}
+    },
+    {
+      "op_type": "ArgMin",
+      "version": 12,
+      "attributes": {
+        "axis": {"type": "int64"}, // Default = 0
+        "keepdims": {"type": "int64"}, // Default = 1 to keep them
+        "select_last_index": {"type": "int64"} // Default = 0
+      },
+      "inputs": {"data": {"type": "T"}},
+      "outputs": {"reduced": {"type": "int64"}},
+      "types": {"T": ["float32", "float16", "float64", "uint8", "uint16", "uint32", "uint64", "int8", "int16", "int32", "int64"]}
+    },
+    {
+      "op_type": "ArgMin",
+      "version": 13,
+      "attributes": {
+        "axis": {"type": "int64"}, // Default = 0
+        "keepdims": {"type": "int64"}, // Default = 1 to keep them
+        "select_last_index": {"type": "int64"} // Default = 0
+      },
+      "inputs": {"data": {"type": "T"}},
+      "outputs": {"reduced": {"type": "int64"}},
+      "types": {"T": ["float32", "float16", "float64", "uint8", "uint16", "uint32", "uint64", "int8", "int16", "int32", "int64", "bfloat16"]}
+    }
+  ]
+}

@@ -1,0 +1,128 @@
+{
+  "tests": [
+    // Nop 1D, same size as input.
+    {
+      "op_type": "Expand",
+      "input": [0, 1, 2, 3, 4],
+      "shape": [5],
+      "output": [0, 1, 2, 3, 4],
+      "T": "float32"
+    },
+    // Nop 1D, 1 means broadcast to input size.
+    {
+      "op_type": "Expand",
+      "input": [0, 1, 2, 3, 4],
+      "shape": [1],
+      "output": [0, 1, 2, 3, 4],
+      "T": "float32"
+    },
+    // Broadcast scalar to 1D.
+    {
+      "op_type": "Expand",
+      "input": 1,
+      "shape": [5],
+      "output": [1, 1, 1, 1, 1],
+      "T": "float32"
+    },
+    // Broadcast scalar to 2D.
+    {
+      "op_type": "Expand",
+      "input": 1,
+      "shape": [2, 5],
+      "output": [[1, 1, 1, 1, 1],
+                 [1, 1, 1, 1, 1]],
+      "T": "float32"
+    },
+    // Broadcast scalar to 2D.
+    {
+      "op_type": "Expand",
+      "input": [[1],[2]],
+      "shape": [5],
+      "output": [[1, 1, 1, 1, 1],
+                 [2, 2, 2, 2, 2]],
+      "T": "float32"
+    },
+    // Nop 0D scalar, same size.
+    {
+      "op_type": "Expand",
+      "input": 13,
+      "shape": [],
+      "output": 13,
+      "T": "float32"
+    },
+    // Broadcast 2D to 3D.
+    {
+      "op_type": "Expand",
+      "input": [[0],[1],[2],[3]],
+      "shape": [2, 4, 3],
+      "output": [[[0,0,0],[1,1,1],[2,2,2],[3,3,3]],
+                 [[0,0,0],[1,1,1],[2,2,2],[3,3,3]]],
+      "T": "float32"
+    },
+    // float16. Broadcast scalar to 2D.
+    {
+      "op_type": "Expand",
+      "input": 1,
+      "shape": [2, 5],
+      "output": [[1, 1, 1, 1, 1],
+                 [1, 1, 1, 1, 1]],
+      "T": "float16"
+    },
+    // int64. Broadcast scalar to 2D.
+    {
+      "op_type": "Expand",
+      "input": 1,
+      "shape": [2, 5],
+      "output": [[1, 1, 1, 1, 1],
+                 [1, 1, 1, 1, 1]],
+      "T": "int64"
+    },
+    // uint64. Broadcast scalar to 2D.
+    {
+      "op_type": "Expand",
+      "input": 1,
+      "shape": [2, 5],
+      "output": [[1, 1, 1, 1, 1],
+                 [1, 1, 1, 1, 1]],
+      "T": "uint64"
+    },
+    {
+      "graph_name": "Expand version 13",
+      "op_type": "Expand",
+      "version": 13,
+      "input": [0, 1, 2, 3, 4],
+      "shape": [5],
+      "output": [0, 1, 2, 3, 4],
+      "T": "float32"
+    }
+  ],
+
+  "schema": [
+    {
+      "op_type": "Expand",
+      "version": 8,
+      "attributes": {},
+      "inputs": {
+        "input": {"type": "T"},
+        "shape": {"type": "int64"}
+      },
+      "outputs": {
+        "output": {"type": "T"}
+      },
+      "types": {"T": ["float32", "float16", "float64", "int8", "uint8", "int16", "uint16", "int32", "uint32", "int64", "uint64", "bool8"]}
+    },
+    {
+      "op_type": "Expand",
+      "version": 13,
+      "attributes": {},
+      "inputs": {
+        "input": {"type": "T"},
+        "shape": {"type": "int64"}
+      },
+      "outputs": {
+        "output": {"type": "T"}
+      },
+      "types": {"T": ["float32", "float16", "float64", "int8", "uint8", "int16", "uint16", "int32", "uint32", "int64", "uint64", "bool8", "bfloat16"]}
+    }
+  ]
+}

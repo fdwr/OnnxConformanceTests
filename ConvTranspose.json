@@ -1,0 +1,459 @@
+{
+  "tests": [
+    {
+      "graph_name": "ConvTranspose 1D convolution explicit output shape NOTSET auto_pad",
+      "op_type": "ConvTranspose",
+      "auto_pad": "NOTSET",
+      "dilations": [1,1],
+      "group": 1,
+      "strides": [1,1],
+      "kernel_shape": [1,5],
+      "output_shape": [1,1,1,14],
+      "pads": [0,0, 0,0],
+      "X": {"dims": [1,1,1,10], "function": "iota"},
+      "W": {"dims": [1,1,1,5], "value": [1,2,3,2,1]},
+      "B": [1],
+      "Y": {"dims": [1,1,1,14], "value": [1,2,5,11,19,28,37,46,55,64,63,51,27,10]},
+      "T": "float32"
+    },
+    {
+      "graph_name": "ConvTranspose 1D convolution explicit output shape ignored pads",
+      "op_type": "ConvTranspose",
+      "auto_pad": "VALID",
+      "dilations": [1,1],
+      "group": 1,
+      "strides": [1,1],
+      "kernel_shape": [1,5],
+      "output_shape": [1,1,1,14],
+      "X": {"dims": [1,1,1,10], "function": "iota"},
+      "W": {"dims": [1,1,1,5], "value": [1,2,3,2,1]},
+      "B": [1],
+      "Y": {"dims": [1,1,1,14], "value": [1,2,5,11,19,28,37,46,55,64,63,51,27,10]},
+      "T": "float32"
+    },
+    {
+      "graph_name": "ConvTranspose 1D convolution explicit output shape ignored pads",
+      "op_type": "ConvTranspose",
+      "auto_pad": "VALID",
+      "dilations": [1,1],
+      "group": 1,
+      "strides": [1,1],
+      "kernel_shape": [1,5],
+      "output_shape": [1,1,1,14],
+      "X": {"dims": [1,1,1,10], "function": "iota"},
+      "W": {"dims": [1,1,1,5], "value": [1,2,3,2,1]},
+      "B": [1],
+      "Y": {"dims": [1,1,1,14], "value": [1,2,5,11,19,28,37,46,55,64,63,51,27,10]},
+      "T": "float32"
+    },
+    {
+      "graph_name": "ConvTranspose 1D convolution no explicit output shape", // inferred solely from input, plus any pads, and output_padding
+      "op_type": "ConvTranspose",
+      "auto_pad": "VALID",
+      "dilations": [1,1],
+      "group": 1,
+      "strides": [1,1],
+      "kernel_shape": [1,5],
+      "output_padding": [0,0],
+      "X": {"dims": [1,1,1,10], "function": "iota"},
+      "W": {"dims": [1,1,1,5], "value": [1,2,3,2,1]},
+      "B": [1],
+      "Y": {"dims": [1,1,1,14], "value": [1,2,5,11,19,28,37,46,55,64,63,51,27,10]},
+      "T": "float32"
+    },
+    {
+      "graph_name": "ConvTranspose 2 batches explicit output shape no output_padding or pads",
+      "op_type": "ConvTranspose",
+      "auto_pad": "VALID",
+      "dilations": [1,1],
+      "group": 1,
+      "strides": [1,1],
+      "kernel_shape": [1,5],
+      "output_shape": [2,1,1,14],
+      "X": {"dims": [2,1,1,10], "function": "iota"},
+      "W": {"dims": [1,1,1,5], "value": [1,2,3,2,1]},
+      "B": [1],
+      "Y": {"dims": [2,1,1,14], "value": [[[[1,2,5,11,19,28,37,46,55,64,63,51,27,10]]],
+                                          [[[11,32,65,91,109,118,127,136,145,154,143,111,57,20]]]]},
+      "T": "float32"
+    },
+    {
+      "graph_name": "ConvTranspose 5D input tensor 1D convolution",
+      "op_type": "ConvTranspose",
+      "auto_pad": "VALID",
+      "dilations": [1,1,1],
+      "group": 1,
+      "strides": [1,1,1],
+      "kernel_shape": [1,1,5],
+      "output_padding": [0,0,0],
+      "X": {"dims": [1,1,1,1,10], "function": "iota"},
+      "W": {"dims": [1,1,1,1,5], "value": [1,2,3,4,5]},
+      "B": [1],
+      "Y": {"dims": [1,1,1,1,14], "value": [1,2,5,11,21,36,51,66,81,96,101,95,77,46]},
+      "T": "float32"
+    },
+    {
+      "graph_name": "ConvTranspose 5D input tensor 2D convolution",
+      "op_type": "ConvTranspose",
+      "auto_pad": "VALID",
+      "dilations": [1,1,1],
+      "group": 1,
+      "strides": [1,1,1],
+      "kernel_shape": [1,2,3],
+      "output_padding": [0,0,0],
+      "X": {"dims": [1,1,1,2,4], "function": "iota"},
+      "W": {"dims": [1,1,1,2,3], "value": [1,2,3,4,5,6]},
+      "B": [1],
+      "Y": {"dims": [1,1,1,3,6], "value": [1,2,5,11,13,10,5,18,42,63,60,40,17,41,74,89,72,43]},
+      "T": "float32"
+    },
+    {
+      "graph_name": "ConvTranspose 5D input tensor 3D convolution",
+      "op_type": "ConvTranspose",
+      "auto_pad": "VALID",
+      "dilations": [1,1,1],
+      "group": 1,
+      "strides": [1,1,1],
+      "kernel_shape": [2,1,3],
+      "output_padding": [0,0,0],
+      "X": {"dims": [1,1,2,1,4], "function": "iota"},
+      "W": {"dims": [1,1,2,1,3], "value": [1,2,3,4,5,6]},
+      "B": [1],
+      "Y": {"dims": [1,1,3,1,6], "value": [1,2,5,11,13,10,5,18,42,63,60,40,17,41,74,89,72,43]},
+      "T": "float32"
+    },
+    {
+      "graph_name": "ConvTranspose SAME_LOWER padding with odd strides",
+      "op_type": "ConvTranspose",
+      "auto_pad": "SAME_LOWER",
+      "dilations": [1,1],
+      "group": 1,
+      "strides": [1,1],
+      "kernel_shape": [2,2],
+      "output_shape": [1,1,3,4],
+      "X": {"dims": [1,1,3,4], "function": "iota"},
+      "W": {"dims": [1,1,2,2], "value": [1,2,3,4]},
+      "B": [1],
+      "Y": {"dims": [1,1,3,4], "value": [17,27,37,27,57,67,77,51,60,67,74,45]},
+      "T": "float32"
+    },
+    {
+      "graph_name": "ConvTranspose SAME_LOWER padding with even strides",
+      "op_type": "ConvTranspose",
+      "auto_pad": "SAME_LOWER",
+      "dilations": [1,1],
+      "group": 1,
+      "strides": [2,2],
+      "kernel_shape": [2,2],
+      "output_shape": [1,1,5,5],
+      "X": {"dims": [1,1,3,3], "function": "iota"},
+      "W": {"dims": [1,1,2,2], "value": [1,2,3,4]},
+      "B": [1],
+      "Y": {"dims": [1,1,5,5], "value": [1,4,5,7,9,7,5,9,6,11,13,13,17,16,21,13,8,15,9,17,25,22,29,25,33]},
+      "T": "float32"
+    },
+    {
+      "graph_name": "ConvTranspose SAME_UPPER padding with odd strides",
+      "op_type": "ConvTranspose",
+      "auto_pad": "SAME_UPPER",
+      "dilations": [1,1],
+      "group": 1,
+      "strides": [1,1],
+      "kernel_shape": [2,2],
+      "output_shape": [1,1,3,4],
+      "X": {"dims": [1,1,3,4], "function": "iota"},
+      "W": {"dims": [1,1,2,2], "value": [1,2,3,4]},
+      "B": [1],
+      "Y": {"dims": [1,1,3,4], "value": [1,2,5,8,5,17,27,37,21,57,67,77]},
+      "T": "float32"
+    },
+    {
+      "graph_name": "ConvTranspose SAME_UPPER padding with even strides",
+      "op_type": "ConvTranspose",
+      "auto_pad": "SAME_UPPER",
+      "dilations": [1,1],
+      "group": 1,
+      "strides": [2,2],
+      "kernel_shape": [2,2],
+      "output_shape": [1,1,5,5],
+      "X": {"dims": [1,1,3,3], "function": "iota"},
+      "W": {"dims": [1,1,2,2], "value": [1,2,3,4]},
+      "B": [1],
+      "Y": {"dims": [1,1,5,5], "value": [1,1,2,3,3,1,1,4,5,7,4,7,5,9,6,10,13,13,17,16,7,13,8,15,9]},
+      "T": "float32"
+    },
+    {
+      "graph_name": "ConvTranspose output_shape with even strides odd kernel SAME_UPPER",
+      "op_type": "ConvTranspose",
+      "auto_pad": "SAME_UPPER",
+      "dilations": [1,1],
+      "group": 1,
+      "strides": [2,2],
+      "kernel_shape": [3,3],
+      "output_shape": [1,1,4,4],
+      "X": {"dims": [1,1,2,2], "function": "iota"},
+      "W": {"dims": [1,1,3,3], "value": [1,2,3,4,5,6,7,8,9]},
+      "B": [1],
+      "Y": {"dims": [1,1,4,4], "value": [1,1,2,3,1,1,5,6,3,5,17,15,9,11,25,16]},
+      "T": "float32"
+    },
+    {
+      "graph_name": "ConvTranspose output_shape with even strides even kernel SAME_UPPER",
+      "op_type": "ConvTranspose",
+      "auto_pad": "SAME_UPPER",
+      "dilations": [1,1],
+      "group": 1,
+      "strides": [2,2],
+      "kernel_shape": [2,2],
+      "output_shape": [1,1,3,3],
+      "X": {"dims": [1,1,2,2], "function": "iota"},
+      "W": {"dims": [1,1,2,2], "value": [1,2,3,4]},
+      "B": [1],
+      "Y": {"dims": [1,1,3,3], "value": [1,1,2,1,1,4,3,5,4]},
+      "T": "float32"
+    },
+    {
+      "graph_name": "ConvTranspose output_shape with odd strides odd kernel SAME_UPPER",
+      "op_type": "ConvTranspose",
+      "auto_pad": "SAME_UPPER",
+      "dilations": [1,1],
+      "group": 1,
+      "strides": [3,3],
+      "kernel_shape": [3,3],
+      "output_shape": [1,1,5,5],
+      "X": {"dims": [1,1,2,2], "function": "iota"},
+      "W": {"dims": [1,1,3,3], "value": [1,2,3,4,5,6,7,8,9]},
+      "B": [1],
+      "Y": {"dims": [1,1,5,5], "value": [1,1,1,2,3,1,1,1,5,6,1,1,1,8,9,3,5,7,4,7,9,11,13,13,16]},
+      "T": "float32"
+    },
+    {
+      "graph_name": "ConvTranspose output_shape with odd strides even kernel SAME_UPPER",
+      "op_type": "ConvTranspose",
+      "auto_pad": "SAME_UPPER",
+      "dilations": [1,1],
+      "group": 1,
+      "strides": [3,3],
+      "kernel_shape": [2,2],
+      "output_shape": [1,1,4,4],
+      "X": {"dims": [1,1,2,2], "function": "iota"},
+      "W": {"dims": [1,1,2,2], "value": [1,2,3,4]},
+      "B": [1],
+      "Y": {"dims": [1,1,4,4], "value": [1,1,1,2,1,1,1,4,1,1,1,1,3,5,1,4]},
+      "T": "float32"
+    },
+    {
+      "graph_name": "ConvTranspose output_shape with even strides odd kernel SAME_LOWER",
+      "op_type": "ConvTranspose",
+      "dilations": [1,1],
+      "auto_pad": "SAME_LOWER",
+      "group": 1,
+      "strides": [2,2],
+      "kernel_shape": [3,3],
+      "output_shape": [1,1,4,4],
+      "X": {"dims": [1,1,2,2], "function": "iota"},
+      "W": {"dims": [1,1,3,3], "value": [1,2,3,4,5,6,7,8,9]},
+      "B": [1],
+      "Y": {"dims": [1,1,4,4], "value": [1,5,6,7,5,17,15,19,11,25,16,19,17,40,25,28]},
+      "T": "float32"
+    },
+    {
+      // CPU ep had an issue where it differs from DML when autopad is NOTSET. It should default to SAME_LOWER behavior.
+      "graph_name": "ConvTranspose output_shape with even strides odd kernel NOTSET",
+      "op_type": "ConvTranspose",
+      "dilations": [1,1],
+      "group": 1,
+      "strides": [2,2],
+      "kernel_shape": [3,3],
+      "output_shape": [1,1,4,4],
+      "X": {"dims": [1,1,2,2], "function": "iota"},
+      "W": {"dims": [1,1,3,3], "value": [1,2,3,4,5,6,7,8,9]},
+      "B": [1],
+      "Y": {"dims": [1,1,4,4], "value": [1,5,6,7,5,17,15,19,11,25,16,19,17,40,25,28]},
+      "T": "float32"
+    },
+    {
+      "graph_name": "ConvTranspose output_shape with even strides even kernel SAME_LOWER",
+      "op_type": "ConvTranspose",
+      "dilations": [1,1],
+      "auto_pad": "SAME_LOWER",
+      "group": 1,
+      "strides": [2,2],
+      "kernel_shape": [2,2],
+      "output_shape": [1,1,3,3],
+      "X": {"dims": [1,1,2,2], "function": "iota"},
+      "W": {"dims": [1,1,2,2], "value": [1,2,3,4]},
+      "B": [1],
+      "Y": {"dims": [1,1,3,3], "value": [1,4,5,5,4,7,9,10,13]},
+      "T": "float32",
+    },
+    {
+      "graph_name": "ConvTranspose output_shape with odd strides odd kernel SAME_LOWER",
+      "op_type": "ConvTranspose",
+      "dilations": [1,1],
+      "auto_pad": "SAME_LOWER",
+      "group": 1,
+      "strides": [3,3],
+      "kernel_shape": [3,3],
+      "output_shape": [1,1,5,5],
+      "X": {"dims": [1,1,2,2], "function": "iota"},
+      "W": {"dims": [1,1,3,3], "value": [1,2,3,4,5,6,7,8,9]},
+      "B": [1],
+      "Y": {"dims": [1,1,5,5], "value": [1,1,5,6,7,1,1,8,9,10,5,7,4,7,10,11,13,13,16,19,17,19,22,25,28]},
+      "T": "float32"
+    },
+    {
+      "graph_name": "ConvTranspose output_shape with odd strides even kernel SAME_LOWER",
+      "op_type": "ConvTranspose",
+      "dilations": [1,1],
+      "auto_pad": "SAME_LOWER",
+      "group": 1,
+      "strides": [3,3],
+      "kernel_shape": [2,2],
+      "output_shape": [1,1,4,4],
+      "X": {"dims": [1,1,2,2], "function": "iota"},
+      "W": {"dims": [1,1,2,2], "value": [1,2,3,4]},
+      "B": [1],
+      "Y": {"dims": [1,1,4,4], "value": [1,1,4,5,1,1,1,1,5,1,4,7,9,1,10,13]},
+      "T": "float32"
+    },
+    {
+      "graph_name": "ConvTranspose float16",
+      "op_type": "ConvTranspose",
+      "auto_pad": "VALID",
+      "dilations": [1,1],
+      "group": 1,
+      "strides": [1,1],
+      "kernel_shape": [1,5],
+      "output_shape": [1,1,1,14],
+      "X": {"dims": [1,1,1,10], "function": "iota"},
+      "W": {"dims": [1,1,1,5], "value": [1,2,3,2,1]},
+      "B": [1],
+      "Y": {"dims": [1,1,1,14], "value": [1,2,5,11,19,28,37,46,55,64,63,51,27,10]},
+      "T": "float16"
+    },
+    {
+      "graph_name": "ConvTranspose 1D convolution. kernel_shape inferred from W tensor",
+      "op_type": "ConvTranspose",
+      "auto_pad": "VALID",
+      "dilations": [1,1],
+      "group": 1,
+      "strides": [1,1],
+      // "kernel_shape": [1,5],
+      "output_shape": [1,1,1,14],
+      "X": {"dims": [1,1,1,10], "function": "iota"},
+      "W": {"dims": [1,1,1,5], "value": [1,2,3,2,1]},
+      "B": [1],
+      "Y": {"dims": [1,1,1,14], "value": [1,2,5,11,19,28,37,46,55,64,63,51,27,10]},
+      "T": "float32"
+    },
+    {
+      "graph_name": "ConvTranspose 1D convolution with dilations",
+      "op_type": "ConvTranspose",
+      "auto_pad": "VALID",
+      "dilations": [1,2],
+      "group": 1,
+      "strides": [1,1],
+      "output_shape": [1,1,1,7],
+      "X": {"dims": [1,1,1,5], "value": [10,11,12,13,14]},
+      "W": {"dims": [1,1,1,2], "value": [1,2]},
+      "B": [1],
+      "Y": {"dims": [1,1,1,7], "value": [11,12,33,36,39,27,29]},
+      "T": "float32"
+    },
+    {
+      "graph_name": "ConvTranspose 2D convolution with dilations along 2nd axis",
+      "op_type": "ConvTranspose",
+      "auto_pad": "VALID",
+      "dilations": [2,1],
+      "group": 1,
+      "strides": [1,1],
+      "output_shape": [1,1,7,1],
+      "X": {"dims": [1,1,5,1], "value": [10,11,12,13,14]},
+      "W": {"dims": [1,1,2,1], "value": [1,2]},
+      "B": [1],
+      "Y": {"dims": [1,1,7,1], "value": [11,12,33,36,39,27,29]},
+      "T": "float32"
+    },
+    {
+      "graph_name": "ConvTranspose 2D convolution with dilations",
+      "op_type": "ConvTranspose",
+      "auto_pad": "VALID",
+      "group": 1,
+      "dilations": [2,2],
+      "kernel_shape": [2,2],
+      "strides": [1,1],
+      "output_shape": [1,1,4,4],
+      "X": {"dims": [1,1,2,2], "value": [10,11,12,13]},
+      "W": {"dims": [1,1,2,2], "value": [1,2,3,4]},
+      "B": [1],
+      "Y": {"dims": [1,1,4,4], "value": [11,12,21,23, 13,14,25,27, 31,34,41,45, 37,40,49,53]},
+      "T": "float32"
+    },
+    {
+      "graph_name": "ConvTranspose-11 2D convolution with dilations",
+      "op_type": "ConvTranspose",
+      "version": 11,
+      "auto_pad": "VALID",
+      "group": 1,
+      "dilations": [2,2],
+      "kernel_shape": [2,2],
+      "strides": [1,1],
+      "output_shape": [1,1,4,4],
+      "X": {"dims": [1,1,2,2], "value": [10,11,12,13]},
+      "W": {"dims": [1,1,2,2], "value": [1,2,3,4]},
+      "B": [1],
+      "Y": {"dims": [1,1,4,4], "value": [11,12,21,23, 13,14,25,27, 31,34,41,45, 37,40,49,53]},
+      "T": "float32"
+    }
+  ],
+
+  "schema": [
+    {
+      "op_type": "ConvTranspose",
+      "version": 1,
+      "attributes": {
+        "auto_pad": {"type": "string8"}, // "SAME_LOWER", "SAME_UPPER", "VALID", "NOTSET"
+        "dilations": {"type": "int64"}, // list, defaults = 1
+        "group": {"type": "int64"}, // default = 1
+        "kernel_shape": {"type": "int64"}, // list, default = input tensor W
+        "output_padding": {"type": "int64"}, // list, defaults = 0
+        "output_shape": {"type": "int64"}, // list
+        "pads": {"type": "int64"}, // list [x1_begin, x2_begin...x1_end, x2_end,...], defaults = 0
+        "strides": {"type": "int64"} // list, defaults = 1
+      },
+      "inputs": {
+        "X": {"type": "T"}, // N x C x H x W
+        "W": {"type": "T"}, // C x M x kH x kW
+        "B": {"type": "T"} // optional, 1D size C
+      },
+      "outputs": {
+        "Y": {"type": "T"}
+      },
+      "types": {"T": ["float32", "float16", "float64"]}
+    },
+    {
+      "op_type": "ConvTranspose",
+      "version": 11, // No difference from 1 (except clarification that strides default to 1).
+      "attributes": {
+        "auto_pad": {"type": "string8"}, // "SAME_LOWER", "SAME_UPPER", "VALID"
+        "dilations": {"type": "int64"}, // list, defaults = 1
+        "group": {"type": "int64"}, // default = 1
+        "kernel_shape": {"type": "int64"}, // list, default = input tensor W
+        "output_padding": {"type": "int64"}, // list, defaults = 0
+        "output_shape": {"type": "int64"}, // list
+        "pads": {"type": "int64"}, // list [x1_begin, x2_begin...x1_end, x2_end,...], defaults = 0
+        "strides": {"type": "int64"} // list, defaults = 1
+      },
+      "inputs": {
+        "X": {"type": "T"}, // N x C x H x W
+        "W": {"type": "T"}, // C x M x kH x kW
+        "B": {"type": "T"} // optional, 1D size C
+      },
+      "outputs": {
+        "Y": {"type": "T"}
+      },
+      "types": {"T": ["float32", "float16", "float64"]}
+    }
+  ]
+}

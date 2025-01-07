@@ -1,0 +1,125 @@
+{
+  "tests": [
+    {
+      "op_type": "Relu",
+      "X": [[-1, 3], [5, -2]],
+      "Y": [[0, 3], [5, 0]],
+      "T": "float32"
+    },
+    {
+      "op_type": "Relu",
+      "X": [[-1, 3], [5, -2]],
+      "Y": [[0, 3], [5, 0]],
+      "T": "float16"
+    },
+    {
+      "op_type": "Relu",
+      "X": [[[[[[[[1]]]]]]]],
+      "Y": [[[[[[[[1]]]]]]]],
+      "T": "float32"
+    },
+    {
+      "op_type": "Relu",
+      "X": [[[[[[[[1],[-2]]]]]]]],
+      "Y": [[[[[[[[1],[0]]]]]]]],
+      "T": "float32"
+    },
+    {
+      "op_type": "Relu",
+      "X": [[[[[[  [[1],[-2]],
+                   [[3],[4]] ]]]]]],
+      "Y": [[[[[[ [[1],[0]],
+                  [[3],[4]] ]]]]]],
+      "T": "float32"
+    },
+    {
+      "op_type": "Relu",
+      "X": [[[[ [[-1],[2]],
+                [[3],[-4]] ]]]],
+      "Y": [[[[ [[0],[2]],
+                [[3],[0]] ]]]],
+      "T": "float32"
+    },
+    {
+      "op_type": "Relu",
+      "X": [[[  [[1],[-2]],
+                [[-3],[4]] ]]],
+      "Y": [[[ [[1],[0]],
+               [[0],[4]] ]]],
+      "T": "float32"
+    },
+    {
+      "op_type": "Relu",
+      "X": [[[     [[[-1],[2]],
+                    [[3],[-4]]],
+                   [[[-1],[2]],
+                    [[3],[-4]]] ]]],
+      "Y": [[[     [[[0],[2]],
+                    [[3],[0]]],
+                   [[[0],[2]],
+                    [[3],[0]]] ]]],
+      "T": "float32"
+    },
+    {
+      "graph_name": "Relu-13",
+      "op_type": "Relu",
+      "version": 13,
+      "X": [[-1, 3], [5, -2]],
+      "Y": [[0, 3], [5, 0]],
+      "T": "float32"
+    },
+    {
+      "graph_name": "Relu-14 int8",
+      "op_type": "Relu",
+      "version": 14,
+      "X": [[-1, 3], [5, -2]],
+      "Y": [[0, 3], [5, 0]],
+      "T": "int8",
+      "verification": {"ulp": 0, "executor_filter": ".*Cpu"}
+    },
+    {
+      "graph_name": "Relu-14 int16",
+      "op_type": "Relu",
+      "version": 14,
+      "X": [[-1, 3], [5, -2]],
+      "Y": [[0, 3], [5, 0]],
+      "T": "int16",
+      "verification": {"ulp": 0, "executor_filter": ".*Cpu"}
+    },
+    {
+      "graph_name": "Relu-14 int32",
+      "op_type": "Relu",
+      "version": 14,
+      "X": [[-1, 3], [5, -2]],
+      "Y": [[0, 3], [5, 0]],
+      "T": "int32"
+    }
+  ],
+
+  "schema": [
+    {
+      "op_type": "Relu", // y = max(0, x)
+      "version": 6,
+      "attributes": {},
+      "inputs": {"X": {"type": "T"}},
+      "outputs": {"Y": {"type": "T"}},
+      "types": {"T": ["float32", "float16", "float64"]}
+    },
+    {
+      "op_type": "Relu", // y = max(0, x)
+      "version": 13,
+      "attributes": {},
+      "inputs": {"X": {"type": "T"}},
+      "outputs": {"Y": {"type": "T"}},
+      "types": {"T": ["float32", "float16", "float64", "bfloat16"]}
+    },
+    {
+      "op_type": "Relu", // y = max(0, x)
+      "version": 14,
+      "attributes": {},
+      "inputs": {"X": {"type": "T"}},
+      "outputs": {"Y": {"type": "T"}},
+      "types": {"T": ["float32", "float16", "float64", "bfloat16", "int8", "int16", "int32", "int64"]}
+    }
+  ]
+}

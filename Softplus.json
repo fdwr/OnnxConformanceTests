@@ -1,0 +1,29 @@
+{
+  "tests": [
+    {
+      "op_type": "Softplus",
+      "X": [0, 1, 2, -1],
+      "Y": [0.693147181, 1.313261688, 2.126928011, 0.313261688],
+      "T": "float32",
+      "verification": { "executor_filter": ".*Cpu", "ulp": 1}
+    },
+    {
+      "op_type": "Softplus",
+      "X": [0, 1, 2, -1],
+      "Y": [0.693147181, 1.313261688, 2.126928011, 0.313261688],
+      "T": "float16",
+      "verification": { "executor_filter": ".*Cpu", "ulp": 1}
+    }
+  ],
+
+  "schema": [
+    {
+      "op_type": "Softplus", // y = ln(exp(x) + 1)
+      "version": 1,
+      "attributes": {},
+      "inputs": {"X": {"type": "T"}},
+      "outputs": {"Y": {"type": "T"}},
+      "types": {"T": ["float32", "float16", "float64"]}
+    }
+  ]
+}

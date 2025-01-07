@@ -1,0 +1,199 @@
+{
+  // https://github.com/onnx/onnx/blob/master/docs/Operators.md#GatherND
+  // https://github.com/onnx/onnx/pull/2106
+  "tests": [
+    {
+      "graph_name": "GatherND 2x2,2x2,2 float32",
+      "op_type": "GatherND",
+      "version": 11,
+      "data":    [[0,1],[2,3]],
+      "indices": [[0,0],[1,1]],
+      "output":  [0,3],
+      "T": "float32",
+      "verification": {"ulp": 0}
+    },
+    {
+      "graph_name": "GatherND 2x2,2x1,2x2 float32",
+      "op_type": "GatherND",
+      "version": 11,
+      "data":    [[0,1],[2,3]],
+      "indices": [[1],[0]],
+      "output":  [[2,3],[0,1]],
+      "T": "float32",
+      "verification": {"ulp": 0}
+    },
+    {
+      "graph_name": "GatherND 2x2x2,2x2,2x2 float32",
+      "op_type": "GatherND",
+      "version": 11,
+      "data":    [[[0,1],[2,3]],[[4,5],[6,7]]],
+      "indices": [[0,1],[1,0]],
+      "output":  [[2,3],[4,5]],
+      "T": "float32",
+      "verification": {"ulp": 0}
+    },
+    {
+      "graph_name": "GatherND 2x2x2,1x2x2,1x2x2 float32",
+      "op_type": "GatherND",
+      "version": 11,
+      "data":    [[[0,1],[2,3]],[[4,5],[6,7]]],
+      "indices": [[[0,1]],[[1,0]]],
+      "output":  [[[2,3]],[[4,5]]],
+      "T": "float32",
+      "verification": {"ulp": 0}
+    },
+    {
+      "graph_name": "GatherND 2x2,2x2,2 float16",
+      "op_type": "GatherND",
+      "version": 11,
+      "data":    [[0,1],[2,3]],
+      "indices": [[0,0],[1,1]],
+      "output":  [0,3],
+      "T": "float16",
+      "verification": {"ulp": 0}
+    },
+    {
+      "graph_name": "GatherND 2x2,2x2,2 float64",
+      "op_type": "GatherND",
+      "version": 11,
+      "data":    [[0,1],[2,3]],
+      "indices": [[0,0],[1,1]],
+      "output":  [0,3],
+      "T": "float64",
+      "verification": {"ulp": 0}
+    },
+    {
+      "graph_name": "GatherND 2x2,2x2,2 int64",
+      "op_type": "GatherND",
+      "version": 11,
+      "data":    [[0,1],[2,3]],
+      "indices": [[0,0],[1,1]],
+      "output":  [0,3],
+      "T": "int64",
+      "verification": {"ulp": 0}
+    },
+    {
+      "graph_name": "GatherND 2x2,2x2,2 uint64",
+      "op_type": "GatherND",
+      "version": 11,
+      "data":    [[0,1],[2,3]],
+      "indices": [[0,0],[1,1]],
+      "output":  [0,3],
+      "T": "uint64",
+      "verification": {"ulp": 0}
+    },
+    {
+      "graph_name": "GatherND 2x2,2x2,2 float32 negative indices",
+      "op_type": "GatherND",
+      "version": 11,
+      "data":    [[0,1],[2,3]],
+      "indices": [[-2,-2],[-1,-1]],
+      "output":  [0,3],
+      "T": "float32",
+      "verification": {"ulp": 0}
+    },
+    {
+      "graph_name": "GatherND 3x2x2,3x2x2,3x2 float32 3D batch_dims=1",
+      "op_type": "GatherND",
+      "version": 12,
+      "batch_dims": 1,
+      "data":    [[[0,1],[2,3]],[[4,5],[6,7]],[[8,9],[10,11]]],
+      "indices": [[[0,0],[1,1]],[[1,1],[0,0]],[[0,0],[1,1]]],
+      "output":  [[0,3],[7,4],[8,11]],
+      "T": "float32",
+      "verification": {"ulp": 0}
+    },
+    {
+      "graph_name": "GatherND 3x2x2x2,3x2x2x2,3x2x2 float32 4D batch_dims=2",
+      "op_type": "GatherND",
+      "version": 12,
+      "batch_dims": 2,
+      "data":    [[[[0,1],[2,3]]],[[[4,5],[6,7]]],[[[8,9],[10,11]]]],
+      "indices": [[[[0,0],[1,1]]],[[[1,1],[0,0]]],[[[0,0],[1,1]]]],
+      "output":  [[[0,3]],[[7,4]],[[8,11]]],
+      "T": "float32",
+      "verification": {"ulp": 0}
+    },
+    {
+      "graph_name": "GatherND 3x2x2x2x2,3x2x2x2x2,3x2x2x2 float32 5D batch_dims=1",
+      "op_type": "GatherND",
+      "version": 12,
+      "batch_dims": 3,
+      "data":    [[[[[0,1],[2,3]]]],[[[[4,5],[6,7]]]],[[[[8,9],[10,11]]]]],
+      "indices": [[[[[0,0],[1,1]]]],[[[[1,1],[0,0]]]],[[[[0,0],[1,1]]]]],
+      "output":  [[[[0,3]]],[[[7,4]]],[[[8,11]]]],
+      "T": "float32",
+      "verification": {"ulp": 0}
+    },
+    {
+      "graph_name": "GatherND",
+      "op_type": "GatherND",
+      "version": 11,
+      "data":    [[[[[0,1],[2,3]]]]],
+      "indices": [[[[[0],[0]]]]],
+      "output":  [[[[ [ [[[0,1],[2,3]]] ], 
+                      [ [[[0,1],[2,3]]] ] ]]]],
+      "T": "float32",
+      "verification": {"ulp": 0}
+    },
+    {
+      "graph_name": "GatherND version 13",
+      "op_type": "GatherND",
+      "version": 13,
+      "data":    [[0,1],[2,3]],
+      "indices": [[0,0],[1,1]],
+      "output":  [0,3],
+      "T": "float32",
+      "verification": {"ulp": 0}
+    }
+  ],
+
+  "schema": [
+    {
+      "op_type": "GatherND",
+      "version": 11,
+      "attributes": {},
+      "inputs": {
+          "data": {"type": "T"},
+          "indices": {"type": "int64"},
+          "updates": {"type": "T"}
+      },
+      "outputs": {
+          "output": {"type": "T"}
+      },
+      "types": {"T": ["float32", "float16", "float64", "uint8", "uint16", "uint32", "uint64", "int8", "int16", "int32", "int64", "bool8", "string8"]}
+    },
+    {
+      "op_type": "GatherND",
+      "version": 12,
+      "attributes": {
+        "batch_dims": {"type": "int64"} // Default = 0
+      },
+      "inputs": {
+          "data": {"type": "T"},
+          "indices": {"type": "int64"}, // Negative indices mean relative from the back.
+          "updates": {"type": "T"}
+      },
+      "outputs": {
+          "output": {"type": "T"}
+      },
+      "types": {"T": ["float32", "float16", "float64", "uint8", "uint16", "uint32", "uint64", "int8", "int16", "int32", "int64", "bool8", "string8"]}
+    },
+    {
+      "op_type": "GatherND",
+      "version": 13,
+      "attributes": {
+        "batch_dims": {"type": "int64"} // Default = 0
+      },
+      "inputs": {
+          "data": {"type": "T"},
+          "indices": {"type": "int64"}, // Negative indices mean relative from the back.
+          "updates": {"type": "T"}
+      },
+      "outputs": {
+          "output": {"type": "T"}
+      },
+      "types": {"T": ["float32", "float16", "float64", "uint8", "uint16", "uint32", "uint64", "int8", "int16", "int32", "int64", "bool8", "string8", "bfloat16"]}
+    }
+  ]
+}

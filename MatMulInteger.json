@@ -1,0 +1,367 @@
+{
+  "tests": [
+    {
+      "graph_name": "MatMulInteger uint8 to int32",
+      "op_type": "MatMulInteger",
+      "A": [[1, 2, 3], [4, 5, 6]],
+      "B": [[1, 2], [3, 4], [5, 6]],
+      "Y": [[22, 28], [49, 64]],
+      "T1": "uint8",
+      "T2": "uint8",
+      "T3": "int32"
+    },
+    {
+      "graph_name": "MatMulInteger 1D x 1D uint8 to int32",
+      "op_type": "MatMulInteger",
+      "A": [2],
+      "B": [3],
+      "Y": 6,
+      "T1": "uint8",
+      "T2": "uint8",
+      "T3": "int32"
+    },
+    {
+      "graph_name": "MatMulInteger 1D x 2D uint8 to int32",
+      "op_type": "MatMulInteger",
+      "A": [2],
+      "B": [[3, 4]],
+      "Y": [6,8],
+      "T1": "uint8",
+      "T2": "uint8",
+      "T3": "int32"
+    },
+    {
+      "graph_name": "MatMulInteger 2D x 1D uint8 to int32",
+      "op_type": "MatMulInteger",
+      "A": [[3],[4]],
+      "B": [2],
+      "Y": [6,8],
+      "T1": "uint8",
+      "T2": "uint8",
+      "T3": "int32"
+    },
+    {
+      "graph_name": "MatMulInteger 1D x 4D uint8 to int32",
+      "op_type": "MatMulInteger",
+      "A": [2],
+      "B": [[[[3, 4]]]],
+      "Y": [[[6,8]]],
+      "T1": "uint8",
+      "T2": "uint8",
+      "T3": "int32"
+    },
+    {
+      "graph_name": "MatMulInteger 4D x 1D uint8 to int32",
+      "op_type": "MatMulInteger",
+      "A": [[[[3]]],[[[4]]]],
+      "B": [2],
+      "Y": [[[6]],[[8]]],
+      "T1": "uint8",
+      "T2": "uint8",
+      "T3": "int32"
+    },
+    {
+      "graph_name": "MatMulInteger 3D x 2D uint8 to int32 no zero point",
+      "op_type": "MatMulInteger",
+      "A": [[[1, 2, 3], [4, 5, 6]], [[7, 8, 9], [10, 11, 12]]],
+      "B": [[1, 2], [3, 4], [5, 6]],
+      "Y": [[[ 22,  28],[ 49,  64]],[[ 76, 100],[103, 136]]],
+      "T1": "uint8",
+      "T2": "uint8",
+      "T3": "int32"
+    },
+    {
+      "graph_name": "MatMulInteger 3D x 3D uint8 to int32 no zero point",
+      "op_type": "MatMulInteger",
+      "A": [[[1, 2, 3], [4, 5, 6]], [[7, 8, 9], [10, 11, 12]]],
+      "B": [[[2, 4],
+             [2, 4],
+             [9, 9]],
+
+            [[4, 2],
+             [5, 1],
+             [9, 6]]],
+      "Y": [[[33, 39], [72, 90]], [[149, 76], [203, 103]]],
+      "T1": "uint8",
+      "T2": "uint8",
+      "T3": "int32"
+    },
+
+    // Int8
+    {
+      "graph_name": "MatMulInteger int8 to int32",
+      "op_type": "MatMulInteger",
+      "A": [[1, 2, 3], [4, 5, 6]],
+      "B": [[1, 2], [3, 4], [5, 6]],
+      "Y": [[22, 28], [49, 64]],
+      "T1": "int8",
+      "T2": "int8",
+      "T3": "int32",
+      "verification": {"executor_filter": ".*Cpu"}
+    },
+    {
+      "graph_name": "MatMulInteger 1D x 1D int8 to int32",
+      "op_type": "MatMulInteger",
+      "A": [2],
+      "B": [3],
+      "Y": 6,
+      "T1": "int8",
+      "T2": "int8",
+      "T3": "int32",
+      "verification": {"executor_filter": ".*Cpu"}
+    },
+    {
+      "graph_name": "MatMulInteger 1D x 2D int8 to int32",
+      "op_type": "MatMulInteger",
+      "A": [2],
+      "B": [[3, 4]],
+      "Y": [6,8],
+      "T1": "int8",
+      "T2": "int8",
+      "T3": "int32",
+      "verification": {"executor_filter": ".*Cpu"}
+    },
+    {
+      "graph_name": "MatMulInteger 2D x 1D int8 to int32",
+      "op_type": "MatMulInteger",
+      "A": [[3],[4]],
+      "B": [2],
+      "Y": [6,8],
+      "T1": "int8",
+      "T2": "int8",
+      "T3": "int32",
+      "verification": {"executor_filter": ".*Cpu"}
+    },
+    {
+      "graph_name": "MatMulInteger 1D x 4D int8 to int32",
+      "op_type": "MatMulInteger",
+      "A": [2],
+      "B": [[[[3, 4]]]],
+      "Y": [[[6,8]]],
+      "T1": "int8",
+      "T2": "int8",
+      "T3": "int32",
+      "verification": {"executor_filter": ".*Cpu"}
+    },
+    {
+      "graph_name": "MatMulInteger 4D x 1D int8 to int32",
+      "op_type": "MatMulInteger",
+      "A": [[[[3]]],[[[4]]]],
+      "B": [2],
+      "Y": [[[6]],[[8]]],
+      "T1": "int8",
+      "T2": "int8",
+      "T3": "int32",
+      "verification": {"executor_filter": ".*Cpu"}
+    },
+    {
+      "graph_name": "MatMulInteger 3D x 2D int8 to int32",
+      "op_type": "MatMulInteger",
+      "A": [[[1, 2, 3], [4, 5, 6]], [[7, 8, 9], [10, 11, 12]]],
+      "B": [[1, 2], [3, 4], [5, 6]],
+      "Y": [[[ 22,  28],[ 49,  64]],[[ 76, 100],[103, 136]]],
+      "T1": "int8",
+      "T2": "int8",
+      "T3": "int32",
+      "verification": {"executor_filter": ".*Cpu"}
+    },
+    {
+      "graph_name": "MatMulInteger 3D x 3D int8 to int32",
+      "op_type": "MatMulInteger",
+      "A": [[[1, 2, 3], [4, 5, 6]], [[7, 8, 9], [10, 11, 12]]],
+      "B": [[[2, 4],
+             [2, 4],
+             [9, 9]],
+
+            [[4, 2],
+             [5, 1],
+             [9, 6]]],
+      "Y": [[[33, 39], [72, 90]], [[149, 76], [203, 103]]],
+      "T1": "int8",
+      "T2": "int8",
+      "T3": "int32",
+      "verification": {"executor_filter": ".*Cpu"}
+    },
+    // Uint8/int8
+    {
+      "graph_name": "MatMulInteger uint8 int8 to int32",
+      "op_type": "MatMulInteger",
+      "A": [[1, 2, 3], [4, 5, 6]],
+      "B": [[1, 2], [3, 4], [5, 6]],
+      "Y": [[22, 28], [49, 64]],
+      "T1": "uint8",
+      "T2": "int8",
+      "T3": "int32",
+      "verification": {"executor_filter": ".*Cpu"}
+    },
+    {
+      "graph_name": "MatMulInteger 1D x 1D uint8 int8 to int32",
+      "op_type": "MatMulInteger",
+      "A": [2],
+      "B": [3],
+      "Y": 6,
+      "T1": "uint8",
+      "T2": "int8",
+      "T3": "int32",
+      "verification": {"executor_filter": ".*Cpu"}
+    },
+    {
+      "graph_name": "MatMulInteger 1D x 2D uint8 int8 to int32",
+      "op_type": "MatMulInteger",
+      "A": [2],
+      "B": [[3, 4]],
+      "Y": [6,8],
+      "T1": "uint8",
+      "T2": "int8",
+      "T3": "int32",
+      "verification": {"executor_filter": ".*Cpu"}
+    },
+    {
+      "graph_name": "MatMulInteger 2D x 1D uint8 int8 to int32",
+      "op_type": "MatMulInteger",
+      "A": [[3],[4]],
+      "B": [2],
+      "Y": [6,8],
+      "T1": "uint8",
+      "T2": "int8",
+      "T3": "int32",
+      "verification": {"executor_filter": ".*Cpu"}
+    },
+    {
+      "graph_name": "MatMulInteger 1D x 4D uint8 int8 to int32",
+      "op_type": "MatMulInteger",
+      "A": [2],
+      "B": [[[[3, 4]]]],
+      "Y": [[[6,8]]],
+      "T1": "uint8",
+      "T2": "int8",
+      "T3": "int32",
+      "verification": {"executor_filter": ".*Cpu"}
+    },
+    {
+      "graph_name": "MatMulInteger 4D x 1D uint8 int8 to int32",
+      "op_type": "MatMulInteger",
+      "A": [[[[3]]],[[[4]]]],
+      "B": [2],
+      "Y": [[[6]],[[8]]],
+      "T1": "uint8",
+      "T2": "int8",
+      "T3": "int32",
+      "verification": {"executor_filter": ".*Cpu"}
+    },
+    {
+      "graph_name": "MatMulInteger 3D x 2D uint8 int8 to int32",
+      "op_type": "MatMulInteger",
+      "A": [[[1, 2, 3], [4, 5, 6]], [[7, 8, 9], [10, 11, 12]]],
+      "B": [[1, 2], [3, 4], [5, 6]],
+      "Y": [[[ 22,  28],[ 49,  64]],[[ 76, 100],[103, 136]]],
+      "T1": "uint8",
+      "T2": "int8",
+      "T3": "int32",
+      "verification": {"executor_filter": ".*Cpu"}
+    },
+    {
+      "graph_name": "MatMulInteger 3D x 3D uint8 unt8 to int32",
+      "op_type": "MatMulInteger",
+      "A": [[[1, 2, 3], [4, 5, 6]], [[7, 8, 9], [10, 11, 12]]],
+      "B": [[[2, 4],
+             [2, 4],
+             [9, 9]],
+
+            [[4, 2],
+             [5, 1],
+             [9, 6]]],
+      "Y": [[[33, 39], [72, 90]], [[149, 76], [203, 103]]],
+      "T1": "uint8",
+      "T2": "uint8",
+      "T3": "int32",
+      "verification": {"executor_filter": ".*Cpu"}
+    },
+
+    // ZeroPoint
+    {
+      "graph_name": "MatMulInteger 3D x 2D uint8 to int32 scalar zero point",
+      "op_type": "MatMulInteger",
+      "A": [[[1, 2, 3], [4, 5, 6]], [[7, 8, 9], [10, 11, 12]]],
+      "B": [[1, 2], [3, 4], [5, 6]],
+      "AZeroPoint": 2,
+      "BZeroPoint": 1,
+      "Y": [[[4, 4], [22, 31]], [[40, 58], [58, 85]]],
+      "T1": "uint8",
+      "T2": "uint8",
+      "T3": "int32"
+    },
+    {
+      "graph_name": "MatMulInteger 3D x 3D uint8 to int32 scalar zero point",
+      "op_type": "MatMulInteger",
+      "A": [[[1, 2, 3], [4, 5, 6]], [[7, 8, 9], [10, 11, 12]]],
+      "B": [[[2, 4],
+             [2, 4],
+             [9, 9]],
+
+            [[4, 2],
+             [5, 1],
+             [9, 6]]],
+      "Y": [[[14, 16], [35, 49]], [[89, 25], [125, 34]]],
+      "AZeroPoint": 1,
+      "BZeroPoint": 2,
+      "T1": "uint8",
+      "T2": "uint8",
+      "T3": "int32"
+    },
+    {
+      "graph_name": "MatMulInteger 3D x 2D uint8 to int32 2d zero point",
+      "op_type": "MatMulInteger",
+      "A": [[[1, 2, 3], [4, 5, 6]], [[7, 8, 9], [10, 11, 12]]],
+      "B": [[1, 2], [3, 4], [5, 6]],
+      "AZeroPoint": [2,3],
+      "BZeroPoint": [1,2],
+      "Y": [[[4, 4], [16, 16]], [[40, 40], [52, 52]]],
+      "T1": "uint8",
+      "T2": "uint8",
+      "T3": "int32",
+      "verification": {"executor_filter": ".*Cpu"}
+    },
+    {
+      "graph_name": "MatMulInteger 3D x 3D uint8 to int32 2d zero point",
+      "op_type": "MatMulInteger",
+      "A": [[[1, 2, 3], [4, 5, 6]], [[7, 8, 9], [10, 11, 12]]],
+      "B": [[[2, 4],
+             [2, 4],
+             [9, 9]],
+
+            [[4, 2],
+             [5, 1],
+             [9, 6]]],
+      "Y": [[[17, 16], [37, 38]], [[110, 25], [140, 31]]],
+      "AZeroPoint": [1,2],
+      "BZeroPoint": [1,2],
+      "T1": "uint8",
+      "T2": "uint8",
+      "T3": "int32",
+      "verification": {"executor_filter": ".*Cpu"}
+    }
+  ],
+
+  "schema": [
+    {
+      "op_type": "MatMulInteger",
+      "version": 10,
+      "attributes": {},
+      "inputs": {
+        "A": {"type": "T1"},
+        "B": {"type": "T2"},
+        "AZeroPoint": {"type": "T1"},
+        "BZeroPoint": {"type": "T2"}
+      },
+      "outputs": {
+        "Y": {"type": "T3"}
+      },
+      "types": {
+          "T1": ["uint8", "int8"],
+          "T2": ["uint8", "int8"],
+          "T3": ["int32"]
+      }
+    }
+  ]
+}

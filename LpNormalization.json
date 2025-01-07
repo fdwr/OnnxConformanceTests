@@ -1,0 +1,120 @@
+{
+  "tests": [
+    // P = 1. 1D.
+    {
+
+      "op_type": "LpNormalization",
+      "axis": 0,
+      "p": 1,
+      "input":  [1, 2, 2, 3],
+      "output": [0.125, 0.25, 0.25, 0.375],
+      "T": "float32"
+    },
+    // P = 1. 2D. Axis 0.
+    {
+      "op_type": "LpNormalization",
+      "axis": 0,
+      "p": 1,
+      "input":  [[1, 0, 3, 2],
+                 [0, 0, 0, 2]],
+      "output": [[1, 0, 1, 0.5],
+                 [0, 0, 0, 0.5]],
+      "T": "float32",
+      "verification": {
+          "absolute_tolerance": 0.00001
+      }
+    },
+    // P = 1. 2D. Axis 1.
+    {
+      "op_type": "LpNormalization",
+      "axis": 1,
+      "p": 1,
+      "input":  [[1, 0, 3, 0],
+                 [0, 2, 0, 2]],
+      "output": [[0.25, 0,   0.75, 0   ],
+                 [0,    0.5, 0,    0.5]],
+      "T": "float32",
+      "verification": { "absolute_tolerance": 0.00001 }
+    },
+    // P = 1. 2D. Axis 0 via negative axis.
+    {
+      "op_type": "LpNormalization",
+      "axis": -2,
+      "p": 1,
+      "input":  [[1, 0, 3, 2],
+                 [0, 0, 0, 2]],
+      "output": [[1, 0, 1, 0.5],
+                 [0, 0, 0, 0.5]],
+      "T": "float32",
+      "verification": {
+          "absolute_tolerance": 0.00001
+      }
+    },
+    // float16. P = 1. 1D.
+    {
+      "op_type": "LpNormalization",
+      "axis": 0,
+      "p": 1,
+      "input": [ 1, 2, 2, 3 ],
+      "output": [ 0.125, 0.25, 0.25, 0.375 ],
+      "T": "float16",
+      "verification": { "absolute_tolerance": 0.001 }
+    },
+    // P = 2.
+    {
+      "op_type": "LpNormalization",
+      "axis": 1,
+      "p": 2,
+      "input":  [[3, 2, 1, 1, 1],
+                 [1, 1, 1, 0, 1]],
+      "output": [[0.75, 0.5, 0.25, 0.25, 0.25],
+                 [0.5, 0.5, 0.5, 0, 0.5]],
+      "T": "float32",
+      // The DML EP kernel passes a sizeable epsilon 0.001 to avoid divisions by zero
+      // in the shader. Unfortunately this safety precaution for the rare case
+      // affects the accuracy of the common case by several ULP.
+      "verification": {"ulp": 2100}
+    },
+    // P = 2.
+    {
+      "op_type": "LpNormalization",
+      "axis": 7,
+      "p": 2,
+      "input":  [[[[[[[[3, 2, 1, 1, 1],
+                 [1, 1, 1, 0, 1]]]]]]]],
+      "output": [[[[[[[[0.75, 0.5, 0.25, 0.25, 0.25],
+                 [0.5, 0.5, 0.5, 0, 0.5]]]]]]]],
+      "T": "float32",
+      // The DML EP kernel passes a sizeable epsilon 0.001 to avoid divisions by zero
+      // in the shader. Unfortunately this safety precaution for the rare case
+      // affects the accuracy of the common case by several ULP.
+      "verification": {"ulp": 2100}
+    },
+    // float16. P = 2.
+    {
+      "op_type": "LpNormalization",
+      "axis": 1,
+      "p": 2,
+      "input":  [[3, 2, 1, 1, 1],
+                 [1, 1, 1, 0, 1]],
+      "output": [[0.75, 0.5, 0.25, 0.25, 0.25],
+                 [0.5, 0.5, 0.5, 0, 0.5]],
+      "T": "float16",
+      "verification": {"ulp": 1}
+    }
+  ],
+
+  "schema": [
+    {
+      "op_type": "LpNormalization",
+      "version": 1,
+      "attributes": {
+        "axis": {"type": "int64"}, // default = -1, which means last axis
+        "p": {"type": "int64"} // default 2 (only 1 or 2 supported)
+      },
+      "inputs": {"input": {"type": "T"}},
+      "outputs": {"output": {"type": "T"}},
+      "types": {"T": ["float32", "float16", "float64"]}
+    }
+  ]
+}

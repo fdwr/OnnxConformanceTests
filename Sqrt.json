@@ -1,0 +1,43 @@
+{
+  "tests": [
+    {
+      "op_type": "Sqrt",
+      "X": [9, 0.25, 100],
+      "Y": [3, 0.5 ,  10],
+      "T": "float32"
+    },
+    {
+      "op_type": "Sqrt",
+      "X": [9, 0.25, 100],
+      "Y": [3, 0.5 ,  10],
+      "T": "float16"
+    },
+    {
+      "graph_name": "Sqrt version 13",
+      "op_type": "Sqrt",
+      "version": 13,
+      "X": [9, 0.25, 100],
+      "Y": [3, 0.5 ,  10],
+      "T": "float32"
+    }
+  ],
+
+  "schema": [
+    {
+      "op_type": "Sqrt",
+      "version": 6,
+      "attributes": {},
+      "inputs": {"X": {"type": "T"}},
+      "outputs": {"Y": {"type": "T"}},
+      "types": {"T": ["float32", "float16", "float64"]}
+    },
+    {
+      "op_type": "Sqrt",
+      "version": 13,
+      "attributes": {},
+      "inputs": {"X": {"type": "T"}},
+      "outputs": {"Y": {"type": "T"}},
+      "types": {"T": ["float32", "float16", "float64", "bfloat16"]}
+    }
+  ]
+}

@@ -1,0 +1,52 @@
+{
+  "tests": [
+    {
+      "graph_name": "Exp float32",
+      "op_type": "Exp",
+      "input": [1, 2, 0, -1, -2],
+      "output": [2.71828182845904, 7.389056099, 1, 0.367879441, 0.135335283],
+      "T": "float32",
+      "verification": {
+        "ulp": 1
+      }
+    },
+    {
+      "graph_name": "Exp float16",
+      "op_type": "Exp",
+      "input": [1, 2, 0, -1, -2],
+      "output": [2.71828182845904, 7.389056099, 1, 0.367879441, 0.135335283],
+      "T": "float16",
+      "verification": {
+        "ulp": 1
+      }
+    },
+    {
+      "graph_name": "Exp version 13",
+      "op_type": "Exp",
+      "version": 13,
+      "input": [1, 2, 0, -1, -2],
+      "output": [2.71828182845904, 7.389056099, 1, 0.367879441, 0.135335283],
+      "T": "float32",
+      "verification": {
+        "ulp": 1
+      }
+    }
+  ],
+
+  "schema": [
+    {
+      "op_type": "Exp",
+      "version": 6,
+      "inputs": {"input": {"type": "T"}},
+      "outputs": {"output": {"type": "T"}},
+      "types": {"T": ["float16", "float32", "float64"]}
+    },
+    {
+      "op_type": "Exp",
+      "version": 13,
+      "inputs": {"input": {"type": "T"}},
+      "outputs": {"output": {"type": "T"}},
+      "types": {"T": ["float16", "float32", "float64", "bfloat16"]}
+    }
+  ]
+}

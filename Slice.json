@@ -1,0 +1,459 @@
+{
+  "tests": [
+    // 1D.
+    {
+      "op_type": "Slice",
+      "version": 1,
+      "axes": [0],
+      "starts": [1],
+      "ends": [4],
+      "data": [1,2,3,4,5,6],
+      "output": [2,3,4],
+      "T": "float32"
+    },
+    // 1D. Omitted axes parameter.
+    {
+      "op_type": "Slice",
+      "version": 1,
+      "starts": [1],
+      "ends": [4],
+      "data": [1,2,3,4,5,6],
+      "output": [2,3,4],
+      "T": "float32"
+    },
+    // 1D. End beyond input size.
+    {
+      "op_type": "Slice",
+      "version": 1,
+      "axes": [0],
+      "starts": [1],
+      "ends": [100],
+      "data": [1,2,3,4,5,6],
+      "output": [2,3,4,5,6],
+      "T": "float32"
+    },
+    // 1D. Negative indices.
+    {
+      "op_type": "Slice",
+      "version": 1,
+      "axes": [0],
+      "starts": [-5],
+      "ends": [-2],
+      "data": [1,2,3,4,5,6],
+      "output": [2,3,4],
+      "T": "float32"
+    },
+    {
+      "op_type": "Slice",
+      "version": 1,
+      "axes": [0],
+      "starts": [1],
+      "ends": [4],
+      "data": [1,2,3,4,5,6],
+      "output": [2,3,4],
+      "T": "float16"
+    },
+    {
+      "op_type": "Slice",
+      "version": 1,
+      "axes": [0],
+      "starts": [1],
+      "ends": [4],
+      "data": [1,2,3,4,5,6],
+      "output": [2,3,4],
+      "T": "uint32"
+    },
+    {
+      "op_type": "Slice",
+      "version": 1,
+      "axes": [0],
+      "starts": [1],
+      "ends": [4],
+      "data": [1,2,-3,4,5,6],
+      "output": [2,-3,4],
+      "T": "int32"
+    },
+    {
+      "op_type": "Slice",
+      "version": 1,
+      "axes": [0],
+      "starts": [1],
+      "ends": [4],
+      "data": [1,2,3,4,5,6],
+      "output": [2,3,4],
+      "T": "uint16"
+    },
+    {
+      "op_type": "Slice",
+      "version": 1,
+      "axes": [0],
+      "starts": [1],
+      "ends": [4],
+      "data": [1,2,-3,4,5,6],
+      "output": [2,-3,4],
+      "T": "int16"
+    },
+    {
+      "op_type": "Slice",
+      "version": 1,
+      "axes": [0],
+      "starts": [1],
+      "ends": [4],
+      "data": [1,2,3,4,5,6],
+      "output": [2,3,4],
+      "T": "uint8"
+    },
+    {
+      "op_type": "Slice",
+      "version": 1,
+      "axes": [0],
+      "starts": [1],
+      "ends": [4],
+      "data": [1,2,-3,4,5,6],
+      "output": [2,-3,4],
+      "T": "int8"
+    },
+    // 2D.
+    {
+      "op_type": "Slice",
+      "version": 1,
+      "axes": [0,1],
+      "starts": [1,0],
+      "ends": [2,3],
+      "data":   [[1,2,3,4],
+                 [5,6,7,8]],
+      "output": [[5,6,7]],
+      "T": "float32"
+    },
+    // 2D with negative values and extents beyond end.
+    {
+      "op_type": "Slice",
+      "version": 1,
+      "axes": [0,1],
+      "starts": [0,1],
+      "ends": [-1,1000],
+      "data":   [[1,2,3,4],
+                 [5,6,7,8]],
+      "output": [[2,3,4]],
+      "T": "float32"
+    },
+    // 2D. Single axis.
+    {
+      "op_type": "Slice",
+      "version": 1,
+      "axes":   [1],
+      "starts": [1],
+      "ends":   [3],
+      "data":   [[1,2,3,4],
+                 [5,6,7,8]],
+      "output": [[2,3],
+                 [6,7]],
+      "T": "float32"
+    },
+    // 3D.
+    {
+      "op_type": "Slice",
+      "version": 1,
+      "axes": [0,1,2],
+      "starts": [1,1,0],
+      "ends": [3,2,2],
+      "data":   [[[1,2,3],
+                  [4,5,6],
+                  [7,8,9]],
+                 [[10,11,12],
+                  [13,14,15],
+                  [16,17,18]],
+                 [[19,20,21],
+                  [22,23,24],
+                  [25,26,27]]],
+      "output": [[[13,14]],
+                 [[22,23]]],
+      "T": "float32"
+    },
+    // 4D.
+    {
+      "op_type": "Slice",
+      "version": 1,
+      "axes": [0,1,2,3],
+      "starts": [1,0,2,1],
+      "ends": [2,1,3,3],
+      "data":   [[[[1,2,3],
+                   [4,5,6],
+                   [7,8,9]],
+                  [[10,11,12],
+                   [13,14,15],
+                   [16,17,18]]],
+                 [[[19,20,21],
+                   [22,23,24],
+                   [25,26,27]],
+                  [[28,29,30],
+                   [31,32,33],
+                   [34,35,36]]]],
+      "output": [[[[26,27]]]],
+      "T": "float32"
+    },
+    // 5D.
+    {
+      "op_type": "Slice",
+      "version": 1,
+      "axes": [0,1,2,3,4],
+      "starts": [0,1,1,0,1],
+      "ends": [1,2,2,2,2],
+      "data":   [[[[[1,2,3],
+                    [4,5,6],
+                    [7,8,9]],
+                   [[10,11,12],
+                    [13,14,15],
+                    [16,17,18]]],
+                  [[[19,20,21],
+                    [22,23,24],
+                    [25,26,27]],
+                   [[28,29,30],
+                    [31,32,33],
+                    [34,35,36]]]],
+                 [[[[37,38,39],
+                    [40,41,42],
+                    [43,44,45]],
+                   [[46,47,48],
+                    [49,50,51],
+                    [52,53,54]]],
+                  [[[55,56,57],
+                    [58,59,60],
+                    [61,62,63]],
+                   [[64,65,66],
+                    [67,68,69],
+                    [70,71,72]]]]],
+      "output": [[[[[29],
+                    [32]]]]],
+      "T": "float32"
+    },
+    // 8D.
+    {
+      "op_type": "Slice",
+      "version": 1,
+      "axes": [0,1,2,3,4,5,6,7],
+      "starts": [0,0,0,0,1,1,0,1],
+      "ends": [1,1,1,1,2,2,2,2],
+      "data":   [[[[[[[[1,2,3],
+                    [4,5,6],
+                    [7,8,9]],
+                   [[10,11,12],
+                    [13,14,15],
+                    [16,17,18]]],
+                  [[[19,20,21],
+                    [22,23,24],
+                    [25,26,27]],
+                   [[28,29,30],
+                    [31,32,33],
+                    [34,35,36]]]],
+                 [[[[37,38,39],
+                    [40,41,42],
+                    [43,44,45]],
+                   [[46,47,48],
+                    [49,50,51],
+                    [52,53,54]]],
+                  [[[55,56,57],
+                    [58,59,60],
+                    [61,62,63]],
+                   [[64,65,66],
+                    [67,68,69],
+                    [70,71,72]]]]]]]],
+      "output": [[[[[[[[29],
+                    [32]]]]]]]],
+      "T": "float32"
+    },
+    // 2D. Single axis via negative axis.
+    {
+      "op_type": "Slice",
+      "version": 1,
+      "axes":   [-1],
+      "starts": [1],
+      "ends":   [3],
+      "data":   [[1,2,3,4],
+                 [5,6,7,8]],
+      "output": [[2,3],
+                 [6,7]],
+      "T": "float32"
+    },
+    // Slice-10 1D negative steps
+    {
+      "op_type": "Slice",
+      "version": 10,
+      "data":   [1,2,3,4,5,6,7,8,9],
+      "starts": [9],
+      "ends":   [0],
+      "axes":   [0],
+      "steps":  [-2],
+      "output": [9,7,5,3],
+      "T": "float32",
+      "Tind": "int32"
+    },
+    // Slice-10 1D negative steps end inclusive
+    // ONNX has no way to properly slice the whole range with negative steps,
+    // because the slice window extents are off by one, and using a negative
+    // value for the end point is reinterpreted as a positive index from the
+    // back. So a special sentinel value (INT_MIN) was added to ONNX.
+    {
+      "op_type": "Slice",
+      "version": 10,
+      "data":   [1,2,3,4,5,6,7,8,9],
+      "starts": [2147483647],
+      "ends":   [-2147483648],
+      "axes":   [0],
+      "steps":  [-2],
+      "output": [9,7,5,3,1],
+      "T": "float32",
+      "Tind": "int32"
+    },
+    // Slice-10 2D steps greater than 1 and negative axes
+    {
+      "op_type": "Slice",
+      "version": 10,
+      "data":   [[ 1, 2, 3, 4],
+                 [ 5, 6, 7, 8],
+                 [ 9,10,11,12],
+                 [13,14,15,16]],
+      "starts": [0,3],
+      "ends":   [4,0],
+      "axes":   [-2,-1],
+      "steps":  [3,-2],
+      "output": [[ 4, 2],
+                 [16,14]],
+      "T": "float32",
+      "Tind": "int32"
+    },
+    // Slice-11 1D int64 indices
+    {
+      "op_type": "Slice",
+      "version": 10,
+      "data":   [1,2,3,4,5,6,7,8,9],
+      "starts": [0],
+      "ends":   [10],
+      "axes":   [0],
+      "steps":  [2],
+      "output": [1,3,5,7,9],
+      "T": "float32",
+      "Tind": "int64"
+    },
+    {
+      "op_type": "Slice",
+      "version": 1,
+      "axes": [6],
+      "starts": [1],
+      "ends": [4],
+      "data": [[[[[[[1,2,3,4,5,6]]]]]]],
+      "output": [[[[[[[2,3,4]]]]]]],
+      "T": "float32"
+    },
+    {
+      "op_type": "Slice",
+      "version": 1,
+      "axes": [0],
+      "starts": [1],
+      "ends": [4],
+      "data": [1,2,-3,4,5,6],
+      "output": [2,-3,4],
+      "T": "float64"
+    },
+    {
+      "op_type": "Slice",
+      "version": 1,
+      "axes": [0],
+      "starts": [1],
+      "ends": [4],
+      "data": [1,2,-3,4,5,6],
+      "output": [2,-3,4],
+      "T": "int64"
+    },
+    {
+      "op_type": "Slice",
+      "version": 1,
+      "axes": [0],
+      "starts": [1],
+      "ends": [4],
+      "data": [1,2,3,4,5,6],
+      "output": [2,3,4],
+      "T": "uint64"
+    },
+    {
+      "graph_name": "Slice version 13",
+      "op_type": "Slice",
+      "version": 13,
+      "axes": [0],
+      "starts": [1],
+      "ends": [4],
+      "data": [1,2,3,4,5,6],
+      "output": [2,3,4],
+      "T": "float32"
+    }
+  ],
+
+  "schema": [
+    {
+      "op_type": "Slice",
+      "version": 1,
+      "attributes": {
+        "axes": {"type": "int64"}, // optional list of ints.
+        "ends": {"type": "int64"}, // required list of ints.
+        "starts": {"type": "int64"} // required list of ints.
+      },
+      "inputs": {"data": {"type": "T"}},
+      "outputs": {"output": {"type": "T"}},
+      "types": {"T": ["float32", "float16", "float64"]}
+    },
+    {
+      "op_type": "Slice",
+      "version": 10,
+      "attributes": {
+      },
+      "inputs": {
+        "data": {"type": "T"},
+        "starts": {"type": "Tind"},
+        "ends": {"type": "Tind"},
+        "axes": {"type": "Tind"},
+        "steps": {"type": "Tind"}
+      },
+      "outputs": {"output": {"type": "T"}},
+      "types": {
+        "T": ["float32", "float16", "float64", "uint8", "uint16", "uint32", "uint64", "int8", "int16", "int32", "int64", "bool8", "string8"],
+        "Tind": ["int32", "int64"]
+      }
+    },
+    {
+      "op_type": "Slice",
+      "version": 11, // No functional change from 10, just axes was clarified to accept negative numbers.
+      "attributes": {
+      },
+      "inputs": {
+        "data": {"type": "T"},
+        "starts": {"type": "Tind"},
+        "ends": {"type": "Tind"},
+        "axes": {"type": "Tind"},
+        "steps": {"type": "Tind"}
+      },
+      "outputs": {"output": {"type": "T"}},
+      "types": {
+        "T": ["float32", "float16", "float64", "uint8", "uint16", "uint32", "uint64", "int8", "int16", "int32", "int64", "bool8", "string8"],
+        "Tind": ["int32", "int64"]
+      }
+    },
+    {
+      "op_type": "Slice",
+      "version": 13,
+      "attributes": {
+      },
+      "inputs": {
+        "data": {"type": "T"},
+        "starts": {"type": "Tind"},
+        "ends": {"type": "Tind"},
+        "axes": {"type": "Tind"},
+        "steps": {"type": "Tind"}
+      },
+      "outputs": {"output": {"type": "T"}},
+      "types": {
+        "T": ["float32", "float16", "float64", "uint8", "uint16", "uint32", "uint64", "int8", "int16", "int32", "int64", "bool8", "string8", "bfloat16"],
+        "Tind": ["int32", "int64"]
+      }
+    }
+  ]
+}

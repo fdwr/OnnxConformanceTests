@@ -1,0 +1,146 @@
+{
+  "tests": [
+    {
+      "graph_name": "LessOrEqual float32",
+      "op_type": "LessOrEqual",
+      "version": 12,
+      "A": [0, 1, 1,  0, -Inf,   0, Inf,    0],
+      "B": [1, 0, 1, -1,    0, Inf,   0, -Inf],
+      "C": [1, 0, 1,  0,    1,   1,   0,    0],
+      "T": "float32"
+    },
+    {
+      "graph_name": "LessOrEqual float32 with broadcast scalar",
+      "op_type": "LessOrEqual",
+      "version": 12,
+      "A": [0, 2, 3, -3],
+      "B":  2,
+      "C": [1, 1, 0, 1],
+      "T": "float32"
+    },
+    {
+      "graph_name": "LessOrEqual float16",
+      "op_type": "LessOrEqual",
+      "version": 12,
+      "A": [0, 1, 1,  0, -Inf,   0, Inf,    0],
+      "B": [1, 0, 1, -1,    0, Inf,   0, -Inf],
+      "C": [1, 0, 1,  0,    1,   1,   0,    0],
+      "T": "float16"
+    },
+    {
+      "graph_name": "LessOrEqual float16 with broadcast scalar",
+      "op_type": "LessOrEqual",
+      "version": 12,
+      "A": [0, 2, 3, -3],
+      "B":  2,
+      "C": [1, 1, 0, 1],
+      "T": "float16"
+    },
+    {
+      "graph_name": "LessOrEqual float32",
+      "op_type": "LessOrEqual",
+      "version": 12,
+      "A": [0, 2, 3, -3],
+      "B":  2,
+      "C": [1, 1, 0, 1],
+      "T": "float32"
+    },
+    {
+      "graph_name": "LessOrEqual int64",
+      "op_type": "LessOrEqual",
+      "version": 12,
+      "A": [0, 2, 3, -3],
+      "B":  2,
+      "C": [1, 1, 0, 1],
+      "T": "int64"
+    },
+    {
+      "graph_name": "LessOrEqual int32",
+      "op_type": "LessOrEqual",
+      "version": 12,
+      "A": [0, 2, 3, -3],
+      "B":  2,
+      "C": [1, 1, 0, 1],
+      "T": "int32"
+    },
+    {
+      "graph_name": "LessOrEqual int16",
+      "op_type": "LessOrEqual",
+      "version": 12,
+      "A": [0, 2, 3, -3],
+      "B":  2,
+      "C": [1, 1, 0, 1],
+      "T": "int16",
+      "verification": {"executor_filter": ".*Cpu"}
+    },
+    {
+      "graph_name": "LessOrEqual int8",
+      "op_type": "LessOrEqual",
+      "version": 12,
+      "A": [0, 2, 3, -3],
+      "B":  2,
+      "C": [1, 1, 0, 1],
+      "T": "int8",
+      "verification": {"executor_filter": ".*Cpu"}
+    },
+    {
+      "graph_name": "LessOrEqual uint64",
+      "op_type": "LessOrEqual",
+      "version": 12,
+      "A": [0, 2, 3, 3],
+      "B":  2,
+      "C": [1, 1, 0, 0],
+      "T": "uint64",
+      "verification": {"executor_filter": ".*Cpu"}
+    },
+    {
+      "graph_name": "LessOrEqual uint32",
+      "op_type": "LessOrEqual",
+      "version": 12,
+      "A": [0, 2, 3, 3],
+      "B":  2,
+      "C": [1, 1, 0, 0],
+      "T": "uint32",
+      "verification": {"executor_filter": ".*Cpu"}
+    },
+    {
+      "graph_name": "LessOrEqual uint16",
+      "op_type": "LessOrEqual",
+      "version": 12,
+      "A": [0, 2, 3, 3],
+      "B":  2,
+      "C": [1, 1, 0, 0],
+      "T": "uint16",
+      "verification": {"executor_filter": ".*Cpu"}
+    },
+    {
+      "graph_name": "LessOrEqual uint8",
+      "op_type": "LessOrEqual",
+      "version": 12,
+      "A": [0, 2, 3, 3],
+      "B":  2,
+      "C": [1, 1, 0, 0],
+      "T": "uint8",
+      "verification": {"executor_filter": ".*Cpu"}
+    }
+  ],
+
+  "schema": [
+    {
+      "op_type": "LessOrEqual",
+      "version": 12,
+      "attributes": {},
+      "inputs": {
+        "A": {"type": "T"},
+        "B": {"type": "T"}
+      },
+      "outputs": {
+        "C": {"type": "T1"}
+      },
+      "types": {
+        "T": ["float32", "float16", "float64", "uint8", "uint16", "uint32", "uint64", "int8", "int16", "int32", "int64"],
+        "T1": ["bool8"]
+      }
+    }
+  ]
+}

@@ -1,0 +1,45 @@
+{
+  "tests": [
+    {
+      "op_type": "Multinomial",
+      "dtype": 6,
+      "sample_size": 20,
+      "seed": 1,
+      "X": {"dims": [1, 2], "value": [[1, 2]]},
+      "Y": {"dims": [1, 20], "value": [[1, 1, 1, 1, 0, 0, 1, 1, 0, 0, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1]]},
+      "T1": "float32",
+      "verification": {
+        "should_compare_expected": false 
+      }
+    },
+    {
+      "op_type": "Multinomial",
+      "dtype": 6,
+      "sample_size": 20,
+      "seed": 1,
+      "X": {"dims": [1, 2], "value": [[1, 2]]},
+      "Y": {"dims": [1, 20], "value": [[1, 1, 1, 1, 0, 0, 1, 1, 0, 0, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1]]},
+      "T1": "float16",
+      "verification": {
+        "should_compare_expected": false 
+      }
+    }
+  ],
+
+  "schema": [
+    {
+      "op_type": "Multinomial",
+      "attributes": {
+        "dtype": {"type": "int64"},
+        "sample_size": {"type": "int64"},
+        "seed": {"type": "float32"}
+      },
+      "inputs": {"X": {"type": "T1"}},
+      "outputs": {"Y": {"type": "T2"}},
+      "types": {
+        "T1": ["float32", "float16", "float64"], 
+        "T2": ["int32", "int64"]
+      }
+    }
+  ]
+}

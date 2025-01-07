@@ -1,0 +1,106 @@
+{
+    "tests": [
+      {
+        "graph_name": "QLinearAdd uint8",
+        "op_type": "QLinearAdd",
+        "domain": "com.microsoft",
+        "A": [[7, 8, 9], [10, 11, 12]],
+        "B": [[1, 2, 3], [4,   5,  6]],
+        "A_zero_point": 1,
+        "B_zero_point": 2,
+        "C_zero_point": 3,
+        "A_scale": 0.1,
+        "B_scale": 0.2,
+        "C_scale": 0.3,
+        "C": {
+            "type": "uint8",
+            "dims": [2, 3],
+            "value": [[4, 5, 6], [7, 8, 9]]
+          },
+        "T": "uint8"
+      },
+      {
+        "graph_name": "QLinearAdd uint8 broadcast A",
+        "op_type": "QLinearAdd",
+        "domain": "com.microsoft",
+        "A": [[7]],
+        "B": [[1, 2, 3], [4,   5,  6]],
+        "A_zero_point": 1,
+        "B_zero_point": 2,
+        "C_zero_point": 3,
+        "A_scale": 0.1,
+        "B_scale": 0.2,
+        "C_scale": 0.3,
+        "C": {
+          "type": "uint8",
+          "dims": [2, 3],
+          "value": [[4, 5, 6], [6, 7, 8]]
+        },
+        "T": "uint8"
+      },
+      {
+        "graph_name": "QLinearAdd uint8 broadcast B",
+        "op_type": "QLinearAdd",
+        "domain": "com.microsoft",
+        "A": [[7, 8, 9], [10, 11, 12]],
+        "B": [[1]],
+        "A_zero_point": 1,
+        "B_zero_point": 2,
+        "C_zero_point": 3,
+        "A_scale": 0.1,
+        "B_scale": 0.2,
+        "C_scale": 0.3,
+        "C": {
+          "type": "uint8",
+          "dims": [2, 3],
+          "value": [[4, 5, 5], [5, 6, 6]]
+        },
+        "T": "uint8",
+      },
+      {
+        "graph_name": "QLinearAdd int8",
+        "op_type": "QLinearAdd",
+        "domain": "com.microsoft",
+        "A": {"type": "int8", "value" : [[7, 8, 9], [10, 11, 12]]},
+        "B": {"type": "int8", "value" : [[1, 2, 3], [4,   5,  6]]},
+        "A_zero_point": {"type": "int8", "value" : 1},
+        "B_zero_point": {"type": "int8", "value" : 2},
+        "C_zero_point": {"type": "int8", "value" : 3},
+        "A_scale": 0.1,
+        "B_scale": 0.2,
+        "C_scale": 0.3,
+        "C": {
+          "type": "int8",
+          "dims": [2, 3],
+          "value": [[4, 5, 6], [7, 8, 9]]
+        },
+        "T": "int8",
+      }
+    ],
+  
+    "schema": [
+      {
+        "op_type": "QLinearAdd",
+        "domain": "com.microsoft",
+        "version": 1,
+        "attributes": {},
+        "inputs": {
+          "A": {"type": "T"},
+          "A_scale": {"type": "float"},
+          "A_zero_point": {"type": "T"},
+          "B": {"type": "T"},
+          "B_scale": {"type": "float"},
+          "B_zero_point": {"type": "T"},
+          "C_scale": {"type": "float"},
+          "C_zero_point": {"type": "T"}
+        },
+        "outputs": {
+          "C": {"type": "T"}
+        },
+        "types": {
+            "T": ["uint8", "int8"]
+        }
+      }
+    ]
+  }
+  

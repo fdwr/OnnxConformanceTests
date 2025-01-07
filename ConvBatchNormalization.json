@@ -1,0 +1,261 @@
+{
+  "tests": [
+    {
+      "graph_name": "Conv+BatchNormalization fusion",
+      "version": 15,
+      "nodes": [
+        {
+          "op_type": "Conv",
+          "version": 15,
+          "auto_pad": "NOTSET",
+          "strides": [1,1],
+          "dilations": [1,1],
+          "kernel_shape": [1,5],
+          "pads": [0,0, 0,0], // ONNX Runtime requires 2 * N, even if 1D input.
+          "inputs": {
+            "ConvX": {}, //"X": {"dims": [2,1,1,10], "function": "iota"},
+            "ConvW": [[[[1,2,3,2,1]]]],
+            "ConvB": [1]
+          },
+          "outputs": {
+            "ConvY": {} // "Y": {"dims": [2,1,1,6], "value": [[[[19,28,37,46,55,64]]], [[[109,118,127,136,145,154]]]]},
+          },
+          "T": "float32"
+        },
+        {
+          "op_type": "BatchNormalization",
+          "version": 15,
+          "inputs": {
+            "ConvY": {}, // "X": {"dims": [2,1,1,6], "value": [[[[19,28,37,46,55,64]]], [[[109,118,127,136,145,154]]]]},
+            "BatchNormalizationScale": [1],
+            "BatchNormalizationB": [0],
+            "BatchNormalizationMean": [0],
+            "BatchNormalizationVar": [1]
+          },
+          "momentum": 2.0,
+          "epsilon": 0,
+          "outputs": {
+            "BatchNormalizationY": {} // "Y": [[[[1, 2], [3, 4]], [[5, 6], [7, 8]], [[9, 10], [11, 12]]]],
+          },
+          "T": "float32",
+          "verification": { "ulp": 128 /* ~0.00001 RTOL */ }
+        }
+      ], // nodes
+      "inputs": {
+        "ConvX": {
+          "type": "float32",
+          "dims": [2,1,1,10],
+          "function": "iota"
+        }
+      },
+      "outputs": {
+        "BatchNormalizationY": {
+          "type": "float32",
+          "value": [[[[19,28,37,46,55,64]]], [[[109,118,127,136,145,154]]]]
+        }
+      }
+    },
+    {
+      "graph_name": "Conv+BatchNormalization fusion mixed input data types",
+      "version": 15,
+      "nodes": [
+        {
+          "op_type": "Conv",
+          "version": 15,
+          "auto_pad": "NOTSET",
+          "strides": [1,1],
+          "dilations": [1,1],
+          "kernel_shape": [1,5],
+          "pads": [0,0, 0,0], // ONNX Runtime requires 2 * N, even if 1D input.
+          "inputs": {
+            "ConvX": {}, //"X": {"dims": [2,1,1,10], "function": "iota"},
+            "ConvW": {"type": "float16", "value": [[[[1,2,3,2,1]]]]},
+            "ConvB": {"type": "float16", "value": [1]}
+          },
+          "outputs": {
+            "ConvY": {} // "Y": {"dims": [2,1,1,6], "value": [[[[19,28,37,46,55,64]]], [[[109,118,127,136,145,154]]]]},
+          },
+          "T": "float16"
+        },
+        {
+          "op_type": "BatchNormalization",
+          "version": 15,
+          "inputs": {
+            "ConvY": {}, // "X": {"dims": [2,1,1,6], "value": [[[[19,28,37,46,55,64]]], [[[109,118,127,136,145,154]]]]},
+            "BatchNormalizationScale": {"type": "float32", "value": [1]},
+            "BatchNormalizationB": {"type": "float32", "value": [0]},
+            "BatchNormalizationMean": [0],
+            "BatchNormalizationVar": [1]
+          },
+          "momentum": 2.0,
+          "epsilon": 0,
+          "outputs": {
+            "BatchNormalizationY": {} // "Y": [[[[1, 2], [3, 4]], [[5, 6], [7, 8]], [[9, 10], [11, 12]]]],
+          },
+          "T": "float16",
+          "verification": { "ulp": 128 /* ~0.00001 RTOL */ }
+        }
+      ], // nodes
+      "inputs": {
+        "ConvX": {
+          "type": "float16",
+          "dims": [2,1,1,10],
+          "function": "iota"
+        }
+      },
+      "outputs": {
+        "BatchNormalizationY": {
+          "type": "float16",
+          "value": [[[[19,28,37,46,55,64]]], [[[109,118,127,136,145,154]]]]
+        }
+      }
+    }
+  ], // tests
+
+  "schema": [
+    {
+      "op_type": "BatchNormalization",
+      "version": 7,
+      "attributes": {
+        "epsilon": {"type": "float32"},
+        "momentum": {"type": "float32"},
+        "spatial": {"type": "int64"} // defaults to 1/true.
+      },
+      "inputs": {
+        "X": {"type": "T"},
+        "scale": {"type": "T"},
+        "B": {"type": "T"},
+        "mean": {"type": "T"},
+        "var": {"type": "T"}
+      },
+      "outputs": {
+        "Y": {"type": "T"},
+        "mean": {"type": "T"},
+        "var": {"type": "T"},
+        "saved_mean": {"type": "T"},
+        "saved_var": {"type": "T"}
+      },
+      "types": {"T": ["float32", "float16", "float64"]}
+    },
+    {
+      "op_type": "BatchNormalization",
+      "version": 9, // Removes 'spatial' attribute.
+      "attributes": {
+        "epsilon": {"type": "float32"},
+        "momentum": {"type": "float32"}
+      },
+      "inputs": {
+        "X": {"type": "T"},
+        "scale": {"type": "T"},
+        "B": {"type": "T"},
+        "mean": {"type": "T"},
+        "var": {"type": "T"}
+      },
+      "outputs": {
+        "Y": {"type": "T"},
+        "mean": {"type": "T"},
+        "var": {"type": "T"},
+        "saved_mean": {"type": "T"},
+        "saved_var": {"type": "T"}
+      },
+      "types": {"T": ["float32", "float16", "float64"]}
+    },
+    {
+      "op_type": "BatchNormalization",
+      // Adds 'training_mode' attribute.
+      // Renames input mean/var with prefix input_*.
+      // Consolidates output mean and variance to running_*.
+      // Adds bfloat16.
+      "version": 14,
+      "attributes": {
+        "epsilon": {"type": "float32"},
+        "momentum": {"type": "float32"},
+        "training_mode": {"type": "int64"} // default = 0
+      },
+      "inputs": {
+        "X": {"type": "T"},
+        "scale": {"type": "T"},
+        "B": {"type": "T"},
+        "input_mean": {"type": "U"},
+        "input_var": {"type": "U"}
+      },
+      "outputs": {
+        "Y": {"type": "T"},
+        "running_mean": {"type": "U"},
+        "running_var": {"type": "U"}
+      },
+      "types": {
+        "T": ["float32", "float16", "bfloat16", "float64"],
+        "U": ["float32", "float16", "bfloat16", "float64"]
+      }
+    },
+    {
+      "op_type": "BatchNormalization",
+      "version": 15, // Allows scale and bias data type to differ from input X type.
+      "attributes": {
+        "epsilon": {"type": "float32"},
+        "momentum": {"type": "float32"},
+        "training_mode": {"type": "int64"} // default = 0
+      },
+      "inputs": {
+        "X": {"type": "T"},
+        "scale": {"type": "T1"},
+        "B": {"type": "T1"},
+        "input_mean": {"type": "T2"},
+        "input_var": {"type": "T2"}
+      },
+      "outputs": {
+        "Y": {"type": "T"},
+        "running_mean": {"type": "T2"},
+        "running_var": {"type": "T2"}
+      },
+      "types": {
+        "T": ["float32", "float16", "bfloat16", "float64"],
+        "T1": ["float32", "float16", "bfloat16", "float64"],
+        "T2": ["float32", "float16", "bfloat16", "float64"]
+      }
+    },
+    {
+      "op_type": "Conv",
+      "version": 1,
+      "attributes": {
+        "auto_pad": {"type": "string8"}, // "SAME_UPPER", "SAME_LOWER", "VALID"
+        "dilations": {"type": "int64"}, // list, defaults = 1
+        "group": {"type": "int64"}, // default = 1
+        "kernel_shape": {"type": "int64"}, // list, default = input tensor W
+        "pads": {"type": "int64"}, // list [x1_begin, x2_begin...x1_end, x2_end,...], defaults = 0
+        "strides": {"type": "int64"} // list, defaults = 1
+      },
+      "inputs": {
+        "X": {"type": "T"},
+        "W": {"type": "T"},
+        "B": {"type": "T"} // optional, size M
+      },
+      "outputs": {
+        "Y": {"type": "T"}
+      },
+      "types": {"T": ["float32", "float16", "float64"]}
+    },
+    {
+      "op_type": "Conv",
+      "version": 15, // No difference from 1 or 11 (except clarification that strides default to 1).
+      "attributes": {
+        "auto_pad": {"type": "string8"}, // "SAME_UPPER", "SAME_LOWER", "VALID", "NOTSET"
+        "dilations": {"type": "int64"}, // list, defaults = 1
+        "group": {"type": "int64"}, // default = 1
+        "kernel_shape": {"type": "int64"}, // list, default = input tensor W
+        "pads": {"type": "int64"}, // list [x1_begin, x2_begin...x1_end, x2_end,...], defaults = 0
+        "strides": {"type": "int64"} // list, defaults = 1
+      },
+      "inputs": {
+        "X": {"type": "T"},
+        "W": {"type": "T"},
+        "B": {"type": "T"} // optional, size M
+      },
+      "outputs": {
+        "Y": {"type": "T"}
+      },
+      "types": {"T": ["float32", "float16", "float64"]}
+    }
+  ]
+}

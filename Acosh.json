@@ -1,0 +1,34 @@
+{
+  "tests": [
+    {
+      "graph_name": "Acosh float32",
+      "op_type": "Acosh",
+      "input": [ 1, 10, 1000 ],
+      "output": [ 0, 2.993222846, 7.60090221 ],
+      "T": "float32",
+      "verification": {
+        "ulp": 128 // ~0.00001 RTOL
+      }
+    },
+    {
+      "graph_name": "Acosh float16",
+      "op_type": "Acosh",
+      "input": [ 1, 10, 1000 ],
+      "output": [ 0, 2.993222846, 7.60090221 ],
+      "T": "float16",
+      "verification": {
+        "ulp": 1 // 0.001 RTOL
+      }
+    }
+  ],
+
+  "schema": [
+    {
+      "op_type": "Acosh",
+      "version": 9,
+      "inputs": {"input": {"type": "T"}},
+      "outputs": {"output": {"type": "T"}},
+      "types": {"T": ["float16", "float32", "float64"]}
+    }
+  ]
+}

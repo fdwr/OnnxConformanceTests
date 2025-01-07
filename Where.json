@@ -1,0 +1,153 @@
+{
+  // An elementwise immediate if that returns elements from X or Y depending on the corresponding condition,
+  // X if true, Y if false.
+  //
+  // Each input tensor is broadcastable like other elementwise operators.
+  "tests": [
+    {
+      "graph_name": "Where float32",
+      "op_type": "Where",
+      "condition": [true, false, true],
+      "X": [1, 2, 3],
+      "Y": [4, 5, 6],
+      "output": [1, 5, 3],
+      "T": "float32"
+    },
+    {
+      "graph_name": "Where 2D float32",
+      "op_type": "Where",
+      "condition": [[true, false], [true, true]],
+      "X": [[1, 2], [3, 4]],
+      "Y": [[9, 8], [7, 6]],
+      "output": [[1, 8], [3, 4]],
+      "T": "float32"
+    },
+    {
+      "graph_name": "Where broadcast scalar",
+      "op_type": "Where",
+      "condition": [true, false, true],
+      "X": 1,
+      "Y": [4, 5, 6],
+      "output": [1, 5, 1],
+      "T": "float32"
+    },
+    {
+      "graph_name": "Where broadcast 2D",
+      "op_type": "Where",
+      "condition": [true, false, true],
+      "X": [[1, 2, 3]], // dims [1,3]
+      "Y": [[4],        // dims [3,1]
+            [5],
+            [6]],
+      "output": [[1, 4, 3],
+                 [1, 5, 3],
+                 [1, 6, 3]],
+      "T": "float32"
+    },
+
+    // Data types.
+    {
+      "graph_name": "Where float16",
+      "op_type": "Where",
+      "version": 9,
+      "condition": [true, false, true],
+      "X": [1, 2, 3],
+      "Y": [4, 5, 6],
+      "output": [1, 5, 3],
+      "T": "float16"
+    },
+    {
+      "verification": {"executor_filter": ".*Cpu"},
+      "graph_name": "Where uint8",
+      "op_type": "Where",
+      "version": 9,
+      "condition": [true, false, true],
+      "X": [1, 2, 3],
+      "Y": [4, 5, 6],
+      "output": [1, 5, 3],
+      "T": "uint8"
+    },
+    {
+      "verification": {"executor_filter": ".*Cpu"},
+      "graph_name": "Where uint16",
+      "op_type": "Where",
+      "version": 9,
+      "condition": [true, false, true],
+      "X": [1, 2, 3],
+      "Y": [4, 5, 6],
+      "output": [1, 5, 3],
+      "T": "uint16"
+    },
+    {
+      "verification": {"executor_filter": ".*Cpu"},
+      "graph_name": "Where uint32",
+      "op_type": "Where",
+      "version": 9,
+      "condition": [true, false, true],
+      "X": [1, 2, 3],
+      "Y": [4, 5, 6],
+      "output": [1, 5, 3],
+      "T": "uint32"
+    },
+    {
+      "verification": {"executor_filter": ".*Cpu"},
+      "graph_name": "Where int8",
+      "op_type": "Where",
+      "version": 9,
+      "condition": [true, false, true],
+      "X": [1, 2, 3],
+      "Y": [4, 5, 6],
+      "output": [1, 5, 3],
+      "T": "int8"
+    },
+    {
+      "verification": {"executor_filter": ".*Cpu"},
+      "graph_name": "Where int16",
+      "op_type": "Where",
+      "version": 9,
+      "condition": [true, false, true],
+      "X": [1, 2, 3],
+      "Y": [4, 5, 6],
+      "output": [1, 5, 3],
+      "T": "int16"
+    },
+    {
+      "graph_name": "Where int32",
+      "op_type": "Where",
+      "version": 9,
+      "condition": [true, false, true],
+      "X": [1, 2, 3],
+      "Y": [4, 5, 6],
+      "output": [1, 5, 3],
+      "T": "int32"
+    },
+    {
+      "verification": {"executor_filter": ".*Cpu"},
+      "graph_name": "Where bool8",
+      "op_type": "Where",
+      "version": 9,
+      "condition": [true, false, true],
+      "X": [1, 2, 3],
+      "Y": [4, 5, 6],
+      "output": [1, 5, 3],
+      "T": "bool8"
+    }
+  ],
+
+  "schema": [
+    {
+      "op_type": "Where",
+      "version": 9,
+      "attributes": {},
+      "inputs": {
+        "condition": {"type": "bool8"},
+        "X": {"type": "T"},
+        "Y": {"type": "T"}
+      },
+      "outputs": {
+        "output": {"type": "T"}
+      },
+      "types": {"T": ["float32", "float16", "float64", "int8", "int16", "int32", "uint8", "uint16", "uint32", "int64", "uint64"]}
+    }
+  ]
+}

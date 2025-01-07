@@ -1,0 +1,49 @@
+{
+  "tests": [
+    {
+      "op_type": "Tanh",
+      "input": [0, 1, 2, -1],
+      "output": [0, 0.761594156, 0.96402758, -0.761594156],
+      "T": "float32",
+      "verification": {"ulp": 1}
+    },
+    {
+      "op_type": "Tanh",
+      "input": [0, 1, 2, -1],
+      "output": [0, 0.761594156, 0.96402758, -0.761594156],
+      "T": "float16",
+      "verification": {
+        "absolute_tolerance": 0.005,
+        "ulp": 4 // Multiple bits can be lost during decomposition: (e^(2*x) - 1) / (e^(2*x) + 1)
+      }
+    },
+    {
+      "graph_name": "Tanh version 13",
+      "op_type": "Tanh",
+      "version": 13,
+      "input": [0, 1, 2, -1],
+      "output": [0, 0.761594156, 0.96402758, -0.761594156],
+      "T": "float32",
+      "verification": {"ulp": 1}
+    }
+  ],
+
+  "schema": [
+    {
+      "op_type": "Tanh",
+      "version": 7,
+      "attributes": {},
+      "inputs": {"input": {"type": "T"}},
+      "outputs": {"output": {"type": "T"}},
+      "types": {"T": ["float32", "float16", "float64"]}
+    },
+    {
+      "op_type": "Tanh",
+      "version": 13,
+      "attributes": {},
+      "inputs": {"input": {"type": "T"}},
+      "outputs": {"output": {"type": "T"}},
+      "types": {"T": ["float32", "float16", "float64", "bfloat16"]}
+    }
+  ]
+}

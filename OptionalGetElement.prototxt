@@ -1,0 +1,62 @@
+ir_version: 8
+producer_name: "backend-test"
+graph {
+  name: "test_optional_get_element_with_add"
+  node {
+    input: "optional_input"
+    output: "optional_output"
+    op_type: "OptionalGetElement"
+  }
+  node {
+    input: "optional_output"
+    input: "nonoptional_input"
+    output: "output"
+    op_type: "Add"
+  }
+  input {
+    name: "optional_input"
+    type {
+      optional_type {
+        elem_type {
+          tensor_type {
+            elem_type: 1
+            shape {
+              dim {
+                dim_value: 4
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  input {
+    name: "nonoptional_input"
+    type {
+      tensor_type {
+        elem_type: 1
+        shape {
+          dim {
+            dim_value: 4
+          }
+        }
+      }
+    }
+  }
+  output {
+    name: "output"
+    type {
+      tensor_type {
+        elem_type: 1
+        shape {
+          dim {
+            dim_value: 4
+          }
+        }
+      }
+    }
+  }
+}
+opset_import {
+  version: 15
+}

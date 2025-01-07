@@ -1,0 +1,58 @@
+{
+  // https://github.com/onnx/onnx/blob/master/docs/Operators.md#IsInf
+  // https://github.com/onnx/onnx/pull/1884
+  "tests": [
+    {
+      "graph_name": "IsInf either float32",
+      "op_type": "IsInf",
+      "detect_negative": 1,
+      "detect_positive": 1,
+      "X": [0, 1, -1, Inf, -Inf],
+      "Y": [0, 0,  0,   1,    1],
+      "T": "float32"
+    },
+    {
+      "graph_name": "IsInf either no attribute supplied float32",
+      "op_type": "IsInf",
+      "X": [0, 1, -1, Inf, -Inf],
+      "Y": [0, 0,  0,   1,    1],
+      "T": "float32"
+    },
+    {
+      "graph_name": "IsInf positive float32",
+      "op_type": "IsInf",
+      "detect_negative": 0,
+      "detect_positive": 1,
+      "X": [0, 1, -1, Inf, -Inf],
+      "Y": [0, 0,  0,   1,    0],
+      "T": "float32"
+    },
+    {
+      "graph_name": "IsInf negative float32",
+      "op_type": "IsInf",
+      "detect_negative": 1,
+      "detect_positive": 0,
+      "X": [0, 1, -1, Inf, -Inf],
+      "Y": [0, 0,  0,   0,    1],
+      "T": "float32"
+    }
+  ],
+
+  "schema": [
+    {
+      "op_type": "IsInf",
+      "version": 10,
+      "attributes": {
+        "detect_negative": {"type": "int64"}, // Default = 1
+        "detect_positive": {"type": "int64"}  // Default = 1
+      },
+      "inputs": {
+          "X": {"type": "T"}
+      },
+      "outputs": {
+          "Y": {"type": "bool8"}
+      },
+      "types": {"T": ["float32", "float64"]} // float16 is not curiously not specified in ONNX for IsInf v10.
+    }
+  ]
+}

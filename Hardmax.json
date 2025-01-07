@@ -1,0 +1,139 @@
+{
+  "tests": [
+    {
+      "graph_name": "Hardmax-1 1D float32",
+      "op_type": "Hardmax",
+      "axis": 0,
+      "input":  [0, 1, 2, -1, 2],
+      "output": [0, 0, 1, 0, 0],
+      "T": "float32"
+    },
+    {
+      "graph_name": "Hardmax-1 1D float16",
+      "op_type": "Hardmax",
+      "axis": 0,
+      "input":  [0, 1, 2, -1, 2],
+      "output": [0, 0, 1, 0, 0],
+      "T": "float16"
+    },
+    {
+      "graph_name": "Hardmax-1 2D axis 0",
+      "op_type": "Hardmax",
+      "axis": 0,
+      "input":  [[0, 1, 2, -2, 2],
+                 [0, 1, 2, -1, 3],
+                 [0, 0, 3,  0, 0]],
+      "output": [[0, 0, 0, 0, 0],
+                 [0, 0, 0, 0, 1],
+                 [0, 0, 0, 0, 0]],
+      "T": "float32"
+    },
+    {
+      "graph_name": "Hardmax-1 2D negative axis",
+      "op_type": "Hardmax",
+      "axis": -2,
+      "input":  [[0, 1, 2, -2, 2],
+                 [0, 1, 2, -1, 3],
+                 [0, 0, 3,  0, 0]],
+      "output": [[0, 0, 0, 0, 0],
+                 [0, 0, 0, 0, 1],
+                 [0, 0, 0, 0, 0]],
+      "T": "float32"
+    },
+    // 2D array, axis 1, such each row is a separate batch and does not interfere with each other.
+    {
+      "graph_name": "Hardmax-1 2D axis 1",
+      "op_type": "Hardmax",
+      "axis": 1,
+      "input":  [[0, 1, 2, -2, 2],
+                 [0, 1, 2, -1, 3]],
+      "output": [[0, 0, 1, 0, 0],
+                 [0, 0, 0, 0, 1]],
+      "T": "float32"
+    },
+    // 1D array, axis 0, version 13 (no coercing happens)
+    {
+      "graph_name": "Hardmax-13 1D axis 0",
+      "op_type": "Hardmax",
+      "version": 13,
+      "axis": 0,
+      "input":  [0, 1, 2, -1, 2],
+      "output": [0, 0, 1, 0, 0],
+      "T": "float32"
+    },
+    // 2D array, axis 1 via negative axis, for version 13 (no coercing happens)
+    {
+      "graph_name": "Hardmax-13 2D negative axis",
+      "op_type": "Hardmax",
+      "version": 13,
+      "axis": -1,
+      "input":  [[0, 1, 2, -2, 2],
+                 [0, 1, 2, -1, 3],
+                 [0, 0, 3,  0, 0]],
+      "output": [[0, 0, 1, 0, 0],
+                 [0, 0, 0, 0, 1],
+                 [0, 0, 1, 0, 0]],
+      "T": "float32"
+    },
+    // 3D array, axis 1, for version 13 (no coercing happens)
+    {
+      "graph_name": "Hardmax-13 3D axis=1",
+      "op_type": "Hardmax",
+      "version": 13,
+      "axis": 1, // Middle dimension
+      "input": [
+        [
+          [  12, 0],
+          [-101, 1],
+          [  99, 2],
+          [  87,-1]
+        ],
+        [
+          [ 0,  12],
+          [ 1,-101],
+          [ 2,  99],
+          [-1,  887]
+        ]
+      ],
+      "output": [
+        [
+          [0, 0],
+          [0, 0],
+          [1, 1],
+          [0, 0]
+        ],
+        [
+          [0, 0],
+          [0, 0],
+          [1, 0],
+          [0, 1]
+        ]
+      ],
+      "T": "float32",
+      "verification": {"ulp": 8 /* 0.000001 RTOL */}
+    }
+  ],
+
+  "schema": [
+    {
+      "op_type": "Hardmax", // y = if x == max(X) then 1 else 0
+      "version": 1,
+      "attributes": {
+        "axis": {"type": "int64"} // Default = 1 (skip 0th axis since often batch number)
+      },
+      "inputs": {"input": {"type": "T"}},
+      "outputs": {"output": {"type": "T"}},
+      "types": {"T": ["float32", "float16", "float64"]}
+    },
+    {
+      "op_type": "Hardmax", // y = if x == max(X) then 1 else 0
+      "version": 13,
+      "attributes": {
+        "axis": {"type": "int64"} // Default = -1 (from back)
+      },
+      "inputs": {"input": {"type": "T"}},
+      "outputs": {"output": {"type": "T"}},
+      "types": {"T": ["float32", "float16", "float64", "bfloat16"]}
+    }
+  ]
+}

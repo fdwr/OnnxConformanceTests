@@ -1,0 +1,294 @@
+{
+  "tests": [
+    // to attribute values:
+    // 0 - undefined
+    // 1 - float32
+    // 2 - uint8
+    // 3 - int8
+    // 4 - uint16
+    // 5 - int16
+    // 6 - int32
+    // 7 - int64
+    // 8 - string
+    // 9 - bool8
+    // 10 - float16
+    // 11 - float64
+    // 12 - uint32
+    // 13 - uint64
+    // 14 - complex64
+    // 15 - complex128
+    // 16 - brain float16
+    {
+      "graph_name": "Cast F32 to I32",
+      "op_type": "Cast",
+      "version": 6,
+      "input": [0, 1, 2, -1, -2],
+      "output": [0, 1, 2, -1, -2],
+      "to": 6,
+      "T1": "float32",
+      "T2": "int32"
+    },
+    {
+      "graph_name": "Cast I32 to F32",
+      "op_type": "Cast",
+      "version": 6,
+      "input": [0, 1, 2, -1, -2],
+      "output": [0, 1, 2, -1, -2],
+      "to": 1,
+      "T1": "int32",
+      "T2": "float32"
+    },
+    {
+      "graph_name": "Cast UI8 to F32",
+      "op_type": "Cast",
+      "version": 6,
+      "input": [0, 1, 2],
+      "output": [0, 1, 2],
+      "to": 1,
+      "T1": "uint8",
+      "T2": "float32"
+    },
+    {
+      "graph_name": "Cast F32 to UI8",
+      "op_type": "Cast",
+      "version": 6,
+      "input": [0, 1, 2],
+      "output": [0, 1, 2],
+      "to": 2,
+      "T1": "float32",
+      "T2": "uint8"
+    },
+    {
+      "graph_name": "Cast I8 to UI8",
+      "op_type": "Cast",
+      "version": 6,
+      "input": [0, 1, 2],
+      "output": [0, 1, 2],
+      "to": 2,
+      "T1": "int8",
+      "T2": "uint8"
+    },
+    {
+      "graph_name": "Cast I32 to I64",
+      "op_type": "Cast",
+      "version": 6,
+      "input": [0, 1, 2, -1, -2],
+      "output": [0, 1, 2, -1, -2],
+      "to": 7,
+      "T1": "int32",
+      "T2": "int64"
+    },
+    {
+      "graph_name": "Cast F32 to I64",
+      "op_type": "Cast",
+      "version": 6,
+      "input": [0, 1, 2, -1, -2],
+      "output": [0, 1, 2, -1, -2],
+      "to": 7,
+      "T1": "float32",
+      "T2": "int64"
+    },
+    {
+      "graph_name": "Cast I64 to F32",
+      "op_type": "Cast",
+      "version": 6,
+      "input": [0, 1, 2],
+      "output": [0, 1, 2],
+      "to": 1,
+      "T1": "int64",
+      "T2": "float32"
+    },
+    {
+      "graph_name": "Cast I64 to I32",
+      "op_type": "Cast",
+      "version": 6,
+      "input": [0, 1, 2, -1, -2],
+      "output": [0, 1, 2, -1, -2],
+      "to": 6,
+      "T1": "int64",
+      "T2": "int32"
+    },
+    {
+      "graph_name": "Cast F32 to F64",
+      "op_type": "Cast",
+      "version": 6,
+      "input": [0, 1, 2, -1, -2],
+      "output": [0, 1, 2, -1, -2],
+      "to": 11,
+      "T1": "float32",
+      "T2": "float64"
+    },
+    {
+      "graph_name": "Cast F64 to F32",
+      "op_type": "Cast",
+      "version": 6,
+      "input": [0, 1, 2, -1, -2],
+      "output": [0, 1, 2, -1, -2],
+      "to": 1,
+      "T1": "float64",
+      "T2": "float32"
+    },
+    {
+      "graph_name": "Cast I64 to F64",
+      "op_type": "Cast",
+      "version": 6,
+      "input": [0, 1, 2, -1, -2],
+      "output": [0, 1, 2, -1, -2],
+      "to": 11,
+      "T1": "int64",
+      "T2": "float64"
+    },
+    {
+      "graph_name": "Cast F64 to I64",
+      "op_type": "Cast",
+      "version": 6,
+      "input": [0, 1, 2, -1, -2],
+      "output": [0, 1, 2, -1, -2],
+      "to": 7,
+      "T1": "float64",
+      "T2": "int64"
+    },
+    {
+      "graph_name": "Cast I32 to F64",
+      "op_type": "Cast",
+      "version": 6,
+      "input": [0, 1, 2, -1, -2],
+      "output": [0, 1, 2, -1, -2],
+      "to": 11,
+      "T1": "int32",
+      "T2": "float64"
+    },
+    {
+      "graph_name": "Cast UI8 to I64",
+      "op_type": "Cast",
+      "version": 6,
+      "input": [0, 1, 2],
+      "output": [0, 1, 2],
+      "to": 7,
+      "T1": "uint8",
+      "T2": "int64"
+    },
+    {
+      "graph_name": "Cast I64 to UI8",
+      "op_type": "Cast",
+      "version": 6,
+      "input": [0, 1, 2],
+      "output": [0, 1, 2],
+      "to": 2,
+      "T1": "int64",
+      "T2": "uint8"
+    },
+    {
+      "graph_name": "Cast F16 to F32",
+      "op_type": "Cast",
+      "version": 6,
+      "input": [0, 1, 2, -1, -2],
+      "output": [0, 1, 2, -1, -2],
+      "to": 1,
+      "T1": "float16",
+      "T2": "float32"
+    },
+    {
+      "graph_name": "Cast F32 to F16",
+      "op_type": "Cast",
+      "version": 6,
+      "input": [0, 1, 2, -1, -2],
+      "output": [0, 1, 2, -1, -2],
+      "to": 10,
+      "T1": "float32",
+      "T2": "float16"
+    },
+    {
+      "graph_name": "Cast bool8 to F32",
+      "op_type": "Cast",
+      "version": 6,
+      "input": [1, 0],
+      "output": [1, 0],
+      "to": 1,
+      "T1": "bool8",
+      "T2": "float32"
+    },
+    {
+      "graph_name": "Cast F32 to bool8",
+      "op_type": "Cast",
+      "version": 6,
+      "input": [1, 0],
+      "output": [1, 0],
+      "to": 9,
+      "T1": "float32",
+      "T2": "bool8"
+    },
+    {
+      "graph_name": "Cast F32 to F16 v9",
+      "op_type": "Cast",
+      "version": 9,
+      "input": [0, 1, 2, -1, -2],
+      "output": [0, 1, 2, -1, -2],
+      "to": 10,
+      "T1": "float32",
+      "T2": "float16"
+    },
+    {
+      "graph_name": "Cast empty dimensions",
+      "op_type": "Cast",
+      "version": 6,
+      "input": [],
+      "output": [],
+      "to": 6,
+      "T1": "float32",
+      "T2": "int32"
+    },
+    {
+      "graph_name": "Cast version 13",
+      "op_type": "Cast",
+      "version": 13,
+      "input": [0, 1, 2, -1, -2],
+      "output": [0, 1, 2, -1, -2],
+      "to": 6,
+      "T1": "float32",
+      "T2": "int32"
+    }
+  ],
+
+  "schema": [
+    {
+      "op_type": "Cast",
+      "version": 6,
+      "attributes": {
+        "to": {"type": "int64"} // DataType enum in TensorProto
+      },
+      "inputs": {"input": {"type": "T1"}},
+      "outputs": {"output": {"type": "T2"}},
+      "types": {
+        "T1": ["float32", "float16", "float64", "uint8", "uint16", "uint32", "uint64", "int8", "int16", "int32", "int64", "bool8"],
+        "T2": ["float32", "float16", "float64", "uint8", "uint16", "uint32", "uint64", "int8", "int16", "int32", "int64", "bool8"]
+      }
+    },
+    {
+      "op_type": "Cast",
+      "version": 9,
+      "attributes": {
+        "to": {"type": "int64"} // DataType enum in TensorProto
+      },
+      "inputs": {"input": {"type": "T1"}},
+      "outputs": {"output": {"type": "T2"}},
+      "types": {
+        "T1": ["float32", "float16", "float64", "uint8", "uint16", "uint32", "uint64", "int8", "int16", "int32", "int64", "bool8"],
+        "T2": ["float32", "float16", "float64", "uint8", "uint16", "uint32", "uint64", "int8", "int16", "int32", "int64", "bool8"]
+      }
+    },
+    {
+      "op_type": "Cast",
+      "version": 13,
+      "attributes": {
+        "to": {"type": "int64"} // DataType enum in TensorProto
+      },
+      "inputs": {"input": {"type": "T1"}},
+      "outputs": {"output": {"type": "T2"}},
+      "types": {
+        "T1": ["float32", "float16", "float64", "uint8", "uint16", "uint32", "uint64", "int8", "int16", "int32", "int64", "bool8", "bfloat16"],
+        "T2": ["float32", "float16", "float64", "uint8", "uint16", "uint32", "uint64", "int8", "int16", "int32", "int64", "bool8", "bfloat16"]
+      }
+    }
+  ]
+}

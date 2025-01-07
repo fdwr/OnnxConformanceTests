@@ -1,0 +1,130 @@
+{
+  "tests": [
+    // Note Constant nodes do not work by themselves because they are virtually
+    // flattened as if they were tensor initializers. So the only way to test
+    // them is to chain them to another dummy operator. Otherwise you only get
+    // zeroes in the final output.
+
+    // float32.
+    {
+      "nodes": [
+        {
+          "op_type": "Constant",
+          "value":  [[1, 2, 3],
+                     [4, 5, 6]],
+          "outputs": ["constant_output"],
+          "T": "float32"
+          },
+        {
+          "op_type": "Identity",
+          "inputs": ["constant_output"],
+          "outputs": ["output"]
+        }
+      ],
+      "outputs": {
+        "output": [[1, 2, 3],
+                   [4, 5, 6]]
+      }
+    },
+    // float16.
+    {
+      "nodes": [
+        {
+          "op_type": "Constant",
+          "value":  [[1, 2, 3],
+                     [4, 5, 6]],
+          "outputs": ["constant_output"],
+          "T": "float16"
+          },
+        {
+          "op_type": "Identity",
+          "inputs": ["constant_output"],
+          "outputs": ["output"]
+        }
+      ],
+      "outputs": {
+        "output": {
+          "type": "float16",
+          "values": [[1, 2, 3],
+                     [4, 5, 6]]
+        }
+      }
+    },
+    // float64.
+    {
+      "nodes": [
+        {
+          "op_type": "Constant",
+          "value":  [[1, 2, 3],
+                     [4, 5, 6]],
+          "outputs": ["constant_output"],
+          "T": "float64"
+          },
+        {
+          "op_type": "Identity",
+          "inputs": ["constant_output"],
+          "outputs": ["output"]
+        }
+      ],
+      "outputs": {
+        "output": {
+          "type": "float64",
+          "values": [[1, 2, 3],
+                     [4, 5, 6]]
+        }
+      }
+    },
+    {
+      "graph_name": "Constant version 13",
+      "version": 13,
+      "nodes": [
+        {
+          "op_type": "Constant",
+          "version": 13,
+          "value":  [[1, 2, 3],
+                     [4, 5, 6]],
+          "outputs": ["constant_output"],
+          "T": "float32"
+          },
+        {
+          "op_type": "Identity",
+          "inputs": ["constant_output"],
+          "outputs": ["output"]
+        }
+      ],
+      "outputs": {
+        "output": [[1, 2, 3],
+                   [4, 5, 6]]
+      }
+    }
+  ],
+
+  "schema": [
+    {
+      "op_type": "Constant",
+      "version": 1,
+      "attributes": {
+        "value": {"type": "T"} // Tensor
+      },
+      "outputs": {"output": {"type": "T"}},
+      "types": {"T": ["float32", "float16", "float64"]}
+    },
+    {
+      "op_type": "Identity",
+      "version": 1,
+      "attributes": {},
+      "inputs": {"input": {"type": "T"}},
+      "outputs": {"output": {"type": "T"}},
+      "types": {"T": ["float32", "float16", "float64", "uint8", "uint16", "uint32", "uint64", "int8", "int16", "int32", "int64", "bool8"]}
+    },
+    {
+      "op_type": "Constant",
+      "version": 13,
+      "attributes": {
+        "value": {"type": "T"} // Tensor
+      },
+      "outputs": {"output": {"type": "T"}},
+      "types": {"T": ["float32", "float16", "float64", "bfloat16"]}
+    }
+  ]
+}

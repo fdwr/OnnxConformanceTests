@@ -1,0 +1,169 @@
+{
+  "tests": [
+    {
+      "graph_name": "Equal int32",
+      "op_type": "Equal",
+      "version": 7,
+      "A": [2, -3, 4, "Inf"],
+      "B": [2, -3, 2, "Inf"],
+      "C": [1,  1, 0,   1],
+      "T": "int32"
+    },
+    {
+      "graph_name": "Equal uint64",
+      "op_type": "Equal",
+      "version": 11,
+      "A": [2, -3, 4, "Inf"],
+      "B": [2, -3, 2, "Inf"],
+      "C": [1,  1, 0,   1],
+      "T": "uint64",
+      "verification": {"executor_filter": ".*Cpu"}
+    },
+    {
+      "graph_name": "Equal int64",
+      "op_type": "Equal",
+      "version": 11,
+      "A": [2, -3, 4, "Inf"],
+      "B": [2, -3, 2, "Inf"],
+      "C": [1,  1, 0,   1],
+      "T": "int64"
+    },
+    {
+      "graph_name": "Equal bool8",
+      "op_type": "Equal",
+      "version": 7,
+      "A": [0, 1, 0, 1],
+      "B": [0, 0, 1, 1],
+      "C": [1, 0, 0, 1],
+      "T": "bool8"
+    },
+    {
+      "graph_name": "Equal uint32",
+      "op_type": "Equal",
+      "version": 11,
+      "A": [0, 1, 0, 1],
+      "B": [0, 0, 1, 1],
+      "C": [1, 0, 0, 1],
+      "T": "uint32",
+      "verification": {"executor_filter": ".*Cpu"}
+    },
+    {
+      "graph_name": "Equal uint16",
+      "op_type": "Equal",
+      "version": 11,
+      "A": [0, 1, 0, 1],
+      "B": [0, 0, 1, 1],
+      "C": [1, 0, 0, 1],
+      "T": "uint16",
+      "verification": {"executor_filter": ".*Cpu"}
+    },
+    {
+      "graph_name": "Equal uint8",
+      "op_type": "Equal",
+      "version": 11,
+      "A": [0, 1, 0, 1],
+      "B": [0, 0, 1, 1],
+      "C": [1, 0, 0, 1],
+      "T": "uint8",
+      "verification": {"executor_filter": ".*Cpu"}
+    },
+    {
+      "graph_name": "Equal int16",
+      "op_type": "Equal",
+      "version": 11,
+      "A": [0, 1, 0, 1],
+      "B": [0, 0, 1, 1],
+      "C": [1, 0, 0, 1],
+      "T": "int16",
+      "verification": {"executor_filter": ".*Cpu"}
+    },
+    {
+      "graph_name": "Equal int8",
+      "op_type": "Equal",
+      "version": 11,
+      "A": [0, 1, 0, 1],
+      "B": [0, 0, 1, 1],
+      "C": [1, 0, 0, 1],
+      "T": "int8",
+      "verification": {"executor_filter": ".*Cpu"}
+    },
+    {
+      "graph_name": "Equal float32",
+      "op_type": "Equal",
+      "version": 11,
+      "A": [2, -3, 4, "Inf"],
+      "B": [2, -3, 2, "Inf"],
+      "C": [1,  1, 0,   1],
+      "T": "float32"
+    },
+    {
+      "graph_name": "Equal float16",
+      "op_type": "Equal",
+      "version": 11,
+      "A": [2, -3, 4, "Inf"],
+      "B": [2, -3, 2, "Inf"],
+      "C": [1,  1, 0,   1],
+      "T": "float16"
+    },
+    {
+      "graph_name": "Equal version 13",
+      "op_type": "Equal",
+      "version": 13,
+      "A": [2, -3, 4, "Inf"],
+      "B": [2, -3, 2, "Inf"],
+      "C": [1,  1, 0,   1],
+      "T": "int32"
+    }
+  ],
+
+  "schema": [
+    {
+      "op_type": "Equal",
+      "version": 7,
+      "attributes": {},
+      "inputs": {
+        "A": {"type": "T"},
+        "B": {"type": "T"}
+      },
+      "outputs": {
+        "C": {"type": "T1"}
+      },
+      "types": {
+        "T": ["int32", "int64", "bool8"],
+        "T1": ["bool8"]
+      }
+    },
+    {
+      "op_type": "Equal",
+      "version": 11,
+      "attributes": {},
+      "inputs": {
+        "A": {"type": "T"},
+        "B": {"type": "T"}
+      },
+      "outputs": {
+        "C": {"type": "T1"}
+      },
+      "types": {
+        "T": ["uint32", "uint16", "uint8", "int32", "int16", "int8", "float32", "float16", "int64", "bool8"],
+        "T1": ["bool8"]
+      }
+    },
+    {
+      "op_type": "Equal",
+      "version": 13,
+      "attributes": {},
+      "inputs": {
+        "A": {"type": "T"},
+        "B": {"type": "T"}
+      },
+      "outputs": {
+        "C": {"type": "T1"}
+      },
+      "types": {
+        "T": ["uint32", "uint16", "uint8", "int32", "int16", "int8", "float32", "float16", "int64", "bool8", "bfloat16"],
+        "T1": ["bool8"]
+      }
+    }
+  ]
+}

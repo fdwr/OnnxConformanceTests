@@ -1,0 +1,33 @@
+{
+    "tests": [
+      {
+        "op_type": "Gelu",
+        "domain": "com.microsoft",
+        "X": [0, 1, -1],
+        "Y": [0, 0.841345, -0.158655],
+        "T": "float32",
+        "verification": { "executor_filter": ".*Cpu", "absolute_tolerance": 0.000001}
+      },
+      {
+        "op_type": "Gelu",
+        "domain": "com.microsoft",
+        "X": [0, 1, -1],
+        "Y": [0, 0.841345, -0.158655],
+        "T": "float16",
+        "verification": { "executor_filter": ".*Cpu", "absolute_tolerance": 0.005}
+      }
+    ],
+  
+    "schema": [
+      {
+        "op_type": "Gelu", // y = 0.5 * x * (1.0 + erf(x / sqrt(2.0)))
+        "domain": "com.microsoft",
+        "version": 1,
+        "attributes": {},
+        "inputs": {"X": {"type": "T"}},
+        "outputs": {"Y": {"type": "T"}},
+        "types": {"T": ["float32", "float16", "float64"]}
+      }
+    ]
+  }
+  

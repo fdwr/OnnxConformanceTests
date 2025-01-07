@@ -1,0 +1,36 @@
+{
+  "tests": [
+    {
+      "op_type": "Selu",
+      "alpha": 2,
+      "gamma": 3,
+      "X": [0, 1, -1],
+      "Y": [0, 3, -3.792723353],
+      "T": "float32",
+      "verification": { "executor_filter": ".*Cpu", "ulp": 1}
+    },
+    {
+      "op_type": "Selu",
+      "alpha": 2,
+      "gamma": 3,
+      "X": [0, 1, -1],
+      "Y": [0, 3, -3.792723353],
+      "T": "float16",
+      "verification": { "executor_filter": ".*Cpu", "ulp": 1}
+    }
+  ],
+
+  "schema": [
+    {
+      "op_type": "Selu", // y = gamma * (alpha * exp(x) - alpha) for x <= 0, y = gamma * x for x > 0
+      "version": 6,
+      "attributes": {
+        "alpha": {"type": "float32"}, // Default = 1.67326319217681884765625
+        "gamma": {"type": "float32"} // Default = 1.05070102214813232421875 
+      },
+      "inputs": {"X": {"type": "T"}},
+      "outputs": {"Y": {"type": "T"}},
+      "types": {"T": ["float32", "float16", "float64"]}
+    }
+  ]
+}

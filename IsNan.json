@@ -1,0 +1,52 @@
+{
+  "tests": [
+    {
+      "graph_name": "IsNaN float32",
+      "op_type": "IsNaN",
+      "input": [ -NaN, -1, 0, 1, Inf, NaN ],
+      "output": [ 1, 0, 0, 0, 0, 1 ],
+      "T": "float32",
+      "verification": {
+        "ulp": 0
+      }
+    },
+    {
+      "graph_name": "IsNaN float16",
+      "op_type": "IsNaN",
+      "input": [ -NaN, -1, 0, 1, Inf, NaN ],
+      "output": [ 1, 0, 0, 0, 0, 1 ],
+      "T": "float16",
+      "verification": {
+        "ulp": 0
+      }
+    },
+    {
+      "graph_name": "IsNaN version 13",
+      "op_type": "IsNaN",
+      "version": 13,
+      "input": [ -NaN, -1, 0, 1, Inf, NaN ],
+      "output": [ 1, 0, 0, 0, 0, 1 ],
+      "T": "float32",
+      "verification": {
+        "ulp": 0
+      }
+    }
+  ],
+
+  "schema": [
+    {
+      "op_type": "IsNaN",
+      "version": 9,
+      "inputs": {"input": {"type": "T"}},
+      "outputs": {"output": {"type": "bool8"}},
+      "types": {"T": ["float16", "float32", "float64"]}
+    },
+    {
+      "op_type": "IsNaN",
+      "version": 13,
+      "inputs": {"input": {"type": "T"}},
+      "outputs": {"output": {"type": "bool8"}},
+      "types": {"T": ["float16", "float32", "float64", "bfloat16"]}
+    }
+  ]
+}

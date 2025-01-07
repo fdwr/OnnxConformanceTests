@@ -1,0 +1,142 @@
+{
+  "tests": [
+    {
+      "graph_name": "LogSoftmax-1 1D float32",
+      "op_type": "LogSoftmax",
+      "axis": 0,
+      "input":  [0, 1, 2, -1],
+      "output": [-2.440189699, -1.440189699, -0.440189699, -3.440189699],
+      "T": "float32",
+      "verification": {"ulp": 8 /* 0.000001 RTOL */}
+    },
+    {
+      "graph_name": "LogSoftmax-1 1D float16",
+      "op_type": "LogSoftmax",
+      "axis": 0,
+      "input":  [0, 1, 2, -1],
+      "output": [-2.440189699, -1.440189699, -0.440189699, -3.440189699],
+      "T": "float16",
+      "verification": {"ulp": 1}
+    },
+    {
+      "graph_name": "LogSoftmax-1 2D axis 1",
+      "op_type": "LogSoftmax",
+      "axis": 1,
+      "input":  [[0, 1, 2, -1],
+                 [0, 1, 2,  0]],
+      "output": [[-2.440189699, -1.440189699, -0.440189699, -3.440189699],
+                 [-2.493811709, -1.493811709, -0.493811709, -2.493811709]],
+      "T": "float32",
+      "verification": {"ulp": 8 /* 0.000001 RTOL */}
+    },
+    {
+      "graph_name": "LogSoftmax-1 2D negative axis",
+      "op_type": "LogSoftmax",
+      "axis": -1,
+      "input":  [[0, 1, 2, -1],
+                 [0, 1, 2,  0]],
+      "output": [[-2.440189699, -1.440189699, -0.440189699, -3.440189699],
+                 [-2.493811709, -1.493811709, -0.493811709, -2.493811709]],
+      "T": "float32",
+      "verification": {"ulp": 8 /* 0.000001 RTOL */}
+    },
+    {
+      "graph_name": "LogSoftmax-1 4D",
+      "op_type": "LogSoftmax",
+      "input": [[[[12, -101, 99, 87]]]],
+      "output": [[[[-87, -200, -6.19886e-06, -12]]]],
+      "verification": {"ulp": 8 /* 0.000001 RTOL */}
+    },
+    {
+      "graph_name": "LogSoftmax-1 5D",
+      "op_type": "LogSoftmax",
+      "input": [[[[[12, -101, 99, 87]]]]],
+      "output": [[[[[-87, -200, -6.19886e-06, -12]]]]],
+      "verification": {"ulp": 8 /* 0.000001 RTOL */}
+    },
+    // 1D array, axis 0, version 13 (no coercing happens)
+    {
+      "graph_name": "LogSoftmax-13 1D axis=0",
+      "op_type": "LogSoftmax",
+      "version": 13,
+      "axis": 0,
+      "input":  [0, 1, 2, -1],
+      "output": [-2.440189699, -1.440189699, -0.440189699, -3.440189699],
+      "T": "float32",
+      "verification": {"ulp": 8 /* 0.000001 RTOL */}
+    },
+    {
+      "graph_name": "LogSoftmax-13 3D axis=1",
+      "op_type": "LogSoftmax",
+      "version": 13,
+      "axis": 1, // Middle dimension
+      "input": [
+        [
+          [  12, 0],
+          [-101, 1],
+          [  99, 2],
+          [  87,-1]
+        ],
+        [
+          [ 0,  12],
+          [ 1,-101],
+          [ 2,  99],
+          [-1,  87]
+        ]
+      ],
+      "output": [
+        [
+          [-87,          -2.440189699],
+          [-200,         -1.440189699],
+          [-6.19886e-06, -0.440189699],
+          [-12,          -3.440189699]
+        ],
+        [
+          [-2.440189699, -87         ],
+          [-1.440189699, -200        ],
+          [-0.440189699, -6.19886e-06],
+          [-3.440189699, -12         ]
+        ],
+      ],
+      "T": "float32",
+      "verification": {"ulp": 8 /* 0.000001 RTOL */}
+    },
+    {
+      "graph_name": "LogSoftmax-13 2D array negative axis",
+      "op_type": "LogSoftmax",
+      "version": 13,
+      "axis": -1,
+      "input":  [[0, 1, 2, -1],
+                 [0, 1, 2,  0]],
+      "output": [[-2.440189699, -1.440189699, -0.440189699, -3.440189699],
+                 [-2.493811709, -1.493811709, -0.493811709, -2.493811709]],
+      "T": "float32",
+      "verification": {"ulp": 8 /* 0.000001 RTOL */}
+    }
+  ],
+
+  "schema": [
+    {
+      "op_type": "LogSoftmax", // y = log(exp(x - max(X)) / sum(exp(X - max(X))))
+      "version": 1,
+      "attributes": {
+        "axis": {"type": "int64"} // default = 1 (skip 0th axis)
+      },
+      "inputs": {"input": {"type": "T"}},
+      "outputs": {"output": {"type": "T"}},
+      "types": {"T": ["float32", "float16", "float64"]}
+    },
+    {
+      "op_type": "LogSoftmax", // y = log(exp(x - max(X)) / sum(exp(X - max(X))))
+      "version": 13,
+      "attributes": {
+        "axis": {"type": "int64"} // default = 1 (skip 0th axis)
+      },
+      "inputs": {
+        "input": {"type": "T"}
+      },
+      "outputs": {"output": {"type": "T"}},
+      "types": {"T": ["float32", "float16", "float64", "bfloat16"]}
+    }
+  ]
+}

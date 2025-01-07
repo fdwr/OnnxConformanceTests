@@ -1,0 +1,308 @@
+{
+  "tests": [
+    {
+      "graph_name": "QuantizeLinear entire tensor float32 to uint8",
+      "op_type": "QuantizeLinear",
+      "domain": "",
+      "version": 10,
+      "X": [0, 2, 3, 1000, -254, -1000],
+      "y_scale": 2,
+      "y_zero_point": 128,
+      "Y": [128, 129, 130, 255, 1, 0],
+      "T1": "float32",
+      "T2": "uint8"
+    },
+    {
+      "graph_name": "QuantizeLinear entire tensor int32 to uint8",
+      "op_type": "QuantizeLinear",
+      "domain": "",
+      "version": 10,
+      "X": [0, 2, 3, 1000, -254, -1000],
+      "y_scale": 2,
+      "y_zero_point": 128,
+      "Y": [128, 129, 130, 255, 1, 0],
+      "T1": "int32",
+      "T2": "uint8",
+      "verification": {"executor_filter": ".*Cpu"}
+    },
+    {
+      "graph_name": "QuantizeLinear entire tensor float32 to int8",
+      "op_type": "QuantizeLinear",
+      "domain": "",
+      "version": 10,
+      "X": [0, 2, 3, 1000, -10, -1000],
+      "y_scale": 2,
+      "y_zero_point": 10,
+      "Y": [10, 11, 12, 127, 5, -128],
+      "T1": "float32",
+      "T2": "int8",
+      "verification": {"executor_filter": ".*Cpu"}
+    },
+    {
+      "graph_name": "QuantizeLinear entire tensor int32 to int8",
+      "op_type": "QuantizeLinear",
+      "domain": "",
+      "version": 10,
+      "X": [0, 2, 3, 1000, -10, -1000],
+      "y_scale": 2,
+      "y_zero_point": 10,
+      "Y": [10, 11, 12, 127, 5, -128],
+      "T1": "int32",
+      "T2": "int8",
+      "verification": {"executor_filter": ".*Cpu"}
+    },
+    {
+      "graph_name": "QuantizeLinear rounding halves toward nearest even",
+      "op_type": "QuantizeLinear",
+      "domain": "",
+      "version": 10,
+      "X": [ 0, 0.5, 1, 1.5, 2, 2.5, -0.5, -1, -1.5, -2, -2.5 ],
+      "y_scale": 1,
+      "y_zero_point": 100,
+      "Y": [ 100, 100, 101, 102, 102, 102, 100, 99, 98, 98, 98 ]
+    },
+    {
+      "graph_name": "QuantizeLinear com.microsoft entire tensor float16 to uint8",
+      "op_type": "QuantizeLinear",
+      "domain": "com.microsoft",
+      "version": 1,
+      "X": [0, 2, 3, 1000, -254, -1000],
+      "y_scale": 2,
+      "y_zero_point": 128,
+      "Y": [128, 129, 130, 255, 1, 0],
+      "T1": "float16",
+      "T2": "uint8"
+    },
+    {
+      "graph_name": "QuantizeLinear entire tensor float16 to int8",
+      "op_type": "QuantizeLinear",
+      "domain": "com.microsoft",
+      "version": 1,
+      "X": [0, 2, 3, 1000, -10, -1000],
+      "y_scale": 2,
+      "y_zero_point": 10,
+      "Y": [10, 11, 12, 127, 5, -128],
+      "T1": "float16",
+      "T2": "int8"
+    },
+    {
+      "graph_name": "QuantizeLinear com.microsoft along broadcasted axis", // Should be identical to full tensor case
+      "op_type": "QuantizeLinear",
+      "domain": "com.microsoft",
+      "version": 1,
+      "X": [0, 2, 3, 1000, -254, -1000],
+      "y_scale": [2, 2, 2, 2, 2, 2],
+      "y_zero_point": [128, 128, 128, 128, 128, 128],
+      "axis": 0,
+      "Y": [128, 129, 130, 255, 1, 0]
+    },
+    {
+      "graph_name": "QuantizeLinear com.microsoft 2D along first axis",
+      "op_type": "QuantizeLinear",
+      "domain": "com.microsoft",
+      "version": 1,
+      "X": [[0, 2, 3, 1000],
+            [0, 2, 3, 1000],
+            [0, 2, 3, 1000]],
+      "y_scale": [1, 2, 5], // Broadcast as if [[1], [2], [4]],
+      "y_zero_point": [0, 0, 0], // Broadcast as if [[0]],
+      "axis": 0,
+      "Y": [[0, 2, 3, 255],
+            [0, 1, 2, 255],
+            [0, 0, 1, 200]]
+    },
+    {
+      "graph_name": "QuantizeLinear com.microsoft 2D along second axis",
+      "op_type": "QuantizeLinear",
+      "domain": "com.microsoft",
+      "version": 1,
+      "X": [[0, 2, 3, 1000],
+            [0, 2, 3, 1000],
+            [0, 4, 6, 2000]],
+      "y_scale": [1, 2, 4, 8], // Broadcast as if [[1, 2, 4],
+      "y_zero_point": [0, 0, 0, 0], // Broadcast as if [[0]],
+      "axis" : 1,
+      "Y": [[0, 1, 1, 125],
+            [0, 1, 1, 125],
+            [0, 2, 2, 250]]
+    },
+    {
+      "graph_name": "QuantizeLinear com.microsoft 2D along second axis using negative axis value",
+      "op_type": "QuantizeLinear",
+      "domain": "com.microsoft",
+      "version": 1,
+      "X": [[0, 2, 3, 1000],
+            [0, 2, 3, 1000],
+            [0, 4, 6, 2000]],
+      "y_scale": [1, 2, 4, 8], // Broadcast as if [[1, 2, 4],
+      "y_zero_point": [0, 0, 0, 0], // Broadcast as if [[0]],
+      "axis" : -1,
+      "Y": [[0, 1, 1, 125],
+            [0, 1, 1, 125],
+            [0, 2, 2, 250]]
+    },
+    {
+      "op_type": "QuantizeLinear",
+      "version": 10,
+      "X":      [[[[[[[[0]]]]]]]],
+      "Y":      [[[[[[[[128]]]]]]]],
+      "y_scale": 2,
+      "y_zero_point": 128,
+      "T1": "float32",
+      "T2": "uint8"
+    },
+    {
+      "op_type": "QuantizeLinear",
+      "version": 10,
+      "X":      [[[[[[[[0],[1]]]]]]]],
+      "Y":      [[[[[[[[128],[128]]]]]]]],
+      "y_scale": 2,
+      "y_zero_point": 128,
+      "T1": "float32",
+      "T2": "uint8"
+    },
+    {
+      "op_type": "QuantizeLinear",
+      "version": 10,
+      "X":      [[[[[[  [[1],[2]],
+                        [[3],[4]] ]]]]]],
+      "Y":      [[[[[[  [[128],[129]],
+                        [[130],[130]] ]]]]]],
+      "y_scale": 2,
+      "y_zero_point": 128,
+      "T1": "float32",
+      "T2": "uint8"
+    },
+    {
+      "op_type": "QuantizeLinear",
+      "version": 10,
+      "X":      [[[[  [[1],[2]],
+                      [[3],[4]] ]]]],
+      "Y":      [[[[  [[128],[129]],
+                      [[130],[130]] ]]]],
+      "y_scale": 2,
+      "y_zero_point": 128,
+      "T1": "float32",
+      "T2": "uint8"
+    },
+    {
+      "op_type": "QuantizeLinear",
+      "version": 10,
+      "X":      [[[ [[1],[2]],
+                    [[3],[4]] ]]],
+      "Y":      [[[ [[128],[129]],
+                    [[130],[130]] ]]],
+      "y_scale": 2,
+      "y_zero_point": 128,
+      "T1": "float32",
+      "T2": "uint8"
+    },
+    {
+      "op_type": "QuantizeLinear",
+      "version": 10,
+      "X":      [[[  [[[1],[2]],
+                      [[3],[4]]],
+                     [[[1],[2]],
+                      [[3],[4]]] ]]],
+      "y_scale": 2,
+      "y_zero_point": 128,
+      "Y":      [[[  [[[128],[129]],
+                      [[130],[130]]],
+                     [[[128],[129]],
+                      [[130],[130]]] ]]],
+      "T1": "float32",
+      "T2": "uint8"
+    },
+    {
+      "graph_name": "QuantizeLinear version 13 scalar scale and zero point",
+      "op_type": "QuantizeLinear",
+      "version": 13,
+      "X":      [[[  [[[1],[2]],
+                      [[3],[4]]],
+                     [[[1],[2]],
+                      [[3],[4]]] ]]],
+      "y_scale": 2,
+      "y_zero_point": 128,
+      "Y":      [[[  [[[128],[129]],
+                      [[130],[130]]],
+                     [[[128],[129]],
+                      [[130],[130]]] ]]],
+      "T1": "float32",
+      "T2": "uint8"
+    },
+    {
+      "graph_name": "QuantizeLinear 2D along first axis",
+      "op_type": "QuantizeLinear",
+      "version": 13,
+      "X": [[0, 2, 3, 1000],
+            [0, 2, 3, 1000],
+            [0, 2, 3, 1000]],
+      "y_scale": [1, 2, 5], // Broadcast as if [[1], [2], [4]],
+      "y_zero_point": [0, 0, 0], // Broadcast as if [[0]],
+      "axis": 0,
+      "Y": [[0, 2, 3, 255],
+            [0, 1, 2, 255],
+            [0, 0, 1, 200]]
+    }
+  ],
+
+  "schema": [
+    {
+      "op_type": "QuantizeLinear",
+      "domain": "",
+      "version": 10,
+      "inputs": {
+        "X": {"type": "T1"},
+        "y_scale": {"type": "float32"},
+        "y_zero_point": {"type": "T2"}
+      },
+      "outputs": {
+        "Y": {"type": "T2"}
+      },
+      "types": {
+        "T1": ["float32", "int32"],
+        "T2": ["uint8", "int8"]
+      }
+    },
+    {
+      "op_type": "QuantizeLinear",
+      "domain": "com.microsoft",
+      "version": 1,
+      "attributes": {
+        "axis" : {"type" : "int64"}
+      },
+      "inputs": {
+        "X": {"type": "T1"},
+        "y_scale": {"type": "T1"},
+        "y_zero_point": {"type": "T2"}
+      },
+      "outputs": {
+        "Y": {"type": "T2"}
+      },
+      "types": {
+        "T1": ["float32", "float16"],
+        "T2": ["uint8", "int8"]
+      }
+    },
+    {
+      "op_type": "QuantizeLinear",
+      "domain": "",
+      "version": 13, // Adds dequantization along vector via given axis.
+      "attributes": {
+        "axis" : {"type" : "int64"}
+      },
+      "inputs": {
+        "X": {"type": "T1"},
+        "y_scale": {"type": "float32"},
+        "y_zero_point": {"type": "T2"}
+      },
+      "outputs": {
+        "Y": {"type": "T2"}
+      },
+      "types": {
+        "T1": ["float32", "int32"],
+        "T2": ["uint8", "int8"]
+      }
+    }
+  ]
+}

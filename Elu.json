@@ -1,0 +1,33 @@
+{
+  "tests": [
+    {
+      "op_type": "Elu",
+      "alpha": 2,
+      "X": [0, 1, -1],
+      "Y": [0, 1, -1.264241118],
+      "T": "float32",
+      "verification": { "executor_filter": ".*Cpu", "ulp": 1}
+    },
+    {
+      "op_type": "Elu",
+      "alpha": 2,
+      "X": [0, 1, -1],
+      "Y": [0, 1, -1.264241118],
+      "T": "float16",
+      "verification": { "executor_filter": ".*Cpu", "ulp": 1}
+    }
+  ],
+
+  "schema": [
+    {
+      "op_type": "Elu", // y = alpha * (exp(x) - 1.) for x < 0, y = x for x >= 0
+      "version": 6,
+      "attributes": {
+        "alpha": {"type": "float32"} // default = 1.0
+      },
+      "inputs": {"X": {"type": "T"}},
+      "outputs": {"Y": {"type": "T"}},
+      "types": {"T": ["float32", "float16", "float64"]}
+    }
+  ]
+}

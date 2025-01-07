@@ -1,0 +1,48 @@
+{
+  "tests": [
+    {
+      "graph_name": "RandomUniformLike float32",
+      "op_type": "RandomUniformLike",
+      "low": -5.0,
+      "high": 2.0,
+      "seed": 17,
+      "X": {"dims": [1, 1, 1, 5]},
+      "Y": {"dims": [1, 1, 1, 5], "value": [[[[-2.937345027923584, -3.727555513381958, -1.2858924865722657, 0.9096369743347168, -3.6593546867370607]]]]},
+      "T": "float32",
+      "verification": {
+        "should_compare_expected": false,
+        "ulp": 1
+      }
+    },
+    {
+      "graph_name": "RandomUniformLike float16",
+      "op_type": "RandomUniformLike",
+      "low": -5.0,
+      "high": 2.0,
+      "seed": 17,
+      "X": {"dims": [1, 1, 1, 5]},
+      "Y": {"dims": [1, 1, 1, 5], "value": [[[[-2.937345027923584, -3.727555513381958, -1.2858924865722657, 0.9096369743347168, -3.6593546867370607]]]]},
+      "T": "float16",
+      "verification": {
+        "should_compare_expected": false,
+        "ulp": 1
+      }
+    }
+  ],
+
+  "schema": [
+    {
+      "op_type": "RandomUniformLike",
+      "version": 1,
+      "attributes": {
+        "dtype": {"type": "int64"},
+        "low": {"type": "float32"},
+        "high": {"type": "float32"},
+        "seed": {"type": "float32"}
+      },
+      "inputs": {"X": {"type": "T"}},
+      "outputs": {"Y": {"type": "T"}},
+      "types": {"T": ["float32", "float16", "float64"]}
+    }
+  ]
+}

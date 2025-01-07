@@ -1,0 +1,143 @@
+{
+  "tests": [
+    {
+      "graph_name": "ConstantOfShape float32",
+      "op_type": "ConstantOfShape",
+      "value": {"value": [42], "is_tensor": true},
+      "shape": [2, 3],
+      "output": [[42, 42, 42],
+                 [42, 42, 42]],
+      "T2": "float32"
+    },
+    {
+      "graph_name": "ConstantOfShape float16",
+      "op_type": "ConstantOfShape",
+      "value": {"value": [42], "is_tensor": true},
+      "shape": [1, 2, 3],
+      "output": [[[42, 42, 42],
+                  [42, 42, 42]]],
+      "T2": "float16"
+    },
+    {
+      "graph_name": "ConstantOfShape float64",
+      "op_type": "ConstantOfShape",
+      "value": {"value": [42], "is_tensor": true},
+      "shape": [2, 3],
+      "output": [[42, 42, 42],
+                 [42, 42, 42]],
+      "T2": "float64"
+    },
+    {
+      "graph_name": "ConstantOfShape int32",
+      "op_type": "ConstantOfShape",
+      "value": {"value": [42], "is_tensor": true},
+      "shape": [2, 3],
+      "output": [[42, 42, 42],
+                 [42, 42, 42]],
+      "T2": "int32"
+    },
+    {
+      "graph_name": "ConstantOfShape uint8",
+      "op_type": "ConstantOfShape",
+      "value": {"value": [42], "is_tensor": true},
+      "shape": [2, 3],
+      "output": [[42, 42, 42],
+                 [42, 42, 42]],
+      "T2": "uint8"
+    },
+    {
+      "graph_name": "ConstantOfShape int8",
+      "op_type": "ConstantOfShape",
+      "value": {"value": [42], "is_tensor": true},
+      "shape": [2, 3],
+      "output": [[42, 42, 42],
+                 [42, 42, 42]],
+      "T2": "int8"
+    },
+    {
+      "graph_name": "ConstantOfShape uint16",
+      "op_type": "ConstantOfShape",
+      "value": {"value": [42], "is_tensor": true},
+      "shape": [2, 3],
+      "output": [[42, 42, 42],
+                 [42, 42, 42]],
+      "T2": "uint16"
+    },
+    {
+      "graph_name": "ConstantOfShape int16",
+      "op_type": "ConstantOfShape",
+      "value": {"value": [42], "is_tensor": true},
+      "shape": [2, 3],
+      "output": [[42, 42, 42],
+                 [42, 42, 42]],
+      "T2": "int16"
+    },
+    {
+      "graph_name": "ConstantOfShape uint64",
+      "op_type": "ConstantOfShape",
+      "value": {"value": [42], "is_tensor": true},
+      "shape": [2, 3],
+      "output": [[42, 42, 42],
+                 [42, 42, 42]],
+      "T2": "uint64"
+    },
+    {
+      "graph_name": "ConstantOfShape int64",
+      "op_type": "ConstantOfShape",
+      "value": {"value": [42], "is_tensor": true},
+      "shape": [2, 3],
+      "output": [[42, 42, 42],
+                 [42, 42, 42]],
+      "T2": "int64"
+    },
+    {
+      "graph_name": "ConstantOfShape bool8",
+      "op_type": "ConstantOfShape",
+      "value": {"value": [true], "is_tensor": true},
+      "shape": [2, 3],
+      "output": [[true, true, true],
+                 [true, true, true]],
+      "T2": "bool8"
+    },
+    {
+      "graph_name": "ConstantOfShape float32 missing value zeroes",
+      "op_type": "ConstantOfShape",
+      "shape": [2, 3],
+      "output": [[0, 0, 0],
+                 [0, 0, 0]],
+      "T2": "float32"
+    },
+    {
+      "graph_name": "ConstantOfShape float32 scalar",
+      "op_type": "ConstantOfShape",
+      "value": {"value": [42], "is_tensor": true},
+      "shape": [],
+      "output": 42,
+      "T2": "float32"
+    },
+    {
+      "graph_name": "ConstantOfShape float32 0 output element",
+      "op_type": "ConstantOfShape",
+      "value": {"value": [42], "is_tensor": true},
+      "shape": [2, 0],
+      "output": [[], []],
+      "T2": "float32"
+    }
+  ],
+
+  "schema": [
+    {
+      "op_type": "ConstantOfShape",
+      "version": 9,
+      "attributes": {
+        "value": {"type": "T2"}
+      },
+      "inputs": {"shape": {"type": "T1"}}, // ONNX 1.5 wrongly names this tensor "input", but it's not. It's "shape" like Expand.
+      "outputs": {"output": {"type": "T2"}},
+      "types": {
+        "T1": ["int64"],
+        "T2": ["float32", "float16", "float64", "uint8", "uint16", "uint32", "uint64", "int8", "int16", "int32", "int64", "bool8"]
+      }
+    }
+  ]
+}

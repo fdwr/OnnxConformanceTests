@@ -1,0 +1,116 @@
+{
+    "tests": [
+      {
+        "op_type": "BitwiseOr",
+        "graph_name": "BitwiseOr",
+        "A": {"value": [-1, -2, 3]},
+        "B": {"value": [1, 0, 4]},
+        "C": {"value": [-1, -2, 7]},
+        "T": "int32"
+      },
+      {
+        "op_type": "BitwiseOr",
+        "graph_name": "BitwiseOr int64",
+        "A": {"value": [-1, -2, 3]},
+        "B": {"value": [1, 0, 4]},
+        "C": {"value": [-1, -2, 7]},
+        "T": "int64"
+      },
+      {
+        "op_type": "BitwiseOr",
+        "graph_name": "BitwiseOr int8",
+        "A": {"value": [-1, -2, 3]},
+        "B": {"value": [1, 0, 4]},
+        "C": {"value": [-1, -2, 7]},
+        "T": "int8"
+      },
+      {
+        "op_type": "BitwiseOr",
+        "graph_name": "BitwiseOr uint8",
+        "A": {"value": [1, 4, 5, 3]},
+        "B": {"value": [1, 2, 2, 1]},
+        "C": {"value": [1, 6, 7, 3]},
+        "T": "uint8"
+      },
+      {
+        "op_type": "BitwiseOr",
+        "graph_name": "BitwiseOr uint64",
+        "A": {"value": [10, 11, 12, 13]},
+        "B": {"value": [15, 7, 12, 9]},
+        "C": {"value": [15, 15, 12, 13]},
+        "T": "uint64"
+      },
+      {
+        "op_type": "BitwiseOr",
+        "graph_name": "BitwiseOr broadcastAB",
+        "A": {"value": [[10, 11],
+                        [12, 13],
+                        [14, 15],
+                        [16, 17]]},
+        "B": {"value": [15, 7]},
+        "C": {"value": [[15, 15],
+                        [15, 15],
+                        [15, 15],
+                        [31, 23]]},
+        "T": "int32"
+      },
+      {
+        "op_type": "BitwiseOr",
+        "graph_name": "BitwiseOr broadcastBA",
+        "A": {"value": [15, 7]},
+        "B": {"value": [[10, 11],
+                        [12, 13],
+                        [14, 15],
+                        [16, 17]]},
+        "C": {"value": [[15, 15],
+                        [15, 15],
+                        [15, 15],
+                        [31, 23]]},
+        "T": "int32"
+      },
+      {
+        "op_type": "BitwiseOr",
+        "graph_name": "BitwiseOr multidirectional_broadcastAB",
+        "A": {"value": [[10],
+                        [11],
+                        [12],
+                        [13]]},
+        "B": {"value": [15, 7]},
+        "C": {"value": [[15, 15],
+                        [15, 15],
+                        [15, 15],
+                        [15, 15]]},
+        "T": "int32"
+      },
+      {
+        "op_type": "BitwiseOr",
+        "graph_name": "BitwiseOr multidirectional_broadcastBA",
+        "A": {"value": [15, 7]},
+        "B": {"value": [[10],
+                        [11],
+                        [12],
+                        [13]]},
+        "C": {"value": [[15, 15],
+                        [15, 15],
+                        [15, 15],
+                        [15, 15]]},
+        "T": "int32"
+      }
+    ],
+  
+    "schema": [
+      {
+        "op_type": "BitwiseOr",
+        "version": 18,
+        "inputs": {
+          "A": {"type": "T"},
+          "B": {"type": "T"}
+        },
+        "outputs": {
+          "C": {"type": "T"}
+        },
+        "types": {"T": ["uint8", "uint16", "uint32", "uint64", "int8", "int16", "int32", "int64"]}
+      }
+    ]
+  }
+  

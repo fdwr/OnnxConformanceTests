@@ -1,0 +1,41 @@
+{
+  "tests": [
+    {
+      "graph_name": "DynamicQuantizeLinear",
+      "op_type": "DynamicQuantizeLinear",
+      "domain": "",
+      "version": 11,
+      "X": [0, 2, 3, 1000, -254, -1000],
+      "Y": {
+        "type": "uint8",
+        "dims": [6],
+        "value": [128, 128, 128, 255, 96, 0]
+      },
+      "Y_scale": {
+        "type": "float32",
+        "value": 7.843137741088867
+      },
+      "Y_zero_point": {
+        "type": "uint8",
+        "value": 128
+      },
+      "verification": {"ulp": 2}
+    }
+  ],
+
+  "schema": [
+    {
+      "op_type": "DynamicQuantizeLinear",
+      "domain": "",
+      "version": 11,
+      "inputs": {
+        "X": {"type": "float32"}
+      },
+      "outputs": {
+        "Y": {"type": "uint8"},
+        "Y_scale": {"type": "float32"},
+        "Y_zero_point": {"type": "uint8"}
+      }
+    }
+  ]
+}

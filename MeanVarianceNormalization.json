@@ -1,0 +1,130 @@
+{
+  "tests": [
+    {
+      "graph_name": "MeanVarianceNormalization v1 experimental float32",
+      "op_type": "MeanVarianceNormalization",
+      "version": 1,
+      "across_channels": 0,
+      "normalize_variance": 1,
+      "X": {"value": [[[[1, 2], [3, 4]]]]},
+      "Y": {"value": [[[[-1.34164, -0.447214], [0.447214, 1.34164]]]]},
+      "T": "float32",
+      "verification": {"ulp": 16384 /* ~0.001 RTOL */}
+    },
+    {
+      "graph_name": "MeanVarianceNormalization v1 experimental float16",
+      "op_type": "MeanVarianceNormalization",
+      "version": 1,
+      "across_channels": 0,
+      "normalize_variance": 1,
+      "X": {"value": [[[[1, 2], [3, 4]]]]},
+      "Y": {"value": [[[[-1.34164, -0.447214], [0.447214, 1.34164]]]]},
+      "T": "float16",
+      "verification": {"ulp": 1 /* 0.001 RTOL */}
+    },
+    {
+      "graph_name": "MeanVarianceNormalization v9 function axes 0 2 3 float32",
+      "op_type": "MeanVarianceNormalization",
+      "version": 9,
+      "axes": [0, 2, 3],
+      "X": {"value": [[[[1, 2], [3, 4]]]]},
+      "Y": {"value": [[[[-1.34164, -0.447214], [0.447214, 1.34164]]]]},
+      "T": "float32",
+      "verification": {"ulp": 16384 /* ~0.001 RTOL */}
+    },
+    {
+      "graph_name": "MeanVarianceNormalization v9 function axes 2 3 float32",
+      "op_type": "MeanVarianceNormalization",
+      "version": 9,
+      "axes": [2, 3], // Only height, width (no normalization across batch dimension)
+      "X": {"value": [ [[[1, 2], [3, 4]]], [[[5, 6], [7, 8]]] ]},
+      "Y": {"value": [ [[[-1.34164, -0.447214], [0.447214, 1.34164]]], [[[-1.34164, -0.447214], [0.447214, 1.34164]]] ]},
+      "T": "float32",
+      "verification": {
+        "ulp": 16384 /* ~0.001 RTOL */,
+        "executor_filter": ".*Cpu" // https://github.com/microsoft/onnxruntime/issues/1828
+      }
+    },
+    {
+      "graph_name": "MeanVarianceNormalization v9 function axes 0 float32",
+      "op_type": "MeanVarianceNormalization",
+      "version": 9,
+      "axes": [0], // Across batches but not height, width, or channel.
+      "X": {"value": [ [[[1, 2], [3, 4]]], [[[4, 3], [2, 1]]] ]},
+      "Y": {"value": [ [[[-1, -1], [1, 1]]], [[[1, 1], [-1, -1]]] ]},
+      "T": "float32",
+      "verification": {
+        "ulp": 16384 /* ~0.001 RTOL */,
+        "executor_filter": ".*Cpu" // https://github.com/microsoft/onnxruntime/issues/1828
+      }
+    },
+    {
+      "graph_name": "MeanVarianceNormalization 8D",
+      "op_type": "MeanVarianceNormalization",
+      "version": 9,
+      "axes": [0], // Across batches but not height, width, or channel. Pad upto 8D
+      "X": {"value": [ [[[[[[[1, 2], [3, 4]]]]]]], [[[[[[[4, 3], [2, 1]]]]]]] ]},
+      "Y": {"value": [ [[[[[[[-1, -1], [1, 1]]]]]]], [[[[[[[1, 1], [-1, -1]]]]]]] ]},
+      "T": "float32",
+      "verification": {
+        "ulp": 16384 /* ~0.001 RTOL */,
+        "executor_filter": ".*Cpu" // https://github.com/microsoft/onnxruntime/issues/1828
+      }
+    },
+    {
+      "graph_name": "MeanVarianceNormalization version 13",
+      "op_type": "MeanVarianceNormalization",
+      "version": 13,
+      "X": {"value": [[[[1, 2], [3, 4]]]]},
+      "Y": {"value": [[[[-1.34164, -0.447214], [0.447214, 1.34164]]]]},
+      "T": "float32",
+      "verification": {"ulp": 16384 /* ~0.001 RTOL */}
+    }
+  ],
+
+  "schema": [
+    {
+      "op_type": "MeanVarianceNormalization",
+      "version": 1,
+      "attributes": {
+        "across_channels": {"type": "int64"}, // default = 0
+        "normalize_variance": {"type": "int64"} // default = 1
+      },
+      "inputs": {"X": {"type": "T"}},
+      "outputs": {"Y": {"type": "T"}},
+      "types": {"T": ["float32", "float16", "float64"]}
+    },
+    {
+      // data_mean = np.mean(input_data, axes, keepdims=1)
+      // data_mean_squared = np.power(data_mean, 2)
+      // data_squared = np.power(input_data, 2)
+      // data_squared_mean = np.mean(data_squared, axes, keepdims=1)
+      // std = np.sqrt(data_squared_mean - data_mean_squared)
+      // expected_output = (input_data - data_mean) / (std + 1e-9)
+      "op_type": "MeanVarianceNormalization",
+      "version": 9,
+      "attributes": {
+        "axes": {"type": "int64"} // default = [0, 2, 3]
+      },
+      "inputs": {"X": {"type": "T"}},
+      "outputs": {"Y": {"type": "T"}},
+      "types": {"T": ["float32", "float16", "float64"]}
+    },
+    {
+      // data_mean = np.mean(input_data, axes, keepdims=1)
+      // data_mean_squared = np.power(data_mean, 2)
+      // data_squared = np.power(input_data, 2)
+      // data_squared_mean = np.mean(data_squared, axes, keepdims=1)
+      // std = np.sqrt(data_squared_mean - data_mean_squared)
+      // expected_output = (input_data - data_mean) / (std + 1e-9)
+      "op_type": "MeanVarianceNormalization",
+      "version": 13,
+      "attributes": {
+        "axes": {"type": "int64"} // default = [0, 2, 3]
+      },
+      "inputs": {"X": {"type": "T"}},
+      "outputs": {"Y": {"type": "T"}},
+      "types": {"T": ["float32", "float16", "float64", "bfloat16"]}
+    }
+  ]
+}

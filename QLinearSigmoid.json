@@ -1,0 +1,114 @@
+{
+    "tests": [
+      {
+        "graph_name": "QLinearSigmoid int8",
+        "op_type": "QLinearSigmoid",
+        "domain":  "com.microsoft",
+        "version": 1,
+        "X":
+        [
+          [
+            [1, 2, 3],
+            [1, 2, 3],
+            [3, 2, 1]
+          ]
+        ],
+        "X_scale": 0.24,
+        "X_zero_point": 0,
+        "Y_scale": 0.23,
+        "Y_zero_point": 0,
+        "Y":
+        [
+          [
+            [2, 3, 3],
+            [2, 3, 3],
+            [3, 3, 2]
+          ]
+        ],
+        "T1": "int8",
+        "T2": "float32",
+        "verification": { "ulp": 0}
+      },
+      {
+        "graph_name": "QLinearSigmoid uint8",
+        "op_type": "QLinearSigmoid",
+        "domain":  "com.microsoft",
+        "version": 1,
+        "X":
+        [
+          [
+            [1, 2, 3],
+            [4, 5, 6],
+            [7, 8, 9]
+          ]
+        ],
+        "X_scale": 0.03201739490032196,
+        "X_zero_point": 0,
+        "Y_scale": 0.003920453134924173,
+        "Y_zero_point": 0,
+        "Y":
+        [
+          [
+            [130, 132, 134],
+            [136, 138, 140],
+            [142, 144, 146]
+          ]
+        ],
+        "T1": "uint8",
+        "T2": "float32",
+        "verification": { "ulp": 0}
+      },
+      {
+        "graph_name": "QLinearSigmoid non-zero x_zero_point",
+        "op_type": "QLinearSigmoid",
+        "domain":  "com.microsoft",
+        "version": 1,
+        "X":
+        [
+          [
+            [1, 2, 3],
+            [4, 5, 6],
+            [7, 8, 9]
+          ]
+        ],
+        "X_scale": 0.03201739490032196,
+        "X_zero_point": 129,
+        "Y_scale": 0.003920453134924173,
+        "Y_zero_point": 0,
+        "Y":
+        [
+          [
+            [4, 4, 4],
+            [5, 5, 5],
+            [5, 5, 5]
+          ]
+        ],
+        "T1": "uint8",
+        "T2": "float32",
+        "verification": { "ulp": 0}
+      }
+    ],
+  
+    "schema": [
+      {
+        "op_type": "QLinearSigmoid",
+        "version": 1,
+        "domain": "com.microsoft",
+        "inputs": {
+          "X": {"type": "T1"},
+          "X_scale": {"type": "T2"},
+          "X_zero_point": {"type": "T1"},
+          "Y_scale": {"type": "T2"},
+          "Y_zero_point": {"type": "T1"}
+        },
+        "outputs": {
+          "Y": {"type": "T1"}
+        },
+        "types": {
+          "T1": ["uint8", "int8"],
+          "T2": ["float32"]
+        }
+      }
+    ]
+  }
+  

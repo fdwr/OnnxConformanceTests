@@ -1,0 +1,122 @@
+{
+  "tests":[
+    // No axes defined - implicitly all axes.
+    {
+      "op_type": "ReduceL2",
+      "keepdims": 1,
+      "data": [[[1, 2], [3, 4]], [[5, 6], [7, 8]], [[9, 10], [11, 12]]],
+      "reduced": [[[25.4951]]],
+      "T": "float32",
+      "verification": {"ulp": 1024 /* ~0.0001 RTOL */}
+    },
+    // All axes specified.
+    {
+      "op_type": "ReduceL2",
+      "axes": [0, 1, 2],
+      "keepdims": 1,
+      "data": [[[1, 2], [3, 4]], [[5, 6], [7, 8]], [[9, 10], [11, 12]]],
+      "reduced": [[[25.4951]]],
+      "T": "float32",
+      "verification": {"ulp": 1024 /* ~0.0001 RTOL */}
+    },
+    // Single axis removed, removing reduced dimensions.
+    {
+      "op_type": "ReduceL2",
+      "axes": [1],
+      "keepdims": 0,
+      "data": [[[1, 2], [3, 4]], [[5, 6], [7, 8]], [[9, 10], [11, 12]]],
+      "reduced": [[3.16228, 4.47214], [8.60233, 10], [14.2127, 15.620]],
+      "T": "float32",
+      "verification": {"ulp": 1024 /* ~0.0001 RTOL */}
+    },
+    // Single axis removed, keeping reduced dimensions as 1's.
+    {
+      "op_type": "ReduceL2",
+      "axes": [1],
+      "keepdims": 1,
+      "data": [[[1, 2], [3, 4]], [[5, 6], [7, 8]], [[9, 10], [11, 12]]],
+      "reduced": [[[3.16228, 4.47214]], [[8.60233, 10]], [[14.2127, 15.620]]],
+      "T": "float32",
+      "verification": {"ulp": 1024 /* ~0.0001 RTOL */}
+    },
+    // Single axis removed via negative axis, keeping reduced dimensions as 1's.
+    {
+      "op_type": "ReduceL2",
+      "axes": [-2],
+      "keepdims": 1,
+      "data": [[[1, 2], [3, 4]], [[5, 6], [7, 8]], [[9, 10], [11, 12]]],
+      "reduced": [[[3.16228, 4.47214]], [[8.60233, 10]], [[14.2127, 15.620]]],
+      "T": "float32",
+      "verification": {"ulp": 1024 /* ~0.0001 RTOL */}
+    },
+    // float16.
+    {
+      "op_type": "ReduceL2",
+      "axes": [1],
+      "keepdims": 1,
+      "data": [[[1, 2], [3, 4]], [[5, 6], [7, 8]], [[9, 10], [11, 12]]],
+      "reduced": [[[3.16228, 4.47214]], [[8.60233, 10]], [[14.2127, 15.620]]],
+      "T": "float16",
+      "verification": {"ulp": 1 /* 0.001 RTOL */}
+    },
+    {
+      "graph_name": "ReduceL2 version 13",
+      "op_type": "ReduceL2",
+      "version": 13,
+      "keepdims": 1,
+      "data": [[[1, 2], [3, 4]], [[5, 6], [7, 8]], [[9, 10], [11, 12]]],
+      "reduced": [[[25.4951]]],
+      "T": "float32",
+      "verification": {"ulp": 1024 /* ~0.0001 RTOL */}
+    },
+    {
+      "op_type": "ReduceL2",
+      "graph_name": "ReduceL2 version 18 axes",
+      "version": 18,
+      "axes": [1],
+      "keepdims": 0,
+      "data": [[[1, 2], [3, 4]], [[5, 6], [7, 8]], [[9, 10], [11, 12]]],
+      "reduced": [[3.16228, 4.47214], [8.60233, 10], [14.2127, 15.620]],
+      "T": "float32",
+      "verification": {"ulp": 1024 /* ~0.0001 RTOL */}
+    },
+  ],
+
+  "schema": [
+    {
+      "op_type": "ReduceL2",
+      "version": 1,
+      "attributes": {
+        "axes": {"type": "int64"}, // Default = all axes
+        "keepdims": {"type": "int64"} // Default = 1
+      },
+      "inputs" : {"data": {"type": "T"}},
+      "outputs": {"reduced": {"type": "T"}},
+      "types": {"T": ["float32", "float16", "float64", "uint32", "uint64", "int32", "int64"]}
+    },
+    {
+      "op_type": "ReduceL2",
+      "version": 13,
+      "attributes": {
+        "axes": {"type": "int64"}, // Default = all axes
+        "keepdims": {"type": "int64"} // Default = 1
+      },
+      "inputs" : {"data": {"type": "T"}},
+      "outputs": {"reduced": {"type": "T"}},
+      "types": {"T": ["float32", "float16", "float64", "uint32", "uint64", "int32", "int64", "bfloat16"]}
+    },
+    {
+      "op_type": "ReduceL2",
+      "version": 18,
+      "attributes": {
+        "keepdims": {"type": "int64"} // Default = 1
+      },
+      "inputs" : {
+        "data": {"type": "T"},
+        "axes": {"type": "int64"}, // Default = all axes
+      },
+      "outputs": {"reduced": {"type": "T"}},
+      "types": {"T": ["float32", "float16", "float64", "uint32", "uint64", "int32", "int64", "bfloat16"]}
+    }
+  ]
+}

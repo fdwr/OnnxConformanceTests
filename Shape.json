@@ -1,0 +1,182 @@
+{
+  "tests": [
+    // 1D.
+    {
+      "graph_name": "Shape 1D float32",
+      "op_type": "Shape",
+      "data": [1, 2, 3, 4, 5, 6],
+      "shape": [6],
+      "T": "float32"
+    },
+    // 2D.
+    {
+      "graph_name": "Shape 2D float32",
+      "op_type": "Shape",
+      "data": [[1, 2, 3], [4, 5, 6]],
+      "shape": [2, 3],
+      "T": "float32"
+    },
+    // 0D.
+    {
+      "graph_name": "Shape 0D float32",
+      "op_type": "Shape",
+      "data": 1,
+      "shape": [],
+      "T": "float32"
+    },
+    // 5D.
+    {
+      "graph_name": "Shape 5D float32",
+      "op_type": "Shape",
+      "data": [[[[[1, 2, 3], [4, 5, 6]]]], [[[[1, 2, 3], [4, 5, 6]]]]],
+      "shape": [2,1,1,2,3],
+      "T": "float32"
+    },
+
+    // Verify all data types.
+    {
+      "graph_name": "Shape 2D float16",
+      "op_type": "Shape",
+      "data": [[1, 2, 3], [4, 5, 6]],
+      "shape": [2, 3],
+      "T": "float16"
+    },
+    {
+      "graph_name": "Shape 2D float64",
+      "op_type": "Shape",
+      "data": [[1, 2, 3], [4, 5, 6]],
+      "shape": [2, 3],
+      "T": "float64"
+    },
+    {
+      "graph_name": "Shape 2D int8",
+      "op_type": "Shape",
+      "data": [[1, 2, 3], [4, 5, 6]],
+      "shape": [2, 3],
+      "T": "int8"
+    },
+    {
+      "graph_name": "Shape 2D uint8",
+      "op_type": "Shape",
+      "data": [[1, 2, 3], [4, 5, 6]],
+      "shape": [2, 3],
+      "T": "uint8"
+    },
+    {
+      "graph_name": "Shape 2D int16",
+      "op_type": "Shape",
+      "data": [[1, 2, 3], [4, 5, 6]],
+      "shape": [2, 3],
+      "T": "int16"
+    },
+    {
+      "graph_name": "Shape 2D uint16",
+      "op_type": "Shape",
+      "data": [[1, 2, 3], [4, 5, 6]],
+      "shape": [2, 3],
+      "T": "uint16"
+    },
+    {
+      "graph_name": "Shape 2D int32",
+      "op_type": "Shape",
+      "data": [[1, 2, 3], [4, 5, 6]],
+      "shape": [2, 3],
+      "T": "int32"
+    },
+    {
+      "graph_name": "Shape 2D uint32",
+      "op_type": "Shape",
+      "data": [[1, 2, 3], [4, 5, 6]],
+      "shape": [2, 3],
+      "T": "uint32"
+    },
+    {
+      "graph_name": "Shape 2D int64",
+      "op_type": "Shape",
+      "data": [[1, 2, 3], [4, 5, 6]],
+      "shape": [2, 3],
+      "T": "int64"
+    },
+    {
+      "graph_name": "Shape 2D uint64",
+      "op_type": "Shape",
+      "data": [[1, 2, 3], [4, 5, 6]],
+      "shape": [2, 3],
+      "T": "uint64"
+    },
+    {
+      "graph_name": "Shape 2D bool8",
+      "op_type": "Shape",
+      "data": [[1, 2, 3], [4, 5, 6]],
+      "shape": [2, 3],
+      "T": "bool8"
+    },
+    {
+      "graph_name": "Shape-13",
+      "op_type": "Shape",
+      "version": 13,
+      "data": [1, 2, 3, 4, 5, 6],
+      "shape": [6],
+      "T": "float32"
+    },
+    {
+      "graph_name": "Shape-15 negative start",
+      "op_type": "Shape",
+      "version": 15,
+      "data": [[[1, 2, 3], [4, 5, 6]]],
+      "shape": [2,3], // slice of [1,2,3],
+      "start": -2,
+      "end": 3,
+      "T": "float32"
+    },
+    {
+      "graph_name": "Shape-15 negative end",
+      "op_type": "Shape",
+      "version": 15,
+      "data": [[[1, 2, 3], [4, 5, 6]]],
+      "shape": [1,2], // slice of [1,2,3],
+      "start": 0,
+      "end": -1,
+      "T": "float32"
+    }
+  ],
+
+  "schema": [
+    {
+      "op_type": "Shape",
+      "version": 1,
+      "attributes": {},
+      "inputs": {"data": {"type": "T"}},
+      "outputs": {"shape": {"type": "T1"}},
+      "types": {
+        "T": ["float32", "float16", "float64", "uint8", "uint16", "uint32", "uint64", "int8", "int16", "int32", "int64", "bool8"],
+        "T1": ["int64"]
+      }
+    },
+    {
+      "op_type": "Shape",
+      "version": 13,
+      "attributes": {},
+      "inputs": {"data": {"type": "T"}},
+      "outputs": {"shape": {"type": "T1"}},
+      "types": {
+        "T": ["float32", "float16", "float64", "uint8", "uint16", "uint32", "uint64", "int8", "int16", "int32", "int64", "bool8", "string8", "bfloat16"],
+        "T1": ["int64"]
+      }
+    },
+    {
+      "op_type": "Shape",
+      "version": 15,
+      "attributes": {
+        "start": {"type": "int64"},
+        "end": {"type": "int64"}
+      },
+      "inputs": {"data": {"type": "T"}},
+      "outputs": {"shape": {"type": "T1"}},
+      "types": {
+        "T": ["float32", "float16", "float64", "uint8", "uint16", "uint32", "uint64", "int8", "int16", "int32", "int64", "bool8", "string8", "bfloat16"],
+        "T1": ["int64"]
+      }
+    }
+  ]
+}

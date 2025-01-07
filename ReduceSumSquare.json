@@ -1,0 +1,153 @@
+{
+  "tests":[
+    // No axes defined - implicitly all axes.
+    {
+      "op_type": "ReduceSumSquare",
+      "keepdims": 1,
+      "data": [[[1, 2], [3, 4]], [[5, 6], [7, 8]], [[9, 10], [11, 12]]],
+      "reduced": [[[650]]],
+      "T": "float32"
+    },
+    // All axes specified.
+    {
+      "op_type": "ReduceSumSquare",
+      "axes": [0, 1, 2],
+      "keepdims": 1,
+      "data": [[[1, 2], [3, 4]], [[5, 6], [7, 8]], [[9, 10], [11, 12]]],
+      "reduced": [[[650]]],
+      "T": "float32"
+    },
+    // Single axis removed, removing reduced dimensions.
+    {
+      "op_type": "ReduceSumSquare",
+      "axes": [1],
+      "keepdims": 0,
+      "data": [[[1, 2], [3, 4]], [[5, 6], [7, 8]], [[9, 10], [11, 12]]],
+      "reduced": [[10, 20], [74, 100], [202, 244]],
+      "T": "float32"
+    },
+    // Single axis removed, keeping reduced dimensions as 1's.
+    {
+      "op_type": "ReduceSumSquare",
+      "axes": [1],
+      "keepdims": 1,
+      "data": [[[1, 2], [3, 4]], [[5, 6], [7, 8]], [[9, 10], [11, 12]]],
+      "reduced": [[[10, 20]], [[74, 100]], [[202, 244]]],
+      "T": "float32"
+    },
+    // Single axis removed via negative axis, keeping reduced dimensions as 1's.
+    {
+      "op_type": "ReduceSumSquare",
+      "axes": [-2],
+      "keepdims": 1,
+      "data": [[[1, 2], [3, 4]], [[5, 6], [7, 8]], [[9, 10], [11, 12]]],
+      "reduced": [[[10, 20]], [[74, 100]], [[202, 244]]],
+      "T": "float32"
+    },
+    // float16.
+    {
+      "op_type": "ReduceSumSquare",
+      "axes": [1],
+      "keepdims": 1,
+      "data": [[[1, 2], [3, 4]], [[5, 6], [7, 8]], [[9, 10], [11, 12]]],
+      "reduced": [[[10, 20]], [[74, 100]], [[202, 244]]],
+      "T": "float16"
+    },
+    // int32.
+    {
+      "op_type": "ReduceSumSquare",
+      "axes": [1],
+      "keepdims": 1,
+      "data": [[[1, 2], [3, 4]], [[5, 6], [7, 8]], [[9, 10], [11, 12]]],
+      "reduced": [[[10, 20]], [[74, 100]], [[202, 244]]],
+      "T": "int32"
+    },
+    // uint32.
+    {
+      "op_type": "ReduceSumSquare",
+      "axes": [1],
+      "keepdims": 1,
+      "data": [[[1, 2], [3, 4]], [[5, 6], [7, 8]], [[9, 10], [11, 12]]],
+      "reduced": [[[10, 20]], [[74, 100]], [[202, 244]]],
+      "T": "uint32",
+      "verification": { "executor_filter": ".*Cpu" }
+    },
+    // int64.
+    {
+      "op_type": "ReduceSumSquare",
+      "axes": [1],
+      "keepdims": 1,
+      "data": [[[1, 2], [3, 4]], [[5, 6], [7, 8]], [[9, 10], [11, 12]]],
+      "reduced": [[[10, 20]], [[74, 100]], [[202, 244]]],
+      "T": "int64",
+      "verification": { "executor_filter": ".*Cpu" }
+    },
+    // uint64.
+    {
+      "op_type": "ReduceSumSquare",
+      "axes": [1],
+      "keepdims": 1,
+      "data": [[[1, 2], [3, 4]], [[5, 6], [7, 8]], [[9, 10], [11, 12]]],
+      "reduced": [[[10, 20]], [[74, 100]], [[202, 244]]],
+      "T": "uint64",
+      "verification": { "executor_filter": ".*Cpu" }
+    },
+    {
+      "graph_name": "ReduceSumSquare version 13",
+      "op_type": "ReduceSumSquare",
+      "version": 13,
+      "keepdims": 1,
+      "data": [[[1, 2], [3, 4]], [[5, 6], [7, 8]], [[9, 10], [11, 12]]],
+      "reduced": [[[650]]],
+      "T": "float32"
+    },
+    {
+      "graph_name": "ReduceSumSquare version 18 axes",
+      "op_type": "ReduceSumSquare",
+      "version": 18,
+      "axes": [1],
+      "keepdims": 0,
+      "data": [[[1, 2], [3, 4]], [[5, 6], [7, 8]], [[9, 10], [11, 12]]],
+      "reduced": [[10, 20], [74, 100], [202, 244]],
+      "T": "float32"
+    }
+  ],
+
+  "schema": [
+    {
+      "op_type": "ReduceSumSquare",
+      "version": 1,
+      "attributes": {
+        "axes": {"type": "int64"}, // Default = all axes
+        "keepdims": {"type": "int64"} // Default = 1
+      },
+      "inputs" : {"data": {"type": "T"}},
+      "outputs": {"reduced": {"type": "T"}},
+      "types": {"T": ["float32", "float16", "float64", "uint32", "uint64", "int32", "int64"]}
+    },
+    {
+      "op_type": "ReduceSumSquare",
+      "version": 13,
+      "attributes": {
+        "axes": {"type": "int64"}, // Default = all axes
+        "keepdims": {"type": "int64"} // Default = 1
+      },
+      "inputs" : {"data": {"type": "T"}},
+      "outputs": {"reduced": {"type": "T"}},
+      "types": {"T": ["float32", "float16", "float64", "uint32", "uint64", "int32", "int64", "bfloat16"]}
+    },
+    {
+      "op_type": "ReduceSumSquare",
+      "version": 18,
+      "attributes": {
+        "keepdims": {"type": "int64"} // Default = 1
+      },
+      "inputs" : {
+        "data": {"type": "T"},
+        "axes": {"type": "int64"}, // Default = all axes
+      },
+      "outputs": {"reduced": {"type": "T"}},
+      "types": {"T": ["float32", "float16", "float64", "uint32", "uint64", "int32", "int64", "bfloat16"]}
+    }
+  ]
+}

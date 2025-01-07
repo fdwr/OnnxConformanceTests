@@ -1,0 +1,38 @@
+{
+  "tests": [
+    // float32.
+    {
+      "op_type": "Crop",
+      "input": [[[ [2, 3, 4, 5, 6], [7, 8, 9, 10, 11], [12, 13, 14, 15, 16] ]]],
+      "output": [[[ [8, 9] ]]],
+      "border": [1, 1, 2, 1],
+      "T": "float32"
+    },
+    // float16.
+    {
+      "op_type": "Crop",
+      "input": [[[ [2, 3, 4, 5, 6], [7, 8, 9, 10, 11], [12, 13, 14, 15, 16] ]]],
+      "output": [[[ [8, 9] ]]],
+      "border": [1, 1, 2, 1],
+      "T": "float16"
+    }
+  ],
+
+  "schema": [
+    {
+      "op_type": "Crop",
+      "version": 1,
+      "attributes": {
+        "border": {"type": "int64"}, // list, {leftBorder, topBorder, rightBorder, bottomBorder}
+        "scale": {"type": "int64"} // list, optional, 1D values of {height, width}
+      },
+      "inputs": {
+        "input": {"type": "T"} // [N,C,H,W]
+      },
+      "outputs": {
+        "output": {"type": "T"}
+      },
+      "types": {"T": ["float32", "float16", "float64"]}
+    }
+  ]
+}

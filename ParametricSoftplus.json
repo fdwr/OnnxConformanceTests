@@ -1,0 +1,48 @@
+{
+  "tests": [
+    // Nop alpha and beta.
+    {
+      "op_type": "ParametricSoftplus",
+      "alpha": 1,
+      "beta": 1,
+      "X": [0, 1, 2, -1],
+      "Y": [0.693147181, 1.313261688, 2.126928011, 0.313261688],
+      "T": "float32",
+      "verification": {"ulp": 16384 /* ~0.001 RTOL */}
+    },
+    // float32.
+    {
+      "op_type": "ParametricSoftplus",
+      "alpha": 2,
+      "beta": 3,
+      "X": [0, 1, 2, -1],
+      "Y": [1.38629, 6.09717, 12.005, 0.0971747],
+      "T": "float32",
+      "verification": {"ulp": 16384 /* ~0.001 RTOL */}
+    },
+    // float16.
+    {
+      "op_type": "ParametricSoftplus",
+      "alpha": 2,
+      "beta": 3,
+      "X": [0, 1, 2, -1],
+      "Y": [1.38629, 6.09717, 12.005, 0.0971747],
+      "T": "float16",
+      "verification": {"ulp": 16384 /* ~0.001 RTOL */}
+    }
+  ],
+
+  "schema": [
+    {
+      "op_type": "ParametricSoftplus", // y = alpha * ln(exp(beta * x) + 1)
+      "version": 1,
+      "attributes": {
+        "alpha": {"type": "float32"},
+        "beta": {"type": "float32"}
+      },
+      "inputs": {"X": {"type": "T"}},
+      "outputs": {"Y": {"type": "T"}},
+      "types": {"T": ["float32", "float16", "float64"]}
+    }
+  ]
+}

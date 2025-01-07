@@ -1,0 +1,37 @@
+{
+  "tests": [
+    {
+      "graph_name": "HardSwish-14 float32",
+      "op_type": "HardSwish",
+      "version": 14,
+      "X": [0, 1, 2, 3, -1, -4],
+      "Y": [0, 0.6666666, 1.6666666, 3, -0.3333333, 0],
+      "T": "float32",
+      "verification": { "executor_filter": ".*Cpu", "ulp": 1}
+    },
+    {
+      "graph_name": "HardSwish-14 float16",
+      "op_type": "HardSwish",
+      "version": 14,
+      "X": [0, 1, 2, 3, -1, -4],
+      "Y": [0, 0.6666666, 1.6666666, 3, -0.3333333, 0],
+      "T": "float16",
+      "verification": { "executor_filter": ".*Cpu", "ulp": 1}
+    }
+  ],
+
+  "schema": [
+    {
+      "op_type": "HardSwish", // y = x * max(0, min(1, alpha * x + beta)), where alpha = 1/6 and beta = 0.5.
+      "version": 14,
+      "attributes": {},
+      "inputs": {
+        "X": {"type": "T"}
+      },
+      "outputs": {
+        "Y": {"type": "T"}
+      },
+      "types": {"T": ["float32", "float16", "float64"]}
+    }
+  ]
+}

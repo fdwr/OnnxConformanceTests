@@ -1,0 +1,84 @@
+{
+  "tests": [
+    // Single batch.
+    {
+      "op_type": "MaxUnpool",
+      "version": 9,
+      "kernel_shape": [2, 2],
+      "strides": [2, 2],
+      "X": [[[[5, 6],
+              [7, 8]]]],
+      "I": [[[[ 6, 8],
+              [16, 18]]]],
+      "output_shape": [1, 1, 5, 5],
+      "Y": [[[[0, 0, 0, 0, 0],
+              [0, 5, 0, 6, 0],
+              [0, 0, 0, 0, 0],
+              [0, 7, 0, 8, 0],
+              [0, 0, 0, 0, 0]]]],
+      "T1": "float32"
+    },
+    {
+      "op_type": "MaxUnpool",
+      "version": 11,
+      "kernel_shape": [2, 2],
+      "strides": [2, 2],
+      "X": [[[[5, 6],
+              [7, 8]]]],
+      "I": [[[[ 6, 8],
+              [16, 18]]]],
+      "output_shape": [1, 1, 5, 5],
+      "Y": [[[[0, 0, 0, 0, 0],
+              [0, 5, 0, 6, 0],
+              [0, 0, 0, 0, 0],
+              [0, 7, 0, 8, 0],
+              [0, 0, 0, 0, 0]]]],
+      "T1": "float32"
+    }
+  ],
+
+  "schema": [
+    {
+      "op_type": "MaxUnpool",
+      "version": 9,
+      "attributes": {
+        "kernel_shape": {"type": "int64"}, // list of ints (required)
+        "pads": {"type": "int64"}, // list of ints. Defaults to 0's.
+        "strides": {"type": "int64"} // list of ints. Defaults to 1's.
+      },
+      "inputs": {
+        "X": {"type": "T1"},
+        "I": {"type": "T2"},
+        "output_shape": {"type": "T2"}
+      },
+      "outputs": {
+        "Y": {"type": "T1"}
+      },
+      "types": {
+        "T1": ["float32", "float16", "float64"],
+        "T2": ["int64"]
+      }
+    },
+    {
+      "op_type": "MaxUnpool",
+      "version": 11, // No difference from 9 (except clarification that strides default to 1).
+      "attributes": {
+        "kernel_shape": {"type": "int64"}, // list of ints (required)
+        "pads": {"type": "int64"}, // list of ints. Defaults to 0's.
+        "strides": {"type": "int64"} // list of ints. Defaults to 1's.
+      },
+      "inputs": {
+        "X": {"type": "T1"},
+        "I": {"type": "T2"},
+        "output_shape": {"type": "T2"}
+      },
+      "outputs": {
+        "Y": {"type": "T1"}
+      },
+      "types": {
+        "T1": ["float32", "float16", "float64"],
+        "T2": ["int64"]
+      }
+    }
+  ]
+}

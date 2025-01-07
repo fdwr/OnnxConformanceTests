@@ -1,0 +1,229 @@
+{
+  "tests": [
+    {
+      "graph_name": "Upsample 1D nearest 2x",
+      "op_type": "Upsample",
+      "mode": "nearest",
+      "scales": [2],
+      "X": [1, 2, 3, 4, 5],
+      "Y": [1, 1, 2, 2, 3, 3, 4, 4, 5, 5],
+      "T": "float32"
+    },
+    {
+      "graph_name": "Upsample 1D linear nop",
+      "op_type": "Upsample",
+      "mode": "linear",
+      "scales": [1,1,1,1],
+      "X": [[[[1, 2, 3, 4, 5]]]],
+      "Y": [[[[1, 2, 3, 4, 5]]]],
+      "T": "float32"
+    },
+    {
+      "graph_name": "Upsample 1D wrapped in 4D nearest float32",
+      "op_type": "Upsample",
+      "mode": "nearest",
+      "scales": [1,1,1,2],
+      "X": [[[[1, 2, 3, 4, 5]]]],
+      "Y": [[[[1, 1, 2, 2, 3, 3, 4, 4, 5, 5]]]],
+      "T": "float32"
+    },
+    {
+      "verification": {"executor_filters": [".*Cpu"]}, // ORT version 0.4 uses coordinate_transformation_mode asymmetric, not half_pixel.
+      "graph_name": "Upsample 1D wrapped in 4D linear float16 half_pixel",
+      "op_type": "Upsample",
+      "mode": "linear",
+      "scales": [1,1,1,2],
+      "X": [[[[1, 2, 3, 4, 5]]]],
+      "Y": [[[[1, 1.25, 1.75, 2.25, 2.75, 3.25, 3.75, 4.25, 4.75, 5]]]],
+      "T": "float16"
+    },
+    {
+      "verification": {"executor_filters": [".*DirectX"]}, // DirectML Vibranium uses half_pixel by default, not asymmetric.
+      "graph_name": "Upsample 1D wrapped in 4D linear float16 asymmetric",
+      "op_type": "Upsample",
+      "mode": "linear",
+      "scales": [1,1,1,2],
+      "X": [[[[1, 2, 3, 4, 5]]]],
+      "Y": [[[[1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5, 5]]]],
+      "T": "float16"
+    },
+    {
+      "graph_name": "Upsample 2D 2,2 to 4,6 nearest",
+      "op_type": "Upsample",
+      "mode": "nearest",
+      "scales": [3, 4],
+      "X": [[1, 2],
+            [3, 4]],
+      "Y": [[1, 1, 1, 1, 2, 2, 2, 2],
+            [1, 1, 1, 1, 2, 2, 2, 2],
+            [1, 1, 1, 1, 2, 2, 2, 2],
+            [3, 3, 3, 3, 4, 4, 4, 4],
+            [3, 3, 3, 3, 4, 4, 4, 4],
+            [3, 3, 3, 3, 4, 4, 4, 4]],
+      "T": "float32"
+    },
+    {
+      "graph_name": "Upsample 3D 1,2,2 to 4,6 nearest",
+      "op_type": "Upsample",
+      "mode": "nearest",
+      "scales": [1, 2, 3],
+      "X": [[[1, 2],
+             [3, 4]]],
+      "Y": [[[1, 1, 1, 2, 2, 2],
+             [1, 1, 1, 2, 2, 2],
+             [3, 3, 3, 4, 4, 4],
+             [3, 3, 3, 4, 4, 4]]],
+      "T": "float32"
+    },
+    {
+      "graph_name": "Upsample 4D 1,1,3,4 to 1,1,6,8 nearest",
+      "op_type": "Upsample",
+      "mode": "nearest",
+      "scales": [1, 1, 3, 4],
+      "X": [[[[1, 2],
+              [3, 4]]]],
+      "Y": [[[[1, 1, 1, 1, 2, 2, 2, 2],
+              [1, 1, 1, 1, 2, 2, 2, 2],
+              [1, 1, 1, 1, 2, 2, 2, 2],
+              [3, 3, 3, 3, 4, 4, 4, 4],
+              [3, 3, 3, 3, 4, 4, 4, 4],
+              [3, 3, 3, 3, 4, 4, 4, 4]]]],
+      "T": "float32"
+    },
+    {
+      "graph_name": "Upsample 5D with 2D upsampling inside 5D",
+      "op_type": "Upsample",
+      "mode": "nearest",
+      "scales": [1, 1, 1, 3, 4],
+      "X": [[[[[1, 2],
+               [3, 4]]]]],
+      "Y": [[[[[1, 1, 1, 1, 2, 2, 2, 2],
+               [1, 1, 1, 1, 2, 2, 2, 2],
+               [1, 1, 1, 1, 2, 2, 2, 2],
+               [3, 3, 3, 3, 4, 4, 4, 4],
+               [3, 3, 3, 3, 4, 4, 4, 4],
+               [3, 3, 3, 3, 4, 4, 4, 4]]]]],
+      "T": "float32"
+    },
+    {
+      "graph_name": "Upsample 2D with fractional size 2,2 to 5,7 by 2.5,3.5 nearest half_pixel round_halves_down float32",
+      "op_type": "Upsample",
+      "mode": "nearest",
+      "scales": [2.5, 3.5],
+      "X": [[1, 2],
+            [3, 4]],
+      "Y": [[1, 1, 1, 1, 2, 2, 2],
+            [1, 1, 1, 1, 2, 2, 2],
+            [1, 1, 1, 1, 2, 2, 2],
+            [3, 3, 3, 3, 4, 4, 4],
+            [3, 3, 3, 3, 4, 4, 4]],
+      "T": "float32"
+    },
+    {
+      "graph_name": "Upsample 2D with fractional size 2,2 to 5,7 by 2.6,3.6 nearest half_pixel round_halves_down float32",
+      "op_type": "Upsample",
+      "mode": "nearest",
+      "scales": [2.6, 3.6],
+      "X": [[1, 2],
+            [3, 4]],
+      "Y": [[1, 1, 1, 1, 2, 2, 2],
+            [1, 1, 1, 1, 2, 2, 2],
+            [1, 1, 1, 1, 2, 2, 2],
+            [3, 3, 3, 3, 4, 4, 4],
+            [3, 3, 3, 3, 4, 4, 4]],
+      "T": "float32"
+    },
+
+    // Test types
+    {
+      "graph_name": "Upsample 1D 2x nearest float16",
+      "op_type": "Upsample",
+      "mode": "nearest",
+      "scales": [2],
+      "X": [1, 2, 3, 4, 5],
+      "Y": [1, 1, 2, 2, 3, 3, 4, 4, 5, 5],
+      "T": "float16"
+    },
+    {
+      "graph_name": "Upsample 1D 2x nearest uint8",
+      "op_type": "Upsample",
+      "mode": "nearest",
+      "scales": [2],
+      "X": [1, 2, 3, 4, 5],
+      "Y": [1, 1, 2, 2, 3, 3, 4, 4, 5, 5],
+      "T": "uint8"
+    },
+    {
+      "graph_name": "Upsample 1D 2x nearest int32",
+      "op_type": "Upsample",
+      "mode": "nearest",
+      "scales": [2],
+      "X": [1, 2, 3, 4, 5],
+      "Y": [1, 1, 2, 2, 3, 3, 4, 4, 5, 5],
+      "T": "int32" // uint32 is not supported by ONNX Runtime in 19h1, but it's not that useful anyway.
+    },
+    {
+      "graph_name": "Upsample 1D v9 nearest float32",
+      "op_type": "Upsample",
+      "version": 9,
+      "mode": "nearest",
+      "X": [1, 2, 3, 4, 5],
+      "scales": {"value": [2], "use_variable_length_values": true},
+      "Y": [1, 1, 2, 2, 3, 3, 4, 4, 5, 5],
+      "T": "float32"
+    },
+    {
+      // This operator is deprecated and will not run ONNX conformance tests
+      // in this opset or above.
+      "verification": {"executor_filters": [".*"]},
+      "graph_name": "Upsample version 13",
+      "op_type": "Upsample",
+      "version": 13,
+      "mode": "nearest",
+      "scales": [2],
+      "X": [1, 2, 3, 4, 5],
+      "Y": [1, 1, 2, 2, 3, 3, 4, 4, 5, 5],
+      "T": "float32"
+    }
+  ],
+
+  "schema": [
+    {
+      "op_type": "Upsample",
+      "version": 7,
+      "attributes": {
+        "mode": {"type": "string8"}, // "nearest", "linear"
+        "scales": {"type": "float32"}
+      },
+      "inputs": {"X": {"type": "T"}},
+      "outputs": {"Y": {"type": "T"}},
+      "types": {"T": ["float32", "float16", "float64", "uint8", "uint16", "uint32", "uint64", "int8", "int16", "int32", "int64", "bool8"]}
+    },
+    {
+      "op_type": "Upsample",
+      "version": 9, // v9 'scales' comes from tensor rather than 'scales' attribute.
+      "attributes": {
+        "mode": {"type": "string8"} // "nearest", "linear"
+      },
+      "inputs": {
+        "X": {"type": "T"},
+        "scales": {"type": "float32"}
+      },
+      "outputs": {"Y": {"type": "T"}},
+      "types": {"T": ["float32", "float16", "float64", "uint8", "uint16", "uint32", "uint64", "int8", "int16", "int32", "int64", "bool8"]}
+    },
+    {
+      "op_type": "Upsample",
+      "version": 13, // same as v9 except data type
+      "attributes": {
+        "mode": {"type": "string8"} // "nearest", "linear"
+      },
+      "inputs": {
+        "X": {"type": "T"},
+        "scales": {"type": "float32"}
+      },
+      "outputs": {"Y": {"type": "T"}},
+      "types": {"T": ["float32", "float16", "float64", "uint8", "uint16", "uint32", "uint64", "int8", "int16", "int32", "int64", "bool8", "bfloat16"]}
+    }
+  ]
+}

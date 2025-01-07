@@ -1,0 +1,208 @@
+{
+  "tests": [
+    {
+      "graph_name": "Sum float32 2 inputs",
+      "op_type": "Sum",
+      "version": 6,
+      "data_0": [2, -4, 0.5,  1, Inf, -Inf, Inf],
+      "data_1": [4,  2, 1,   -1,   0,    0, Inf],
+      "sum":    [6, -2, 1.5,  0, Inf, -Inf, Inf],
+      "T": "float32"
+    },
+    {
+      "graph_name": "Sum float16",
+      "op_type": "Sum",
+      "version": 6,
+      "data_0": [2, -4, 0.5,  1, Inf, -Inf, Inf],
+      "data_1": [4,  2, 1,   -1,   0,    0, Inf],
+      "sum":    [6, -2, 1.5,  0, Inf, -Inf, Inf],
+      "T": "float16"
+    },
+    {
+      "graph_name": "Sum 3 inputs",
+      "op_type": "Sum",
+      "version": 6,
+      "data_0": [0,  6, 2.5, Inf],
+      "data_1": [1,  0, 3,     0],
+      "data_2": [2,  0, 2,     0],
+      "sum":    [3,  6, 7.5, Inf],
+      "T": "float32"
+    },
+    {
+      "graph_name": "Sum float32 single input",
+      "version": 6,
+      "op_type": "Sum",
+      "data_0": [2, -4, 0.5,  1, Inf],
+      "sum":    [2, -4, 0.5,  1, Inf],
+      "T": "float32"
+    },
+    {
+      "graph_name": "Sum 2 inputs 2D 1D with broadcasting",
+      "op_type": "Sum",
+      "version": 8,
+      "data_0": [[11,12,13,14],
+                 [21,22,23,24],
+                 [31,32,33,34]],
+      "data_1":  [0, 0, 0, 2],
+      "sum":    [[11,12,13,16],
+                 [21,22,23,26],
+                 [31,32,33,36]],
+      "T": "float32"
+    },
+    {
+      "graph_name": "Sum 2 inputs 2D 2D with broadcasting",
+      "op_type": "Sum",
+      "version": 8,
+      "data_0": [[11,12,13,14],
+                 [21,22,23,24],
+                 [31,32,33,34]],
+      "data_1":  [[0],
+                  [0],
+                  [1]],
+      "sum":    [[11,12,13,14],
+                 [21,22,23,24],
+                 [32,33,34,35]],
+      "T": "float32"
+    },
+    {
+      "graph_name": "Sum 4 inputs with broadcasting",
+      "op_type": "Sum",
+      "version": 8,
+      "data_0": [[11,12,13,14],
+                 [21,22,23,24],
+                 [31,32,33,34]],
+      "data_1":  [0, 0, 0, 1],
+      "data_2":  [1],
+      "data_3":  [[0],
+                  [0],
+                  [1]],
+      "sum":    [[12,13,14,16],
+                 [22,23,24,26],
+                 [33,34,35,37]],
+      "T": "float32"
+    },
+    {
+      "op_type": "Sum",
+      "data_0": [[[[[[[[1]]]]]]]],
+      "data_1": [[[[[[[[1]]]]]]]],
+      "data_2": [[[[[[[[1]]]]]]]],
+      "sum":    [[[[[[[[3]]]]]]]],
+      "T": "float32"
+    },
+    {
+      "op_type": "Sum",
+      "data_0": [[[[[[[[1],[2]]]]]]]],
+      "data_1": [[[[[[[[1],[2]]]]]]]],
+      "data_2": [[[[[[[[1],[2]]]]]]]],
+      "sum":    [[[[[[[[3],[6]]]]]]]],
+      "T": "float32"
+    },
+    {
+      "op_type": "Sum",
+      "data_0": [[[[[[  [[1],[2]],
+                        [[3],[4]] ]]]]]],
+      "data_1": [[[[[[  [[1],[2]],
+                        [[3],[4]] ]]]]]],
+      "data_2": [[[[[[  [[1],[2]],
+                        [[3],[4]] ]]]]]],
+      "sum":    [[[[[[  [[3],[6]],
+                        [[9],[12]] ]]]]]],
+      "T": "float32"
+    },
+    {
+      "op_type": "Sum",
+      "data_0": [[[[  [[1],[2]],
+                      [[3],[4]] ]]]],
+      "data_1": [[[[  [[1],[2]],
+                      [[3],[4]] ]]]],
+      "data_2": [[[[  [[1],[2]],
+                      [[3],[4]] ]]]],
+      "sum":    [[[[  [[3],[6]],
+                      [[9],[12]] ]]]],
+      "T": "float32"
+    },
+    {
+      "op_type": "Sum",
+      "data_0": [[[ [[1],[2]],
+                    [[3],[4]] ]]],
+      "data_1": [[[ [[1],[2]],
+                    [[3],[4]] ]]],
+      "data_2": [[[ [[1],[2]],
+                    [[3],[4]] ]]],
+      "sum":    [[[ [[3],[6]],
+                    [[9],[12]] ]]],
+      "T": "float32"
+    },
+    {
+      "op_type": "Sum",
+      "data_0": [[[  [[[1],[2]],
+                      [[3],[4]]],
+                     [[[1],[2]],
+                      [[3],[4]]] ]]],
+      "data_1": [[[  [[[1],[2]],
+                      [[3],[4]]],
+                     [[[1],[2]],
+                      [[3],[4]]] ]]],
+      "data_2": [[[  [[[1],[2]],
+                      [[3],[4]]],
+                     [[[1],[2]],
+                      [[3],[4]]] ]]],
+      "sum": [[[     [[[3],[6]],
+                      [[9],[12]]],
+                     [[[3],[6]],
+                      [[9],[12]]] ]]],
+      "T": "float32"
+    },
+    {
+      "graph_name": "Sum version 13",
+      "op_type": "Sum",
+      "version": 13,
+      "data_0": [2, -4, 0.5,  1, Inf, -Inf, Inf],
+      "data_1": [4,  2, 1,   -1,   0,    0, Inf],
+      "sum":    [6, -2, 1.5,  0, Inf, -Inf, Inf],
+      "T": "float32"
+    }
+  ],
+
+  "schema": [
+    {
+      "op_type": "Sum",
+      "version": 6,
+      "attributes": {},
+      "inputs": { // Variadic
+        "data_0": {"type": "T"},
+        "data_1": {"type": "T"},
+        "data_2": {"type": "T"},
+        "data_3": {"type": "T"}
+      },
+      "outputs": {"sum": {"type": "T"}},
+      "types": {"T": ["float32", "float16", "float64"]}
+    },
+    {
+      "op_type": "Sum",
+      "version": 8, // Supports broadcasting.
+      "attributes": {},
+      "inputs": { // Variadic
+        "data_0": {"type": "T"},
+        "data_1": {"type": "T"},
+        "data_2": {"type": "T"},
+        "data_3": {"type": "T"}
+      },
+      "outputs": {"sum": {"type": "T"}},
+      "types": {"T": ["float32", "float16", "float64"]}
+    },
+    {
+      "op_type": "Sum",
+      "version": 13, // Adds bfloat16
+      "attributes": {},
+      "inputs": { // Variadic
+        "data_0": {"type": "T"},
+        "data_1": {"type": "T"},
+        "data_2": {"type": "T"},
+        "data_3": {"type": "T"}
+      },
+      "outputs": {"sum": {"type": "T"}},
+      "types": {"T": ["float32", "float16", "float64", "bfloat16"]}
+    }
+  ]
+}

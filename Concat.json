@@ -1,0 +1,292 @@
+{
+  "tests": [
+    // 1D Axis 0.
+    {
+      "op_type": "Concat",
+      "axis": 0,
+      "input_0":       [2,  3,  4,  5,  6],
+      "input_1":       [7,  8,  9, 10, 11, 12],
+      "concat_result": [2,  3,  4,  5,  6,  7,  8,  9, 10, 11, 12],
+      "T": "float32"
+    },
+    // 2D Axis 0.
+    {
+      "op_type": "Concat",
+      "axis": 0,
+      "input_0":       [[ 2,  3,  4],
+                        [ 5,  6,  7]],
+      "input_1":       [[ 8,  9, 10],
+                        [11, 12, 13]],
+      "concat_result": [[ 2,  3,  4],
+                        [ 5,  6,  7],
+                        [ 8,  9, 10],
+                        [11, 12, 13]],
+      "T": "float32"
+    },
+    // 2D Axis 1.
+    {
+      "op_type": "Concat",
+      "axis": 1,
+      "input_0":       [[ 2,  3,  4],
+                        [ 5,  6,  7]],
+      "input_1":       [[ 8,  9, 10],
+                        [11, 12, 13]],
+      "concat_result": [[2,  3,  4,  8,  9, 10],
+                        [5,  6,  7, 11, 12, 13]],
+      "T": "float32"
+    },
+    // 5D Axis 0.
+    {
+      "op_type": "Concat",
+      "axis": 0,
+      "input_0":    [ [[[[2]]]], [[[[3]]]] ],
+      "input_1":    [ [[[[8]]]], [[[[9]]]] ],
+      "concat_result": [ [[[[2]]]], [[[[3]]]], [[[[8]]]], [[[[9]]]] ],
+      "T": "float32"
+    },
+    // 8D Axis 0.
+    {
+      "op_type": "Concat",
+      "axis": 0,
+      "input_0":    [ [[[[[[[2]]]]]]], [[[[[[[3]]]]]]] ],
+      "input_1":    [ [[[[[[[8]]]]]]], [[[[[[[9]]]]]]] ],
+      "concat_result": [ [[[[[[[2]]]]]]], [[[[[[[3]]]]]]], [[[[[[[8]]]]]]], [[[[[[[9]]]]]]] ],
+      "T": "float32"
+    },
+    // 2D Axis 1 via negative axis.
+    {
+      "op_type": "Concat",
+      "axis": -1,
+      "input_0":       [[ 2,  3,  4],
+                        [ 5,  6,  7]],
+      "input_1":       [[ 8,  9, 10],
+                        [11, 12, 13]],
+      "concat_result": [[2,  3,  4,  8,  9, 10],
+                        [5,  6,  7, 11, 12, 13]],
+      "T": "float32"
+    },
+    // 2D Axis 1, non-constant inputs, non-aligned concatenated dim size
+    {
+        "nodes": [
+        {
+          "op_type": "Relu",
+          "inputs": ["input_0"],
+          "outputs": ["intermediate1"]
+        },
+        {
+          "op_type": "Relu",
+          "inputs": ["input_1"],
+          "outputs": ["intermediate2"]
+        },
+        {
+            "op_type": "Concat",
+            "axis": 1,
+            "inputs": ["intermediate1", "intermediate2"],
+            "outputs": ["concat_result"]
+        }],
+
+     "inputs": {
+        "input_0": {
+          "type": "float32",
+          "value": [[ 2,  3,  4],
+                    [ 5,  6,  7]]
+        },
+        "input_1": {
+          "type": "float32",
+          "value": [[ 8,  9, 10],
+                     [11, 12, 13]]
+        }
+     },
+      
+      "outputs": {
+          "concat_result" : {
+          "type": "float32",
+          "value": [[2,  3,  4,  8,  9, 10],
+                    [5,  6,  7, 11, 12, 13]]
+        }
+      }
+    },    
+    // 2D Axis 1, non-constant inputs, aligned concatenated dim size
+    {
+        "nodes": [
+        {
+          "op_type": "Relu",
+          "inputs": ["input_0"],
+          "outputs": ["intermediate1"]
+        },
+        {
+          "op_type": "Relu",
+          "inputs": ["input_1"],
+          "outputs": ["intermediate2"]
+        },
+        {
+            "op_type": "Concat",
+            "axis": 1,
+            "inputs": ["intermediate1", "intermediate2"],
+            "outputs": ["concat_result"]
+        }],
+
+     "inputs": {
+        "input_0": {
+          "type": "float32",
+          "value": [[ 1, 2, 3, 4],
+                    [ 5, 6, 7, 8]]
+        },
+        "input_1": {
+          "type": "float32",
+          "value":  [[ 5, 6, 7, 8],
+                     [ 1, 2, 3, 4]]
+        }
+     },
+      
+     "outputs": {
+          "concat_result" : {
+          "type": "float32",
+          "value": [[ 1, 2, 3, 4, 5, 6, 7, 8],
+                    [ 5, 6, 7, 8, 1, 2, 3, 4]]
+        }
+      }
+    },
+    // float16. 1D Axis 0.
+    {
+      "op_type": "Concat",
+      "axis": 0,
+      "input_0":       [2,  3,  4,  5,  6],
+      "input_1":       [7,  8,  9, 10, 11, 12],
+      "concat_result": [2,  3,  4,  5,  6,  7,  8,  9, 10, 11, 12],
+      "T": "float16"
+    },
+    // float64. 1D Axis 0.
+    {
+      "op_type": "Concat",
+      "axis": 0,
+      "input_0":       [2,  3,  4,  5,  6],
+      "input_1":       [7,  8,  9, 10, 11, 12],
+      "concat_result": [2,  3,  4,  5,  6,  7,  8,  9, 10, 11, 12],
+      "T": "float64"
+    },
+    // uint64. 1D Axis 0.
+    {
+      "op_type": "Concat",
+      "axis": 0,
+      "input_0":       [2,  3,  4,  5,  6],
+      "input_1":       [7,  8,  9, 10, 11, 12],
+      "concat_result": [2,  3,  4,  5,  6,  7,  8,  9, 10, 11, 12],
+      "T": "uint64"
+    },
+    // int64. 1D Axis 0.
+    {
+      "op_type": "Concat",
+      "axis": 0,
+      "input_0":       [2,  3,  4,  5,  6],
+      "input_1":       [7,  8,  9, 10, 11, -12],
+      "concat_result": [2,  3,  4,  5,  6,  7,  8,  9, 10, 11, -12],
+      "T": "int64"
+    },
+    // int32. 1D Axis 0.
+    {
+      "op_type": "Concat",
+      "axis": 0,
+      "input_0":       [2,  3,  4,  5,  6],
+      "input_1":       [7,  8,  9, 10, 11, 12],
+      "concat_result": [2,  3,  4,  5,  6,  7,  8,  9, 10, 11, 12],
+      "T": "int32"
+    },
+    // uint32. 1D Axis 0.
+    {
+      "op_type": "Concat",
+      "axis": 0,
+      "input_0":       [2,  3,  4,  5,  6],
+      "input_1":       [7,  8,  9, 10, 11, 12],
+      "concat_result": [2,  3,  4,  5,  6,  7,  8,  9, 10, 11, 12],
+      "T": "uint32"
+    },
+    // int16. 1D Axis 0.
+    {
+      "op_type": "Concat",
+      "axis": 0,
+      "input_0":       [2,  3,  4,  5,  6],
+      "input_1":       [7,  8,  9, 10, 11, 12],
+      "concat_result": [2,  3,  4,  5,  6,  7,  8,  9, 10, 11, 12],
+      "T": "int16"
+    },
+    // uint16. 1D Axis 0.
+    {
+      "op_type": "Concat",
+      "axis": 0,
+      "input_0":       [2,  3,  4,  5,  6],
+      "input_1":       [7,  8,  9, 10, 11, 12],
+      "concat_result": [2,  3,  4,  5,  6,  7,  8,  9, 10, 11, 12],
+      "T": "uint16"
+    },
+    // int32. 1D Axis 0.
+    {
+      "op_type": "Concat",
+      "axis": 0,
+      "input_0":       [2,  3,  4,  5,  6],
+      "input_1":       [7,  8,  9, 10, 11, 12],
+      "concat_result": [2,  3,  4,  5,  6,  7,  8,  9, 10, 11, 12],
+      "T": "int8"
+    },
+    // uint32. 1D Axis 0.
+    {
+      "op_type": "Concat",
+      "axis": 0,
+      "input_0":       [2,  3,  4,  5,  6],
+      "input_1":       [7,  8,  9, 10, 11, 12],
+      "concat_result": [2,  3,  4,  5,  6,  7,  8,  9, 10, 11, 12],
+      "T": "uint8"
+    },
+    {
+      "graph_name": "Concat version 13",
+      "op_type": "Concat",
+      "version": 13,
+      "axis": 0,
+      "input_0":       [2,  3,  4,  5,  6],
+      "input_1":       [7,  8,  9, 10, 11, 12],
+      "concat_result": [2,  3,  4,  5,  6,  7,  8,  9, 10, 11, 12],
+      "T": "float32"
+    }
+  ],
+
+  "schema": [
+    {
+      "op_type": "Concat",
+      "version": 4,
+      "attributes": {
+        "axis": {"type": "int64"}
+      },
+      "inputs": { // Variadic
+        "input_0": {"type": "T"},
+        "input_1": {"type": "T"},
+        "input_2": {"type": "T"},
+        "input_3": {"type": "T"}
+      }, 
+      "outputs": {"concat_result": {"type": "T"}},
+      "types": {"T": ["float32", "float16", "float64", "uint8", "uint16", "uint32", "uint64", "int8", "int16", "int32", "int64", "bool8"]}
+    },
+    {
+      "op_type": "Concat",
+      "version": 13,
+      "attributes": {
+        "axis": {"type": "int64"}
+      },
+      "inputs": { // Variadic
+        "input_0": {"type": "T"},
+        "input_1": {"type": "T"},
+        "input_2": {"type": "T"},
+        "input_3": {"type": "T"}
+      }, 
+      "outputs": {"concat_result": {"type": "T"}},
+      "types": {"T": ["float32", "float16", "float64", "uint8", "uint16", "uint32", "uint64", "int8", "int16", "int32", "int64", "bool8", "bfloat16"]}
+    },
+    {
+      "op_type": "Relu",
+      "version": 1,
+      "attributes": {},
+      "inputs": {"input": {"type": "T"}},
+      "outputs": {"output": {"type": "T"}},
+      "types": {"T": ["float32", "float16", "float64", "uint8", "uint16", "uint32", "uint64", "int8", "int16", "int32", "int64", "bool8", "string8"]}
+    }
+  ]
+}
